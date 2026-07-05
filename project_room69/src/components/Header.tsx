@@ -122,12 +122,12 @@ export const Header = ({ onNavigate, currentPage, user, onLogout }: HeaderProps)
         </div>
 
         {/* Navigation */}
-        <nav className="flex items-center justify-center space-x-12 pb-4">
+        <nav className="flex items-center justify-center space-x-4 sm:space-x-8 md:space-x-12 pb-4 overflow-x-auto px-2">
           {['home', 'shop', 'about', 'contact'].map((page) => (
             <button
               key={page}
               onClick={() => onNavigate(page)}
-              className={`text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 relative pb-1 ${
+              className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] whitespace-nowrap transition-all duration-300 relative pb-1 ${
                 currentPage === page
                   ? 'text-white'
                   : 'text-[#C9A96E] hover:text-white'

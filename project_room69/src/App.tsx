@@ -53,7 +53,7 @@ function App() {
           user={user} 
           onLogout={handleLogout} 
         />
-        <main className="flex-1">
+        <main className="flex-1 pt-36">
           <Routes>
             <Route path="/" element={<HomePage onNavigate={handleNavigate} />} />
             <Route path="/shop" element={<ShopPage onNavigate={handleNavigate} />} />
