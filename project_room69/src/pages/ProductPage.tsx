@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { MessageCircle } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { API_URL } from '../config';
+import { API_URL, getImageUrl } from '../config';
 
 interface Product {
   id: string;
@@ -87,7 +87,7 @@ export const ProductPage = ({ onNavigate }: ProductPageProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white p-8">
           <div className="relative h-[600px] bg-gray-100">
             <img
-              src={product.image_url}
+              src={getImageUrl(product.image_url)}
               alt={product.name}
               className="w-full h-full object-cover"
             />

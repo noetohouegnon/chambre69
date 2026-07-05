@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { MessageCircle } from 'lucide-react';
 import { FadeInOnLoad, RevealOnScroll } from '../components/Animations';
 import { useCart } from '../context/CartContext';
-import { API_URL } from '../config';
+import { API_URL, getImageUrl } from '../config';
 
 interface Product {
   id: string;
@@ -378,7 +378,7 @@ export const HomePage = ({ onNavigate }: HomePageProps) => {
                       style={{ height: '300px' }}
                       onClick={() => onNavigate('product', { slug: item.slug })}
                     >
-                      <img src={item.image_url} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img src={getImageUrl(item.image_url)} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div className="p-4 text-center">
                       <h3 className={`text-base font-medium mb-2 transition-colors ${isActive ? 'text-[#C9A96E]' : 'text-gray-900 group-hover:text-[#C9A96E]'}`}>

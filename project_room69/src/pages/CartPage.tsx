@@ -1,5 +1,6 @@
 import { useCart } from '../context/CartContext';
 import { MessageCircle, Trash2, Minus, Plus } from 'lucide-react';
+import { getImageUrl } from '../config';
 
 interface CartPageProps {
   onNavigate: (page: string) => void;
@@ -66,7 +67,7 @@ export const CartPage = ({ onNavigate, user }: CartPageProps) => {
             >
               <div className="w-32 h-32 flex-shrink-0 bg-gray-100">
                 <img
-                  src={item.product.image_url}
+                  src={getImageUrl(item.product.image_url)}
                   alt={item.product.name}
                   className="w-full h-full object-cover"
                 />

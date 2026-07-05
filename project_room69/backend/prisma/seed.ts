@@ -113,7 +113,7 @@ async function createProduct(filePath: string, brandId: string, categoryId: stri
 
   // Ensure the URL is correctly encoded for the frontend
   const encodedPath = relativePath.split('/').map(segment => encodeURIComponent(segment)).join('/');
-  const imageUrl = `http://localhost:5000/images/${encodedPath}`;
+  const imageUrl = `/images/${encodedPath}`;
 
   try {
     await prisma.product.create({

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useCart } from '../context/CartContext';
 import { FadeInOnLoad, RevealOnScroll } from '../components/Animations';
-import { API_URL } from '../config';
+import { API_URL, getImageUrl } from '../config';
 import { X, ShoppingBag, MessageCircle, ChevronRight, Info, Ruler, Sparkles } from 'lucide-react';
 
 interface Product {
@@ -55,7 +55,7 @@ const ProductModal = ({ product, onClose, onAddToCart }: { product: Product & { 
         </button>
         
         <div className="md:w-3/5 h-80 md:h-auto overflow-hidden bg-[#FAFAFA] relative">
-          <img src={product.image_url} alt={product.name} className="w-full h-full object-contain p-12 transition-transform duration-[3s] hover:scale-110" />
+          <img src={getImageUrl(product.image_url)} alt={product.name} className="w-full h-full object-contain p-12 transition-transform duration-[3s] hover:scale-110" />
           <div className="absolute top-12 left-12">
             <span className="text-[10px] font-black text-[#C9A96E] uppercase tracking-[0.5em]">{product.collection || 'Exclusivité'}</span>
           </div>
@@ -243,7 +243,7 @@ export const ShopPage = ({ onNavigate }: ShopPageProps) => {
                 >
                   <div className="w-28 h-28 rounded-full overflow-hidden border-2 border-black group-hover:border-[#C9A96E] group-hover:scale-110 transition-all duration-700 shadow-2xl relative">
                     <img
-                      src={brand.image_url || 'https://via.placeholder.com/150'}
+                      src={brand.image_url ? getImageUrl(brand.image_url) : 'https://via.placeholder.com/150'}
                       alt={brand.name}
                       className="w-full h-full object-cover transition-all duration-1000"
                     />
@@ -374,7 +374,7 @@ export const ShopPage = ({ onNavigate }: ShopPageProps) => {
                                 style={{ height: '520px' }}
                               >
                                 <img
-                                  src={item.image_url}
+                                  src={getImageUrl(item.image_url)}
                                   alt={item.name}
                                   className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-110"
                                 />
