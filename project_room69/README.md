@@ -68,4 +68,4 @@ Un workflow **GitHub Actions** est configuré dans `.github/workflows/main.yml` 
 Pour la procédure complète de déploiement avec **Neon**, **Render**, et **Vercel**, consultez `DEPLOYMENT.md`.
 
 ---
-*Développé avec passion pour l'élégance.*
+*Développé avec passion pour l'élégance.* 
