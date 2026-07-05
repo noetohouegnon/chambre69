@@ -324,20 +324,20 @@ export const HomePage = ({ onNavigate }: HomePageProps) => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <FadeInOnLoad>
-        <section className="relative min-h-screen flex items-stretch overflow-hidden gap-6 md:gap-8 p-6 md:p-8">
-          <div className="w-1/2 rounded-2xl shadow-2xl overflow-hidden">
+        <section className="relative min-h-screen flex flex-col md:flex-row items-stretch overflow-hidden gap-6 md:gap-8 p-4 md:p-8">
+          <div className="w-full md:w-1/2 h-72 md:h-auto rounded-2xl shadow-2xl overflow-hidden">
             <img
               src="https://i0.wp.com/www.youreleganceshop.com/wp-content/uploads/2025/01/ensemble-lingerie-5-pieces-sexy.png?fit=1136%2C1512&ssl=1"
               alt="Lingerie élégante"
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="w-1/2 bg-black border-2 border-[#C9A96E] rounded-2xl shadow-2xl flex items-start justify-center p-8">
-            <div className="text-center max-w-lg mx-auto pt-12 md:pt-16 breathe">
-              <h1 className="font-bold text-5xl md:text-7xl tracking-tight text-[#C9A96E] mb-6 leading-tight">
+          <div className="w-full md:w-1/2 bg-black border-2 border-[#C9A96E] rounded-2xl shadow-2xl flex items-start justify-center p-6 md:p-8">
+            <div className="text-center max-w-lg mx-auto pt-6 md:pt-16 breathe">
+              <h1 className="font-bold text-3xl sm:text-4xl md:text-7xl tracking-tight text-[#C9A96E] mb-4 md:mb-6 leading-tight">
                 Révélez votre<br />pouvoir de séduction
               </h1>
-              <p className="text-lg md:text-xl text-[#C9A96E]/80 mb-8 font-light">
+              <p className="text-base md:text-xl text-[#C9A96E]/80 mb-6 md:mb-8 font-light">
                 Découvrez notre collection de lingerie haut de gamme, conçue pour sublimer votre beauté naturelle
               </p>
               <button

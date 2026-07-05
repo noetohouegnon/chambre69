@@ -365,18 +365,18 @@ export const ShopPage = ({ onNavigate }: ShopPageProps) => {
                               className={`flex-shrink-0 transition-all duration-1000 ease-in-out scroll-snap-align-center ${
                                 isActive ? 'scale-100' : 'scale-95'
                               }`}
-                              style={{ width: '340px' }}
+                              style={{ width: 'min(340px, 78vw)' }}
                             >
                               <div
                                 className={`relative overflow-hidden rounded-[3rem] group cursor-pointer shadow-2xl ${
                                   isEven ? 'bg-gray-50' : 'bg-white/5'
                                 }`}
-                                style={{ height: '520px' }}
+                                style={{ height: 'min(520px, 78vw)' }}
                               >
                                 <img
                                   src={getImageUrl(item.image_url)}
                                   alt={item.name}
-                                  className="w-full h-full object-cover transition-all duration-[2s] group-hover:scale-110"
+                                  className="w-full h-full object-contain p-6 transition-all duration-[2s] group-hover:scale-110"
                                 />
                                 
                                 <div className="absolute inset-0 bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 flex flex-col items-center justify-center gap-5 backdrop-blur-[2px] bg-black/5">
