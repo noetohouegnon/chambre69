@@ -55,7 +55,7 @@ export const LINES: { id: LineId; name: string; gloss: string; universe: string;
   { id: 'sanse', name: 'Sañse', gloss: 'se faire belle', universe: 'Ligne quotidienne, confort et maintien', moment: 'Tous les jours, toutes morphologies' },
   { id: 'sutura', name: 'Sutura', gloss: 'ce qui reste à vous', universe: 'Ligne discrète, nudes et tons profonds', moment: 'Celle qui ne veut pas que cela se voie' },
   { id: 'drianke', name: 'Drianké', gloss: 'femme assumée', universe: 'Ligne majestueuse, grands bonnets', moment: '40 ans et plus, fortes poitrines' },
-  { id: 'ndeye', name: 'Ndeye', gloss: 'mère', universe: 'Grossesse, allaitement, post-partum', moment: 'Maternité et retour à soi' },
+  { id: 'ndeye', name: 'Ndeye', gloss: 'mère', universe: 'Grossesse, naissance, post-partum', moment: 'Maternité et retour à soi' },
   { id: 'entierement', name: 'Entièrement', gloss: '', universe: 'Post-opératoire et prothèses', moment: 'Après une mastectomie' },
   { id: 'trousseau', name: 'Le Trousseau', gloss: '', universe: 'Coffrets, bétio, pièces de mariage', moment: 'Mariée, amies de la mariée, diaspora' },
 ];
@@ -74,14 +74,21 @@ export const OCCASIONS: { id: OccasionId; label: string }[] = [
 const CUPS = 'ABCDEFGHIJKLMNO';
 const ov = overrides as Record<string, Partial<Product>>;
 
+/** Pièces de jeu de rôle : réservées à la catégorie Séduction, jamais proposées dans un trousseau ni comme cadeau entre femmes. */
+const ROLEPLAY = /costume|harnais|menottes|masque|cache-tétons|jeu de rôle/i;
+/** Encens, parfums et huiles (le thiouraye et les senteurs). */
+const SCENT = /encens|parfum|huile|mamoul|mamool|oudh|agarwood/i;
+
 function deriveLines(p: Product): LineId[] {
   const l = new Set<LineId>();
   const txt = `${p.name} ${p.description}`.toLowerCase();
   const maxCup = p.sizes.cups?.length ? CUPS.indexOf(p.sizes.cups[p.sizes.cups.length - 1]) : -1;
-  if (/grossesse|allaitement|maternit/.test(txt)) l.add('ndeye');
+  const roleplay = ROLEPLAY.test(p.name);
+  // Ndeye (mère) : grossesse, naissance et retour à soi — confort, sans armature, tenues pour recevoir, thiouraye pour la chambre.
+  if (/grossesse|allaitement|maternit/.test(txt) || (p.category === 'soutiens-gorge' && /sans armatures/i.test(p.name)) || /pyjama|camisole/i.test(p.name) || (p.category === 'nuit' && /kimono blanc/i.test(p.name)) || /thurabi|mamoul en pot/i.test(p.name)) l.add('ndeye');
   if (maxCup >= CUPS.indexOf('K')) l.add('drianke');
-  if (p.category === 'heritage' || p.category === 'seduction' || /kimono|nuisette|soie/.test(txt)) l.add('trousseau');
-  if (p.category === 'heritage' && /nuisette|tradition/.test(txt)) l.add('sunu-betio');
+  if (!roleplay && (p.category === 'heritage' || p.category === 'seduction' || /kimono|nuisette|soie/.test(txt))) l.add('trousseau');
+  if (p.category === 'heritage' && /nuisette traditionnelle|chaînes de taille/i.test(p.name)) l.add('sunu-betio');
   if (/nude|chair|smooth|moulé|invisible|sans couture/.test(txt) || p.color === 'Nude') l.add('sutura');
   if (['basiques', 'culottes'].includes(p.category) || /coton|confort|quotidien|sans armatures/.test(txt)) l.add('sanse');
   return [...l];
@@ -90,13 +97,17 @@ function deriveLines(p: Product): LineId[] {
 function deriveOccasions(p: Product): OccasionId[] {
   const o = new Set<OccasionId>();
   const txt = `${p.name} ${p.description}`.toLowerCase();
-  if (p.category === 'heritage' || p.category === 'seduction' || p.category === 'porte-jarretelles' || /dentelle|soie|satin/.test(txt)) o.add('mariage');
-  if (p.category === 'heritage' || /dentelle|brod/.test(txt)) o.add('ceremonie');
-  if (['heritage', 'nuit', 'seduction'].includes(p.category)) o.add('cadeau');
+  const roleplay = ROLEPLAY.test(p.name);
+  // Nuit de noces : héritage, nuit, séduction (hors jeu de rôle), dentelle et soie.
+  if (!roleplay && (p.category === 'heritage' || p.category === 'seduction' || p.category === 'porte-jarretelles' || p.category === 'nuit' || /dentelle|soie|satin/.test(txt))) o.add('mariage');
+  // Sous une tenue de cérémonie : maintien invisible et lissant, qui tient toute la journée.
+  if (['soutiens-gorge', 'culottes'].includes(p.category) && /smooth|moulé|sans bretelles|invisible|lissant|sans couture/.test(txt)) o.add('ceremonie');
+  if (!roleplay && (['heritage', 'nuit'].includes(p.category) || (p.category === 'seduction' && /dentelle|kimono|nuisette/.test(txt)))) o.add('cadeau');
   if (['basiques', 'culottes'].includes(p.category) || /quotidien|confort|tous les jours|t-shirt/.test(txt)) o.add('quotidien');
-  if (/grossesse|allaitement/.test(txt)) o.add('maternite');
+  if (/grossesse|allaitement|matern/.test(txt) || (p.category === 'soutiens-gorge' && /sans armatures/i.test(p.name))) o.add('maternite');
   if (/sport/.test(txt)) o.add('sport');
   if (p.category === 'nuit') o.add('nuit');
+  if (SCENT.test(p.name)) o.add('cadeau');
   return [...o];
 }
 

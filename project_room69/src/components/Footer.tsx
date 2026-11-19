@@ -67,8 +67,7 @@ export function Footer() {
           <li><a href={`mailto:${BRAND.email}`} className="inline-flex min-h-[36px] items-center gap-2 hover:text-gold"><Mail className="h-4 w-4" />{BRAND.email}</a></li>
           <L to="/contact">Formulaire de contact</L>
         </Col>
-        <Col title="Mentions légales">
-          <L to="/mentions-legales">Mentions légales</L>
+        <Col title="Informations légales">
           <L to="/cgv">Conditions générales de vente</L>
           <L to="/confidentialite">Confidentialité</L>
           <L to="/cookies">Cookies</L>

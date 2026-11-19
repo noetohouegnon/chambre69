@@ -115,7 +115,6 @@ export const PAGES: Record<string, Meta> = {
     image: og('conseils'),
   },
   '/presse': { title: 'Espace presse — Chambre 69', description: 'Logo, visuels haute définition et contact presse de Chambre 69, maison de lingerie experte et conseillère à Dakar.', image: og('accueil') },
-  '/mentions-legales': { title: 'Mentions légales — Chambre 69', description: 'Mentions légales du site Chambre 69 : éditeur, directrice de la publication, hébergeur et contact.', image: og('accueil') },
   '/cgv': { title: 'Conditions générales de vente — Chambre 69', description: "Conditions générales de vente de Chambre 69, y compris pour les ventes à distance vers l'Afrique de l'Ouest et l'international.", image: og('accueil') },
   '/confidentialite': { title: 'Politique de confidentialité — Chambre 69', description: 'Comment Chambre 69 collecte, utilise et protège vos données personnelles, conformément à la loi sénégalaise et au règlement européen.', image: og('accueil') },
   '/cookies': { title: 'Politique de cookies — Chambre 69', description: 'Les cookies et traceurs utilisés sur le site Chambre 69, et comment accepter ou refuser leur dépôt.', image: og('accueil') },

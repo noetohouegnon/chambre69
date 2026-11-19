@@ -134,8 +134,7 @@ export function CartPage() {
       </ul>
       <dl className="mt-5 space-y-2 border-t border-gold/10 pt-4 text-sm">
         <div className="flex justify-between"><dt className="text-mute">Articles</dt><dd>{count}</dd></div>
-        <div className="flex justify-between gap-4"><dt className="text-mute">Livraison</dt><dd className="text-right">{zone ? (f.mode === 'retrait' ? 'Retrait en boutique, sans frais' : zone.fees) : 'Choisissez votre pays'}</dd></div>
-        {zone && f.mode === 'livraison' && <div className="flex justify-between gap-4"><dt className="text-mute">Délai</dt><dd className="text-right">{zone.delay}</dd></div>}
+        <div className="flex justify-between gap-4"><dt className="text-mute">Livraison</dt><dd className="text-right">{zone ? (f.mode === 'retrait' ? 'Retrait en boutique, sans frais' : 'Convenue avec votre conseillère') : 'Choisissez votre pays'}</dd></div>
         <div className="flex justify-between border-t border-gold/10 pt-2 text-base"><dt>Total</dt><dd>{allPriced && total ? formatPrice(total) : 'Confirmé par votre conseillère'}</dd></div>
       </dl>
       <p className="mt-4 flex gap-2 text-xs leading-relaxed text-mute"><Lock className="h-4 w-4 shrink-0" />Colis neutre, sans mention du contenu ni du nom de la boutique. Le règlement est convenu avec votre conseillère après confirmation.</p>
@@ -188,12 +187,11 @@ export function CartPage() {
                     <optgroup key={z.id} label={z.label}>{z.countries.map((c) => <option key={c} value={c}>{c}</option>)}</optgroup>
                   ))}
                 </select>
-                <p id="c-pays-help" className="mt-2 text-sm text-mute">Il détermine les frais et le délai. Votre pays n’est pas dans la liste ? <a className="text-gold hover:underline" href={waLink(MESSAGES.abroad())} target="_blank" rel="noopener noreferrer">Écrivez-nous</a>.</p>
+                <p id="c-pays-help" className="mt-2 text-sm text-mute">Il permet à votre conseillère de vous indiquer les frais et le délai. Votre pays n’est pas dans la liste ? <a className="text-gold hover:underline" href={waLink(MESSAGES.abroad())} target="_blank" rel="noopener noreferrer">Écrivez-nous</a>.</p>
                 {err('pays')}
                 {zone && (
                   <div className="mt-4 grid gap-2 rounded-xl bg-ink-3 p-4 text-sm sm:grid-cols-2">
-                    <p><span className="text-mute">Frais : </span>{zone.fees}</p>
-                    <p><span className="text-mute">Délai : </span>{zone.delay}</p>
+                    <p className="sm:col-span-2"><span className="text-mute">Frais et délai : </span>convenus avec votre conseillère, sur WhatsApp ou par téléphone.</p>
                     {zone.notes.map((n) => <p key={n} className="text-ivory-2 sm:col-span-2">· {n}</p>)}
                   </div>
                 )}

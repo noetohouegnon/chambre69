@@ -219,7 +219,7 @@ export function ShopPage() {
             <p className="text-ivory-2"><strong className="font-medium text-ivory">Vous hésitez sur votre taille ?</strong> Une conseillère vérifie avec vous avant que vous ne commandiez.</p>
             <WaButton message={MESSAGES.sizeCheck()} source="boutique-bas" className="shrink-0">Demander conseil</WaButton>
           </aside>
-          <p className="mt-6 text-xs text-mute">Prototype : les tailles affichées sont l’amplitude habituelle de chaque maison, à confirmer par le stock réel de la boutique.</p>
+          <p className="mt-6 text-xs text-mute">Les tailles affichées sont l’amplitude habituelle de chaque maison : votre conseillère vous confirme la disponibilité de la vôtre avant toute expédition.</p>
         </div>
       </div>
 

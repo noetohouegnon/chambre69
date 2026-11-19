@@ -3,7 +3,7 @@ import { Users, Clock, Gift, Share2 } from 'lucide-react';
 import { PageHero, Section } from '../components/ui/Section';
 import { WaButton } from '../components/ui/WaButton';
 import { ProductCard } from '../components/ProductCard';
-import { PRODUCTS } from '../data/catalog';
+import { PRODUCTS, BY_SLUG, type Product } from '../data/catalog';
 import { MESSAGES } from '../lib/whatsapp';
 
 const MOMENTS = [
@@ -13,8 +13,21 @@ const MOMENTS = [
   { t: 'Les premiers mois', d: 'Parce qu’un trousseau ne s’arrête pas au lendemain du mariage, et que ce qu’on achète à ce moment-là, on le porte des années.', to: '/boutique?categorie=nuit,soutiens-gorge' },
 ];
 
+/** Sélection d'ouverture : un mélange lisible de maisons européennes, d'héritage et de senteurs, de la cérémonie à la nuit de noces. */
+const BRIDE_PICKS = [
+  'soutien-gorge-natsuki-wacoal', 'slip-natsuki-wacoal', 'nuisette-traditionnelle-modele-01', 'chaines-de-taille-modele-01',
+  'ensemble-kimono-modele-01', 'ensemble-seduction-modele-18', 'senteur-et-encens-modele-12', 'senteur-et-encens-modele-01',
+];
+/** Trousseau de naissance : de quoi recevoir, se reposer et retrouver son corps à son rythme. */
+const BIRTH_PICKS = [
+  'ensemble-kimono-blanc-de-lait', 'pyjamas-femme-ysabel-mora', 'nuisette-camisole-ysabel-mora', 'soutien-gorge-celeste-sans-armatures-elomi',
+  'soutien-gorge-sans-armatures-non-rembourre-ysabel-mora', 'culotte-de-grossesse-ysabel-mora', 'ensemble-pyjama-lingadore', 'senteur-et-encens-modele-12',
+];
+const pick = (slugs: string[]) => slugs.map((s) => BY_SLUG.get(s)).filter((p): p is Product => Boolean(p));
+
 export function BridePage() {
-  const picks = PRODUCTS.filter((p) => p.lines.includes('trousseau') && p.category !== 'bien-etre').filter((_, i) => i % 3 === 0).slice(0, 8);
+  const picks = pick(BRIDE_PICKS).length >= 4 ? pick(BRIDE_PICKS) : PRODUCTS.filter((p) => p.lines.includes('trousseau')).slice(0, 8);
+  const birth = pick(BIRTH_PICKS);
   return (
     <>
       <PageHero eyebrow="Mariée" title="Le trousseau de la mariée" crumbs={[{ label: 'Mariée' }]}>
@@ -78,6 +91,22 @@ export function BridePage() {
         </Section>
       )}
 
+      {birth.length > 0 && (
+        <Section>
+          <p className="eyebrow mb-4">Et plus tard</p>
+          <h2 className="h-section">Le trousseau de naissance</h2>
+          <div className="body-copy mt-5 max-w-prose">
+            <p>À la naissance, on gâte la jeune maman. Elle reçoit, elle se repose, et son corps change encore : il lui faut de quoi être belle pour les visites, à l’aise la nuit, et soutenue sans être serrée.</p>
+            <p>Nuisettes et kimonos pour recevoir, pyjamas, soutiens-gorge sans armatures, culotte de grossesse, et le thiouraye (encens parfumé) qui embaume la chambre : une liste qui s’offre à plusieurs, comme celle de la mariée.</p>
+          </div>
+          <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4">{birth.map((p) => <li key={p.slug}><ProductCard p={p} /></li>)}</ul>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Link to="/boutique?ligne=ndeye" className="btn-line">Voir toute la ligne Ndeye (mère)</Link>
+            <Link to="/mariee/liste" className="btn-ghost">Créer une liste de naissance</Link>
+          </div>
+        </Section>
+      )}
+
       <Section>
         <div className="grid gap-6 lg:grid-cols-2">
           <article className="card p-8">
@@ -93,10 +122,10 @@ export function BridePage() {
             <h2 className="font-serif text-3xl">Vous cherchez quoi offrir</h2>
             <div className="body-copy mt-4">
               <p>Si elle a une liste, tout est déjà choisi, dans sa taille : il n’y a qu’à prendre.</p>
-              <p>Si elle n’en a pas, nos coffrets sont faits pour cela. Et si vous hésitez sur la taille, la carte cadeau règle la question sans en avoir l’air.</p>
+              <p>Si elle n’en a pas, nos idées cadeaux sont faites pour cela : senteurs, nuisettes, kimonos. Et si vous hésitez sur la taille, la carte cadeau règle la question sans en avoir l’air.</p>
             </div>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link to="/boutique?ligne=trousseau&occasion=cadeau" className="btn-line">Voir les coffrets</Link>
+              <Link to="/boutique?ligne=trousseau&occasion=cadeau" className="btn-line">Voir les idées cadeaux</Link>
               <Link to="/carte-cadeau" className="btn-gold">Offrir une carte cadeau</Link>
             </div>
           </article>

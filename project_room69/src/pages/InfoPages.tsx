@@ -5,7 +5,7 @@ import { PageHero, Section } from '../components/ui/Section';
 import { WaButton } from '../components/ui/WaButton';
 import { Newsletter } from '../components/Newsletter';
 import { MESSAGES } from '../lib/whatsapp';
-import { BRAND, ZONES, PENDING, SITE_URL, exchangeDelayText } from '../data/site';
+import { BRAND, ZONES, SITE_URL, exchangeDelayText } from '../data/site';
 import { setConsent, getConsent } from '../lib/analytics';
 
 /* ---------- Carte cadeau (5.5) ---------- */
@@ -57,7 +57,7 @@ export function GiftCardPage() {
 const FAQ: { cat: string; q: string; a: React.ReactNode; text: string }[] = [
   { cat: 'Tailles', q: 'Jusqu’à quelle taille montez-vous ?', text: 'Du bonnet A au bonnet O, et du S au 3XL pour les culottes et pièces souples.', a: <>Du bonnet A au bonnet O, et du S au 3XL pour les culottes et les pièces souples. <Link to="/toutes-les-tailles" className="text-gold hover:underline">Notre amplitude réelle</Link></> },
   { cat: 'Tailles', q: 'Je ne connais pas ma taille. Comment faire ?', text: 'Notre guide des tailles vous donne un point de départ en deux minutes, puis une conseillère vérifie avec vous sur WhatsApp. Vous pouvez aussi venir vous faire mesurer gratuitement en boutique.', a: <>Notre <Link to="/guide-des-tailles" className="text-gold hover:underline">guide des tailles</Link> vous donne un point de départ en deux minutes, puis une conseillère vérifie avec vous sur WhatsApp. Vous pouvez aussi venir vous faire mesurer gratuitement en boutique : vingt minutes, en salon fermé.</> },
-  { cat: 'Livraison', q: 'Livrez-vous hors de Dakar ?', text: 'Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et le délai vous sont annoncés dès que vous indiquez votre pays.', a: <>Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et le délai vous sont annoncés dès que vous indiquez votre pays, avant toute validation. <Link to="/livraison-retours" className="text-gold hover:underline">Livraison et retours</Link></> },
+  { cat: 'Livraison', q: 'Livrez-vous hors de Dakar ?', text: 'Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et le délai se règlent avec votre conseillère, sur WhatsApp ou par téléphone.', a: <>Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et le délai se règlent avec votre conseillère, sur WhatsApp ou par téléphone, avant toute validation. <Link to="/livraison-retours" className="text-gold hover:underline">Livraison et retours</Link></> },
   { cat: 'Livraison', q: 'Puis-je commander depuis la France et faire livrer ma mère à Dakar ?', text: 'Oui. Cochez « Commande à offrir » dans votre panier : l’adresse de livraison est différente de la vôtre, le prix n’apparaît pas sur le colis, et nous vous prévenons quand elle l’a reçu.', a: <>Oui. Cochez « Commande à offrir » dans votre panier : l’adresse de livraison est différente de la vôtre, le prix n’apparaît pas sur le colis, et nous vous prévenons quand elle l’a reçu. <Link to="/commander-depuis-l-etranger" className="text-gold hover:underline">Commander depuis l’étranger</Link></> },
   { cat: 'Discrétion', q: 'Le colis est-il discret ?', text: 'Oui. Il est expédié dans un emballage neutre, sans mention du contenu ni du nom de la boutique à l’extérieur.', a: 'Oui. Il est expédié dans un emballage neutre, sans mention du contenu ni du nom de la boutique à l’extérieur. Vous pouvez aussi demander à n’être contactée que par WhatsApp.' },
   { cat: 'Paiement', q: 'Comment se passe le règlement ?', text: 'Votre commande est envoyée à une conseillère sur WhatsApp. Elle confirme la disponibilité, les frais et le délai, puis convient avec vous du règlement. Rien n’est expédié avant votre accord.', a: 'Votre commande est envoyée à une conseillère sur WhatsApp. Elle confirme la disponibilité de chaque taille, les frais et le délai, puis convient avec vous du règlement. Rien n’est expédié avant votre accord, et le libellé reste discret.' },
@@ -115,12 +115,12 @@ export function DeliveryPage() {
                 <li key={z.id} className="card p-6">
                   <h3 className="font-serif text-2xl">{z.label}</h3>
                   <p className="mt-2 text-sm text-ivory-2">{z.countries.join(', ')}</p>
-                  <dl className="mt-4 space-y-1 text-sm"><div><dt className="inline text-mute">Délai : </dt><dd className="inline">{z.delay}</dd></div><div><dt className="inline text-mute">Frais : </dt><dd className="inline">{z.fees}</dd></div></dl>
+                  
                   <ul className="mt-3 space-y-1 text-sm text-ivory-2">{z.notes.map((n) => <li key={n}>· {n}</li>)}</ul>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-mute">Les frais et le délai exacts dépendent de votre adresse et du poids du colis. Votre conseillère vous les annonce sur WhatsApp avant toute validation : rien n’est expédié sans votre accord.</p>
+            <p className="mt-6 text-sm text-mute">Les frais et le délai de livraison se règlent directement avec votre conseillère, sur WhatsApp ou par téléphone, avant toute validation. Rien n’est expédié sans votre accord.</p>
           </section>
           <section className="body-copy">
             <h2 className="h-section">Discrétion</h2>
@@ -141,7 +141,7 @@ export function DeliveryPage() {
             <h2 className="h-section">Droits et taxes</h2>
             <p className="mt-4">Selon votre pays, des droits de douane peuvent s’appliquer à la réception. Nous vous l’indiquons avant la commande, jamais après.</p>
           </section>
-          <WaButton message={MESSAGES.abroad()} source="livraison">Voir les délais vers mon pays</WaButton>
+          <WaButton message={MESSAGES.abroad()} source="livraison">Parler livraison avec une conseillère</WaButton>
         </div>
       </Section>
     </>
@@ -187,30 +187,11 @@ function Legal({ title, children }: { title: string; children: React.ReactNode }
     </>
   );
 }
-const L = PENDING.legal;
-
-export function LegalNoticePage() {
-  return (
-    <Legal title="Mentions légales">
-      <h2>Éditeur</h2>
-      <p>
-        {L.company || 'Chambre 69'}{L.form ? `, ${L.form}` : ''}{L.rccm ? `, immatriculée au RCCM sous le numéro ${L.rccm}` : ''}{L.ninea ? `, NINEA ${L.ninea}` : ''}.
-        {' '}Siège : {L.hq ? `${L.hq}, ` : ''}Dakar, Sénégal.
-      </p>
-      <p>Directrice de la publication : {BRAND.founder}, fondatrice et directrice générale.</p>
-      <p>Contact : {BRAND.email} — {BRAND.whatsappDisplay}.</p>
-      <h2>Hébergement</h2>
-      <p>{L.host}.</p>
-      <h2>Propriété intellectuelle</h2>
-      <p>Les textes, photographies et éléments graphiques de ce site appartiennent à Chambre 69 ou aux maisons distribuées. Toute reproduction sans autorisation est interdite.</p>
-    </Legal>
-  );
-}
 
 export function TermsPage() {
   return (
     <Legal title="Conditions générales de vente">
-      <h2>1. Objet</h2><p>Les présentes conditions régissent les ventes conclues entre {L.company ? <>{L.company} (« Chambre 69 »)</> : 'Chambre 69'} et toute cliente passant commande sur le site {SITE_URL}, en boutique ou par WhatsApp.</p>
+      <h2>1. Objet</h2><p>Les présentes conditions régissent les ventes conclues entre Chambre 69 et toute cliente passant commande sur le site {SITE_URL}, en boutique ou par WhatsApp.</p>
       <h2>2. Commande</h2><p>La commande est transmise à une conseillère, qui confirme la disponibilité de chaque taille, les frais de livraison et le délai. La vente est conclue à l’acceptation de cette confirmation par la cliente.</p>
       <h2>3. Prix</h2><p>Les prix sont exprimés en francs CFA (FCFA). Une conversion en euros ou en dollars peut être indiquée à titre purement indicatif. Les frais de livraison sont communiqués avant la confirmation de la commande.</p>
       <h2>4. Règlement</h2><p>Les modalités de règlement sont convenues avec la conseillère lors de la confirmation de la commande. Aucune donnée bancaire n’est conservée par Chambre 69.</p>

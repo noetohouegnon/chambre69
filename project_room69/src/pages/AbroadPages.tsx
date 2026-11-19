@@ -5,15 +5,15 @@ import { MESSAGES } from '../lib/whatsapp';
 import { ZONES, PENDING } from '../data/site';
 import { useUi } from '../context/UiContext';
 
-function DelaysTable({ ids }: { ids: string[] }) {
+function ZonesTable({ ids }: { ids: string[] }) {
   return (
-    <div id="delais" className="scroll-mt-32 overflow-x-auto rounded-2xl border border-gold/15">
-      <table className="w-full min-w-[34rem] text-left text-sm">
-        <caption className="sr-only">Délais et frais par zone</caption>
-        <thead className="bg-ink-3 text-ivory"><tr><th className="p-4 font-medium">Zone</th><th className="p-4 font-medium">Pays</th><th className="p-4 font-medium">Délai</th><th className="p-4 font-medium">Frais</th></tr></thead>
+    <div id="pays" className="scroll-mt-32 overflow-x-auto rounded-2xl border border-gold/15">
+      <table className="w-full min-w-[28rem] text-left text-sm">
+        <caption className="sr-only">Pays desservis par zone</caption>
+        <thead className="bg-ink-3 text-ivory"><tr><th className="p-4 font-medium">Zone</th><th className="p-4 font-medium">Pays</th></tr></thead>
         <tbody className="divide-y divide-gold/10 text-ivory-2">
           {ZONES.filter((z) => ids.includes(z.id)).map((z) => (
-            <tr key={z.id}><td className="p-4 text-ivory">{z.label}</td><td className="p-4">{z.countries.join(', ')}</td><td className="p-4">{z.delay}</td><td className="p-4">{z.fees}</td></tr>
+            <tr key={z.id}><td className="p-4 text-ivory">{z.label}</td><td className="p-4">{z.countries.join(', ')}</td></tr>
           ))}
         </tbody>
       </table>
@@ -58,19 +58,19 @@ export function AbroadPage() {
           <article className="card p-8">
             <h2 className="font-serif text-3xl">Ce qu’il faut savoir</h2>
             <div className="body-copy mt-4">
-              <p>Les délais et les frais vous sont annoncés dès que vous indiquez votre pays, avant de valider quoi que ce soit.</p>
+              <p>Les frais et le délai de livraison se règlent avec votre conseillère, sur WhatsApp ou par téléphone, avant de valider quoi que ce soit.</p>
               <p>Le règlement est convenu avec votre conseillère, et le libellé qui apparaît sur votre relevé est discret.</p>
               <p>Selon votre pays, des droits de douane peuvent s’appliquer à la réception. Nous vous l’indiquons avant la commande, jamais après.</p>
               <p>Notre numéro WhatsApp fonctionne depuis l’étranger, comme un numéro ordinaire.</p>
             </div>
-            <a href="#delais" className="btn-gold mt-6">Voir les délais vers mon pays</a>
+            <a href="#pays" className="btn-gold mt-6">Voir les pays desservis</a>
           </article>
         </div>
       </Section>
       <Section tone="ink2">
-        <h2 className="h-section mb-8">Délais et frais à l’international</h2>
-        <DelaysTable ids={['international', 'dakar', 'senegal']} />
-        <p className="mt-6 max-w-prose text-sm text-mute">Les frais et le délai exacts dépendent de votre ville et du poids du colis : votre conseillère vous les annonce sur WhatsApp, avant toute validation. Rien n’est expédié sans votre accord.</p>
+        <h2 className="h-section mb-8">Où nous livrons</h2>
+        <ZonesTable ids={['international', 'dakar', 'senegal']} />
+        <p className="mt-6 max-w-prose text-sm text-mute">Les frais et le délai de livraison se règlent directement avec votre conseillère, sur WhatsApp ou par téléphone, avant toute validation. Rien n’est expédié sans votre accord.</p>
         <WaButton message={MESSAGES.abroad()} source="diaspora-bas" className="mt-8">Parler à une conseillère</WaButton>
       </Section>
     </>
@@ -98,11 +98,11 @@ export function WestAfricaPage() {
           <article>
             <h2 className="h-section">Comment ça se passe</h2>
             <ol className="mt-6 space-y-4 text-[17px] text-ivory-2">
-              {['Vous indiquez votre pays : votre conseillère vous annonce les frais et le délai.', 'Vous réglez selon les modalités convenues avec votre conseillère.', PENDING.shipDays ? `Nous expédions sous ${PENDING.shipDays} jours ouvrés, dans un colis neutre, et vous suivez votre commande.` : 'Nous expédions dès votre accord, dans un colis neutre, et vous suivez votre commande sur WhatsApp.', 'Si la taille ne va pas, écrivez-nous : nous trouverons une solution.'].map((t, i) => (
+              {['Vous indiquez votre pays : votre conseillère convient avec vous, sur WhatsApp ou par téléphone, des frais et du délai.', 'Vous réglez selon les modalités convenues avec votre conseillère.', PENDING.shipDays ? `Nous expédions sous ${PENDING.shipDays} jours ouvrés, dans un colis neutre, et vous suivez votre commande.` : 'Nous expédions dès votre accord, dans un colis neutre, et vous suivez votre commande sur WhatsApp.', 'Si la taille ne va pas, écrivez-nous : nous trouverons une solution.'].map((t, i) => (
                 <li key={t} className="flex gap-4"><span className="font-serif text-3xl leading-none text-gold">{i + 1}</span><span>{t}</span></li>
               ))}
             </ol>
-            <a href="#delais" className="btn-gold mt-8">Voir les délais vers mon pays</a>
+            <a href="#pays" className="btn-gold mt-8">Voir les pays desservis</a>
           </article>
         </div>
       </Section>
@@ -130,9 +130,9 @@ export function WestAfricaPage() {
         </div>
       </Section>
       <Section>
-        <h2 className="h-section mb-8">Délais et frais en Afrique de l’Ouest</h2>
-        <DelaysTable ids={['sous-region']} />
-        <p className="mt-6 max-w-prose text-sm text-mute">Les frais et le délai exacts dépendent de votre ville et du poids du colis : votre conseillère vous les annonce sur WhatsApp, avant toute validation. Rien n’est expédié sans votre accord.</p>
+        <h2 className="h-section mb-8">Les pays que nous livrons</h2>
+        <ZonesTable ids={['sous-region']} />
+        <p className="mt-6 max-w-prose text-sm text-mute">Les frais et le délai de livraison se règlent directement avec votre conseillère, sur WhatsApp ou par téléphone, avant toute validation. Rien n’est expédié sans votre accord.</p>
       </Section>
     </>
   );

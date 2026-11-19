@@ -47,7 +47,7 @@ export function StoresPage() {
               <p className="eyebrow">Dakar, Sénégal</p>
               <h2 className="mt-3 font-serif text-4xl"><Link to={`/nos-boutiques/${s.id}`} className="hover:text-gold">{s.district}</Link></h2>
               <p className="mt-2 text-ivory-2">{s.context}</p>
-              <div className="mt-5">{s.address ? <p>{s.address}</p> : <p className="text-sm text-mute">Pour l’adresse exacte et les horaires du jour, utilisez « Itinéraire » ou écrivez-nous sur WhatsApp : nous vous guidons jusqu’à la porte.</p>}</div>
+              <div className="mt-5">{s.address ? <><p>{s.address}</p>{s.hours && <p className="mt-1 text-sm text-mute">{s.hours.map((h) => `${h.day} : ${h.time}`).join(' · ')}</p>}</> : <p className="text-sm text-mute">Pour l’adresse exacte et les horaires du jour, utilisez « Itinéraire » ou écrivez-nous sur WhatsApp : nous vous guidons jusqu’à la porte.</p>}</div>
               <div className="mt-6"><StoreActions s={s} /></div>
               <Link to={`/nos-boutiques/${s.id}`} className="btn-ghost mt-4">Toutes les informations</Link>
             </article>
@@ -88,7 +88,7 @@ export function StorePage() {
             </div>
             <div>
               <h2 className="flex items-center gap-2 font-serif text-3xl"><Clock className="h-6 w-6 text-gold" />Horaires</h2>
-              <div className="mt-3">{s.hours ? <ul>{s.hours.map((h) => <li key={h.day} className="flex justify-between border-b border-gold/10 py-2"><span>{h.day}</span><span>{h.time}</span></li>)}</ul> : <p className="text-ivory-2">Les horaires peuvent varier pendant le Ramadan et les fêtes : appelez-nous ou écrivez-nous sur WhatsApp avant de passer, nous vous confirmons l’ouverture du jour.</p>}</div>
+              <div className="mt-3">{s.hours ? <><ul>{s.hours.map((h) => <li key={h.day} className="flex justify-between border-b border-gold/10 py-2"><span>{h.day}</span><span>{h.time}</span></li>)}</ul><p className="mt-3 text-sm text-mute">Pendant le Ramadan et les fêtes, les horaires peuvent changer : appelez-nous ou écrivez-nous avant de passer.</p></> : <p className="text-ivory-2">Les horaires peuvent varier pendant le Ramadan et les fêtes : appelez-nous ou écrivez-nous sur WhatsApp avant de passer, nous vous confirmons l’ouverture du jour.</p>}</div>
             </div>
             {s.parking && (
               <div>

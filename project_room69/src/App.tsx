@@ -27,7 +27,7 @@ import { BrandsPage } from './pages/BrandsPage';
 import { AbroadPage, WestAfricaPage } from './pages/AbroadPages';
 import { AppointmentPage } from './pages/AppointmentPage';
 import { ContactPage } from './pages/ContactPage';
-import { GiftCardPage, FaqPage, DeliveryPage, NewsletterPage, PressPage, LegalNoticePage, TermsPage, PrivacyPage, CookiesPage } from './pages/InfoPages';
+import { GiftCardPage, FaqPage, DeliveryPage, NewsletterPage, PressPage, TermsPage, PrivacyPage, CookiesPage } from './pages/InfoPages';
 import { NotFoundPage } from './pages/NotFoundPage';
 
 const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
@@ -112,7 +112,6 @@ export default function App() {
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/inscription" element={<NewsletterPage />} />
                 <Route path="/presse" element={<PressPage />} />
-                <Route path="/mentions-legales" element={<LegalNoticePage />} />
                 <Route path="/cgv" element={<TermsPage />} />
                 <Route path="/confidentialite" element={<PrivacyPage />} />
                 <Route path="/cookies" element={<CookiesPage />} />

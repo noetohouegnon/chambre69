@@ -13,7 +13,7 @@ export const BRAND = {
   whatsappNumber: '221787040505',
   whatsappDisplay: '+221 78 704 05 05',
   phoneHref: 'tel:+221787040505',
-  email: 'contact@chambre69.com',
+  email: 'contact@chambre69.sn',
   firstPrice: 33000,
   cups: 'ABCDEFGHIJKLMNO'.split(''),
 };
@@ -48,10 +48,15 @@ export const STORES: Store[] = [
     name: 'Chambre 69 Point E',
     district: 'Point E',
     context: 'Point E, quartier résidentiel du centre de Dakar, Sénégal',
-    address: null,
+    address: 'Angle rue PE 23 et boulevard de Saint-Louis, Point E, Dakar',
     landmarks: null,
-    hours: null,
-    mapsQuery: 'Chambre 69 lingerie Point E Dakar',
+    // Horaires relevés sur chambre69.sn (novembre 2026) : à confirmer par la boutique.
+    hours: [
+      { day: 'Lundi', time: '10 h – 20 h' },
+      { day: 'Du mardi au samedi', time: '8 h – 20 h' },
+      { day: 'Dimanche', time: 'Sur rendez-vous' },
+    ],
+    mapsQuery: 'Chambre 69, Angle Rue PE23 Boulevard de Saint-Louis, Point E, Dakar',
     parking: null,
   },
   {
@@ -59,10 +64,14 @@ export const STORES: Store[] = [
     name: 'Chambre 69 Corniche Ouest',
     district: 'Corniche Ouest',
     context: 'Corniche Ouest, axe côtier ouest de Dakar, Sénégal',
-    address: null,
-    landmarks: null,
-    hours: null,
-    mapsQuery: 'Chambre 69 lingerie Corniche Ouest Dakar',
+    address: 'Route de la Corniche Ouest, Soumbédioune, au niveau de la RFM, Dakar',
+    landmarks: 'Sur la Corniche Ouest, à Soumbédioune, à hauteur des locaux de la radio RFM.',
+    hours: [
+      { day: 'Lundi', time: '10 h – 20 h' },
+      { day: 'Du mardi au samedi', time: '8 h – 20 h' },
+      { day: 'Dimanche', time: 'Sur rendez-vous' },
+    ],
+    mapsQuery: 'Chambre 69, Route de la Corniche Ouest, Soumbédioune, Dakar',
     parking: null,
   },
 ];
@@ -70,40 +79,32 @@ export const STORES: Store[] = [
 export const mapsUrl = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 export const directionsUrl = (q: string) => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(q)}`;
 
-/** Zones de livraison (5 bis.2). Délais et frais : à arrêter avec Chambre 69. */
-export type Zone = { id: string; label: string; countries: string[]; delay: string; fees: string; notes: string[] };
+/** Zones de livraison (5 bis.2). Frais et délais : convenus au cas par cas sur WhatsApp ou par téléphone. */
+export type Zone = { id: string; label: string; countries: string[]; notes: string[] };
 
 export const ZONES: Zone[] = [
   {
     id: 'dakar',
     label: 'Dakar et périphérie',
     countries: ['Sénégal — Dakar et périphérie'],
-    delay: 'Livraison express, sur un créneau convenu avec vous',
-    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Retrait possible dans nos deux boutiques', 'Règlement possible à la livraison, après confirmation par une conseillère'],
   },
   {
     id: 'senegal',
     label: 'Régions du Sénégal',
     countries: ['Sénégal — régions (Thiès, Saint-Louis, Mbour, Touba, Ziguinchor…)'],
-    delay: 'Précisé par votre conseillère selon votre ville',
-    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Suivi de commande sur WhatsApp'],
   },
   {
     id: 'sous-region',
     label: "Afrique de l'Ouest",
     countries: ["Côte d'Ivoire", 'Mali', 'Burkina Faso', 'Guinée', 'Mauritanie', 'Gambie', 'Bénin', 'Togo'],
-    delay: 'Précisé par votre conseillère selon votre pays',
-    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Droits et taxes éventuels annoncés avant la commande, jamais après'],
   },
   {
     id: 'international',
     label: 'International',
     countries: ['France', 'Italie', 'Espagne', 'Belgique', 'Royaume-Uni', 'Allemagne', 'États-Unis', 'Canada'],
-    delay: 'Précisé par votre conseillère selon votre pays',
-    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Mention douanière et droits éventuels annoncés avant la commande', 'Suivi de colis'],
   },
 ];
@@ -145,14 +146,6 @@ export const PENDING = {
   /** Amplitude des tours de dos en stock (ex. '75 au 120'). */
   bandRange: null as string | null,
   alphaRange: 'S au 3XL',
-  legal: {
-    company: null as string | null,
-    form: null as string | null,
-    rccm: null as string | null,
-    ninea: null as string | null,
-    hq: null as string | null,
-    host: 'Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis',
-  },
 };
 
 /** « sous 14 jours » si le délai est connu, sinon une formulation neutre. */
