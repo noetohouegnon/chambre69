@@ -1,0 +1,31 @@
+{
+  "name": "Soutien-gorge Naked",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "soutiens-gorge",
+  "reference": "C69-27B31C",
+  "color": "Nude",
+  "images": [
+    "/media/soutien-gorge-naked-ysabel-mora/0-960.webp",
+    "/media/soutien-gorge-naked-ysabel-mora/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "bands": [
+      "80",
+      "85",
+      "90",
+      "95",
+      "100"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 700
+}

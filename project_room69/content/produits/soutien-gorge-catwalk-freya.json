@@ -1,0 +1,45 @@
+{
+  "name": "Soutien-gorge Catwalk",
+  "brand": "Freya",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "AA402201MIH",
+  "color": "Bleu nuit",
+  "description": "Découvrez le Soutien-gorge Catwalk de Freya, et succombez sans plus attendre à sa sublime dentelle à imprimé animal abstrait. Notre Soutien-gorge tant apprécié est agrémenté d’un renfort intérieur sur les côtés pour garantir une poitrine parfaitement rehaussée, maintenue et projetée vers l’avant. Sans oublier le crochet en J pour une option dos nageur et un joli petit nœud avec détail bouton-pression à l'entre-seins pour cette note hyper féminine que nous apprécions tellement.\n\nBonnet 4 pans avec renfort latéral, pour une poitrine parfaitement rehaussée et projetée en avant\n\nRenfort latéral laminé dans toutes les tailles pour un maintien garanti et une poitrine projetée en avant",
+  "features": [
+    "Dos uni doublé de powernet pour un bon positionnement et un maintien garanti",
+    "Bretelles fixes réglables qui ne tombent pas sur les épaules",
+    "Crochet en J pour option dos nageur",
+    "Anneaux et glissières argentés",
+    "Joli nœud à l’entre-seins avec détail bouton-pression argenté"
+  ],
+  "images": [
+    "/media/soutien-gorge-catwalk-freya/0-960.webp",
+    "/media/soutien-gorge-catwalk-freya/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 420
+}

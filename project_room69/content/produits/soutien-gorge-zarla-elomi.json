@@ -1,0 +1,52 @@
+{
+  "name": "Soutien-gorge Zarla",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "EL302505CAT",
+  "color": "Rose",
+  "description": "Elomi vous présente son nouveau Soutien-gorge à basque stretch Zarla. De délicates broderies plates et abstraites de feuilles et de baies habillent le haut des bonnets pour ajouter une touche chic à votre lingerie. Le haut dos en U vous donne une silhouette lisse, tandis que le joli nœud à l'entre-seins complète parrfaitement le look ! Disponible jusqu’au bonnet O.\n\nNouvelle forme inspirée de Morgan EL4110, notre modèle ‘most-loved’ mi-couvrant, mais avec un haut de bonnet non extensible pour plus de maintien\n\nHaut de bonnet orné d'une broderie abstraite de feuilles et de baies - point plat pour minimiser les lignes apparentes sous les vêtements\n\nBonnets en tulle avec doublure transparente pour le maintien, mais avec un look séduisant et léger",
+  "features": [
+    "Bonnets 3 pans avec renfort latéral pour une poitrine rehaussée et projetée vers l'avant",
+    "Ouverture goutte à l’entre-seins pour un look plus léger",
+    "Dos doublé avec élastiques intégrés pour des bords doux et lisses qui ne s’enroulent pas",
+    "Dos cheminée large pour un effet lissant",
+    "Liseré élastique discret sur le décolleté pour une application parfaite",
+    "Petit nœud à l’entre-seins"
+  ],
+  "images": [
+    "/media/soutien-gorge-zarla-elomi/0-960.webp",
+    "/media/soutien-gorge-zarla-elomi/1-960.webp",
+    "/media/soutien-gorge-zarla-elomi/2-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O"
+    ],
+    "bands": [
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110",
+      "115",
+      "120"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 370
+}

@@ -1,0 +1,48 @@
+{
+  "name": "Soutien-gorge Fatale",
+  "brand": "Freya",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "AA401402NOR",
+  "color": "Noir",
+  "description": "La beauté est dans les détails avec le soutien-gorge Plunge Freya Fatale : décolleté plongeant sans effet push up décoré d’une délicate bordure en dentelle et panneaux transparents sur le haut des bonnets. La romantique en vous est sûre d’y trouver son bonheur.",
+  "features": [
+    "Descriptif",
+    "Entre-seins bas pour un décolleté plongeant",
+    "Décolleté plongeant sans effet push up",
+    "Décolleté et bas des bonnets en dentelle et haut des bonnets en tulle transparent",
+    "Présente une doublure beige contrastante",
+    "Bretelles fixes réglables qui ne tombent pas sur les épaules",
+    "Décor anneau doré à l’entre-seins et au départ bretelles"
+  ],
+  "images": [
+    "/media/soutien-gorge-fatale-freya/1-960.webp",
+    "/media/soutien-gorge-fatale-freya/2-960.webp",
+    "/media/soutien-gorge-fatale-freya/0-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 460
+}

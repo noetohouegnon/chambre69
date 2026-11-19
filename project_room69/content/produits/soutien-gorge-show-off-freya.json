@@ -1,0 +1,36 @@
+{
+  "name": "Soutien-gorge Show Off",
+  "brand": "Freya",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "C69-E28605",
+  "images": [
+    "/media/soutien-gorge-show-off-freya/0-960.webp",
+    "/media/soutien-gorge-show-off-freya/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 470
+}

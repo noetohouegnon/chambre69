@@ -1,0 +1,22 @@
+{
+  "name": "Ensemble harnais rouge avec bas",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-B93456",
+  "images": [
+    "/media/ensemble-seduction-modele-01/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1560
+}

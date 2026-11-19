@@ -1,0 +1,23 @@
+{
+  "name": "Nuisette en satin et kimono en dentelle champagne",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "nuit",
+  "reference": "C69-A53DC2",
+  "images": [
+    "/media/ensemble-kimono-modele-01/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 1490
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Soutien-gorge Leia",
+  "brand": "Empreinte",
+  "origin": "France",
+  "category": "soutiens-gorge",
+  "reference": "00P_258_07224_0221",
+  "color": "Noir",
+  "description": "Broderie suisse exclusive associée à une dentelle française, sans élasthanne pour une meilleure longévité\n\nForme iconique du vestiaire Empreinte, le soutien-gorge moulé emboitant concentre toute l’expertise de la lingerie sans couture. Ses bonnets moulés, réalisés en broderie suisse, épousent la poitrine avec précision pour offrir un galbe naturel et parfaitement maîtrisé. Une création pensée pour sublimer le quotidien avec exigence et féminité.",
+  "features": [
+    "Informations produits",
+    "Soutien-gorge moulé avec armatures, sans coque",
+    "Bonnets moulés sans couture pour une invisibilité totale sous les vêtements",
+    "Galbe naturel, sans effet volume superflu",
+    "Décolleté emboitant rassurant",
+    "Bretelles décorées ponctuées d’un bijou ton sur ton",
+    "Largeurs dos et des agrafages évolutives selon les tailles et profondeurs",
+    "Maintien haute précision jusqu’au bonnet H",
+    "Broderie suisse",
+    "Dentelle française"
+  ],
+  "images": [
+    "/media/soutien-gorge-leia-empreinte/0-960.webp",
+    "/media/soutien-gorge-leia-empreinte/1-960.webp",
+    "/media/soutien-gorge-leia-empreinte/2-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H"
+    ],
+    "bands": [
+      "80",
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 60
+}

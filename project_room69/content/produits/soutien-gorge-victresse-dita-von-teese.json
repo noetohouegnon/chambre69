@@ -1,0 +1,44 @@
+{
+  "name": "Soutien-gorge Victresse",
+  "brand": "Dita Von Teese",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "D59041F",
+  "description": "Dita Von Teese dévoile à travers cette ligne glamour son savoir-faire et son amour de la broderie riche et travaillée. Tout en élégance et en sensualité, Victresse allie la finesse des fleurs à l'éclat du satin pour une silhouette époustouflante.",
+  "features": [
+    "Soutien-gorge corbeille DITA VON TEESE Victresse",
+    "Semi-transparent",
+    "Armatures",
+    "Demi-coques",
+    "Finitions : festonnées",
+    "Fermeture : agrafes",
+    "Bretelles : extensibles, réglables",
+    "Nœuds satinés",
+    "Les modèles de cette collection font partie de notre univers Lingerie sexy"
+  ],
+  "images": [
+    "/media/soutien-gorge-victresse-dita-von-teese/0-960.webp",
+    "/media/soutien-gorge-victresse-dita-von-teese/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 590
+}

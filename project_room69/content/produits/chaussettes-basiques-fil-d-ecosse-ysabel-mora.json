@@ -1,0 +1,29 @@
+{
+  "name": "Chaussettes basiques fil d'Écosse",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "basiques",
+  "reference": "C69-868257",
+  "color": "Noir",
+  "features": [
+    "43-46",
+    "Noir gris bleu"
+  ],
+  "images": [
+    "/media/chaussettes-basiques-fil-d-ecosse-ysabel-mora/0-960.webp",
+    "/media/chaussettes-basiques-fil-d-ecosse-ysabel-mora/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 760
+}

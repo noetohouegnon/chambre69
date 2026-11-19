@@ -1,0 +1,33 @@
+{
+  "name": "Culotte Agathe",
+  "brand": "Empreinte",
+  "origin": "France",
+  "category": "culottes",
+  "reference": "00P_242_03204_0576",
+  "description": "Essentiel du vestiaire lingerie, le slip Agathe séduit par son confort et son esthétique raffinée. Le jeu de transparence et les découpes verticales élancent visuellement la silhouette pour une allure élégante au quotidien.",
+  "features": [
+    "Informations produits",
+    "Slip",
+    "Découpes verticales affinant visuellement la silhouette",
+    "Dos en maille douce et transparente",
+    "Bijou central en écho aux soutiens-gorge du thème"
+  ],
+  "images": [
+    "/media/culotte-agathe-empreinte/0-960.webp",
+    "/media/culotte-agathe-empreinte/1-960.webp",
+    "/media/culotte-agathe-empreinte/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 20
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Soutien-gorge Kintai",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "EL301202BLK",
+  "color": "Noir",
+  "description": "Découvrez une version ludique de notre modèle Matilda tant apprécié avec le tout nouveau Soutien-gorge Plunge Kintai d’Elomi. Kintai présente des bonnets recouverts de tulle formant un pont à l’entre-seins pour vous donner un look original et contemporain.\n\nEntre-seins et bonnets doublés coloris Café Au Lait pour le maintien et un look plus léger",
+  "features": [
+    "Inspiré du modèle Plunge armatures Matilda tant apprécié (EL8900)",
+    "Bonnets et dos conçus dans une fine dentelle résille extensible",
+    "Bonnets recouverts de tulle formant un pont à l’entre-seins, invisible sous les vêtements",
+    "Hauts des bonnets en tulle pour un look plus léger",
+    "Décolleté élastique pour une meilleure application",
+    "Élastique à rabat doux au dos, à la basque et sous le bras pour un confort au quotidien",
+    "Joli détail ovale en or rose à l’entre-seins et au départ des bretelles"
+  ],
+  "images": [
+    "/media/soutien-gorge-kintai-elomi/2-960.webp",
+    "/media/soutien-gorge-kintai-elomi/1-960.webp",
+    "/media/soutien-gorge-kintai-elomi/0-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O"
+    ],
+    "bands": [
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110",
+      "115",
+      "120"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 320
+}

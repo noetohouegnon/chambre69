@@ -1,0 +1,30 @@
+{
+  "name": "Soutien-gorge Naked à armatures, rembourré, forme corbeille",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "soutiens-gorge",
+  "reference": "C69-87BD3C",
+  "color": "Noir",
+  "images": [
+    "/media/soutien-gorge-naked-a-armatures-rembourre-ysabel-mora-2/0-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "bands": [
+      "80",
+      "85",
+      "90",
+      "95",
+      "100"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 980
+}

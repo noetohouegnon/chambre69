@@ -1,0 +1,32 @@
+{
+  "name": "Slip Cate",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "EL4036INK",
+  "color": "Violet profond",
+  "description": "Coordonnez votre look Elomi préféré avec la sublime culotte Cate. Avec une broderie ajourée à la taille, la culotte offre un style bien enveloppant et un effet lisse sous les vêtements.",
+  "features": [
+    "Forme de culotte enveloppante",
+    "Panneau brodé ajouré sur le devant de la taille",
+    "Tissu irisé lisse",
+    "Ceinture élastiquée"
+  ],
+  "images": [
+    "/media/slip-cate-elomi/0-960.webp",
+    "/media/slip-cate-elomi/2-960.webp",
+    "/media/slip-cate-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 120
+}

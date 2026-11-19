@@ -1,0 +1,24 @@
+{
+  "name": "Nuisette",
+  "brand": "LingaDore",
+  "origin": "Europe",
+  "category": "nuit",
+  "reference": "C69-BC50FF",
+  "color": "Noir",
+  "images": [
+    "/media/nuisette-lingadore/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1040
+}

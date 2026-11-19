@@ -1,0 +1,22 @@
+{
+  "name": "Ensemble brodé de fleurs et bijou de corps",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-5D0B4E",
+  "images": [
+    "/media/nuisette-modele-05/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 2050
+}

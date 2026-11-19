@@ -1,17 +1,19 @@
 /**
- * Génère le catalogue statique du site à partir des dossiers photos du dépôt.
+ * IMPORT EN MASSE (facultatif) : crée des fiches produits à partir des dossiers photos du dépôt.
+ * Pour un ajout ponctuel, utilisez plutôt l'espace d'administration (/admin).
  *
- *   node scripts/build-catalog.mjs
+ *   npm run import-dossiers
+ *
+ * Seules les fiches qui n'existent pas encore dans content/produits/ sont créées :
+ * les fiches existantes (et leurs modifications faites depuis /admin) ne sont jamais écrasées.
  *
  * - Chaque dossier « produit » (avec fiche .docx, ou quelques photos d'une même pièce)
  *   devient UNE fiche produit avec sa galerie.
  * - Les dossiers « en vrac » (photos WhatsApp sans fiche) donnent une fiche par photo.
  * - Les photos sont converties en WebP (480 px et 960 px de large) dans public/media.
- * - Le résultat est écrit dans src/data/catalog.json (versionné : le site n'a besoin
- *   d'aucune base de données pour afficher le catalogue).
+ * - Le résultat est écrit dans content/produits/<identifiant>.json.
  *
- * Les tailles sont des AMPLITUDES PROVISOIRES par maison, à remplacer par le stock réel
- * (voir src/data/overrides.json, qui prime sur tout ce qui est généré ici).
+ * Les tailles sont des AMPLITUDES PROVISOIRES par maison, à corriger depuis /admin.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -22,7 +24,6 @@ import mammoth from 'mammoth';
 const PROJECT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const ROOT = path.resolve(PROJECT, '..');
 const OUT_MEDIA = path.join(PROJECT, 'public', 'media');
-const OUT_JSON = path.join(PROJECT, 'src', 'data', 'catalog.json');
 const WIDTHS = [480, 960];
 const IMG_RE = /\.(jpe?g|png|webp|avif)$/i;
 
@@ -315,9 +316,17 @@ async function main() {
     const colors = new Set(list.map((p) => p.color));
     list.forEach((p, i) => { p.name = colors.size === list.length && p.color ? `${p.name} — ${p.color.toLowerCase()}` : `${p.name} — modèle ${i + 1}`; });
   }
-  fs.mkdirSync(path.dirname(OUT_JSON), { recursive: true });
-  fs.writeFileSync(OUT_JSON, JSON.stringify(products, null, 1));
-  console.log(`\n${products.length} fiches produits, ${products.reduce((n, p) => n + p.images.length, 0)} photos.`);
+  const contentDir = path.join(PROJECT, 'content', 'produits');
+  fs.mkdirSync(contentDir, { recursive: true });
+  let created = 0;
+  for (const p of products) {
+    const file = path.join(contentDir, `${p.slug}.json`);
+    if (fs.existsSync(file)) continue;
+    const { slug, brandKind, source, images, ...rest } = p;
+    fs.writeFileSync(file, JSON.stringify({ ...rest, images: images.map((im) => im.src), hidden: false, rank: 0 }, null, 2));
+    created++;
+  }
+  console.log(`\n${products.length} fiches lues dans les dossiers, ${created} nouvelle(s) fiche(s) créée(s) dans content/produits.`);
 }
 
 main().catch((e) => { console.error(e); process.exit(1); });

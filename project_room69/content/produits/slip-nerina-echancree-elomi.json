@@ -1,0 +1,25 @@
+{
+  "name": "Slip Nerina échancré",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "C69-22AAB5",
+  "color": "Noir",
+  "images": [
+    "/media/slip-nerina-echancree-elomi/0-960.webp",
+    "/media/slip-nerina-echancree-elomi/1-960.webp",
+    "/media/slip-nerina-echancree-elomi/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 150
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Costume de dompteuse",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-09D787",
+  "images": [
+    "/media/ensemble-seduction-modele-35/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1900
+}

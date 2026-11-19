@@ -1,0 +1,28 @@
+{
+  "name": "Boxer homme ouverture braguette — modèle 2",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "homme",
+  "reference": "C69-E8ED82",
+  "features": [
+    "Motif carreaux , Gris, Bleu marine",
+    "Tailles S M L"
+  ],
+  "images": [
+    "/media/boxer-homme-ouverture-braguette-ysabel-mora-2/0-960.webp",
+    "/media/boxer-homme-ouverture-braguette-ysabel-mora-2/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": true,
+  "rank": 740
+}

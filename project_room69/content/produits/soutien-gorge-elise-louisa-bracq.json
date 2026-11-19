@@ -1,0 +1,44 @@
+{
+  "name": "Soutien-gorge Elise",
+  "brand": "Louisa Bracq",
+  "origin": "France",
+  "category": "soutiens-gorge",
+  "reference": "C69-C79A0D",
+  "description": "Élise incarne l’élégance essentielle de Louisa Bracq. Sa broderie de feuilles iconique, associée à une maille imitation plissée bi-élastique, offre un équilibre parfait entre finesse et confort. L’une des lignes historiques de la maison, toujours plébiscitée, Élise séduit par son style épuré, sa simplicité maîtrisée et son allure indémodable. Un incontournable à redécouvrir saison après saison.",
+  "features": [
+    "Détail produit",
+    "Armatures",
+    "Bonnets doublés",
+    "Décolleté couvrant",
+    "Bretelles réglables",
+    "Fermeture agrafe dos large",
+    "Fermeture agrafe dos standard",
+    "Dos réglable",
+    "Dos stretch tonique"
+  ],
+  "images": [
+    "/media/soutien-gorge-elise-louisa-bracq/0-960.webp",
+    "/media/soutien-gorge-elise-louisa-bracq/1-960.webp",
+    "/media/soutien-gorge-elise-louisa-bracq/2-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "bands": [
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 390
+}

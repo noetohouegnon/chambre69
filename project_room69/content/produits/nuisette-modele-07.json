@@ -1,0 +1,22 @@
+{
+  "name": "Nuisette en voile rouge",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-DB536B",
+  "images": [
+    "/media/nuisette-modele-07/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 2070
+}

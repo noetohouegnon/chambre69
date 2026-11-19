@@ -1,0 +1,50 @@
+{
+  "name": "Soutien-gorge Morgan",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "EL4110WHE",
+  "color": "Léopard bleu",
+  "description": "La collection la plus vendue Elomi, Morgan vous offre un confort parfait pour tous les jours. Le soutien-gorge Basque présente une magnifique dentelle stretch. Ses bonnet 3 pans avec renfort latéral vous offrent un galbe parfait et un maintien ultime.",
+  "features": [
+    "Bonnet 3 pans avec renfort latéral pour une poitrine galbée et projetée en avant",
+    "Haut bonnet stretch pour un joli galbe",
+    "Décolleté élastique pour plus de confort",
+    "Un joli nœud à l’entre-seins complète le look"
+  ],
+  "images": [
+    "/media/soutien-gorge-morgan-elomi/0-960.webp",
+    "/media/soutien-gorge-morgan-elomi/2-960.webp",
+    "/media/soutien-gorge-morgan-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O"
+    ],
+    "bands": [
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110",
+      "115",
+      "120"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 340
+}

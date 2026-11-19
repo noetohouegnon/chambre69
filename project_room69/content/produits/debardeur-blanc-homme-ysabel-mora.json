@@ -1,0 +1,29 @@
+{
+  "name": "Débardeur blanc homme",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "homme",
+  "reference": "C69-D66EA7",
+  "features": [
+    "L XL",
+    "Noir Blanc"
+  ],
+  "images": [
+    "/media/debardeur-blanc-homme-ysabel-mora/0-960.webp",
+    "/media/debardeur-blanc-homme-ysabel-mora/1-960.webp",
+    "/media/debardeur-blanc-homme-ysabel-mora/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 850
+}

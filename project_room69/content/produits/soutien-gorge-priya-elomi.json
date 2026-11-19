@@ -1,0 +1,52 @@
+{
+  "name": "Soutien-gorge Priya",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "EL4550BLK",
+  "color": "Noir",
+  "description": "Offrant tout le luxe et le glamour des années 20, découvrez le soutien-gorge Plunge Priya. Décoré d’une ravissante broderie avec motif brodé style tatouage à l’entre-seins, il offre un look élégant et flatteur pour toutes les morphologies.\n\nBonnet 3 pans et renfort latéral pour une poitrine parfaitement rehaussée et projetée en avant.\n\nÉlastique monté en fourreau sur le haut bonnet et élastiques dos montés en fourreau pour ne pas marquer sous les vêtements",
+  "features": [
+    "Descriptif",
+    "Décolleté échancré pour une coupe plongeante sans effet push up",
+    "Haut bonnets en tulle non doublés",
+    "Bonnets doublés d’une magnifique broderie, orientée vers l’avant pour un style flatteur",
+    "Motif brodé à l’entre-seins pour un look tattoo décoratif",
+    "Décor or rose à l’entre-seins et aux départs bretelles"
+  ],
+  "images": [
+    "/media/soutien-gorge-priya-elomi/0-960.webp",
+    "/media/soutien-gorge-priya-elomi/2-960.webp",
+    "/media/soutien-gorge-priya-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O"
+    ],
+    "bands": [
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110",
+      "115",
+      "120"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 360
+}

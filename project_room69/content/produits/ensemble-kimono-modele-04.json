@@ -1,0 +1,23 @@
+{
+  "name": "Kimono long en dentelle dorée à plumes",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "nuit",
+  "reference": "C69-D43C04",
+  "images": [
+    "/media/ensemble-kimono-modele-04/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 1520
+}

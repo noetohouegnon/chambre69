@@ -1,0 +1,43 @@
+{
+  "contact": {
+    "whatsapp": "+221 78 704 05 05",
+    "email": "contact@chambre69.sn"
+  },
+  "boutiques": [
+    {
+      "id": "point-e",
+      "quartier": "Point E",
+      "adresse": "Angle rue PE 23 et boulevard de Saint-Louis, Point E, Dakar",
+      "reperes": "",
+      "horaires": [
+        { "jour": "Lundi", "heures": "10 h – 20 h" },
+        { "jour": "Du mardi au samedi", "heures": "8 h – 20 h" },
+        { "jour": "Dimanche", "heures": "Sur rendez-vous" }
+      ],
+      "stationnement": "",
+      "recherche_maps": "Chambre 69, Angle Rue PE23 Boulevard de Saint-Louis, Point E, Dakar"
+    },
+    {
+      "id": "corniche-ouest",
+      "quartier": "Corniche Ouest",
+      "adresse": "Route de la Corniche Ouest, Soumbédioune, au niveau de la RFM, Dakar",
+      "reperes": "Sur la Corniche Ouest, à Soumbédioune, à hauteur des locaux de la radio RFM.",
+      "horaires": [
+        { "jour": "Lundi", "heures": "10 h – 20 h" },
+        { "jour": "Du mardi au samedi", "heures": "8 h – 20 h" },
+        { "jour": "Dimanche", "heures": "Sur rendez-vous" }
+      ],
+      "stationnement": "",
+      "recherche_maps": "Chambre 69, Route de la Corniche Ouest, Soumbédioune, Dakar"
+    }
+  ],
+  "echange_jours": null,
+  "temoignages": [],
+  "reseaux": {
+    "mis_a_jour": "octobre 2026",
+    "tiktok": 41000,
+    "instagram": 14000,
+    "facebook": 12000,
+    "snapchat": 3000
+  }
+}

@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useUi } from '../context/UiContext';
 import { searchProducts } from '../lib/search';
 import { productUrl } from '../data/catalog';
+import { BRAND } from '../data/site';
 import { WhatsAppIcon } from './ui/icons';
 import { waLink, MESSAGES } from '../lib/whatsapp';
 import { track } from '../lib/analytics';
@@ -149,7 +150,7 @@ export function Header() {
             <div className="mt-auto space-y-3 border-t border-gold/10 p-4">
               <button className="btn-line w-full" onClick={() => { setMenu(false); openSizeGuide('menu'); }}><Ruler className="h-5 w-5" />Trouver ma taille</button>
               <a className="btn-wa w-full" href={waLink(MESSAGES.general)} target="_blank" rel="noopener noreferrer"><WhatsAppIcon />Parler à une conseillère</a>
-              <p className="pt-1 text-center text-xs text-mute">WhatsApp +221 78 704 05 05 — joignable depuis l’étranger</p>
+              <p className="pt-1 text-center text-xs text-mute">WhatsApp {BRAND.whatsappDisplay} — joignable depuis l’étranger</p>
             </div>
           </div>
         </div>

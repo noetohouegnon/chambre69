@@ -1,0 +1,26 @@
+{
+  "name": "String Brianna",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "C69-206584",
+  "color": "Bruyère",
+  "images": [
+    "/media/string-brianna-elomi/1-960.webp",
+    "/media/string-brianna-elomi/2-960.webp",
+    "/media/string-brianna-elomi/3-960.webp",
+    "/media/string-brianna-elomi/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 70
+}

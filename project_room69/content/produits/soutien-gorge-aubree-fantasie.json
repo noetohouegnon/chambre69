@@ -1,0 +1,44 @@
+{
+  "name": "Soutien-gorge Aubree",
+  "brand": "Fantasie",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "FL6933NAE",
+  "description": "Découvrez le maintien sans égal et la beauté intemporelle du soutien-gorge Aubree. Orné d’une magnifique dentelle bicolore pour un look élégant au quotidien. Les bonnets en mousse légèrement paddés, les armatures larges et le dos en Powernet s’allient à la perfection pour vous garantir maintien et confort.",
+  "features": [
+    "Armatures larges pour plus de confort et un meilleur maintien",
+    "Bonnets légèrement paddés pour plus de maintien et une forme lisse et arrondie",
+    "Délicate dentelle bicolore sur les bonnets et la basque",
+    "Bretelles fixes entièrement réglables",
+    "Charm goutte diamanté en or rose à l’entre-seins"
+  ],
+  "images": [
+    "/media/soutien-gorge-aubree-fantasie/0-960.webp",
+    "/media/soutien-gorge-aubree-fantasie/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "75",
+      "80",
+      "85",
+      "90",
+      "95",
+      "100"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 490
+}

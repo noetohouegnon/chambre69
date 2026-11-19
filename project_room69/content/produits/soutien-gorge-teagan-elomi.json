@@ -1,0 +1,51 @@
+{
+  "name": "Soutien-gorge Teagan",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "EL302602RAW",
+  "color": "Multicolore",
+  "description": "Découvrez le Soutien-gorge Plunge Teagan signé Elomi , inspiré de notre Soutien-gorge Matilda, l'un de nos modèles Most Loved. Des fleurs aux nuances de coucher de soleil – jaune, rose et orangé – viennent sublimer le haut des bonnets et l’entre-seins. Grâce à une technique de surimpression précise, elles offrent un effet 3D saisissant, pour un look résolument unique. Conçu avec un décolleté plongeant ultra-flatteur sans effet push-up, il est doté d'élastiques et de cache-armatures lisses et satinés qui apportent une finition luxueuse, à la fois douce et sophistiquée.\n\nHauts de bonnet et entre-seins ornés de broderie en relief grâce à une technique précise de surimpression, avec détails en fils métalliques doux",
+  "features": [
+    "Inspiré de notre S-G Plunge Matilda, un modèle 'Most-Loved’ (EL8900)",
+    "Décolleté échancré pour une coupe plongeante sans effet push-up",
+    "Élastiques et cache-armatures lisses et satinés pour un look luxueux",
+    "Bretelles satinées lisses, avec bords mini-picots souples",
+    "Petit nœud à l'entre-seins"
+  ],
+  "images": [
+    "/media/soutien-gorge-teagan-elomi/0-960.webp",
+    "/media/soutien-gorge-teagan-elomi/1-960.webp",
+    "/media/soutien-gorge-teagan-elomi/2-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O"
+    ],
+    "bands": [
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110",
+      "115",
+      "120"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 250
+}

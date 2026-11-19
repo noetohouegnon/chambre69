@@ -1,0 +1,42 @@
+{
+  "name": "Soutien-gorge Brianna",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "C69-C63920",
+  "color": "Bruyère",
+  "images": [
+    "/media/soutien-gorge-brianna-elomi/0-960.webp",
+    "/media/soutien-gorge-brianna-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O"
+    ],
+    "bands": [
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110",
+      "115",
+      "120"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 190
+}

@@ -1,0 +1,40 @@
+{
+  "name": "Culotte Zsa Zsa",
+  "brand": "Dita Von Teese",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "D21054",
+  "description": "Sous l'aura envoutante de la dentelle, chaque pièce de Zsa Zsa capture l'essence enchanteresse de votre féminité dans un ballet de coupes sensuelles et de détails luxueux pour une silhouette remarquable.",
+  "features": [
+    "Culotte haute DITA VON TEESE Zsa Zsa",
+    "Doublure en satin à l'avant",
+    "Coupe couvrante sur les fesses",
+    "Petite ouverture et nœud à l'arrière",
+    "Résille extensible",
+    "Les modèles de cette collection font partie de notre univers Lingerie sexy",
+    "Opération promotionnelle de déstockage jusqu'à épuisement des stocks."
+  ],
+  "composition": [
+    "Fond doublé : 100% coton",
+    "Matière : Dentelle",
+    "Composition : 70% Nylon, 17% Polyester, 13% Élasthanne"
+  ],
+  "images": [
+    "/media/culotte-zsa-dita-von-teese/0-960.webp",
+    "/media/culotte-zsa-dita-von-teese/1-960.webp",
+    "/media/culotte-zsa-dita-von-teese/2-960.webp",
+    "/media/culotte-zsa-dita-von-teese/3-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 560
+}

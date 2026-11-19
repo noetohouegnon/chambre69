@@ -1,0 +1,22 @@
+{
+  "name": "Costume de mariée en tulle blanc",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-12D9D3",
+  "images": [
+    "/media/ensemble-seduction-modele-42/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1970
+}

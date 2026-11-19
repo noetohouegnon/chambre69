@@ -1,0 +1,32 @@
+{
+  "name": "Slip Elise",
+  "brand": "Louisa Bracq",
+  "origin": "France",
+  "category": "culottes",
+  "reference": "C69-EB6C91",
+  "description": "Élise incarne l’élégance essentielle de Louisa Bracq. Sa broderie de feuilles iconique, associée à une maille imitation plissée bi-élastique, offre un équilibre parfait entre finesse et confort. L’une des lignes historiques de la maison, toujours plébiscitée, Élise séduit par son style épuré, sa simplicité maîtrisée et son allure indémodable. Un incontournable à redécouvrir saison après saison.",
+  "features": [
+    "Détail produit",
+    "Taille élastiquée",
+    "Fond doublé",
+    "Légèrement échancrée sur les fesses",
+    "Tour de cuisse sans couture"
+  ],
+  "images": [
+    "/media/slip-elise-louisa-bracq/0-960.webp",
+    "/media/slip-elise-louisa-bracq/1-960.webp",
+    "/media/slip-elise-louisa-bracq/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 400
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Culotte brésilienne",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "culottes",
+  "reference": "C69-E857A0",
+  "images": [
+    "/media/culotte-bresilienne-ysabel-mora/0-960.webp",
+    "/media/culotte-bresilienne-ysabel-mora/1-960.webp",
+    "/media/culotte-bresilienne-ysabel-mora/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 790
+}

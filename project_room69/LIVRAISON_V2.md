@@ -7,7 +7,7 @@ Les numéros renvoient à ceux du cahier de Mme Nafi Ba Doré.
 
 - **Paiement en ligne (5.2) : volontairement non intégré.** Aucun prestataire de paiement (Wave, Orange Money, carte) n'est ouvert à ce jour. La commande reste finalisée **sur WhatsApp** : le panier rédige automatiquement le message (numéro de commande, pièces, références, tailles, pays, adresse, options cadeau), une conseillère confirme la disponibilité, les frais et le délai, puis convient du règlement. Les textes du livrable qui promettaient « Vous réglez par carte / paiement mobile » ont été reformulés en conséquence, pour ne rien promettre de faux.
 - **Charte graphique et photos conservées.** Noir profond et or `#C9A96E`, logo existant, toutes les photos produits du dépôt (408 photos, 236 fiches). Les images externes de l'ancien prototype (sites marchands tiers, banques d'images) ont été retirées, comme l'exige le point 3.3.
-- **Plus besoin de base de données pour afficher le site** : le catalogue est généré depuis les dossiers photos et les fiches `.docx` (`npm run catalog`).
+- **Plus besoin de base de données pour afficher le site** : le catalogue est généré à partir des fiches de `content/produits/`, modifiables depuis l'espace d'administration `/admin` (import initial depuis les dossiers photos et les fiches `.docx`).
 
 ## Statut par exigence
 
@@ -39,7 +39,7 @@ Les numéros renvoient à ceux du cahier de Mme Nafi Ba Doré.
 | 5 ter | Section Mariée + **liste de trousseau partageable sans compte** | ✅ (réservation transmise à une conseillère ; le retrait automatique en temps réel demandera un petit serveur) |
 | 5.5 | Carte cadeau | ✅ (via WhatsApp) |
 | 8.2 / 8.3 | Événements de mesure + bandeau de consentement (refus aussi simple) | ✅ prêts — GA4, Meta, TikTok à brancher avec les comptes de la marque |
-| 10.3 | Interface d'administration | ⏳ en attendant : `src/data/overrides.json` (prix, tailles réelles, ruptures…) et `src/data/site.ts` (boutiques, zones, chiffres de communauté) |
+| 10.3 | Interface d'administration | ✅ `/admin` : produits, photos, prix, tailles, ruptures, boutiques, horaires, contact, témoignages (voir `ADMINISTRATION.md`) |
 
 ## Ce qu'il manque de la part de Chambre 69 (affiché sur le site en blocs « À compléter »)
 
@@ -51,6 +51,6 @@ Les tailles affichées sur les fiches sont **l'amplitude habituelle de chaque ma
 
 ```
 npm install
-npm run catalog   # régénère le catalogue depuis les dossiers photos (optionnel)
+npm run import-dossiers   # import en masse depuis les dossiers photos (optionnel, ne modifie pas les fiches existantes)
 npm run build     # build + pré-rendu des 268 pages + sitemap + robots
 ```

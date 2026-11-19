@@ -1,0 +1,38 @@
+{
+  "name": "Tanga Embrace",
+  "brand": "Wacoal",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "WA848191",
+  "color": "Nude",
+  "description": "Découvrez l'icône de la maison Wacoal avec le tanga de la collection Embrace Lace. Véritable best-seller mondial, cette ligne marie à la perfection le romantisme d'une dentelle florale raffinée et le confort absolu d'une coupe moderne.\n\nDentelle Signature : Une broderie florale bicolore en relief sur un tulle stretch d'une douceur exceptionnelle.\n\nCoupe Sublimée : Sa forme tanga, légèrement échancrée sur les hanches, allonge la silhouette tout en restant invisible sous les vêtements grâce à ses bordures festonnées sans couture.\n\nFinitions Luxueuses : Un travail de dentelle plate qui ne marque pas la peau et assure un maintien souple.",
+  "features": [
+    "L'élégance intemporelle au quotidien",
+    "Pourquoi vous allez l'adorer :",
+    "Détails du produit :",
+    "Composition : Corps en dentelle stretch de haute qualité, fond doublé coton."
+  ],
+  "composition": [
+    "Confort Optimal : Conçu en maille extensible de haute qualité avec un fond doublé 100% coton pour un bien-être durable tout au long de la journée."
+  ],
+  "care": [
+    "Conseil d'entretien : Lavage à la main recommandé pour préserver la finesse de la dentelle."
+  ],
+  "images": [
+    "/media/tanga-embrace-wacoal/0-960.webp",
+    "/media/tanga-embrace-wacoal/2-960.webp",
+    "/media/tanga-embrace-wacoal/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 600
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Slip Smooth couvrante",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "C69-72DAF2",
+  "color": "Noir",
+  "images": [
+    "/media/slip-smooth-couvrante-elomi/1-960.webp",
+    "/media/slip-smooth-couvrante-elomi/2-960.webp",
+    "/media/slip-smooth-couvrante-elomi/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 80
+}

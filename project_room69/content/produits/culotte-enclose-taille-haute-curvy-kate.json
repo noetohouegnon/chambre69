@@ -1,0 +1,32 @@
+{
+  "name": "Culotte Enclose taille haute",
+  "brand": "Curvy Kate",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "CK063208BLK",
+  "description": "Apportez un style sexy au quotidien avec le slip taille haute Enclose de Curvy Kate. Fabriqué en mesh doux et transparent, avec des panneaux en faux cuir et des détails de bretelles pour s'accorder avec le soutien-gorge, offrant une coupe à couverture complète pour le confort.",
+  "features": [
+    "Marque : Curvy Kate"
+  ],
+  "composition": [
+    "Principal : 95 % polyester, 5 % élastane, maille : 100 % polyamide, maille à bâtons : 92 % polyamide, 8 % élastane, gousset de doublure : 100 % coton"
+  ],
+  "images": [
+    "/media/culotte-enclose-taille-haute-curvy-kate/0-960.webp",
+    "/media/culotte-enclose-taille-haute-curvy-kate/1-960.webp",
+    "/media/culotte-enclose-taille-haute-curvy-kate/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 520
+}

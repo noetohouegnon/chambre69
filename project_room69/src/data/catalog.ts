@@ -1,5 +1,4 @@
 import raw from './catalog.json';
-import overrides from './overrides.json';
 
 export type ProductImage = { src: string; srcSmall: string; ratio: number; width: number };
 export type Sizes = { cups?: string[]; bands?: number[]; alpha?: string[] };
@@ -72,7 +71,6 @@ export const OCCASIONS: { id: OccasionId; label: string }[] = [
 ];
 
 const CUPS = 'ABCDEFGHIJKLMNO';
-const ov = overrides as Record<string, Partial<Product>>;
 
 /** Pièces de jeu de rôle : réservées à la catégorie Séduction, jamais proposées dans un trousseau ni comme cadeau entre femmes. */
 const ROLEPLAY = /costume|harnais|menottes|masque|cache-tétons|jeu de rôle/i;
@@ -143,7 +141,7 @@ export const isWearable = (p: Pick<Product, 'name' | 'category'>) =>
 
 export const PRODUCTS: Product[] = (raw as unknown as Product[])
   .map((p, i) => {
-    const merged = { ...p, ...(ov[p.slug] || {}) } as Product;
+    const merged = { ...p } as Product;
     merged.features = (merged.features || []).filter((f) => !JUNK_FEATURE.test(f.trim()));
     if (!merged.description?.trim()) merged.description = fallbackDescription(merged);
     merged.lines = deriveLines(merged);

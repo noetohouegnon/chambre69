@@ -1,0 +1,49 @@
+{
+  "name": "Soutien-gorge Temptress",
+  "brand": "Freya",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "AA400102BLK",
+  "color": "Noir",
+  "description": "Le look intemporel du Soutien-Gorge Plunge Temptress de Freya Black possède un style parfait grâce à son décolleté échancré. Le tout est embelli par des laçages sexy ajustables et un nœud délicat avec un anneau métallique doré à l’entre-seins.",
+  "features": [
+    "Décolleté échancré pour une coupe plongeante",
+    "Plongeant sans push-up",
+    "Laçages sexy à l’entre-seins ajustables pour le bien-aller",
+    "Modèle sans basque",
+    "Dos en maille Powernet unie pour un meilleur maintien",
+    "Bretelles entièrement réglables, ne tombant pas sur les épaules",
+    "Anneaux et crochets dorés",
+    "Détail nœud et bordure dorée métallique à l’entre-seins"
+  ],
+  "images": [
+    "/media/soutien-gorge-temptress-freya/2-960.webp",
+    "/media/soutien-gorge-temptress-freya/1-960.webp",
+    "/media/soutien-gorge-temptress-freya/0-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 450
+}

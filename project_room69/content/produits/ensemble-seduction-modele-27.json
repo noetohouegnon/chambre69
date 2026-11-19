@@ -1,0 +1,22 @@
+{
+  "name": "Corset rouge et noir lacé",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-12C777",
+  "images": [
+    "/media/ensemble-seduction-modele-27/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1820
+}

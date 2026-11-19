@@ -1,0 +1,28 @@
+{
+  "name": "Boxer homme à braguette",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "homme",
+  "reference": "C69-9CDCE3",
+  "features": [
+    "Blanc, Gris, Noir, Bleu marine"
+  ],
+  "images": [
+    "/media/boxer-homme-fastening-boxer-ysabel-mora/0-960.webp",
+    "/media/boxer-homme-fastening-boxer-ysabel-mora/1-960.webp",
+    "/media/boxer-homme-fastening-boxer-ysabel-mora/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 930
+}

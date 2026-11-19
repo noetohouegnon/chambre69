@@ -1,0 +1,30 @@
+{
+  "name": "Slip Namrah",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "EL301353PAU",
+  "color": "Noir",
+  "description": "Ajoutez une touche de fun à votre lingerie du quotidien avec le Slip Namrah d'Elomi. Offrant une taille haute pour une coupe plus couvrante",
+  "features": [
+    "Détail broderie à l’avant",
+    "Avant et dos doublés en maille stretch pour un look léger et moins de transparence"
+  ],
+  "images": [
+    "/media/slip-namrah-elomi/0-960.webp",
+    "/media/slip-namrah-elomi/2-960.webp",
+    "/media/slip-namrah-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 90
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Slip Teagan",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "EL302653RAW",
+  "color": "Multicolore",
+  "description": "Illuminez votre tiroir à lingerie avec le Slip Jambe Échancrée Teagan d'Elomi . Des fleurs arc-en-ciel audacieuses s’épanouissent sur des panneaux brodés en relief, sublimés par une technique précise de surimpression et une touche de fil métallique doux. Conçu pour vous offrir une silhouette flatteuse et élancée, ce modèle célèbre toutes les formes. Il mise sur le confort, la confiance en soi et une note de fantaisie joyeuse. Confectionné en maille extensible double épaisseur à l’avant, sur les côtés et au dos, il offre juste ce qu’il faut d’opacité avec une pointe de séduction.\n\nPanneaux avant ornés de broderie en relief grâce à une technique précise de surimpression, avec détails en fils métalliques doux",
+  "features": [
+    "Maille stretch double épaisseur à l’avant, sur les côtés et au dos pour plus d’opacité",
+    "Élastique satiné lisse sur la taille",
+    "Petit nœud à l'avant"
+  ],
+  "images": [
+    "/media/slip-teagan-elomi/0-960.webp",
+    "/media/slip-teagan-elomi/1-960.webp",
+    "/media/slip-teagan-elomi/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 160
+}

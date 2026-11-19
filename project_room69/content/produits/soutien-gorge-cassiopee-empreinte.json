@@ -1,0 +1,50 @@
+{
+  "name": "Soutien-gorge Cassiopée",
+  "brand": "Empreinte",
+  "origin": "France",
+  "category": "soutiens-gorge",
+  "reference": "00P_210_07151_0003",
+  "color": "Rose",
+  "description": "Best-seller iconique, Cassiopée incarne l’expertise du sans couture. Les bonnets moulés de cette forme offrent un galbe naturel et une invisibilité parfaite sous les vêtements. Fruit d’un savoir-faire exclusif, ce soutien-gorge allie maintien, élégance et confort absolu.",
+  "features": [
+    "Informations produits",
+    "Soutien-gorge avec armatures, sans coques",
+    "Bonnets moulés, sans coutures pour un effet seconde peau",
+    "Décolleté rassurant, galbe naturel et silhouette redessinée",
+    "Bretelles ajustables et largeur adaptée selon la taille",
+    "Dos en maille nerveuse pour un maintien optimisé et reste en place toute la journée",
+    "Agrafage aux finitions douces avec hauteur adaptée en fonction de la taille",
+    "Disponible jusqu’au bonnet H, pensé pour les poitrines généreuses",
+    "Broderie suisse",
+    "Dentelle française"
+  ],
+  "images": [
+    "/media/soutien-gorge-cassiopee-empreinte/0-960.webp",
+    "/media/soutien-gorge-cassiopee-empreinte/1-960.webp",
+    "/media/soutien-gorge-cassiopee-empreinte/2-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H"
+    ],
+    "bands": [
+      "80",
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 40
+}

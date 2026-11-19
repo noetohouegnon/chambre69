@@ -1,0 +1,47 @@
+{
+  "name": "Soutien-gorge Tailored",
+  "brand": "Freya",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "AA401109NAE",
+  "color": "Rose cendré",
+  "description": "Dansez jusqu’au bout de la nuit grâce au confort et au maintien inoubliables du Soutien-gorge sans bretelles Tailored de Freya. Inspiré de notre soutien-gorge bandeau Caméo, ce modèle présente des bonnets moulés pour une silhouette lisse et arrondie tandis que sa dentelle géométrique stretch plate assure une finition invisible sous les vêtements. Ses bretelles amovibles et réglables peuvent être portées de multiples façons, tandis que sa bande élastique Stay4Sure garantit un positionnement et un maintien exceptionnels lorsqu’il est porté sans les bretelles.\n\nBretelles multipositions, amovibles et réglables pouvant être portées sur les épaules ou croisées au dos",
+  "features": [
+    "Descriptif",
+    "Inspiré de notre Soutien-gorge Bandeau Moulé Deco",
+    "Bonnets moulés pour une silhouette lisse et parfaitement galbée",
+    "Dentelle géométrique, stretch et plate pour une finition invisible sous les vêtements",
+    "Pince élastique Stay4Sure pour un positionnement et un maintien améliorés",
+    "Décor or rose à l’entre-seins"
+  ],
+  "images": [
+    "/media/soutien-gorge-tailored-freya/2-960.webp",
+    "/media/soutien-gorge-tailored-freya/0-960.webp",
+    "/media/soutien-gorge-tailored-freya/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 480
+}

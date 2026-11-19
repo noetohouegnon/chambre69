@@ -1,0 +1,32 @@
+{
+  "name": "String Victresse",
+  "brand": "Dita Von Teese",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "D23041F",
+  "description": "String DITA VON TEESE Victresse\n\nSemi-transparent\n\nCoupe : très échancrée\n\nTour de taille : extensible\n\nFinitions : festonnées, coutures plates\n\nDita Von Teese dévoile à travers cette ligne glamour son savoir-faire et son amour de la broderie riche et travaillée. Tout en élégance et en sensualité, Victresse allie la finesse des fleurs à l'éclat du satin pour une silhouette époustouflante.\n\nLes modèles de cette collection font partie de notre univers Lingerie sexy\n\nEntretien :\n\nNe pas repasser",
+  "composition": [
+    "Fond doublé : 100% coton"
+  ],
+  "care": [
+    "Lavage à la main",
+    "Pas de séchage en tambour",
+    "Pas de nettoyage à sec"
+  ],
+  "images": [
+    "/media/culotte-dita-von-teese/0-960.webp",
+    "/media/culotte-dita-von-teese/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 580
+}

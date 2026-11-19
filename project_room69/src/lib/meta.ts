@@ -1,5 +1,5 @@
 import { BY_SLUG, PRODUCTS, productUrl, CATEGORIES } from '../data/catalog';
-import { SITE_URL } from '../data/site';
+import { SITE_URL, BRAND } from '../data/site';
 import { ARTICLES } from '../data/articles';
 
 export type Meta = { title: string; description: string; image: string; type?: 'website' | 'product' | 'article'; noindex?: boolean };
@@ -106,7 +106,7 @@ export const PAGES: Record<string, Meta> = {
   },
   '/contact': {
     title: 'Nous contacter — Chambre 69',
-    description: 'Une conseillère vous répond sur WhatsApp au +221 78 704 05 05, y compris depuis l\'étranger. Formulaire de contact, boutiques de Dakar et délai de réponse annoncé.',
+    description: `Une conseillère vous répond sur WhatsApp au ${BRAND.whatsappDisplay}, y compris depuis l’étranger. Formulaire de contact, boutiques de Dakar et délai de réponse annoncé.`,
     image: og('accueil'),
   },
   '/inscription': {

@@ -1,0 +1,35 @@
+{
+  "name": "Slip Priya",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "EL4555BLK",
+  "color": "Noir",
+  "description": "Offrant une coupe entièrement couvrante et une maille stretch doublée à l’avant, la culotte Priya vous offre un confort et un maintien irréprochables.\n\nCouture arrière diagonale cousue à l’aide d’une technique plate spéciale et d’un fil ultra doux pour",
+  "features": [
+    "Descriptif",
+    "Coupe plus couvrante",
+    "Maille stretch doublée à l’avant",
+    "Élastiques montés en fourreau sur la bordure des jambes pour ne pas marquer",
+    "Couture arrière diagonale pour une bordure des jambes fixe qui ne remonte pas à l’arrière",
+    "Décor goutte au dos",
+    "Décor or rose à l’avant"
+  ],
+  "images": [
+    "/media/slip-priya-elomi/0-960.webp",
+    "/media/slip-priya-elomi/2-960.webp",
+    "/media/slip-priya-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 100
+}

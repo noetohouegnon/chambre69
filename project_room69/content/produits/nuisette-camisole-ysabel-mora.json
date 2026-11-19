@@ -1,0 +1,29 @@
+{
+  "name": "Nuisette camisole",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "nuit",
+  "reference": "C69-F3BE75",
+  "color": "Noir",
+  "features": [
+    "L XL"
+  ],
+  "images": [
+    "/media/nuisette-camisole-ysabel-mora/0-960.webp",
+    "/media/nuisette-camisole-ysabel-mora/1-960.webp",
+    "/media/nuisette-camisole-ysabel-mora/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 900
+}

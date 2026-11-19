@@ -1,0 +1,31 @@
+{
+  "name": "Slip Florilège",
+  "brand": "Wacoal",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "WE600755",
+  "color": "Encre fleurie",
+  "description": "Vous retrouverez l'élégance des modèles de la marque Wacoal avec le détail de la dentelle florale. Ravivez votre garde-robe avec une lingerie bicolore qui mettra en avant votre belle silhouette !",
+  "features": [
+    "Wacoal vous présente la collection Florilège !",
+    "Découvrez une ligne audacieuse et sensuelle.",
+    "Craquez pour la belle collection Florilège de Wacoal !"
+  ],
+  "images": [
+    "/media/slip-florilege-wacoal/1-960.webp",
+    "/media/slip-florilege-wacoal/2-960.webp",
+    "/media/slip-florilege-wacoal/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 610
+}

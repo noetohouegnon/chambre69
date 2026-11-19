@@ -1,0 +1,29 @@
+{
+  "name": "Slip homme bleu marine à braguette",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "homme",
+  "reference": "C69-6EC7D2",
+  "features": [
+    "Bleu marine ;gris ;noir",
+    "Tailles : S, M, L, XL"
+  ],
+  "images": [
+    "/media/slip-homme-fastening-ysabel-mora/0-960.webp",
+    "/media/slip-homme-fastening-ysabel-mora/1-960.webp",
+    "/media/slip-homme-fastening-ysabel-mora-2/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 940
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Culotte jeune fille en coton rose",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "basiques",
+  "reference": "C69-3CA14A",
+  "features": [
+    "Light melange grey",
+    "Valencia rose",
+    "Dark melange grey"
+  ],
+  "images": [
+    "/media/lingerie-jeune-fille-ysabel-mora-2/0-960.webp",
+    "/media/lingerie-jeune-fille-ysabel-mora-2/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 890
+}

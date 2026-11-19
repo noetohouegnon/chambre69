@@ -1,8 +1,21 @@
 /**
  * Données de la maison, à un seul endroit.
- * Les valeurs à null (adresses, horaires, délais, mentions légales…) sont en attente de Chambre 69 :
- * le site affiche alors une formulation neutre, et l'information réelle dès qu'elle est renseignée.
+ * Les informations courantes (boutiques, horaires, contact, témoignages, chiffres des réseaux)
+ * viennent de content/reglages.json, modifiable depuis l'espace d'administration (/admin).
  */
+import R from '../../content/reglages.json';
+
+type Reglages = {
+  contact?: { whatsapp?: string; email?: string };
+  boutiques?: { id: string; quartier?: string; adresse?: string; reperes?: string; horaires?: { jour: string; heures: string }[]; stationnement?: string; recherche_maps?: string }[];
+  echange_jours?: number | null;
+  temoignages?: { citation: string; auteur: string }[];
+  reseaux?: { mis_a_jour?: string; tiktok?: number; instagram?: number; facebook?: number; snapchat?: number };
+};
+const REG = R as Reglages;
+const waDigits = (REG.contact?.whatsapp || '+221 78 704 05 05').replace(/\D/g, '');
+const shop = (id: string) => REG.boutiques?.find((b) => b.id === id);
+const text = (v?: string | null) => (v && v.trim() ? v.trim() : null);
 
 export const SITE_URL = (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || 'http://localhost:4173';
 
@@ -10,23 +23,23 @@ export const BRAND = {
   name: 'Chambre 69',
   baseline: 'Chambre 69 — Au-delà de la lingerie.',
   founder: 'Nafi Ba Doré',
-  whatsappNumber: '221787040505',
-  whatsappDisplay: '+221 78 704 05 05',
-  phoneHref: 'tel:+221787040505',
-  email: 'contact@chambre69.sn',
+  whatsappNumber: waDigits,
+  whatsappDisplay: REG.contact?.whatsapp || '+221 78 704 05 05',
+  phoneHref: `tel:+${waDigits}`,
+  email: REG.contact?.email || 'contact@chambre69.sn',
   firstPrice: 33000,
   cups: 'ABCDEFGHIJKLMNO'.split(''),
 };
 
 /** Chiffres de communauté : à mettre à jour chaque trimestre (jamais d'estimation arrondie à la hausse). */
 export const COMMUNITY = {
-  updatedAt: 'octobre 2026',
+  updatedAt: REG.reseaux?.mis_a_jour || 'octobre 2026',
   handle: '@chambre_69',
   networks: [
-    { id: 'tiktok', label: 'TikTok', count: 41000, url: 'https://www.tiktok.com/@chambre__69' },
-    { id: 'instagram', label: 'Instagram', count: 14000, url: 'https://www.instagram.com/chambre_69' },
-    { id: 'facebook', label: 'Facebook', count: 12000, url: 'https://www.facebook.com/search/top?q=chambre%2069%20dakar' },
-    { id: 'snapchat', label: 'Snapchat', count: 3000, url: 'https://www.snapchat.com/add/chambre_69' },
+    { id: 'tiktok', label: 'TikTok', count: REG.reseaux?.tiktok ?? 41000, url: 'https://www.tiktok.com/@chambre__69' },
+    { id: 'instagram', label: 'Instagram', count: REG.reseaux?.instagram ?? 14000, url: 'https://www.instagram.com/chambre_69' },
+    { id: 'facebook', label: 'Facebook', count: REG.reseaux?.facebook ?? 12000, url: 'https://www.facebook.com/search/top?q=chambre%2069%20dakar' },
+    { id: 'snapchat', label: 'Snapchat', count: REG.reseaux?.snapchat ?? 3000, url: 'https://www.snapchat.com/add/chambre_69' },
   ],
 };
 
@@ -42,39 +55,24 @@ export type Store = {
   parking: string | null;
 };
 
-export const STORES: Store[] = [
-  {
-    id: 'point-e',
-    name: 'Chambre 69 Point E',
-    district: 'Point E',
-    context: 'Point E, quartier résidentiel du centre de Dakar, Sénégal',
-    address: 'Angle rue PE 23 et boulevard de Saint-Louis, Point E, Dakar',
-    landmarks: null,
-    // Horaires relevés sur chambre69.sn (novembre 2026) : à confirmer par la boutique.
-    hours: [
-      { day: 'Lundi', time: '10 h – 20 h' },
-      { day: 'Du mardi au samedi', time: '8 h – 20 h' },
-      { day: 'Dimanche', time: 'Sur rendez-vous' },
-    ],
-    mapsQuery: 'Chambre 69, Angle Rue PE23 Boulevard de Saint-Louis, Point E, Dakar',
-    parking: null,
-  },
-  {
-    id: 'corniche-ouest',
-    name: 'Chambre 69 Corniche Ouest',
-    district: 'Corniche Ouest',
-    context: 'Corniche Ouest, axe côtier ouest de Dakar, Sénégal',
-    address: 'Route de la Corniche Ouest, Soumbédioune, au niveau de la RFM, Dakar',
-    landmarks: 'Sur la Corniche Ouest, à Soumbédioune, à hauteur des locaux de la radio RFM.',
-    hours: [
-      { day: 'Lundi', time: '10 h – 20 h' },
-      { day: 'Du mardi au samedi', time: '8 h – 20 h' },
-      { day: 'Dimanche', time: 'Sur rendez-vous' },
-    ],
-    mapsQuery: 'Chambre 69, Route de la Corniche Ouest, Soumbédioune, Dakar',
-    parking: null,
-  },
+const STORE_BASE: Pick<Store, 'id' | 'name' | 'district' | 'context' | 'mapsQuery'>[] = [
+  { id: 'point-e', name: 'Chambre 69 Point E', district: 'Point E', context: 'Point E, quartier résidentiel du centre de Dakar, Sénégal', mapsQuery: 'Chambre 69 lingerie Point E Dakar' },
+  { id: 'corniche-ouest', name: 'Chambre 69 Corniche Ouest', district: 'Corniche Ouest', context: 'Corniche Ouest, axe côtier ouest de Dakar, Sénégal', mapsQuery: 'Chambre 69 lingerie Corniche Ouest Dakar' },
 ];
+
+export const STORES: Store[] = STORE_BASE.map((b) => {
+  const r = shop(b.id);
+  const hours = (r?.horaires || []).filter((h) => h.jour && h.heures).map((h) => ({ day: h.jour, time: h.heures }));
+  return {
+    ...b,
+    district: text(r?.quartier) || b.district,
+    address: text(r?.adresse),
+    landmarks: text(r?.reperes),
+    hours: hours.length ? hours : null,
+    parking: text(r?.stationnement),
+    mapsQuery: text(r?.recherche_maps) || text(r?.adresse) || b.mapsQuery,
+  };
+});
 
 export const mapsUrl = (q: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 export const directionsUrl = (q: string) => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(q)}`;
@@ -138,7 +136,7 @@ export const DIAL_CODES = [
  */
 export const PENDING = {
   /** Délai d'échange en boutique, en jours (ex. 14). */
-  exchangeDays: null as number | null,
+  exchangeDays: (REG.echange_jours || null) as number | null,
   /** Délai d'expédition hors Sénégal, en jours ouvrés (ex. 3). */
   shipDays: null as number | null,
   /** Bonnet maximum des brassières de sport en stock (ex. 'K'). */
@@ -155,6 +153,8 @@ export const exchangeDelayText = () =>
 /**
  * Témoignages de clientes réelles, publiés avec leur accord écrit (2.9).
  * Tant que la liste est vide, l'accueil affiche une simple invitation à témoigner.
- * Exemple d'entrée : { quote: 'Texte exact de la cliente', author: 'Aïssatou, Dakar — bonnet G' }
+ * Ils se saisissent depuis /admin → Réglages du site → Témoignages.
  */
-export const TESTIMONIALS: { quote: string; author: string }[] = [];
+export const TESTIMONIALS: { quote: string; author: string }[] = (REG.temoignages || [])
+  .filter((t) => t.citation?.trim())
+  .map((t) => ({ quote: t.citation.trim(), author: t.auteur?.trim() || '' }));

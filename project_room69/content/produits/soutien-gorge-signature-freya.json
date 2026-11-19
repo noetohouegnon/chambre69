@@ -1,0 +1,51 @@
+{
+  "name": "Soutien-gorge Signature",
+  "brand": "Freya",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "C69-364743",
+  "color": "Noir",
+  "description": "Toutes les formes sont fabriquées à partir d’une dentelle extensible, qui présente un design en diamant.\n\nCe soutien gorge balconnet à armatures est une excellente option pour toutes celles qui recherchent un décolleté plongeant et un petit peu de boost supplémentaire.",
+  "features": [
+    "Cette série Freya Signature est garantie pour être un collection incontournable !",
+    "Armature plus large pour une coupe plus enveloppante et plus de confort",
+    "Bas des bonnets doublé pour plus de maintien et un galbe parfait",
+    "Bretelles entièrement réglables, ne tombent pas sur les épaules",
+    "Décor métallique rectangulaire à l'entre seins",
+    "MATIÈRES :"
+  ],
+  "composition": [
+    "80% Nylon/Polyamide",
+    "20% Élasthanne"
+  ],
+  "images": [
+    "/media/soutien-gorge-signature-freya/2-960.webp",
+    "/media/soutien-gorge-signature-freya/0-960.webp",
+    "/media/soutien-gorge-signature-freya/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 430
+}

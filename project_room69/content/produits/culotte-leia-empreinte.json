@@ -1,0 +1,39 @@
+{
+  "name": "Culotte Leia",
+  "brand": "Empreinte",
+  "origin": "France",
+  "category": "culottes",
+  "reference": "00P_258_05224_0003",
+  "color": "Noir",
+  "description": "Moderne et structurée par un subtil jeu d’empiècements, la culotte Leïa élance la silhouette tout en offrant une couvrance rassurante. Le motif de la dentelle met en valeur toutes les morphologies avec justesse, tandis que l’absence d’élastique au dos garantit une invisibilité parfaite sous les vêtements. Une pièce chic et confortable, pensée pour conjuguer maintien discret et esthétique sophistiquée.",
+  "features": [
+    "Informations produits",
+    "Culotte taille haute",
+    "Devant en dentelle française associée à des empiècements de maille douce à la taille",
+    "Dos avec découpe en V associant maille opaque et dentelle transparente",
+    "Dos sans élastique pour une meilleure invisibilité sous les vêtements",
+    "Effet lissant au niveau de la taille et du ventre",
+    "Finitions plates aux cuisses pour une invisibilités optimale",
+    "Fond doublé coton",
+    "Dentelle française",
+    "Maille belge"
+  ],
+  "images": [
+    "/media/culotte-leia-empreinte/0-960.webp",
+    "/media/culotte-leia-empreinte/1-960.webp",
+    "/media/culotte-leia-empreinte/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 30
+}

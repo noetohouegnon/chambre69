@@ -1,0 +1,22 @@
+{
+  "name": "Costume d’agente d’intervention",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-DC65BB",
+  "images": [
+    "/media/ensemble-seduction-modele-36/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1910
+}

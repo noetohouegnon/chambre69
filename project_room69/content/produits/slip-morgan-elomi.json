@@ -1,0 +1,32 @@
+{
+  "name": "Slip Morgan",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "EL4118HOU",
+  "color": "Léopard bleu",
+  "description": "Sentez-vous belle, belle, belle avec le Slip Morgan d’Elomi, avec des panneaux en dentelle stretch au dos apportent une touche moderne et séduisante. Pour un confort absolu et une confiance sans faille, les panneaux arrière et latéraux sont conçus en tulle stretch double épaisseur, avec un rendu lisse et élégant.",
+  "features": [
+    "Descriptif",
+    "Panneaux en dentelle stretch au dos des jambes pour un look plus contemporain",
+    "Côtés avant et dos en maille stretch double épaisseur pour plus d’opacité",
+    "Petit nœud à l'avant"
+  ],
+  "images": [
+    "/media/slip-morgan-elomi/0-960.webp",
+    "/media/slip-morgan-elomi/2-960.webp",
+    "/media/slip-morgan-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 140
+}

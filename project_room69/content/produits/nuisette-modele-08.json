@@ -1,0 +1,22 @@
+{
+  "name": "Ensemble violet à lanières",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-E9264F",
+  "images": [
+    "/media/nuisette-modele-08/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 2080
+}

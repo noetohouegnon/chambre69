@@ -1,0 +1,47 @@
+{
+  "name": "Soutien-gorge Fusion",
+  "brand": "Fantasie",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "FL3091NAE",
+  "description": "Notre Soutien-Gorge Entier Renfort Latéral, est la promesse d'une poitrine joliment rehaussée et projetée vers l'avant. Confectionné dans un tissu jacquard rayé d'une douceur irrésistible, il offre un confort absolu et présente des coutures dissimulées dans les bonnets pour une silhouette lisse sous les vêtements.\n\nBonnet trois pans avec renfort latéral, pour une poitrine parfaitement rehaussée et projetée vers l’avant\n\nModèle renfort latéral avec coupe plus enveloppante au niveau des bonnets et sur les côtés",
+  "features": [
+    "Descriptif",
+    "Bonnets et basque ornés d’un tissu jacquard rayé doux au toucher",
+    "Armatures larges pour plus de confort et de maintien",
+    "Haut de bonnet avec liseré élastique pour une application parfaite",
+    "Coutures cachées pour une invisibilité totale sous les vêtements",
+    "Dos cheminée pour éviter que les bretelles ne tombent",
+    "Décor délicat à l’entre-seins"
+  ],
+  "images": [
+    "/media/soutien-gorge-fusion-fantasie/1-960.webp",
+    "/media/soutien-gorge-fusion-fantasie/2-960.webp",
+    "/media/soutien-gorge-fusion-fantasie/0-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "75",
+      "80",
+      "85",
+      "90",
+      "95",
+      "100"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 500
+}

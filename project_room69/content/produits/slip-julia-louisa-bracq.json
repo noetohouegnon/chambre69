@@ -1,0 +1,30 @@
+{
+  "name": "Slip Julia",
+  "brand": "Louisa Bracq",
+  "origin": "France",
+  "category": "culottes",
+  "reference": "C69-2D674F",
+  "description": "Julia sublime les courbes féminines grâce à une broderie aux lignes verticales flamboyantes et une transparence délicatement atténuée par un motif « nid d’abeilles ». Ce motif se prolonge dans un jacquard français tonique, garantissant maintien, confort et élégance. Une ligne grand maintien qui allie esthétisme et performance.",
+  "features": [
+    "Détail produit",
+    "Taille élastiquée",
+    "Fond doublé",
+    "Légèrement échancrée sur les fesses"
+  ],
+  "images": [
+    "/media/slip-julia-louisa-bracq/0-960.webp",
+    "/media/slip-julia-louisa-bracq/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 410
+}

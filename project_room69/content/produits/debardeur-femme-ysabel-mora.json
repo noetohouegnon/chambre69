@@ -1,0 +1,30 @@
+{
+  "name": "Débardeur femme",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "basiques",
+  "reference": "C69-5301DE",
+  "color": "Nude",
+  "features": [
+    "L XL",
+    "Noir Nude"
+  ],
+  "images": [
+    "/media/debardeur-femme-ysabel-mora/0-960.webp",
+    "/media/debardeur-femme-ysabel-mora/1-960.webp",
+    "/media/debardeur-femme-ysabel-mora/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 860
+}

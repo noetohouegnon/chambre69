@@ -1,0 +1,22 @@
+{
+  "name": "Ensemble rouge avec bas et menottes",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "seduction",
+  "reference": "C69-F6B6EB",
+  "images": [
+    "/media/ensemble-seduction-modele-13/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1680
+}

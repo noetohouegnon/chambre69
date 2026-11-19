@@ -1,0 +1,25 @@
+{
+  "name": "Culotte Midi",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "culottes",
+  "reference": "C69-1BA032",
+  "color": "Nude",
+  "features": [
+    "Blanc Bleu marine"
+  ],
+  "images": [
+    "/media/culotte-midi-ysabel-mora/0-960.webp",
+    "/media/culotte-midi-ysabel-mora/1-960.webp",
+    "/media/culotte-midi-ysabel-mora/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 820
+}

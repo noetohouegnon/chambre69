@@ -1,0 +1,25 @@
+{
+  "name": "Ensemble kimono blanc",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "nuit",
+  "reference": "C69-B89B5B",
+  "color": "Blanc",
+  "images": [
+    "/media/ensemble-kimono-blanc/0-960.webp",
+    "/media/ensemble-kimono-blanc/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 1540
+}

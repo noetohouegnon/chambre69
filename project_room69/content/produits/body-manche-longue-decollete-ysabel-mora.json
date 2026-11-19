@@ -1,0 +1,25 @@
+{
+  "name": "Body manche longue décolleté",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "basiques",
+  "reference": "C69-2CE6E3",
+  "color": "Noir",
+  "images": [
+    "/media/body-manche-longue-decollete-ysabel-mora/0-960.webp",
+    "/media/body-manche-longue-decollete-ysabel-mora/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 720
+}

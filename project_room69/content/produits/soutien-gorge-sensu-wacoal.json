@@ -1,0 +1,51 @@
+{
+  "name": "Soutien-gorge Sensu",
+  "brand": "Wacoal",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "WE601255",
+  "description": "Découvrez la collection Sensu Lace, où une délicate dentelle florale se marie harmonieusement avec un motif géométrique inspiré des éventails traditionnels japonais. Cette ligne unique célèbre l'élégance et le raffinement à travers des designs qui évoquent une histoire culturelle riche et intemporelle.",
+  "features": [
+    "Slip Sensu Lace",
+    "Modèle couvrant au niveau des fesses",
+    "Dentelle extensible",
+    "Panneau triangulaire en maille stretch sur la ceinture au dos"
+  ],
+  "composition": [
+    "Derriere: 85% Polyamide, 15% Elastanne",
+    "Gousset: 85% Polyamide, 15% Elastanne",
+    "Doublure Gousset: 100% Coton",
+    "Dentelle: 88% Polyamide, 12% Elastanne"
+  ],
+  "care": [
+    "Le lavage à la main est conseillé"
+  ],
+  "images": [
+    "/media/soutien-gorge-sensu-wacoal/0-960.webp",
+    "/media/soutien-gorge-sensu-wacoal/1-960.webp",
+    "/media/soutien-gorge-sensu-wacoal/2-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H"
+    ],
+    "bands": [
+      "75",
+      "80",
+      "85",
+      "90",
+      "95",
+      "100"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 680
+}

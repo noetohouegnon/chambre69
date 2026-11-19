@@ -1,0 +1,49 @@
+{
+  "name": "Soutien-gorge Matilda",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "EL8900WHE",
+  "color": "Blanc",
+  "description": "Mettez votre silhouette en valeur avec le soutien-gorge Plunge Matilda. Ses bonnets 3 pans et son renfort latéral vous offrent une poitrine parfaitement galbée, rehaussée et projetée en avant.\n\nBonnet trois pans avec renfort latéral pour une poitrine parfaitement galbée, rehaussée et projetée en avant",
+  "features": [
+    "Entre-seins bas pour une coupe plongeante sans effet push up",
+    "Décolleté élastique pour plus de confort",
+    "Crochet J glisseur pour un dos nageur"
+  ],
+  "images": [
+    "/media/soutien-gorge-matilda-elomi/2-960.webp",
+    "/media/soutien-gorge-matilda-elomi/0-960.webp",
+    "/media/soutien-gorge-matilda-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O"
+    ],
+    "bands": [
+      "85",
+      "90",
+      "95",
+      "100",
+      "105",
+      "110",
+      "115",
+      "120"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 330
+}

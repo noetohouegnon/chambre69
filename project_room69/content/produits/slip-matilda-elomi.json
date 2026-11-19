@@ -1,0 +1,31 @@
+{
+  "name": "Slip Matilda",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "EL8906CAT",
+  "color": "Café au lait",
+  "description": "Ajoutez une touche de style à votre collection de lingerie avec le Slip Entier Matilda signé Elomi. Sa broderie de perles emblématique à l’avant apporte une touche contemporaine, tandis que son dos et ses côtés délicatement transparents offrent une sensation de légèreté. Pour un ensemble harmonieux, associez cette culotte à notre Soutien-gorge Plunge Matilda, l’un de nos modèles les plus appréciés.",
+  "features": [
+    "Culotte gainante avec dos en maille transparente pour un look léger",
+    "Avant doublé de coton et panneaux latéraux en maille stretch",
+    "Panneaux transparents brodés à l'avant"
+  ],
+  "images": [
+    "/media/slip-matilda-elomi/0-960.webp",
+    "/media/slip-matilda-elomi/2-960.webp",
+    "/media/slip-matilda-elomi/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 130
+}

@@ -1,0 +1,31 @@
+{
+  "name": "Slip Zarla",
+  "brand": "Elomi",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "EL302553BLK",
+  "color": "Rose",
+  "description": "Tombez sous le charme du Slip côtés hauts Zarla d'Elomil. Cette culotte taille haute est ornée d'un motif abstrait de feuilles et de baies brodées au point plat sur les panneaux avant, pour un minimum de transparence.\n\nPanneaux latéraux avant ornés d'une broderie abstraite de feuilles et de baies - point plat pour minimiser les lignes apparentes sous les vêtements",
+  "features": [
+    "Descriptif",
+    "Maille stretch doublée à l’avant, sur les côtés et au dos pour plus d’opacité"
+  ],
+  "images": [
+    "/media/slip-zarla-elomi/0-960.webp",
+    "/media/slip-zarla-elomi/1-960.webp",
+    "/media/slip-zarla-elomi/2-960.webp",
+    "/media/slip-zarla-elomi/3-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "L",
+      "XL",
+      "2XL",
+      "3XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 170
+}

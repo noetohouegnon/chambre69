@@ -1,0 +1,193 @@
+# Espace d'administration Chambre 69 (Sveltia CMS).
+# Chaque enregistrement crée une modification sur GitHub (branche main) ;
+# Vercel remet alors le site en ligne automatiquement, en une à deux minutes.
+
+backend:
+  name: github
+  repo: noetohouegnon/chambre69
+  branch: main
+  commit_messages:
+    create: "Ajout depuis l’administration : {{slug}}"
+    update: "Modification depuis l’administration : {{slug}}"
+    delete: "Suppression depuis l’administration : {{slug}}"
+    uploadMedia: "Photo ajoutée : {{path}}"
+    deleteMedia: "Photo supprimée : {{path}}"
+
+logo:
+  src: /brand/symbole-bordeaux.png
+
+# Photos ajoutées depuis l'administration (converties automatiquement en WebP allégé,
+# y compris les photos HEIC des iPhone).
+# (dossier commun à toutes les photos du site, pour que les photos existantes s'affichent aussi)
+media_folder: project_room69/public/media
+public_folder: /media
+media_libraries:
+  default:
+    config:
+      max_file_size: 15000000
+      slugify_filename: true
+      transformations:
+        raster_image:
+          format: webp
+          quality: 85
+          width: 1800
+          height: 1800
+
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  # ─────────────────────────── PRODUITS ───────────────────────────
+  - name: produits
+    label: Produits
+    label_singular: Produit
+    description: "Ajoutez, modifiez ou retirez des pièces. La première photo est la photo principale. Pour retirer une pièce sans la supprimer, cochez « Masquer du site »."
+    folder: project_room69/content/produits
+    format: json
+    extension: json
+    create: true
+    delete: true
+    identifier_field: name
+    slug: "{{name}}-{{brand}}"
+    summary: "{{name}} — {{brand}}{{hidden | ternary(' (masqué)', '')}}"
+    sortable_fields:
+      fields: [name, brand, category, rank]
+      default:
+        field: rank
+        direction: ascending
+    view_filters:
+      - { label: "Soutiens-gorge", field: category, pattern: "^soutiens-gorge$" }
+      - { label: "Culottes", field: category, pattern: "^culottes$" }
+      - { label: "Nuit", field: category, pattern: "^nuit$" }
+      - { label: "Héritage", field: category, pattern: "^heritage$" }
+      - { label: "Séduction", field: category, pattern: "^seduction$" }
+      - { label: "Bien-être intime", field: category, pattern: "^bien-etre$" }
+      - { label: "Masqués", field: hidden, pattern: true }
+      - { label: "Nouveautés", field: isNew, pattern: true }
+    view_groups:
+      - { label: "Maison", field: brand }
+      - { label: "Catégorie", field: category }
+    fields:
+      - { name: name, label: "Nom de la pièce", widget: string, hint: "Ex. : Soutien-gorge Agathe, Nuisette en satin champagne" }
+      - name: images
+        label: Photos
+        label_singular: photo
+        widget: list
+        min: 1
+        hint: "Glissez pour changer l’ordre. La première photo s’affiche dans la boutique."
+        field: { name: src, label: Photo, widget: image, choose_url: false }
+      - name: brand
+        label: Maison
+        widget: select
+        default: "Chambre 69"
+        options: ["Chambre 69", "KRIZALID", "Empreinte", "Elomi", "Louisa Bracq", "Freya", "Fantasie", "Curvy Kate", "Dita Von Teese", "Wacoal", "Ysabel Mora", "LingaDore"]
+      - name: category
+        label: Catégorie
+        widget: select
+        options:
+          - { label: "Soutiens-gorge", value: soutiens-gorge }
+          - { label: "Culottes, slips et strings", value: culottes }
+          - { label: "Porte-jarretelles", value: porte-jarretelles }
+          - { label: "Nuisettes, kimonos et pyjamas", value: nuit }
+          - { label: "Basiques et confort", value: basiques }
+          - { label: "Héritage (tradition, perles, encens, senteurs)", value: heritage }
+          - { label: "Séduction", value: seduction }
+          - { label: "Bien-être intime", value: bien-etre }
+          - { label: "Homme", value: homme }
+      - { name: price, label: "Prix (FCFA)", widget: number, value_type: int, min: 0, required: false, hint: "Laissez vide pour afficher « Prix communiqué par votre conseillère »." }
+      - { name: description, label: Description, widget: text, required: false, hint: "Laissez vide pour un texte de présentation automatique." }
+      - { name: isNew, label: "Nouveauté", widget: boolean, default: true, required: false }
+      - { name: hidden, label: "Masquer du site", widget: boolean, default: false, required: false, hint: "La pièce disparaît du site sans être supprimée (rupture, fin de série…)." }
+      - { name: lastPieces, label: "Dernières pièces", widget: boolean, default: false, required: false }
+      - name: sizes
+        label: Tailles
+        widget: object
+        collapsed: true
+        required: false
+        hint: "Soutiens-gorge : tours de dos + bonnets. Autres pièces : tailles S, M, L… Rien pour l’encens et les accessoires."
+        fields:
+          - { name: bands, label: "Tours de dos", widget: select, multiple: true, required: false, options: ["65", "70", "75", "80", "85", "90", "95", "100", "105", "110", "115", "120", "125", "130"] }
+          - { name: cups, label: "Bonnets", widget: select, multiple: true, required: false, options: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"] }
+          - { name: alpha, label: "Tailles", widget: select, multiple: true, required: false, options: ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL", "5XL", "Taille unique"] }
+      - { name: sizesProvisional, label: "Tailles indicatives (pas encore le stock réel)", widget: boolean, default: true, required: false }
+      - { name: unavailable, label: "Tailles en rupture", widget: list, required: false, hint: "Ex. : 95G, L — une taille par ligne." }
+      - name: stores
+        label: "Disponible en boutique"
+        widget: select
+        multiple: true
+        required: false
+        options:
+          - { label: "Point E", value: point-e }
+          - { label: "Corniche Ouest", value: corniche-ouest }
+      - { name: color, label: Couleur, widget: string, required: false }
+      - { name: reference, label: Référence, widget: string, required: false, hint: "Laissez vide : une référence est créée automatiquement." }
+      - { name: features, label: "Points forts", widget: list, required: false }
+      - { name: composition, label: Composition, widget: list, required: false }
+      - { name: care, label: Entretien, widget: list, required: false }
+      - { name: fit, label: "« Cette pièce vous ira si » (3 lignes maximum)", widget: list, max: 3, required: false }
+      - name: origin
+        label: Provenance
+        widget: select
+        required: false
+        hint: "Laissez vide : la provenance habituelle de la maison est utilisée."
+        options: ["Sélection Chambre 69", "Sénégal", "France", "Espagne", "Angleterre", "Europe"]
+      - { name: rank, label: "Ordre d’affichage", widget: number, value_type: int, default: 0, required: false, hint: "Plus le nombre est petit, plus la pièce apparaît tôt. 0 = en tête de sa catégorie." }
+
+  # ─────────────────────────── RÉGLAGES ───────────────────────────
+  - name: reglages
+    label: "Réglages du site"
+    files:
+      - name: reglages
+        label: "Boutiques, contact, témoignages"
+        file: project_room69/content/reglages.json
+        format: json
+        fields:
+          - name: contact
+            label: Contact
+            widget: object
+            fields:
+              - { name: whatsapp, label: "Numéro WhatsApp et téléphone", widget: string, hint: "Format international, ex. : +221 78 704 05 05" }
+              - { name: email, label: "Adresse e-mail", widget: string }
+          - name: boutiques
+            label: Boutiques
+            widget: list
+            allow_add: false
+            allow_remove: false
+            allow_reorder: false
+            summary: "{{fields.quartier}}"
+            fields:
+              - { name: id, label: Identifiant, widget: hidden }
+              - { name: quartier, label: Quartier, widget: string }
+              - { name: adresse, label: Adresse, widget: string }
+              - { name: reperes, label: "Repères (facultatif)", widget: string, required: false }
+              - name: horaires
+                label: Horaires
+                widget: list
+                summary: "{{fields.jour}} : {{fields.heures}}"
+                fields:
+                  - { name: jour, label: "Jour(s)", widget: string, hint: "Ex. : Du mardi au samedi" }
+                  - { name: heures, label: Horaires, widget: string, hint: "Ex. : 10 h – 20 h, ou Fermé" }
+              - { name: stationnement, label: "Stationnement et accès (facultatif)", widget: string, required: false }
+              - { name: recherche_maps, label: "Recherche Google Maps (pour le bouton Itinéraire)", widget: string, required: false }
+          - { name: echange_jours, label: "Délai d’échange en boutique (jours)", widget: number, value_type: int, required: false, hint: "Laissez vide si non défini." }
+          - name: temoignages
+            label: Témoignages
+            label_singular: témoignage
+            widget: list
+            required: false
+            hint: "Uniquement des clientes réelles, avec leur accord. La section s’affiche sur l’accueil dès qu’il y a un témoignage."
+            summary: "{{fields.auteur}}"
+            fields:
+              - { name: citation, label: "Ce qu’elle a dit (texte exact)", widget: text }
+              - { name: auteur, label: "Signature", widget: string, hint: "Ex. : Aïssatou, Dakar — bonnet G" }
+          - name: reseaux
+            label: "Chiffres des réseaux sociaux"
+            widget: object
+            collapsed: true
+            fields:
+              - { name: mis_a_jour, label: "Mis à jour en", widget: string, hint: "Ex. : novembre 2026" }
+              - { name: tiktok, label: "Abonnés TikTok", widget: number, value_type: int }
+              - { name: instagram, label: "Abonnés Instagram", widget: number, value_type: int }
+              - { name: facebook, label: "Abonnés Facebook", widget: number, value_type: int }
+              - { name: snapchat, label: "Abonnés Snapchat", widget: number, value_type: int }

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, Gift, Store, Truck, Check, ArrowLeft, Lock } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { COUNTRY_OPTIONS, DIAL_CODES, STORES, ZONES } from '../data/site';
+import { BRAND, COUNTRY_OPTIONS, DIAL_CODES, STORES, ZONES } from '../data/site';
 import { formatPrice } from '../data/catalog';
 import { Img } from '../components/ui/Img';
 import { WaButton } from '../components/ui/WaButton';
@@ -314,7 +314,7 @@ export function CartPage() {
               <div className="mt-8 rounded-2xl border border-gold/25 bg-gold/[0.05] p-5 text-[15px] leading-relaxed text-ivory-2">
                 <p className="text-ivory">Comment se passe la suite</p>
                 <ol className="mt-2 list-decimal space-y-1 pl-5">
-                  <li>Votre commande part sur WhatsApp, déjà rédigée, vers notre numéro {inSenegal ? '' : '(joignable depuis l’étranger) '}+221 78 704 05 05.</li>
+                  <li>Votre commande part sur WhatsApp, déjà rédigée, vers notre numéro {inSenegal ? '' : '(joignable depuis l’étranger) '}{BRAND.whatsappDisplay}.</li>
                   <li>Une conseillère confirme chaque taille, les frais et le délai.</li>
                   <li>Vous convenez ensemble du règlement. Rien n’est expédié avant votre accord.</li>
                 </ol>

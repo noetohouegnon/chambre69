@@ -1,0 +1,24 @@
+{
+  "name": "Slip Natsuki",
+  "brand": "Wacoal",
+  "origin": "Angleterre",
+  "category": "culottes",
+  "reference": "WE601355",
+  "color": "Or antique",
+  "description": "La collection Natsuki Lace de Wacoal sublime l’élégance féminine avec une lingerie d’exception, pensée pour la saison Automne-Hiver 2024. Inspirée de l’art raffiné de la sérigraphie textile et de la peinture sur soie japonaises, cette ligne associe à merveille tradition et modernité. Chaque modèle allie la finesse d’une dentelle extensible mate au raffinement d’un satin brillant luxueux, pour un rendu à la fois sophistiqué et confortable. Des détails délicats aux accents dorés et scintillants viennent rehausser les pièces les plus emblématiques, pour une allure féminine et précieuse. Élégance, confort et savoir-faire se rencontrent dans cette collection incontournable de la marque Wacoal, idéale pour celles qui recherchent une lingerie haut de gamme alliant style et sensualité.",
+  "images": [
+    "/media/slip-natsuki-wacoal/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 620
+}

@@ -1,0 +1,45 @@
+{
+  "name": "Soutien-gorge Sydnie",
+  "brand": "Freya",
+  "origin": "Angleterre",
+  "category": "soutiens-gorge",
+  "reference": "AA402820BLK",
+  "description": "Glissez-vous dans le luxe et laissez-vous séduire par le Soutien-gorge Bustier Sydnie de Freya. Le secret pour vous sentir irrésistible jour après jour ! Il présente un haut bonnet en jolie dentelle stretch florale pour une application parfaite et un galbe naturellement arrondi. Sa coupe échancrée dessine un décolleté audacieux qui ajoute une touche de séduction à votre quotidien. Complétez votre look unique avec notre slip Brésilien assorti.\n\nHaut bonnet en jolie dentelle stretch florale pour une application parfaite et un galbe arrondi",
+  "features": [
+    "Descriptif",
+    "Entre-seins bas pour un décolleté échancré",
+    "Plongeant sans push up",
+    "Jolie dentelle stretch florale à l’avant et au dos",
+    "Bretelles fixes réglables qui ne tombent pas sur les épaules",
+    "Détail nœud et pendentif floral à l’entre-seins"
+  ],
+  "images": [
+    "/media/soutien-gorge-sydnie-freya/0-960.webp",
+    "/media/soutien-gorge-sydnie-freya/1-960.webp"
+  ],
+  "sizes": {
+    "cups": [
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K"
+    ],
+    "bands": [
+      "70",
+      "75",
+      "80",
+      "85",
+      "90",
+      "95"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 440
+}

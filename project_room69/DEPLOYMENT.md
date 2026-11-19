@@ -1,7 +1,7 @@
 # Mettre le site Chambre 69 en ligne (gratuitement, avec Vercel)
 
 Le site est **entièrement statique** : aucune base de données ni serveur à louer.
-Le catalogue est généré depuis les dossiers photos et les fiches `.docx` du dépôt.
+Le catalogue est généré à chaque mise en ligne à partir des fiches de `content/produits/`, gérées depuis l'espace d'administration (`/admin`).
 Le dossier `backend/` est un reste de l'ancien prototype : il n'est **pas** utilisé.
 
 ## 1. Première mise en ligne (une seule fois, ~5 minutes)
@@ -27,30 +27,22 @@ Chaque modification poussée ensuite sur la branche `main` est remise en ligne a
 
 Sans cette variable, le site utilise automatiquement l'adresse `*.vercel.app` de production.
 
-## 3. Mettre à jour les informations (sans développeur)
+## 3. Mettre à jour le site (sans développeur)
 
-Tout se modifie directement sur GitHub (bouton crayon ✏️ sur le fichier), puis « Commit changes » :
+Produits, photos, boutiques, horaires, contact et témoignages se gèrent depuis
+l'**espace d'administration** : `https://VOTRE-SITE/admin`.
+Mise en place et mode d'emploi : voir **`ADMINISTRATION.md`**.
 
-| Information | Fichier | Champ |
-|---|---|---|
-| Adresses, horaires, stationnement des boutiques | `src/data/site.ts` | `STORES` (`address`, `landmarks`, `hours`, `parking`) |
-| Délais et frais de livraison | `src/data/site.ts` | `ZONES` (`delay`, `fees`) |
-| Délai d'échange, délai d'expédition, tours de dos, bonnet max. sport | `src/data/site.ts` | `PENDING` |
-| Raison sociale, RCCM, NINEA, siège | `src/data/site.ts` | `PENDING.legal` |
-| Témoignages clientes (avec leur accord écrit) | `src/data/site.ts` | `TESTIMONIALS` |
-| Chiffres réseaux sociaux | `src/data/site.ts` | `COMMUNITY` |
-| Prix, nom, tailles réelles, rupture, masquer une pièce | `src/data/overrides.json` | voir `_lisez-moi` en tête du fichier |
-| Film « Avec ou sans » | `src/pages/MastectomyPage.tsx` | `FILM` (lien YouTube + vignette) |
-
-Tant qu'une valeur n'est pas renseignée, le site affiche une formulation neutre
-(« annoncés par votre conseillère… ») : rien d'incomplet n'apparaît aux clientes.
+Les fiches produits sont dans `content/produits/` et les réglages dans `content/reglages.json`
+(modifiables aussi directement sur GitHub). `src/data/site.ts` garde les textes fixes
+(zones de livraison, indicatifs, etc.).
 
 ## 4. En local (facultatif, pour un développeur)
 
 ```
 cd project_room69
 npm install
-npm run catalog   # régénère le catalogue depuis les dossiers photos (si nouvelles photos)
+npm run dev       # aperçu de développement (prépare aussi le catalogue)
 npm run build     # build + pré-rendu des pages + sitemap
 npx vite preview  # aperçu sur http://localhost:4173
 ```

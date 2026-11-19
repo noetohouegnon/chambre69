@@ -1,0 +1,28 @@
+{
+  "name": "T-shirt thermique blanc col V",
+  "brand": "Ysabel Mora",
+  "origin": "Espagne",
+  "category": "basiques",
+  "reference": "C69-4997D4",
+  "features": [
+    "L XL"
+  ],
+  "images": [
+    "/media/t-shirt-sous-vetement-thermique-blanc-col-v-ysabel-mora/0-960.webp",
+    "/media/t-shirt-sous-vetement-thermique-blanc-col-v-ysabel-mora/1-960.webp",
+    "/media/t-shirt-sous-vetement-thermique-blanc-col-v-ysabel-mora/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 1010
+}

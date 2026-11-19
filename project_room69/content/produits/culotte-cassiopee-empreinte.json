@@ -1,0 +1,38 @@
+{
+  "name": "Culotte Cassiopée",
+  "brand": "Empreinte",
+  "origin": "France",
+  "category": "culottes",
+  "reference": "00P_210_03151_0455",
+  "color": "Rose",
+  "description": "Le slip Cassiopée séduit par son jeu subtil de transparence et de broderie. À l’arrière, la maille est lisse et douce tout en discrétion sous les vêtements. Un équilibre parfait entre séduction et bien-être.",
+  "features": [
+    "Informations produits",
+    "Slip",
+    "Pièce incontournable du vestiaire",
+    "Devant tout en broderie et côtés en dentelle",
+    "Dos en maille douce et lisse pour un confort maximal",
+    "Finitions délicates avec des bords plats et festonnés pour une allure couture",
+    "Matières haut de gamme d’origine européenne",
+    "Broderie suisse",
+    "Dentelle française"
+  ],
+  "images": [
+    "/media/culotte-cassiopee-empreinte/0-960.webp",
+    "/media/culotte-cassiopee-empreinte/1-960.webp",
+    "/media/culotte-cassiopee-empreinte/2-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": false,
+  "hidden": false,
+  "rank": 10
+}
