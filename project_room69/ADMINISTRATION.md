@@ -19,34 +19,26 @@ Adresse : **https://VOTRE-SITE/admin** (par exemple `https://chambre69.sn/admin`
 1. Sur https://github.com/noetohouegnon/chambre69 → **Settings** → **Collaborators** → **Add people**.
 2. Saisissez le nom d'utilisateur GitHub ou l'e-mail de la gérante, puis **Add**.
 
-### b) Pour Noé : activer le bouton « Se connecter avec GitHub » (une seule fois, 5 minutes)
-1. Sur GitHub : photo de profil → **Settings** → **Developer settings** (tout en bas à gauche)
-   → **OAuth Apps** → **New OAuth App** :
-   - **Application name** : `Chambre 69 — Administration`
-   - **Homepage URL** : `https://chambre69-sknk.vercel.app`
-   - **Authorization callback URL** : `https://chambre69-sknk.vercel.app/api/callback`
-   - **Register application**.
-2. Sur la page qui s'ouvre : copiez le **Client ID**, puis **Generate a new client secret** et copiez le secret
-   (il ne sera plus affiché).
-3. Sur Vercel : projet → **Settings** → **Environment Variables**, ajoutez :
-   - `GITHUB_OAUTH_ID` = le Client ID
-   - `GITHUB_OAUTH_SECRET` = le secret
-   puis **Deployments** → **⋯** du dernier déploiement → **Redeploy**.
-4. **Le jour où le nom de domaine change** (ex. `chambre69.sn`) : dans l'OAuth App, remplacez les deux adresses
-   par `https://chambre69.sn` et `https://chambre69.sn/api/callback`.
-
-> Seules les personnes que vous avez invitées sur le dépôt peuvent enregistrer des modifications :
-> GitHub refuse l'écriture à toute autre personne, même si elle se connecte.
-
-### c) Pour la gérante
+### b) Pour la gérante : créer sa clé d'accès (5 minutes)
+La connexion à l'administration se fait avec une **clé d'accès personnelle** GitHub (un long code, comme un mot de passe).
 1. Créez un compte gratuit sur https://github.com (si ce n'est pas déjà fait).
 2. Acceptez l'invitation reçue par e-mail (bouton **Accept invitation**).
-3. Ouvrez **https://VOTRE-SITE/admin** → **« Se connecter avec GitHub »** → **Authorize**.
+3. Ouvrez https://github.com/settings/tokens/new et remplissez :
+   - **Note** : `Administration Chambre 69`
+   - **Expiration** : `90 days` ou `1 year` (notez la date de renouvellement dans votre agenda)
+   - cochez la case **`repo`** (la première de la liste)
+4. Tout en bas, cliquez sur **Generate token**, puis **copiez la clé** (elle commence par `ghp_…`).
+   Elle ne sera plus affichée : gardez-la dans un endroit sûr (gestionnaire de mots de passe, ou notes protégées).
+5. Ouvrez **https://VOTRE-SITE/admin** → **« Se connecter avec un jeton d'accès »** → collez la clé → validez.
    L'ordinateur ou le téléphone s'en souvient ensuite.
 
-*Solution de secours, sans le bouton GitHub* : créez une clé sur https://github.com/settings/tokens/new
-(cochez **`repo`**, expiration au choix, **Generate token**, copiez la clé `ghp_…`), puis sur `/admin`
-choisissez **« Se connecter avec un jeton d'accès »** et collez-la. Ne la partagez pas.
+> **Cette clé donne le droit de modifier le site : ne la partagez avec personne.** Si elle est perdue ou volée,
+> supprimez-la sur https://github.com/settings/tokens et créez-en une autre.
+> Seules les personnes invitées sur le dépôt peuvent enregistrer des modifications.
+> Quand la clé expire, l'administration redemande une connexion : refaites les étapes 3 à 5.
+
+*Facultatif, pour un développeur :* le bouton « Se connecter avec GitHub » (sans clé) existe aussi, via une
+OAuth App GitHub. Voir `api/` (Vercel) et `ovh/api/` (OVH), variables `GITHUB_OAUTH_ID` et `GITHUB_OAUTH_SECRET`.
 
 ---
 
