@@ -1,71 +1,56 @@
-# 🏛️ Chambre 69 - Boutique de Lingerie Haut de Gamme
+# Chambre 69 — site vitrine et boutique en ligne
 
-Bienvenue sur la plateforme officielle de **Chambre 69**, une expérience numérique de luxe dédiée à l'élégance et au raffinement.
+Lingerie du bonnet A au bonnet O, Dakar. Site statique pré-rendu (React + Vite + Tailwind),
+commande finalisée sur WhatsApp, espace d'administration sans serveur.
 
----
+| Document | Pour qui | Contenu |
+|---|---|---|
+| [`ADMINISTRATION.md`](ADMINISTRATION.md) | la gérante | ajouter / retirer des pièces et des photos, boutiques, témoignages |
+| [`DEPLOYMENT.md`](DEPLOYMENT.md) | le responsable du site | mise en ligne gratuite sur Vercel, domaine, accès |
+| [`LIVRAISON_V2.md`](LIVRAISON_V2.md) | historique | ce qui a été livré en V2 |
 
-## 📖 Pour les Visiteurs (Clients)
-**Chambre 69** est conçue pour vous offrir une navigation fluide et immersive dans l'univers de la lingerie de luxe.
-- **Boutique Intuitive** : Parcourez nos collections par marque (Curvy Kate, Dita Von Teese, Elomi, etc.) avec des filtres intelligents par catégorie et collection.
-- **Détails Produits** : Cliquez sur n'importe quel article pour découvrir ses secrets (matières, entretien, tailles).
-- **Commande WhatsApp** : Un coup de cœur ? Commandez directement via WhatsApp en un clic pour un service personnalisé.
-- **Expérience Premium** : Un design épuré, lumineux et réactif pour un confort visuel optimal.
+## Architecture
 
----
+```
+content/produits/*.json   fiches produits (une par pièce)   ← modifiées depuis /admin
+content/reglages.json     boutiques, contact, témoignages   ← modifiés depuis /admin
+public/admin/             interface d'administration (Sveltia CMS, connexion par jeton GitHub)
+public/media/             photos (WebP 480/960 px ; ajouts /admin convertis au build)
+scripts/prepare-content.mjs  content/ → src/data/catalog.json (généré, non versionné)
+scripts/prerender.mjs     pré-rendu HTML de toutes les pages + sitemap + robots
+src/                      application React (pages, composants, données fixes)
+```
 
-## 🛠️ Pour les Développeurs (Débutants à Seniors)
+- **Aucune base de données, aucun serveur** : tout est généré au build et servi en statique.
+- **Commande** : le panier rédige le message WhatsApp (pièces, tailles, adresse, options cadeau).
+- **Mesure d'audience** : Vercel Web Analytics (sans cookie) ; GA4 / Meta en option
+  (`VITE_GA4_ID`, `VITE_META_PIXEL_ID`), chargés uniquement après consentement.
+- **Formulaires** : transmis par WhatsApp ; `VITE_FORMS_ENDPOINT` pour un envoi direct (optionnel).
 
-### Architecture Technique
-Le projet utilise une stack moderne et performante :
-- **Frontend** : React 18, TypeScript, Tailwind CSS, Framer Motion (animations).
-- **Backend** : Node.js (Express), TypeScript, Prisma ORM.
-- **Base de Données** : PostgreSQL.
+## Commandes
 
-### Installation Rapide
-1. **Clonage** : `git clone https://github.com/votre-repo/Chambre69.git`
-2. **Frontend** :
-   ```bash
-   npm install
-   npm run dev
-   ```
-3. **Backend** :
-   ```bash
-   cd backend
-   npm install
-   npx prisma migrate dev
-   npm run prisma:seed # Scan automatique des images racine
-   npm run dev
-   ```
+```bash
+cd project_room69
+npm ci
+npm run dev              # développement (http://localhost:5173)
+npm run build            # catalogue + build + pré-rendu → dist/
+npx vite preview         # aperçu du build (http://localhost:4173)
+npm run typecheck        # vérification TypeScript
+npm run lint             # vérification du code
+npm run import-dossiers  # import en masse depuis les dossiers photos (n'écrase rien)
+node scripts/build-brand-assets.mjs   # régénère les images de partage (polices Italiana et Jost requises)
+```
 
-### 🧠 Logique de Scan Dynamique (Seed)
-Le script `backend/prisma/seed.ts` est le cœur de l'automatisation. Il parcourt récursivement les dossiers de marques à la racine du dépôt :
-- Il détecte automatiquement les **Marques**, **Sous-catégories** et **Collections**.
-- Il supporte les formats `.jpg`, `.png`, `.webp` et `.avif`.
-- Il génère des URLs encodées pour gérer les espaces et caractères spéciaux dans les noms de dossiers.
+## Variables d'environnement (toutes facultatives)
 
----
+| Variable | Effet |
+|---|---|
+| `VITE_SITE_URL` | domaine définitif (ex. `https://chambre69.sn`) pour les liens de partage et le sitemap ; sinon l'adresse Vercel |
+| `VITE_GA4_ID` | identifiant Google Analytics 4 (`G-…`) |
+| `VITE_META_PIXEL_ID` | identifiant du pixel Meta |
+| `VITE_FORMS_ENDPOINT` | adresse d'un service d'envoi de formulaires (JSON POST) |
 
-## 🔐 Système d'Authentification
-Nous avons implémenté une authentification sécurisée et esthétique :
-- **Glassmorphisme** : Formulaires de connexion/inscription avec effet de verre dépoli.
-- **Sécurité** : Hachage des mots de passe avec `bcryptjs` et gestion des sessions via `JSON Web Tokens (JWT)`.
-- **Persistance** : Session utilisateur sauvegardée localement pour une navigation sans interruption.
+## Charte graphique
 
----
-
-## 🎨 Guide de Style (Code Couleur)
-- **Fond** : `#FDFDFD` (Blanc cassé / Crème)
-- **Accent principal** : `#C9A96E` (Or Chambre 69)
-- **Texte** : `#111111` (Noir Profond) / `#999999` (Gris Doux)
-- **Typographie** : Serif pour les titres (Élégance), Sans-serif pour le corps (Lisibilité).
-
----
-
-## 🚀 Déploiement
-Un workflow **GitHub Actions** est configuré dans `.github/workflows/main.yml` pour valider chaque build automatiquement et garantir la stabilité du projet.
-
-### Liaison avec le guide de déploiement
-Pour la procédure complète de déploiement avec **Neon**, **Render**, et **Vercel**, consultez `DEPLOYMENT.md`.
-
----
-*Développé avec passion pour l'élégance.*
+Base crème `#F4F2EE`, bordeaux `#5A1725`, or `#E49D27` et noir en accents ; titres en Italiana,
+texte en Jost ; logo C69 doré d'origine. Jetons dans `tailwind.config.js`.

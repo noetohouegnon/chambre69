@@ -3,6 +3,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
+import { initAnalytics } from './lib/analytics';
 
 const container = document.getElementById('root')!;
 const app = (
@@ -19,3 +20,5 @@ const prerendered = document.querySelector('link[rel="canonical"]')?.getAttribut
 const samePage = prerendered.replace(/^https?:\/\/[^/]+/, '').replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '');
 if (container.firstElementChild && !window.location.search && samePage) hydrateRoot(container, app);
 else { container.innerHTML = ''; createRoot(container).render(app); }
+
+initAnalytics();

@@ -7,7 +7,7 @@ import { useUi } from '../context/UiContext';
 
 function ZonesTable({ ids }: { ids: string[] }) {
   return (
-    <div id="pays" className="scroll-mt-32 overflow-x-auto rounded-2xl border border-gold/15">
+    <div id="pays" role="region" aria-label="Pays desservis" tabIndex={0} className="scroll-mt-32 overflow-x-auto rounded-2xl border border-gold/15">
       <table className="w-full min-w-[28rem] text-left text-sm">
         <caption className="sr-only">Pays desservis par zone</caption>
         <thead className="bg-ink-3 text-ivory"><tr><th className="p-4 font-medium">Zone</th><th className="p-4 font-medium">Pays</th></tr></thead>

@@ -176,7 +176,7 @@ export function HomePage() {
 
       {/* Accueil, section 6 — Amplitude (2.4) */}
       <section className="relative overflow-hidden border-y border-gold/10 bg-ink-2 py-20 sm:py-24">
-        <div aria-hidden className="pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 select-none font-serif text-[22rem] leading-none text-gold/[0.05] lg:block">A–O</div>
+        <div aria-hidden data-deco="A–O" className="deco-text pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 select-none font-serif text-[22rem] leading-none text-gold/[0.05] lg:block" />
         <div className="container-x relative">
           <p className="eyebrow mb-4">Toutes les tailles</p>
           <h2 className="h-section max-w-3xl text-balance">Du bonnet A au bonnet O. Vraiment.</h2>

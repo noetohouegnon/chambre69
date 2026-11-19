@@ -7,7 +7,6 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
@@ -31,7 +30,7 @@ const OG = [
   { name: 'diaspora', title: ['Livrée chez vous,', 'ou chez votre mère'], sub: 'Afrique de l’Ouest et international', photo: 'soutien-gorge-zarla-elomi' },
 ];
 
-const logo = await sharp(path.join(pub, 'brand/logo-horizontal-bordeaux.png')).resize({ height: 70 }).png().toBuffer();
+const logo = await sharp(path.join(pub, 'brand/logo-wide.png')).resize({ height: 72 }).png().toBuffer();
 
 for (const o of OG) {
   const hasPhoto = !!o.photo;
@@ -55,23 +54,7 @@ for (const o of OG) {
   console.log(o.name, Math.round(fs.statSync(out).size / 1024), 'Ko');
 }
 
-// Icônes : symbole bordeaux sur fond crème (public/brand/symbole-bordeaux.png, extrait de la charte).
-const mono = await sharp(path.join(pub, 'brand/symbole-bordeaux.png')).trim().png().toBuffer();
-const icon = async (size, pad, file, bg = CREME) => {
-  const inner = Math.round(size * (1 - pad * 2));
-  const m = await sharp(mono).resize(inner, inner, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer();
-  await sharp({ create: { width: size, height: size, channels: 4, background: bg } }).composite([{ input: m, gravity: 'center' }]).png().toFile(file);
-};
-await icon(32, 0.04, path.join(pub, 'icons/favicon-32.png'));
-await icon(48, 0.04, path.join(pub, 'icons/favicon-48.png'));
-await icon(16, 0.04, path.join(pub, 'icons/favicon-16.png'));
-await icon(180, 0.14, path.join(pub, 'icons/apple-touch-icon.png'));
-await icon(192, 0.14, path.join(pub, 'icons/icon-192.png'));
-await icon(512, 0.14, path.join(pub, 'icons/icon-512.png'));
-await icon(512, 0.24, path.join(pub, 'icons/icon-maskable-512.png'));
-try {
-  execFileSync('convert', [path.join(pub, 'icons/favicon-16.png'), path.join(pub, 'icons/favicon-32.png'), path.join(pub, 'icons/favicon-48.png'), path.join(pub, 'favicon.ico')]);
-} catch { console.log('ImageMagick absent : favicon.ico non régénéré.'); }
+// Icônes : logo d'origine (C69 doré), conservées telles quelles dans public/icons et public/favicon.ico.
 
 fs.writeFileSync(path.join(pub, 'manifest.webmanifest'), JSON.stringify({
   name: 'Chambre 69 — Au-delà de la lingerie',

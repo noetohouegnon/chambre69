@@ -6,7 +6,7 @@ import { useCart } from '../context/CartContext';
 import { SizeGuideTool } from './SizeGuideTool';
 import { WhatsAppIcon } from './ui/icons';
 import { waLink } from '../lib/whatsapp';
-import { track, getConsent, setConsent } from '../lib/analytics';
+import { track, getConsent, setConsent, needsConsent } from '../lib/analytics';
 
 /** Bouton WhatsApp flottant, présent sur toutes les pages (4.3). */
 export function FloatingWhatsApp() {
@@ -77,6 +77,7 @@ export function AddedToast() {
 export function ConsentBanner() {
   const [show, setShow] = useState(false);
   useEffect(() => {
+    if (!needsConsent) return;
     setShow(getConsent() === null);
     const h = () => setShow(true);
     window.addEventListener('c69-consent-open', h);

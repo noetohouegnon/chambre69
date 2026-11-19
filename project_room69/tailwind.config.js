@@ -8,7 +8,7 @@ export default {
       colors: {
         ink: { DEFAULT: '#F4F2EE', 2: '#EDE8E2', 3: '#E5DED6', 4: '#D8CEC4' },
         gold: { DEFAULT: '#5A1725', soft: '#74283A', deep: '#3E0E18' },
-        or: { DEFAULT: '#E49D27', text: '#9A600D' },
+        or: { DEFAULT: '#E49D27', text: '#80500A' },
         bordeaux: '#5A1725',
         creme: '#F4F2EE',
         ivory: { DEFAULT: '#4A1220', 2: '#4B3438' },

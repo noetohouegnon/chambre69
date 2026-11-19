@@ -203,6 +203,7 @@ export function ShopPage() {
             </div>
           ) : (
             <>
+              <h2 className="sr-only">Pièces correspondant à votre sélection</h2>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-3 xl:grid-cols-4">
                 {list.map((p, i) => <li key={p.slug}><ProductCard p={p} priority={i < 4} sizes="(min-width:1280px) 18vw, (min-width:768px) 28vw, 46vw" /></li>)}
               </ul>

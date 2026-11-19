@@ -120,10 +120,12 @@ export default function App() {
             </main>
             <Footer />
           </div>
-          <FloatingWhatsApp />
-          <SizeGuideModal />
-          <AddedToast />
-          <ConsentBanner />
+          <aside aria-label="Aide et notifications">
+            <FloatingWhatsApp />
+            <SizeGuideModal />
+            <AddedToast />
+            <ConsentBanner />
+          </aside>
         </ListProvider>
       </CartProvider>
     </UiProvider>

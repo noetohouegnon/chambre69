@@ -21,6 +21,7 @@ export type Product = {
   price: number | null;
   isNew: boolean;
   images: ProductImage[];
+  ogImage?: string;
   unavailable?: string[];
   lastPieces?: boolean;
   stores?: string[];

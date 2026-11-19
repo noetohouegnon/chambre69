@@ -65,6 +65,6 @@ fs.writeFileSync(path.join(dist, '404.html'), page('/404', render('/page-introuv
 const today = new Date().toISOString().slice(0, 10);
 const indexable = routes.filter((u) => !metaFor(u).noindex);
 fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.map((u) => `  <url><loc>${SITE_URL}${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`);
-fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /panier\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /panier\nDisallow: /admin\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 fs.rmSync(path.join(root, 'dist-ssr'), { recursive: true, force: true });
 console.log(`Pré-rendu : ${routes.length} pages + 404, sitemap.xml, robots.txt`);

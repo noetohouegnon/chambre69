@@ -6,7 +6,7 @@ import { WaButton } from '../components/ui/WaButton';
 import { Newsletter } from '../components/Newsletter';
 import { MESSAGES } from '../lib/whatsapp';
 import { BRAND, ZONES, SITE_URL, exchangeDelayText } from '../data/site';
-import { setConsent, getConsent } from '../lib/analytics';
+import { setConsent, getConsent, needsConsent } from '../lib/analytics';
 
 /* ---------- Carte cadeau (5.5) ---------- */
 export function GiftCardPage() {
@@ -22,7 +22,7 @@ export function GiftCardPage() {
       <Section>
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div className="relative aspect-[1.6] overflow-hidden rounded-3xl border border-or/60 bg-bordeaux p-8 shadow-2xl">
-            <img src="/brand/logo-horizontal-creme.png" alt="" width={805} height={200} className="h-10 w-auto" />
+            <img src="/brand/logo-wide.png" alt="" width={482} height={105} className="h-10 w-auto" />
             <p className="absolute bottom-8 left-8 font-serif text-4xl text-creme">{value ? `${fmt(value)} FCFA` : 'Montant libre'}</p>
             <p className="absolute bottom-8 right-8 text-sm text-or">Au-delà de la lingerie</p>
           </div>
@@ -169,7 +169,7 @@ export function PressPage() {
       </PageHero>
       <Section>
         <div className="grid gap-6 sm:grid-cols-2">
-          <a href="/brand/logo-bordeaux.png" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Logo Chambre 69</span><span className="text-sm text-mute">PNG, fond transparent — autres formats sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
+          <a href="/brand/logo-mark.png" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Logo Chambre 69</span><span className="text-sm text-mute">PNG, fond transparent — autres formats sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
           <a href="/brand/boutique-facade-960.webp" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Vitrine de la boutique</span><span className="text-sm text-mute">WebP — visuels haute définition sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
         </div>
         <div className="mt-8 card p-6"><p className="text-ivory">Contact presse</p><p className="mt-2 text-ivory-2"><a href={`mailto:${BRAND.email}?subject=Presse`} className="text-gold hover:underline">{BRAND.email}</a> · {BRAND.whatsappDisplay}</p></div>
@@ -219,14 +219,19 @@ export function CookiesPage() {
   const [c, setC] = useState(getConsent());
   return (
     <Legal title="Politique de cookies">
-      <p>Ce site n’utilise des traceurs de mesure d’audience et de publicité (Google Analytics, Meta, TikTok) qu’avec votre accord. Sans accord, aucun de ces scripts n’est chargé.</p>
+      <p>Nous mesurons la fréquentation du site de façon anonyme, sans cookie et sans aucune donnée personnelle : nous savons combien de pages sont vues, pas qui les voit.</p>
       <p>Le site enregistre dans votre navigateur, sans traceur tiers, votre panier, votre liste de trousseau et votre choix de consentement, pour que vous les retrouviez.</p>
-      <h2>Votre choix</h2>
-      <p>Choix actuel : <strong className="text-ivory">{c === 'granted' ? 'mesure d’audience acceptée' : c === 'denied' ? 'mesure d’audience refusée' : 'aucun choix enregistré'}</strong>.</p>
+      {needsConsent ? (
+        <p>Des outils de mesure et de publicité (Google Analytics, Meta) ne sont chargés qu’avec votre accord. Sans accord, aucun de ces scripts n’est chargé.</p>
+      ) : (
+        <p>Aucun traceur publicitaire n’est utilisé sur ce site.</p>
+      )}
+      {needsConsent && <h2>Votre choix</h2>}
+      {needsConsent && <><p>Choix actuel : <strong className="text-ivory">{c === 'granted' ? 'mesure d’audience acceptée' : c === 'denied' ? 'mesure d’audience refusée' : 'aucun choix enregistré'}</strong>.</p>
       <div className="flex flex-wrap gap-3">
         <button className="btn-line" onClick={() => { setConsent('denied'); setC('denied'); }}>Refuser</button>
         <button className="btn-line" onClick={() => { setConsent('granted'); setC('granted'); }}>Accepter</button>
-      </div>
+      </div></>}
     </Legal>
   );
 }

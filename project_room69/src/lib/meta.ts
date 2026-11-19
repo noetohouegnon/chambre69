@@ -130,7 +130,9 @@ export function metaFor(pathname: string): Meta {
     const p = BY_SLUG.get(prod[1]);
     if (p) {
       const desc = `${p.name} ${p.brand !== 'Chambre 69' ? `de la maison ${p.brand}` : 'Chambre 69'}. ${p.description ? p.description.slice(0, 80).replace(/\s+\S*$/, '') + '…' : ''} Conseil gratuit sur WhatsApp, emballage neutre, livraison Sénégal et international.`;
-      return { title: `${p.name} — ${p.brand === 'Chambre 69' ? 'Chambre 69' : `${p.brand} — Chambre 69`}`, description: desc.replace(/\s+/g, ' ').trim().slice(0, 165), image: `${SITE_URL}/media/${p.slug}/og.jpg`, type: 'product' };
+      const full = `${p.name} — ${p.brand === 'Chambre 69' ? 'Chambre 69' : `${p.brand} — Chambre 69`}`;
+      const d = desc.replace(/\s+/g, ' ').trim();
+      return { title: full.length > 62 ? `${p.name} — Chambre 69` : full, description: d.length > 160 ? `${d.slice(0, 157).replace(/\s+\S*$/, '')}…` : d, image: `${SITE_URL}${p.ogImage || `/media/${p.slug}/og.jpg`}`, type: 'product' };
     }
   }
   const art = path.match(/^\/conseils\/([^/]+)$/);

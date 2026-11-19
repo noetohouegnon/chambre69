@@ -73,6 +73,16 @@ for (const f of files) {
   if (list(sz.bands).length) sizes.bands = list(sz.bands).map(Number).filter(Boolean).sort((a, b) => a - b);
   if (list(sz.alpha).length) sizes.alpha = list(sz.alpha).map(String);
   const own = OWN_BRANDS.includes(d.brand);
+  // Vignette de partage (WhatsApp, Facebook) : celle de l'import d'origine, sinon générée depuis la 1re photo.
+  let ogImage = `/media/${slug}/og.jpg`;
+  if (!fs.existsSync(path.join(pub, ogImage))) {
+    ogImage = `/media/generated/${slug}-og.jpg`;
+    const ogFile = path.join(pub, ogImage);
+    if (!fs.existsSync(ogFile)) {
+      const photo = await sharp(path.join(pub, images[0].src)).resize({ width: 1200, height: 630, fit: 'contain', background: '#F4F2EE' }).toBuffer();
+      await sharp(photo).flatten({ background: '#F4F2EE' }).jpeg({ quality: 80 }).toFile(ogFile);
+    }
+  }
   products.push({
     slug,
     name: String(d.name).trim(),
@@ -91,6 +101,7 @@ for (const f of files) {
     price: typeof d.price === 'number' && d.price > 0 ? d.price : null,
     isNew: Boolean(d.isNew),
     images,
+    ogImage,
     ...(d.hidden ? { hidden: true } : {}),
     ...(d.lastPieces ? { lastPieces: true } : {}),
     ...(list(d.unavailable).length ? { unavailable: list(d.unavailable) } : {}),
