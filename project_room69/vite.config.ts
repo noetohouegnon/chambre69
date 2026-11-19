@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { execFileSync } from 'node:child_process';
+import type { Plugin } from 'vite';
 
 /**
  * Adresse publique du site (balises de partage, sitemap, données structurées).
@@ -12,9 +14,23 @@ const siteUrl =
   process.env.URL ||
   '';
 
+/**
+ * Prépare le catalogue (content/ → src/data/catalog.json) avant chaque build ou démarrage,
+ * même si l'hébergeur lance directement « vite build » au lieu de « npm run build ».
+ */
+let prepared = false;
+const prepareContent = (): Plugin => ({
+  name: 'chambre69-prepare-content',
+  buildStart() {
+    if (prepared) return;
+    prepared = true;
+    execFileSync(process.execPath, ['scripts/prepare-content.mjs'], { stdio: 'inherit' });
+  },
+});
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [prepareContent(), react()],
   define: {
     'import.meta.env.VITE_SITE_URL': JSON.stringify(siteUrl),
     // Vrai uniquement pour un build sur Vercel : active Vercel Web Analytics (sans cookie).
