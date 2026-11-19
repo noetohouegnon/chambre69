@@ -57,7 +57,7 @@ Dépôt → **Settings** → **Secrets and variables** → **Actions** :
   | Nom | Valeur |
   |---|---|
   | `SITE_URL` | `https://chambre69.sn` (par défaut). Pour le site de test : `http://test.chambre69.sn` (non indexé par Google) |
-  | `OVH_PROTOCOL` | `ftp` (par défaut, connexion chiffrée FTPS) ; `sftp` si votre offre l'autorise |
+  | `OVH_PROTOCOL` | `auto` (par défaut : essaie la connexion chiffrée FTPS, puis SFTP, puis FTP simple) ; ou `ftps`, `sftp`, `ftp` pour en imposer une |
   | `OVH_FORCE_HTTPS` | `false` tant que le certificat HTTPS n'est pas actif (site de test en http), puis supprimez la variable |
   | `OVH_DIR` | `www` (par défaut) |
 

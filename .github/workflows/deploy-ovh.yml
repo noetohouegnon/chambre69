@@ -9,7 +9,7 @@
 #   GITHUB_OAUTH_ID / GITHUB_OAUTH_SECRET   (facultatif : bouton « Se connecter avec GitHub »)
 # Variables facultatives (onglet « Variables ») :
 #   SITE_URL         ex. https://chambre69.sn   (sinon https://chambre69.sn)
-#   OVH_PROTOCOL     ftp (par défaut, FTPS) ou sftp
+#   OVH_PROTOCOL     auto (par défaut : essaie FTPS, puis SFTP, puis FTP), ou ftps / sftp / ftp
 #   OVH_FORCE_HTTPS  false tant que le certificat HTTPS n'est pas actif (site de test en http)
 #   OVH_DIR          dossier du site sur l'hébergement (par défaut : www)
 
@@ -102,7 +102,7 @@ jobs:
           OVH_HOST: ${{ secrets.OVH_HOST }}
           OVH_USER: ${{ secrets.OVH_USER }}
           OVH_PASSWORD: ${{ secrets.OVH_PASSWORD }}
-          OVH_PROTOCOL: ${{ vars.OVH_PROTOCOL || 'ftp' }}
+          OVH_PROTOCOL: ${{ vars.OVH_PROTOCOL || 'auto' }}
           OVH_DIR: ${{ vars.OVH_DIR || 'www' }}
         run: |
           if [ -z "$OVH_HOST" ] || [ -z "$OVH_USER" ] || [ -z "$OVH_PASSWORD" ]; then
@@ -110,17 +110,28 @@ jobs:
             exit 0
           fi
           sudo apt-get install -y -qq lftp > /dev/null
-          if [ "$OVH_PROTOCOL" = "ftp" ]; then
-            URL="ftp://$OVH_HOST"; TLS="set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no;"
-          else
-            URL="sftp://$OVH_HOST"; TLS="set sftp:auto-confirm yes;"
-          fi
-          lftp -u "$OVH_USER","$OVH_PASSWORD" "$URL" -e "
-            $TLS
-            set net:max-retries 3; set net:timeout 30;
-            mkdir -p -f $OVH_DIR;
-            mirror --reverse --delete --verbose=1 --parallel=4 \
-                   --exclude-glob .ovhconfig --exclude-glob .well-known/ \
-                   dist/ $OVH_DIR/;
-            bye"
-          echo "Site mis en ligne."
+          upload() {  # $1 = nom de la méthode, $2 = adresse, $3 = réglages de connexion
+            echo "::group::Essai : $1"
+            if lftp -u "$OVH_USER","$OVH_PASSWORD" "$2" -e "
+                set cmd:fail-exit yes;
+                $3
+                set net:max-retries 1; set net:timeout 20; set net:reconnect-interval-base 2;
+                mkdir -p -f $OVH_DIR;
+                mirror --reverse --delete --verbose=1 --parallel=4 \
+                       --exclude-glob .ovhconfig --exclude-glob .well-known/ \
+                       dist/ $OVH_DIR/;
+                bye"; then
+              echo "::endgroup::"; echo "Site mis en ligne ($1)."; return 0
+            fi
+            echo "::endgroup::"; echo "Échec avec : $1"; return 1
+          }
+          ftps()  { upload "FTP chiffré (FTPS)" "ftp://$OVH_HOST"  "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no;"; }
+          sftp()  { upload "SFTP"               "sftp://$OVH_HOST" "set sftp:auto-confirm yes;"; }
+          ftp()   { echo "::warning::Connexion FTP non chiffrée (l'hébergement refuse FTPS et SFTP). Changez le mot de passe FTP une fois la mise en ligne terminée."
+                    upload "FTP simple" "ftp://$OVH_HOST" "set ftp:ssl-allow no;"; }
+          case "$OVH_PROTOCOL" in
+            ftps) ftps ;;
+            sftp) sftp ;;
+            ftp)  ftp ;;
+            *)    ftps || sftp || ftp ;;
+          esac
