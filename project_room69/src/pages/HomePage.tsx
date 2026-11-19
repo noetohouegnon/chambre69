@@ -299,17 +299,24 @@ export function HomePage() {
           <ul className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
             {COMMUNITY.networks.map((n) => (
               <li key={n.id} className="card p-5">
-                <a href={n.url} target="_blank" rel="noopener noreferrer" className="block">
-                  <span className="block font-serif text-4xl text-gold">{fmt(n.count)}</span>
-                  <span className="text-sm text-ivory-2">sur {n.label}</span>
-                </a>
+                {n.url ? (
+                  <a href={n.url} target="_blank" rel="noopener noreferrer" className="block">
+                    <span className="block font-serif text-4xl text-gold">{fmt(n.count)}</span>
+                    <span className="text-sm text-ivory-2">sur {n.label}</span>
+                  </a>
+                ) : (
+                  <div>
+                    <span className="block font-serif text-4xl text-gold">{fmt(n.count)}</span>
+                    <span className="text-sm text-ivory-2">sur {n.label}</span>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
           <p className="lead mx-auto mt-8 max-w-2xl">Plus de {total >= 70000 ? 'soixante-dix mille' : fmt(total)} femmes qui parlent enfin de tout cela sans baisser la voix.</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a className="btn-gold" href={COMMUNITY.networks[0].url} target="_blank" rel="noopener noreferrer">Nous suivre sur TikTok</a>
-            <a className="btn-line" href={COMMUNITY.networks[1].url} target="_blank" rel="noopener noreferrer">Nous suivre sur Instagram</a>
+            {COMMUNITY.networks[0].url && <a className="btn-gold" href={COMMUNITY.networks[0].url} target="_blank" rel="noopener noreferrer">Nous suivre sur TikTok</a>}
+            {COMMUNITY.networks[1].url && <a className="btn-line" href={COMMUNITY.networks[1].url} target="_blank" rel="noopener noreferrer">Nous suivre sur Instagram</a>}
           </div>
           <p className="mt-6 text-xs text-mute">Chiffres arrêtés en {COMMUNITY.updatedAt}.</p>
         </div>

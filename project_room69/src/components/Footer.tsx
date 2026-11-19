@@ -83,9 +83,9 @@ export function Footer() {
         <div>
           <p className="mb-3 text-sm text-creme/70">{COMMUNITY.handle} sur</p>
           <ul className="flex justify-center gap-2">
-            {COMMUNITY.networks.map((n) => (
+            {COMMUNITY.networks.filter((n) => n.url).map((n) => (
               <li key={n.id}>
-                <a href={n.url} target="_blank" rel="noopener noreferrer" aria-label={`${n.label} ${COMMUNITY.handle}`} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-creme/30 text-creme hover:border-or hover:text-or">{ICONS[n.id]}</a>
+                <a href={n.url!} target="_blank" rel="noopener noreferrer" aria-label={`${n.label} ${COMMUNITY.handle}`} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-creme/30 text-creme hover:border-or hover:text-or">{ICONS[n.id]}</a>
               </li>
             ))}
           </ul>

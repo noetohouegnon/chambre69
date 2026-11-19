@@ -10,7 +10,7 @@ type Reglages = {
   boutiques?: { id: string; quartier?: string; adresse?: string; reperes?: string; horaires?: { jour: string; heures: string }[]; stationnement?: string; recherche_maps?: string }[];
   echange_jours?: number | null;
   temoignages?: { citation: string; auteur: string }[];
-  reseaux?: { mis_a_jour?: string; tiktok?: number; instagram?: number; facebook?: number; snapchat?: number };
+  reseaux?: { mis_a_jour?: string; tiktok?: number; instagram?: number; facebook?: number; snapchat?: number; tiktok_url?: string; instagram_url?: string; facebook_url?: string; snapchat_url?: string };
 };
 const REG = R as Reglages;
 const waDigits = (REG.contact?.whatsapp || '+221 78 704 05 05').replace(/\D/g, '');
@@ -35,12 +35,14 @@ export const BRAND = {
 export const COMMUNITY = {
   updatedAt: REG.reseaux?.mis_a_jour || 'octobre 2026',
   handle: '@chambre_69',
+  /** `url` vaut null tant que l'adresse exacte de la page n'est pas renseignée (le réseau s'affiche alors sans lien). */
   networks: [
-    { id: 'tiktok', label: 'TikTok', count: REG.reseaux?.tiktok ?? 41000, url: 'https://www.tiktok.com/@chambre__69' },
-    { id: 'instagram', label: 'Instagram', count: REG.reseaux?.instagram ?? 14000, url: 'https://www.instagram.com/chambre_69' },
-    { id: 'facebook', label: 'Facebook', count: REG.reseaux?.facebook ?? 12000, url: 'https://www.facebook.com/search/top?q=chambre%2069%20dakar' },
-    { id: 'snapchat', label: 'Snapchat', count: REG.reseaux?.snapchat ?? 3000, url: 'https://www.snapchat.com/add/chambre_69' },
-  ],
+    { id: 'tiktok', label: 'TikTok', count: REG.reseaux?.tiktok ?? 41000, url: text(REG.reseaux?.tiktok_url) },
+    { id: 'instagram', label: 'Instagram', count: REG.reseaux?.instagram ?? 14000, url: text(REG.reseaux?.instagram_url) },
+    { id: 'facebook', label: 'Facebook', count: REG.reseaux?.facebook ?? 12000, url: text(REG.reseaux?.facebook_url) },
+    { id: 'snapchat', label: 'Snapchat', count: REG.reseaux?.snapchat ?? 3000, url: text(REG.reseaux?.snapchat_url) },
+  ] as { id: string; label: string; count: number; url: string | null }[],
+
 };
 
 export type Store = {

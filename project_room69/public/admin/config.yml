@@ -191,3 +191,7 @@ collections:
               - { name: instagram, label: "Abonnés Instagram", widget: number, value_type: int }
               - { name: facebook, label: "Abonnés Facebook", widget: number, value_type: int }
               - { name: snapchat, label: "Abonnés Snapchat", widget: number, value_type: int }
+              - { name: tiktok_url, label: "Adresse de la page TikTok", widget: string, required: false, hint: "Copiez l’adresse exacte du profil, ex. : https://www.tiktok.com/@nom" }
+              - { name: instagram_url, label: "Adresse de la page Instagram", widget: string, required: false }
+              - { name: facebook_url, label: "Adresse de la page Facebook", widget: string, required: false, hint: "Laissez vide tant que l’adresse exacte n’est pas connue : le réseau s’affiche alors sans lien." }
+              - { name: snapchat_url, label: "Adresse du profil Snapchat", widget: string, required: false }
