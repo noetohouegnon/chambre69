@@ -26,7 +26,7 @@ Adresse : **https://VOTRE-SITE/admin** (par exemple `https://chambre69.sn/admin`
    - allez sur https://github.com/settings/tokens/new ;
    - **Note** : `Administration Chambre 69` ;
    - **Expiration** : `No expiration` (ou 1 an, à renouveler) ;
-   - cochez la case **`public_repo`** ;
+   - cochez la case **`repo`** (la première de la liste : le dépôt est privé) ;
    - en bas, cliquez sur **Generate token** ;
    - **copiez la clé** (elle commence par `ghp_…`) et gardez-la dans un endroit sûr
      (par exemple dans les notes de votre téléphone). Elle ne sera plus affichée.
