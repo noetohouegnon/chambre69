@@ -21,10 +21,10 @@ export function GiftCardPage() {
       </PageHero>
       <Section>
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div className="relative aspect-[1.6] overflow-hidden rounded-3xl border border-gold/40 bg-[linear-gradient(135deg,#26221D,#0B0A09_60%)] p-8 shadow-2xl">
-            <img src="/brand/logo-wide.png" alt="" width={482} height={105} className="h-10 w-auto" />
-            <p className="absolute bottom-8 left-8 font-serif text-4xl text-ivory">{value ? `${fmt(value)} FCFA` : 'Montant libre'}</p>
-            <p className="absolute bottom-8 right-8 text-sm text-gold">Au-delà de la lingerie</p>
+          <div className="relative aspect-[1.6] overflow-hidden rounded-3xl border border-or/60 bg-bordeaux p-8 shadow-2xl">
+            <img src="/brand/logo-horizontal-creme.png" alt="" width={805} height={200} className="h-10 w-auto" />
+            <p className="absolute bottom-8 left-8 font-serif text-4xl text-creme">{value ? `${fmt(value)} FCFA` : 'Montant libre'}</p>
+            <p className="absolute bottom-8 right-8 text-sm text-or">Au-delà de la lingerie</p>
           </div>
           <div>
             <fieldset>
@@ -169,7 +169,7 @@ export function PressPage() {
       </PageHero>
       <Section>
         <div className="grid gap-6 sm:grid-cols-2">
-          <a href="/brand/logo-wide.png" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Logo Chambre 69</span><span className="text-sm text-mute">PNG, fond transparent — autres formats sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
+          <a href="/brand/logo-bordeaux.png" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Logo Chambre 69</span><span className="text-sm text-mute">PNG, fond transparent — autres formats sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
           <a href="/brand/boutique-facade-960.webp" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Vitrine de la boutique</span><span className="text-sm text-mute">WebP — visuels haute définition sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
         </div>
         <div className="mt-8 card p-6"><p className="text-ivory">Contact presse</p><p className="mt-2 text-ivory-2"><a href={`mailto:${BRAND.email}?subject=Presse`} className="text-gold hover:underline">{BRAND.email}</a> · {BRAND.whatsappDisplay}</p></div>

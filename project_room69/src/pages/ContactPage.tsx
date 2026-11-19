@@ -22,7 +22,7 @@ export function ContactPage() {
     await sendForm('contact', f, `Bonjour Chambre 69,\nSujet : ${f.sujet}\n\n${f.message}\n\n${f.prenom}${f.email ? ` · ${f.email}` : ''}${f.tel ? ` · ${f.dial} ${f.tel}` : ''}`);
     setDone(true);
   };
-  const err = (k: string) => errors[k] && <p id={`ct-${k}-e`} className="mt-1.5 text-sm text-[#F2A999]">{errors[k]}</p>;
+  const err = (k: string) => errors[k] && <p id={`ct-${k}-e`} className="mt-1.5 text-sm text-[#B3261E]">{errors[k]}</p>;
   return (
     <>
       <PageHero eyebrow="Contact" title="Nous contacter" crumbs={[{ label: 'Contact' }]}>

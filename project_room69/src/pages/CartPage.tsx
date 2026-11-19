@@ -112,7 +112,7 @@ export function CartPage() {
     storage.set('c69-commande', JSON.stringify({ ...f, gift: false, giftMessage: '', promo: '', note: '' }));
   };
 
-  const err = (k: string) => errors[k] && <p id={`e-${k}`} className="mt-1.5 text-sm text-[#F2A999]">{errors[k]}</p>;
+  const err = (k: string) => errors[k] && <p id={`e-${k}`} className="mt-1.5 text-sm text-[#B3261E]">{errors[k]}</p>;
   const input = (k: keyof Form, label: string, props: React.InputHTMLAttributes<HTMLInputElement> = {}) => (
     <div>
       <label htmlFor={`c-${k}`} className="label">{label}</label>
@@ -257,14 +257,14 @@ export function CartPage() {
                 </div>
                 {input('email', 'E-mail (facultatif)', { type: 'email', inputMode: 'email', autoComplete: 'email' })}
                 <label className="flex items-start gap-3 self-end text-sm text-ivory-2">
-                  <input type="checkbox" className="mt-1 h-5 w-5 accent-[#C9A96E]" checked={f.whatsappOnly} onChange={(e) => set('whatsappOnly', e.target.checked)} />
+                  <input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={f.whatsappOnly} onChange={(e) => set('whatsappOnly', e.target.checked)} />
                   Ne pas m’appeler : écrire sur WhatsApp uniquement
                 </label>
               </fieldset>
 
               <fieldset className="card p-5">
                 <label className="flex items-start gap-3">
-                  <input type="checkbox" className="mt-1 h-5 w-5 accent-[#C9A96E]" checked={f.gift} onChange={(e) => set('gift', e.target.checked)} />
+                  <input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={f.gift} onChange={(e) => set('gift', e.target.checked)} />
                   <span><span className="flex items-center gap-2 text-ivory"><Gift className="h-4 w-4 text-gold" />Commande à offrir</span><span className="text-sm text-mute">Vous payez d’où vous êtes, nous livrons chez elle. Idéal pour faire livrer une femme restée au pays.</span></span>
                 </label>
                 {f.gift && (
@@ -283,7 +283,7 @@ export function CartPage() {
                       <textarea id="c-giftMessage" className="field min-h-[96px]" maxLength={300} value={f.giftMessage} onChange={(e) => set('giftMessage', e.target.value)} />
                     </div>
                     <label className="flex items-start gap-3 text-sm text-ivory-2 sm:col-span-2">
-                      <input type="checkbox" className="mt-1 h-5 w-5 accent-[#C9A96E]" checked={f.hidePrice} onChange={(e) => set('hidePrice', e.target.checked)} />
+                      <input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={f.hidePrice} onChange={(e) => set('hidePrice', e.target.checked)} />
                       Masquer le prix sur le bon de livraison
                     </label>
                     <p className="text-sm text-mute sm:col-span-2">Nous vous prévenons par WhatsApp quand elle l’a reçu.</p>

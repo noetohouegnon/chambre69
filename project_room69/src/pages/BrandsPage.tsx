@@ -53,7 +53,7 @@ export function BrandsPage() {
         </ul>
       </Section>
 
-      <section id="krizalid" className="scroll-mt-32 border-y border-gold/20 bg-[linear-gradient(135deg,#1C1915,#0B0A09)] py-20">
+      <section id="krizalid" className="scroll-mt-32 border-y border-gold/20 bg-[linear-gradient(135deg,#E5DED6,#F4F2EE)] py-20">
         <div className="container-x grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:items-center">
           <p className="font-serif text-5xl tracking-[0.12em] text-gold sm:text-7xl sm:tracking-[0.2em]">KRIZALID</p>
           <div>

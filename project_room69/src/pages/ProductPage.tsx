@@ -188,7 +188,7 @@ export function ProductPage() {
                 )}
                 {notify && <p className="mt-2 text-sm text-gold" role="status">Demande d’alerte préparée sur WhatsApp pour la taille {notify}.</p>}
                 {p.sizesProvisional && <p className="mt-3 text-xs text-mute">Tailles habituelles de la maison {p.brand}. La disponibilité exacte est confirmée par votre conseillère avant l’expédition.</p>}
-                {error && <p role="alert" className="mt-3 text-sm text-[#F2A999]">{error}</p>}
+                {error && <p role="alert" className="mt-3 text-sm text-[#B3261E]">{error}</p>}
               </fieldset>
             ) : null}
 

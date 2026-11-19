@@ -5,8 +5,8 @@
   "lang": "fr",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0B0A09",
-  "theme_color": "#0B0A09",
+  "background_color": "#F4F2EE",
+  "theme_color": "#5A1725",
   "icons": [
     {
       "src": "/icons/icon-192.png",

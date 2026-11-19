@@ -11,10 +11,10 @@ function Diagram({ level }: { level: 'under' | 'bust' }) {
   const y = level === 'under' ? 118 : 92;
   return (
     <svg viewBox="0 0 200 180" className="mx-auto h-40 w-auto" role="img" aria-label={level === 'under' ? 'Schéma : mètre ruban sous la poitrine' : 'Schéma : mètre ruban au niveau le plus fort de la poitrine'}>
-      <path d="M60 20 C60 50 40 60 42 100 C44 140 56 160 60 175 M140 20 C140 50 160 60 158 100 C156 140 144 160 140 175" fill="none" stroke="#ADA496" strokeWidth="2" />
-      <path d="M66 82 C70 112 96 116 100 100 C104 116 130 112 134 82" fill="none" stroke="#ADA496" strokeWidth="1.5" opacity="0.7" />
-      <ellipse cx="100" cy={y} rx="62" ry="9" fill="none" stroke="#C9A96E" strokeWidth="3" strokeDasharray="5 4" />
-      <text x="100" y={y - 16} textAnchor="middle" fill="#C9A96E" fontSize="11" fontFamily="Jost, sans-serif">{level === 'under' ? 'tour de dos' : 'tour de poitrine'}</text>
+      <path d="M60 20 C60 50 40 60 42 100 C44 140 56 160 60 175 M140 20 C140 50 160 60 158 100 C156 140 144 160 140 175" fill="none" stroke="#75595E" strokeWidth="2" />
+      <path d="M66 82 C70 112 96 116 100 100 C104 116 130 112 134 82" fill="none" stroke="#75595E" strokeWidth="1.5" opacity="0.7" />
+      <ellipse cx="100" cy={y} rx="62" ry="9" fill="none" stroke="#5A1725" strokeWidth="3" strokeDasharray="5 4" />
+      <text x="100" y={y - 16} textAnchor="middle" fill="#5A1725" fontSize="11" fontFamily="Jost, sans-serif">{level === 'under' ? 'tour de dos' : 'tour de poitrine'}</text>
     </svg>
   );
 }
@@ -75,7 +75,7 @@ export function SizeGuideTool({ onNavigate, compact }: { onNavigate?: () => void
           <p className="body-copy">Passez le mètre juste sous la poitrine, bien à l’horizontale, contre la peau. Serrez fermement sans comprimer. Expirez normalement, puis lisez le chiffre.</p>
           <label htmlFor="sg-under" className="label mt-6">Tour de dos, en centimètres</label>
           <input id="sg-under" className="field max-w-[12rem]" inputMode="decimal" autoComplete="off" value={under} onChange={(e) => setUnder(e.target.value)} aria-invalid={!!error} aria-describedby={error ? 'sg-err' : undefined} autoFocus />
-          {error && <p id="sg-err" role="alert" className="mt-2 text-sm text-[#F2A999]">{error}</p>}
+          {error && <p id="sg-err" role="alert" className="mt-2 text-sm text-[#B3261E]">{error}</p>}
           <div className="mt-8 flex flex-wrap gap-3">
             <button type="button" className="btn-line" onClick={() => { setError(''); setStep(0); }}><ArrowLeft className="h-4 w-4" />Retour</button>
             <button type="submit" className="btn-gold">Continuer</button>
@@ -90,7 +90,7 @@ export function SizeGuideTool({ onNavigate, compact }: { onNavigate?: () => void
           <p className="body-copy">Passez le mètre au niveau le plus fort de la poitrine, sans serrer, en gardant le dos droit et les bras le long du corps.</p>
           <label htmlFor="sg-bust" className="label mt-6">Tour de poitrine, en centimètres</label>
           <input id="sg-bust" className="field max-w-[12rem]" inputMode="decimal" autoComplete="off" value={bust} onChange={(e) => setBust(e.target.value)} aria-invalid={!!error} aria-describedby={error ? 'sg-err2' : undefined} autoFocus />
-          {error && <p id="sg-err2" role="alert" className="mt-2 text-sm text-[#F2A999]">{error}</p>}
+          {error && <p id="sg-err2" role="alert" className="mt-2 text-sm text-[#B3261E]">{error}</p>}
           <div className="mt-8 flex flex-wrap gap-3">
             <button type="button" className="btn-line" onClick={() => { setError(''); setStep(1); }}><ArrowLeft className="h-4 w-4" />Retour</button>
             <button type="submit" className="btn-gold">Voir ma taille</button>

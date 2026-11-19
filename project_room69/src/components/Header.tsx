@@ -97,7 +97,7 @@ export function Header() {
           <Menu className="h-6 w-6" />
         </button>
         <Link to="/" className="mr-auto flex shrink-0 items-center lg:mr-0" aria-label="Chambre 69, retour à l’accueil">
-          <img src="/brand/logo-wide.png" alt="Chambre 69" width={482} height={105} className="h-9 w-auto sm:h-10 lg:h-11" />
+          <img src="/brand/logo-horizontal-bordeaux.png" alt="Chambre 69" width={805} height={200} className="h-9 w-auto sm:h-10 lg:h-11" />
         </Link>
 
         <div className="ml-auto hidden max-w-xs flex-1 lg:block xl:max-w-sm"><SearchBox /></div>
@@ -138,7 +138,7 @@ export function Header() {
           <div className="absolute inset-0 bg-black/70" onClick={() => setMenu(false)} />
           <div className="absolute inset-y-0 left-0 flex w-[86%] max-w-sm flex-col overflow-y-auto bg-ink-2 shadow-2xl">
             <div className="flex h-16 items-center justify-between border-b border-gold/10 px-4">
-              <img src="/brand/logo-wide.png" alt="Chambre 69" width={482} height={105} className="h-8 w-auto" />
+              <img src="/brand/logo-horizontal-bordeaux.png" alt="Chambre 69" width={805} height={200} className="h-8 w-auto" />
               <button className="inline-flex h-11 w-11 items-center justify-center" onClick={() => setMenu(false)} aria-label="Fermer le menu"><X className="h-6 w-6" /></button>
             </div>
             <ul className="px-2 py-3">

@@ -136,7 +136,7 @@ export function TrousseauListPage() {
               <input id="l-date" type="date" className="field" value={list.date} onChange={(e) => update({ date: e.target.value })} />
             </div>
             <label className="flex items-start gap-3 text-sm text-ivory-2 sm:col-span-2">
-              <input type="checkbox" className="mt-1 h-5 w-5 accent-[#C9A96E]" checked={list.hideGivers} onChange={(e) => update({ hideGivers: e.target.checked })} />
+              <input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={list.hideGivers} onChange={(e) => update({ hideGivers: e.target.checked })} />
               Ne pas voir qui a offert quoi avant le jour venu
             </label>
           </div>

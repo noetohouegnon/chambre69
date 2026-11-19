@@ -1,18 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-// Palette resserrée (3.1) : une dominante sombre, une couleur d'accent, deux neutres.
+// Charte graphique Chambre 69 (oct. 2026) : base crème, bordeaux porteur, noir et or en accents.
+// Les noms de jetons sont historiques : ink = fonds (crème), ivory = textes (bordeaux), gold = accent principal (bordeaux), or = or de la charte.
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
-        ink: { DEFAULT: '#0B0A09', 2: '#13110F', 3: '#1C1915', 4: '#26221D' },
-        gold: { DEFAULT: '#C9A96E', soft: '#E3D2AE', deep: '#9C7F4B' },
-        ivory: { DEFAULT: '#F4EEE4', 2: '#D9D1C4' },
-        mute: { DEFAULT: '#ADA496' },
+        ink: { DEFAULT: '#F4F2EE', 2: '#EDE8E2', 3: '#E5DED6', 4: '#D8CEC4' },
+        gold: { DEFAULT: '#5A1725', soft: '#74283A', deep: '#3E0E18' },
+        or: { DEFAULT: '#E49D27', text: '#9A600D' },
+        bordeaux: '#5A1725',
+        creme: '#F4F2EE',
+        ivory: { DEFAULT: '#4A1220', 2: '#4B3438' },
+        mute: { DEFAULT: '#75595E' },
         wa: '#25D366',
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['Italiana', '"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['Jost', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
       },
       maxWidth: { prose: '68ch' },

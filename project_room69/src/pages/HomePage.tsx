@@ -34,7 +34,7 @@ export function HomePage() {
     <>
       {/* 2.1 — Bloc 1 : premier écran */}
       <section className="relative overflow-hidden border-b border-gold/10">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(201,169,110,0.16),transparent_55%)]" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(228,157,39,0.14),transparent_55%)]" />
         <div className="container-x relative grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-20">
           <div>
             <p className="eyebrow mb-5">Chambre 69 — Au-delà de la lingerie</p>

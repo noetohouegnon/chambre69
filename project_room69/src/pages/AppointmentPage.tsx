@@ -53,7 +53,7 @@ export function AppointmentPage() {
     setDone(true);
   };
 
-  const err = (k: string) => errors[k] && <p id={`a-${k}-e`} className="mt-1.5 text-sm text-[#F2A999]">{errors[k]}</p>;
+  const err = (k: string) => errors[k] && <p id={`a-${k}-e`} className="mt-1.5 text-sm text-[#B3261E]">{errors[k]}</p>;
 
   return (
     <>
@@ -115,8 +115,8 @@ export function AppointmentPage() {
                 </div>
                 {err('tel')}
               </div>
-              <label className="flex items-start gap-3 text-sm text-ivory-2"><input type="checkbox" className="mt-1 h-5 w-5 accent-[#C9A96E]" checked={f.accompagnee} onChange={(e) => setF({ ...f, accompagnee: e.target.checked })} />Je viendrai accompagnée</label>
-              <label className="flex items-start gap-3 text-sm text-ivory-2"><input type="checkbox" className="mt-1 h-5 w-5 accent-[#C9A96E]" checked={f.whatsappOnly} onChange={(e) => setF({ ...f, whatsappOnly: e.target.checked })} />Me répondre sur WhatsApp plutôt que par appel</label>
+              <label className="flex items-start gap-3 text-sm text-ivory-2"><input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={f.accompagnee} onChange={(e) => setF({ ...f, accompagnee: e.target.checked })} />Je viendrai accompagnée</label>
+              <label className="flex items-start gap-3 text-sm text-ivory-2"><input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={f.whatsappOnly} onChange={(e) => setF({ ...f, whatsappOnly: e.target.checked })} />Me répondre sur WhatsApp plutôt que par appel</label>
               <div className="sm:col-span-2">
                 <label htmlFor="a-note" className="label">Une précision (facultatif)</label>
                 <textarea id="a-note" className="field min-h-[90px]" value={f.note} onChange={(e) => setF({ ...f, note: e.target.value })} />

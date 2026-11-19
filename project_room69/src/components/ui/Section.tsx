@@ -24,7 +24,7 @@ export function SectionHead({ eyebrow, title, children, center, as: As = 'h2' }:
 export function PageHero({ eyebrow, title, children, crumbs }: { eyebrow?: string; title: ReactNode; children?: ReactNode; crumbs?: { label: string; to?: string }[] }) {
   return (
     <div className="relative overflow-hidden border-b border-gold/10 bg-ink pb-12 pt-8 sm:pb-16 sm:pt-12">
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,169,110,0.14),transparent_60%)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(228,157,39,0.12),transparent_60%)]" />
       <div className="container-x relative">
         {crumbs && <Breadcrumbs items={crumbs} />}
         {eyebrow && <p className="eyebrow mb-4 mt-6">{eyebrow}</p>}

@@ -32,7 +32,7 @@ export function Newsletter({ id = 'nl' }: { id?: string }) {
     );
   }
 
-  const err = (k: string) => errors[k] && <p id={`${id}-${k}-e`} className="mt-1.5 text-sm text-[#F2A999]">{errors[k]}</p>;
+  const err = (k: string) => errors[k] && <p id={`${id}-${k}-e`} className="mt-1.5 text-sm text-[#B3261E]">{errors[k]}</p>;
   return (
     <form onSubmit={submit} noValidate className="grid gap-3 sm:grid-cols-2">
       <div>
@@ -60,7 +60,7 @@ export function Newsletter({ id = 'nl' }: { id?: string }) {
       </div>
       <div className="sm:col-span-2">
         <label className="flex items-start gap-3 text-sm text-ivory-2">
-          <input type="checkbox" className="mt-1 h-5 w-5 accent-[#C9A96E]" checked={f.ok} onChange={(e) => setF({ ...f, ok: e.target.checked })} aria-invalid={!!errors.ok} />
+          <input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={f.ok} onChange={(e) => setF({ ...f, ok: e.target.checked })} aria-invalid={!!errors.ok} />
           <span>J’accepte de recevoir les actualités de Chambre 69. <Link to="/confidentialite" className="text-gold underline-offset-2 hover:underline">Confidentialité</Link></span>
         </label>
         {err('ok')}
