@@ -27,7 +27,7 @@ export const BRAND = {
   whatsappDisplay: REG.contact?.whatsapp || '+221 78 704 05 05',
   phoneHref: `tel:+${waDigits}`,
   email: REG.contact?.email || 'contact@chambre69.sn',
-  firstPrice: 33000,
+  firstPrice: 10000,
   cups: 'ABCDEFGHIJKLMNO'.split(''),
 };
 
@@ -113,7 +113,7 @@ export const COUNTRY_OPTIONS = ZONES.flatMap((z) => z.countries.map((c) => ({ zo
 
 /** Tranches de budget proposées à la fin du guide des tailles (tranches indiquées par Madame, novembre 2026). */
 export const BUDGETS = [
-  '8 000 à 13 000 FCFA',
+  'Moins de 15 000 FCFA',
   '15 000 à 35 000 FCFA',
   'Plus de 35 000 FCFA',
 ];

@@ -69,7 +69,7 @@ export function StorePage() {
   const s = STORES.find((x) => x.id === id);
   if (!s) return <NotFoundPage />;
   const ld = {
-    '@context': 'https://schema.org', '@type': 'ClothingStore', name: s.name, url: `${SITE_URL}/nos-boutiques/${s.id}`, telephone: `+${BRAND.whatsappNumber}`, priceRange: 'À partir de 33 000 FCFA',
+    '@context': 'https://schema.org', '@type': 'ClothingStore', name: s.name, url: `${SITE_URL}/nos-boutiques/${s.id}`, telephone: `+${BRAND.whatsappNumber}`, priceRange: 'À partir de 10 000 FCFA',
     address: { '@type': 'PostalAddress', streetAddress: s.address || undefined, addressLocality: 'Dakar', addressRegion: s.district, addressCountry: 'SN' },
     image: `${SITE_URL}/brand/boutique-facade-960.webp`,
   };

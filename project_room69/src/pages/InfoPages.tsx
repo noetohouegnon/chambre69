@@ -30,7 +30,7 @@ export function GiftCardPage() {
             <fieldset>
               <legend className="mb-3 text-[15px] font-medium">Montant</legend>
               <div className="flex flex-wrap gap-2">
-                {['33000', '50000', '100000', '150000', 'libre'].map((a) => (
+                {['10000', '25000', '50000', '100000', 'libre'].map((a) => (
                   <button key={a} type="button" aria-pressed={amount === a} onClick={() => setAmount(a)} className={`chip ${amount === a ? 'border-gold bg-gold text-ink' : 'border-ivory/20 text-ivory-2 hover:border-gold'}`}>{a === 'libre' ? 'Montant libre' : `${fmt(a)} FCFA`}</button>
                 ))}
               </div>

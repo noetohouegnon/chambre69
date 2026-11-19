@@ -119,7 +119,7 @@ export function HomePage() {
       <Section tone="ink2">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHead title="Nos pièces">
-            Soutiens-gorge, ensembles, nuisettes, culottes, bétio (pagne intime traditionnel), linge de maison. Chaque pièce est disponible dans une amplitude réelle de tailles, pas seulement sur le papier. À partir de 33&nbsp;000&nbsp;FCFA.
+            Soutiens-gorge, ensembles, nuisettes, culottes, bétio (pagne intime traditionnel), linge de maison. Chaque pièce est disponible dans une amplitude réelle de tailles, pas seulement sur le papier. À partir de 10&nbsp;000&nbsp;FCFA.
           </SectionHead>
         </div>
         <ul className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
