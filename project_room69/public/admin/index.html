@@ -10,12 +10,6 @@
   </head>
   <body>
     <!-- Sveltia CMS : interface d'administration, configurée par admin/config.yml -->
-    <script>window.CMS_MANUAL_INIT = true;</script>
     <script src="https://unpkg.com/@sveltia/cms@0.256.1/dist/sveltia-cms.js"></script>
-    <script>
-      // « Se connecter avec GitHub » passe par le service de connexion du site lui-même (dossier api/),
-      // quelle que soit l'adresse (….vercel.app aujourd'hui, nom de domaine demain).
-      CMS.init({ config: { backend: { base_url: window.location.origin, auth_endpoint: 'api/auth' } } });
-    </script>
   </body>
 </html>

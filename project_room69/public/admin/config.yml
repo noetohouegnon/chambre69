@@ -6,6 +6,8 @@ backend:
   name: github
   repo: noetohouegnon/chambre69
   branch: main
+  # Connexion uniquement par jeton d'accès personnel GitHub (pas de bouton « Se connecter avec GitHub »).
+  auth_methods: [token]
   commit_messages:
     create: "Ajout depuis l’administration : {{slug}}"
     update: "Modification depuis l’administration : {{slug}}"

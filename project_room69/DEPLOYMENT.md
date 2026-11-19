@@ -53,8 +53,6 @@ Dépôt → **Settings** → **Secrets and variables** → **Actions** :
   | `OVH_HOST` | le serveur FTP (ex. `ftp.cluster0XX.hosting.ovh.net`) |
   | `OVH_USER` | l'identifiant FTP |
   | `OVH_PASSWORD` | le mot de passe FTP |
-  | `GITHUB_OAUTH_ID` | *(facultatif)* Client ID de l'OAuth App, pour le bouton « Se connecter avec GitHub » |
-  | `GITHUB_OAUTH_SECRET` | *(facultatif)* son secret |
 - onglet **Variables** → **New repository variable** *(facultatif)* :
   | Nom | Valeur |
   |---|---|
@@ -84,15 +82,7 @@ Chez le registraire du domaine (zone DNS) :
 - **ne touchez pas** aux enregistrements **MX** (e-mails).
 La propagation prend de quelques minutes à quelques heures. Ensuite, retournez à l'étape a.3 pour le SSL.
 
-### d) Le bouton « Se connecter avec GitHub » de l'administration
-Dans l'OAuth App GitHub (voir `ADMINISTRATION.md`), mettez :
-- **Homepage URL** : `https://chambre69.sn`
-- **Authorization callback URL** : `https://chambre69.sn/api/callback`
-et renseignez les secrets `GITHUB_OAUTH_ID` / `GITHUB_OAUTH_SECRET` (étape b). Sur OVH, la connexion passe par
-`api/auth.php` et `api/callback.php` ; les identifiants sont écrits par le robot dans un fichier protégé,
-jamais dans le dépôt. La connexion par **jeton d'accès** fonctionne dans tous les cas.
-
-### e) Vérifications après la première mise en ligne
+### d) Vérifications après la première mise en ligne
 `https://chambre69.sn` (accueil), une fiche produit, `/mariee`, le panier jusqu'au message WhatsApp,
 `/admin` (écran de connexion), `/sitemap.xml`, et une adresse inexistante (page « Cette page n'existe pas »).
 

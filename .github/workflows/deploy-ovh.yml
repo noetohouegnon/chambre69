@@ -5,7 +5,6 @@
 #   OVH_HOST         ex. ftp.cluster0XX.hosting.ovh.net
 #   OVH_USER         identifiant FTP
 #   OVH_PASSWORD     mot de passe FTP
-#   GITHUB_OAUTH_ID / GITHUB_OAUTH_SECRET   (facultatif : bouton « Se connecter avec GitHub »)
 # Variables facultatives (onglet « Variables ») :
 #   SITE_URL         ex. https://chambre69.sn   (sinon https://chambre69.sn)
 #   OVH_PROTOCOL     auto (par défaut : essaie FTPS, puis SFTP, puis FTP), ou ftps / sftp / ftp
@@ -47,10 +46,8 @@ jobs:
           VITE_SITE_URL: ${{ vars.SITE_URL || 'https://chambre69.sn' }}
         run: npm run build
 
-      - name: Réglages OVH (.htaccess et connexion GitHub)
+      - name: Réglages OVH (.htaccess)
         env:
-          OAUTH_ID: ${{ secrets.GITHUB_OAUTH_ID }}
-          OAUTH_SECRET: ${{ secrets.GITHUB_OAUTH_SECRET }}
           FORCE_HTTPS: ${{ vars.OVH_FORCE_HTTPS || 'true' }}
           SITE_URL: ${{ vars.SITE_URL || 'https://chambre69.sn' }}
         run: |
@@ -76,22 +73,33 @@ jobs:
               printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
               echo "Site de test : non indexable." ;;
           esac
-          mkdir -p dist/api
-          cp ovh/api/*.php dist/api/
-          if [ -n "$OAUTH_ID" ] && [ -n "$OAUTH_SECRET" ]; then
-            php -r 'echo "<?php return " . var_export(["client_id" => getenv("OAUTH_ID"), "client_secret" => getenv("OAUTH_SECRET")], true) . ";\n";' > dist/api/oauth-config.php
-            echo "Connexion GitHub configurée."
-          else
-            echo "Secrets GITHUB_OAUTH_ID / GITHUB_OAUTH_SECRET absents : connexion par jeton uniquement."
+          # Tant que le certificat HTTPS n'est pas prêt : pas de redirection forcée vers https
+          # (sinon le site de test affiche une erreur).
+          if [ "$FORCE_HTTPS" = "false" ]; then
+            python3 - <<'PY'
+          import re
+          p = 'dist/.htaccess'
+          s = open(p).read()
+          s = re.sub(r"  # 1\. Toujours en HTTPS.*?\n\n", "", s, flags=re.S)
+          s = s.replace("; upgrade-insecure-requests", "")
+          s = re.sub(r'  Header always set Strict-Transport-Security[^\n]*\n', "", s)
+          open(p, 'w').write(s)
+          PY
+            echo "HTTPS forcé désactivé (test en http)."
           fi
+          # Site de test (adresse en « test. » ou adresse technique OVH) : invisible pour Google.
+          case "$SITE_URL" in
+            *//test.*|*hosting.ovh.net*)
+              sed -i 's|<IfModule mod_headers.c>|<IfModule mod_headers.c>\n  Header always set X-Robots-Tag "noindex, nofollow"|' dist/.htaccess
+              printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+              echo "Site de test : non indexable." ;;
+          esac
 
       - name: Site prêt à envoyer (à télécharger depuis l'onglet Actions)
         uses: actions/upload-artifact@v4
         with:
           name: site-chambre69-ovh
-          path: |
-            project_room69/dist/
-            !project_room69/dist/api/oauth-config.php
+          path: project_room69/dist/
           include-hidden-files: true
           retention-days: 30
 

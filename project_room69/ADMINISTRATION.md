@@ -37,9 +37,6 @@ La connexion à l'administration se fait avec une **clé d'accès personnelle** 
 > Seules les personnes invitées sur le dépôt peuvent enregistrer des modifications.
 > Quand la clé expire, l'administration redemande une connexion : refaites les étapes 3 à 5.
 
-*Facultatif, pour un développeur :* le bouton « Se connecter avec GitHub » (sans clé) existe aussi, via une
-OAuth App GitHub. Voir `api/` (Vercel) et `ovh/api/` (OVH), variables `GITHUB_OAUTH_ID` et `GITHUB_OAUTH_SECRET`.
-
 ---
 
 ## 2. Au quotidien
@@ -96,6 +93,4 @@ et le regroupement par maison.
 - Fiches produits : `content/produits/*.json` (une par pièce) ; réglages : `content/reglages.json`.
 - `scripts/prepare-content.mjs` (lancé par `npm run dev` et `npm run build`) génère
   `src/data/catalog.json` et les tailles 480/960 px des photos ajoutées (`public/media/generated/`).
-- Interface : Sveltia CMS (`public/admin/`). Le bouton « Se connecter avec GitHub » passe par deux fonctions
-  Vercel du projet (`api/auth.js`, `api/callback.js`, variables `GITHUB_OAUTH_ID` / `GITHUB_OAUTH_SECRET`) ;
-  `public/admin/index.html` pointe l'administration vers l'adresse du site elle-même.
+- Interface : Sveltia CMS (`public/admin/`), connexion **uniquement par jeton d'accès GitHub** (`auth_methods: [token]` dans `public/admin/config.yml`).

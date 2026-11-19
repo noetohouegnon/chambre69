@@ -14,12 +14,11 @@ commande finalisée sur WhatsApp, espace d'administration sans serveur.
 ```
 content/produits/*.json   fiches produits (une par pièce)   ← modifiées depuis /admin
 content/reglages.json     boutiques, contact, témoignages   ← modifiés depuis /admin
-public/admin/             interface d'administration (Sveltia CMS, connexion par jeton GitHub)
+public/admin/             interface d'administration (Sveltia CMS, connexion par jeton GitHub uniquement)
 public/media/             photos (WebP 480/960 px ; ajouts /admin convertis au build)
 scripts/prepare-content.mjs  content/ → src/data/catalog.json (généré, non versionné)
 scripts/prerender.mjs     pré-rendu HTML de toutes les pages + sitemap + robots
-ovh/                      réglages Apache (.htaccess) et connexion GitHub en PHP pour OVH
-api/                      la même connexion GitHub, version Vercel (si hébergé sur Vercel)
+ovh/                      réglages Apache (.htaccess) pour l'hébergement OVH
 ../.github/workflows/deploy-ovh.yml   robot : build + envoi SFTP sur OVH à chaque modification de main
 src/                      application React (pages, composants, données fixes)
 ```
