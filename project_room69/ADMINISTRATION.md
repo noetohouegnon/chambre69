@@ -19,22 +19,34 @@ Adresse : **https://VOTRE-SITE/admin** (par exemple `https://chambre69.sn/admin`
 1. Sur https://github.com/noetohouegnon/chambre69 → **Settings** → **Collaborators** → **Add people**.
 2. Saisissez le nom d'utilisateur GitHub ou l'e-mail de la gérante, puis **Add**.
 
-### b) Pour la gérante
+### b) Pour Noé : activer le bouton « Se connecter avec GitHub » (une seule fois, 5 minutes)
+1. Sur GitHub : photo de profil → **Settings** → **Developer settings** (tout en bas à gauche)
+   → **OAuth Apps** → **New OAuth App** :
+   - **Application name** : `Chambre 69 — Administration`
+   - **Homepage URL** : `https://chambre69-sknk.vercel.app`
+   - **Authorization callback URL** : `https://chambre69-sknk.vercel.app/api/callback`
+   - **Register application**.
+2. Sur la page qui s'ouvre : copiez le **Client ID**, puis **Generate a new client secret** et copiez le secret
+   (il ne sera plus affiché).
+3. Sur Vercel : projet → **Settings** → **Environment Variables**, ajoutez :
+   - `GITHUB_OAUTH_ID` = le Client ID
+   - `GITHUB_OAUTH_SECRET` = le secret
+   puis **Deployments** → **⋯** du dernier déploiement → **Redeploy**.
+4. **Le jour où le nom de domaine change** (ex. `chambre69.sn`) : dans l'OAuth App, remplacez les deux adresses
+   par `https://chambre69.sn` et `https://chambre69.sn/api/callback`.
+
+> Seules les personnes que vous avez invitées sur le dépôt peuvent enregistrer des modifications :
+> GitHub refuse l'écriture à toute autre personne, même si elle se connecte.
+
+### c) Pour la gérante
 1. Créez un compte gratuit sur https://github.com (si ce n'est pas déjà fait).
 2. Acceptez l'invitation reçue par e-mail (bouton **Accept invitation**).
-3. Créez votre « clé d'accès » :
-   - allez sur https://github.com/settings/tokens/new ;
-   - **Note** : `Administration Chambre 69` ;
-   - **Expiration** : `No expiration` (ou 1 an, à renouveler) ;
-   - cochez la case **`repo`** (la première de la liste : le dépôt est privé) ;
-   - en bas, cliquez sur **Generate token** ;
-   - **copiez la clé** (elle commence par `ghp_…`) et gardez-la dans un endroit sûr
-     (par exemple dans les notes de votre téléphone). Elle ne sera plus affichée.
-4. Ouvrez **https://VOTRE-SITE/admin**, cliquez sur **« Se connecter avec un jeton d'accès »**,
-   collez la clé, validez. L'ordinateur ou le téléphone s'en souvient ensuite.
+3. Ouvrez **https://VOTRE-SITE/admin** → **« Se connecter avec GitHub »** → **Authorize**.
+   L'ordinateur ou le téléphone s'en souvient ensuite.
 
-> Cette clé donne le droit de modifier le site : ne la partagez pas. En cas de perte,
-> supprimez-la sur https://github.com/settings/tokens et créez-en une nouvelle.
+*Solution de secours, sans le bouton GitHub* : créez une clé sur https://github.com/settings/tokens/new
+(cochez **`repo`**, expiration au choix, **Generate token**, copiez la clé `ghp_…`), puis sur `/admin`
+choisissez **« Se connecter avec un jeton d'accès »** et collez-la. Ne la partagez pas.
 
 ---
 
@@ -92,6 +104,6 @@ et le regroupement par maison.
 - Fiches produits : `content/produits/*.json` (une par pièce) ; réglages : `content/reglages.json`.
 - `scripts/prepare-content.mjs` (lancé par `npm run dev` et `npm run build`) génère
   `src/data/catalog.json` et les tailles 480/960 px des photos ajoutées (`public/media/generated/`).
-- Interface : Sveltia CMS (`public/admin/`), connexion par jeton GitHub. Pour un bouton
-  « Se connecter avec GitHub » sans jeton, déployer le petit service gratuit
-  https://github.com/sveltia/sveltia-cms-auth (Cloudflare Workers) et renseigner `backend.base_url`.
+- Interface : Sveltia CMS (`public/admin/`). Le bouton « Se connecter avec GitHub » passe par deux fonctions
+  Vercel du projet (`api/auth.js`, `api/callback.js`, variables `GITHUB_OAUTH_ID` / `GITHUB_OAUTH_SECRET`) ;
+  `public/admin/index.html` pointe l'administration vers l'adresse du site elle-même.
