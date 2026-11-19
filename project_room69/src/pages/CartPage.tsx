@@ -10,7 +10,7 @@ import { WhatsAppIcon } from '../components/ui/icons';
 import { waLink, MESSAGES } from '../lib/whatsapp';
 import { storage } from '../lib/storage';
 import { track } from '../lib/analytics';
-import { isEmail, isPhone } from '../lib/forms';
+import { isEmail, isPhone, fullPhone } from '../lib/forms';
 
 type Form = {
   mode: 'livraison' | 'retrait';
@@ -74,7 +74,7 @@ export function CartPage() {
   const validate2 = () => {
     const e: Record<string, string> = {};
     if (!f.prenom.trim()) e.prenom = 'Indiquez votre prénom.';
-    if (!isPhone(f.tel)) e.tel = 'Indiquez un numéro de téléphone valide, sans l’indicatif.';
+    if (!isPhone(f.tel)) e.tel = 'Indiquez un numéro de téléphone valide (au moins 7 chiffres).';
     if (f.email && !isEmail(f.email)) e.email = 'Cette adresse e-mail ne semble pas valide.';
     if (f.mode === 'livraison') {
       if (!f.quartier.trim()) e.quartier = 'Indiquez le quartier.';
@@ -96,7 +96,7 @@ export function CartPage() {
         ? `Retrait en boutique : ${STORES.find((s) => s.id === f.store)?.district}, passage prévu le ${f.visitDate}`
         : `Adresse : ${f.quartier}${f.repere ? `, repère : ${f.repere}` : ''}, ${f.ville}, ${country}`,
       `Nom : ${f.prenom} ${f.nom}`.trim(),
-      `Téléphone : ${f.dial} ${f.tel}`,
+      `Téléphone : ${fullPhone(f.dial, f.tel)}`,
       f.email ? `E-mail : ${f.email}` : null,
       f.whatsappOnly ? 'Merci de ne pas m’appeler : écrivez-moi sur WhatsApp uniquement.' : null,
       f.gift ? `Commande à offrir${f.recipient ? ` à ${f.recipient}` : ''}${f.recipientTel ? ` (tél. ${f.recipientDial} ${f.recipientTel})` : ''}. ${f.hidePrice ? 'Prix masqué sur le bon de livraison.' : ''}${f.giftMessage ? ` Message à joindre : « ${f.giftMessage} »` : ''}` : null,
@@ -203,7 +203,7 @@ export function CartPage() {
               </details>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <button className="btn-gold px-8" onClick={() => { if (!country) { setErrors({ pays: 'Choisissez votre pays de livraison pour continuer.' }); return; } setErrors({}); track('begin_checkout', { country }); setStep(1); }}>Continuer</button>
+                <button className="btn-gold px-8" onClick={() => { if (!country) { setErrors({ pays: 'Choisissez votre pays de livraison pour continuer.' }); return; } setErrors({}); if (!f.ville && zone?.id === 'dakar') set('ville', 'Dakar'); track('begin_checkout', { country }); setStep(1); }}>Continuer</button>
                 <Link to="/boutique" className="btn-line">Continuer mes achats</Link>
               </div>
               <div className="mt-6"><WaButton message={MESSAGES.general} source="panier" variant="ghost">Une question avant de commander ? Parler à une conseillère</WaButton></div>
@@ -308,7 +308,7 @@ export function CartPage() {
               <h2 className="font-serif text-3xl">Vérifiez avant d’envoyer</h2>
               <dl className="mt-6 space-y-3 text-[15px]">
                 <div><dt className="text-mute">Réception</dt><dd>{f.mode === 'retrait' ? `Retrait à la boutique ${STORES.find((s) => s.id === f.store)?.district}, le ${f.visitDate}` : `${f.quartier}${f.repere ? ` (${f.repere})` : ''}, ${f.ville}, ${country}`}</dd></div>
-                <div><dt className="text-mute">Contact</dt><dd>{f.prenom} {f.nom} · {f.dial} {f.tel}{f.email ? ` · ${f.email}` : ''}{f.whatsappOnly ? ' · WhatsApp uniquement' : ''}</dd></div>
+                <div><dt className="text-mute">Contact</dt><dd>{f.prenom} {f.nom} · {fullPhone(f.dial, f.tel)}{f.email ? ` · ${f.email}` : ''}{f.whatsappOnly ? ' · WhatsApp uniquement' : ''}</dd></div>
                 {f.gift && <div><dt className="text-mute">Commande à offrir</dt><dd>{f.recipient || 'Destinataire'}{f.hidePrice ? ' · prix masqué' : ''}{f.giftMessage ? ` · « ${f.giftMessage} »` : ''}</dd></div>}
               </dl>
               <div className="mt-8 rounded-2xl border border-gold/25 bg-gold/[0.05] p-5 text-[15px] leading-relaxed text-ivory-2">

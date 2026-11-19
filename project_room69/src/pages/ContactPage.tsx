@@ -5,7 +5,7 @@ import { PageHero, Section } from '../components/ui/Section';
 import { WaButton } from '../components/ui/WaButton';
 import { BRAND, DIAL_CODES } from '../data/site';
 import { MESSAGES } from '../lib/whatsapp';
-import { isEmail, isPhone, sendForm } from '../lib/forms';
+import { isEmail, isPhone, sendForm, fullPhone } from '../lib/forms';
 
 export function ContactPage() {
   const [f, setF] = useState({ prenom: '', email: '', dial: '+221', tel: '', sujet: 'Une question sur une taille', message: '' });
@@ -19,7 +19,7 @@ export function ContactPage() {
     if (f.message.trim().length < 5) er.message = 'Écrivez votre message.';
     setErrors(er);
     if (Object.keys(er).length) return;
-    await sendForm('contact', f, `Bonjour Chambre 69,\nSujet : ${f.sujet}\n\n${f.message}\n\n${f.prenom}${f.email ? ` · ${f.email}` : ''}${f.tel ? ` · ${f.dial} ${f.tel}` : ''}`);
+    await sendForm('contact', f, `Bonjour Chambre 69,\nSujet : ${f.sujet}\n\n${f.message}\n\n${f.prenom}${f.email ? ` · ${f.email}` : ''}${f.tel ? ` · ${fullPhone(f.dial, f.tel)}` : ''}`);
     setDone(true);
   };
   const err = (k: string) => errors[k] && <p id={`ct-${k}-e`} className="mt-1.5 text-sm text-[#B3261E]">{errors[k]}</p>;

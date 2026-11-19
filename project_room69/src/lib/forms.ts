@@ -21,4 +21,13 @@ export async function sendForm(kind: string, fields: Record<string, string>, wha
 }
 
 export const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
-export const isPhone = (v: string) => v.replace(/[\s.-]/g, '').replace(/^0+/, '').length >= 7 && /^[0-9\s.-]+$/.test(v.trim());
+/** Numéro de téléphone : chiffres, espaces, points, tirets, parenthèses ; « +221 » ou « 00221 » acceptés. */
+export const isPhone = (v: string) => /^(\+|00)?\d{7,15}$/.test(v.replace(/[\s.()-]/g, ''));
+
+/** Numéro complet pour le message : si la cliente a déjà saisi l'indicatif (+… ou 00…), on ne le double pas. */
+export const fullPhone = (dial: string, tel: string) => {
+  const t = tel.trim();
+  if (/^\+/.test(t)) return t;
+  if (/^00/.test(t)) return `+${t.slice(2)}`;
+  return `${dial} ${t.replace(/^0(?=\d{8,})/, '')}`;
+};

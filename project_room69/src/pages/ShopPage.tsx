@@ -194,8 +194,8 @@ export function ShopPage() {
         <div>
           {results.length === 0 ? (
             <div className="card mx-auto max-w-xl p-8 text-center">
-              <h2 className="font-serif text-3xl">Nous n’avons pas encore cette taille dans ce modèle</h2>
-              <p className="mt-4 text-ivory-2">Dites-nous laquelle vous cherchez : nous vous répondons sous 24 heures et nous en tenons compte pour nos prochaines commandes.</p>
+              <h2 className="font-serif text-3xl">{f.bonnet.length || f.dos.length || f.taille.length ? 'Nous n’avons pas encore cette taille dans ce modèle' : 'Aucune pièce ne correspond, pour le moment'}</h2>
+              <p className="mt-4 text-ivory-2">Dites-nous ce que vous cherchez : nous vous répondons sous 24 heures, et nous en tenons compte pour nos prochaines commandes. Une partie de nos pièces n’est pas encore en ligne.</p>
               <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
                 <WaButton message={MESSAGES.emptyResult(describe(f, q))} source="resultat-vide">Écrire à une conseillère</WaButton>
                 <button onClick={reset} className="btn-line">Voir toutes les pièces</button>

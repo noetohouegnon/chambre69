@@ -49,7 +49,7 @@ function SearchBox({ onDone, autoFocus }: { onDone?: () => void; autoFocus?: boo
       />
       <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-mute" aria-hidden />
       {open && results.length > 0 && (
-        <ul className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-gold/20 bg-ink-2 shadow-2xl" role="listbox">
+        <ul className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-gold/20 bg-ink-2  shadow-2xl" aria-label="Suggestions">
           {results.map((p) => (
             <li key={p.slug}>
               <Link to={productUrl(p)} onClick={() => { setOpen(false); setQ(''); onDone?.(); }} className="flex items-center gap-3 px-4 py-2.5 hover:bg-ink-3">

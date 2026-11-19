@@ -21,11 +21,23 @@ function lev(a: string, b: string, max: number) {
   return prev[b.length];
 }
 
-const SYNONYMS: Record<string, string> = {
-  'sg': 'soutien gorge', 'soutif': 'soutien gorge', 'bra': 'soutien gorge', 'culote': 'culotte', 'string': 'string',
-  'nuisettes': 'nuisette', 'betio': 'betio heritage nuisette traditionnelle', 'bin': 'chaines taille', 'binbin': 'chaines taille',
-  'thiouraye': 'senteur encens', 'encens': 'senteur encens', 'parfum': 'senteur', 'pyjama': 'pyjamas', 'grossesse': 'grossesse',
-  'grande': '', 'taille': '',
+/** Abréviations développées (tous les mots doivent être trouvés). */
+const EXPAND: Record<string, string> = {
+  'sg': 'soutien gorge', 'soutif': 'soutien gorge', 'bra': 'soutien gorge', 'culote': 'culotte',
+  'nuisettes': 'nuisette', 'grande': '', 'taille': '', 'tailles': '',
+};
+/** Synonymes : le mot est trouvé si l'une des variantes est présente. */
+const ALTERNATIVES: Record<string, string[]> = {
+  encens: ['encens', 'mamoul', 'mamool', 'oudh', 'agarwood'],
+  thiouraye: ['encens', 'mamoul', 'mamool', 'oudh', 'agarwood'],
+  parfum: ['parfum', 'huile', 'encens'],
+  parfums: ['parfum', 'huile', 'encens'],
+  senteur: ['parfum', 'huile', 'encens'],
+  senteurs: ['parfum', 'huile', 'encens'],
+  bin: ['chaines'], binbin: ['chaines'], perles: ['chaines', 'perles'],
+  pyjama: ['pyjama', 'pyjamas'], pyjamas: ['pyjama', 'pyjamas'],
+  kimonos: ['kimono'], bodys: ['body'], sextoy: ['bien', 'vibromasseur', 'godemiche', 'satisfyer'], jouet: ['bien', 'vibromasseur', 'godemiche', 'satisfyer'],
+  homme: ['homme', 'boxer', 'slip'],
 };
 
 const index = new Map<string, string[]>();
@@ -33,7 +45,7 @@ function tokensOf(p: Product) {
   let t = index.get(p.slug);
   if (!t) {
     const cat = CATEGORIES.find((c) => c.id === p.category)?.label || '';
-    t = norm(`${p.name} ${p.brand} ${cat} ${p.color || ''} ${p.reference} ${p.lines.join(' ')} ${(p.sizes.cups || []).map((c) => `bonnet${c}`).join(' ')}`).split(' ');
+    t = norm(`${p.name} ${p.brand} ${cat} ${p.color || ''} ${p.reference} ${p.lines.join(' ')} ${(p.sizes.cups || []).map((c) => `bonnet${c}`).join(' ')} ${(p.sizes.bands || []).map((b) => `dos${b}`).join(' ')} ${(p.sizes.alpha || []).map((a) => `taille${a}`).join(' ')}`).split(' ');
     index.set(p.slug, t);
   }
   return t;
@@ -44,19 +56,28 @@ export function searchProducts(query: string, pool: Product[] = PRODUCTS): Produ
   if (!q) return pool;
   // « bonnet g » → jeton bonnetg
   q = q.replace(/\bbonnet ([a-o])\b/g, 'bonnet$1');
-  const words = q.split(' ').flatMap((w) => (SYNONYMS[w] !== undefined ? SYNONYMS[w].split(' ') : [w])).filter((w) => w.length > 0);
+  // « 95E » ou « 95 e » → tour de dos 95 + bonnet E
+  q = q.replace(/\b(6[5-9]|[7-9]\d|1[0-3]\d) ?([a-o])\b/g, 'dos$1 bonnet$2');
+  // « taille XL » → jeton tailleXL
+  q = q.replace(/\btaille (xs|s|m|l|xl|2xl|3xl|xxl)\b/g, 'taille$1');
+  const words = q.split(' ').flatMap((w) => (EXPAND[w] !== undefined ? EXPAND[w].split(' ') : [w])).filter((w) => w.length > 0);
   if (!words.length) return pool;
   const scored: { p: Product; s: number }[] = [];
   for (const p of pool) {
     const toks = tokensOf(p);
     let score = 0;
     let all = true;
-    for (const w of words) {
+    for (const word of words) {
       let best = 0;
-      for (const t of toks) {
-        if (t === w) { best = 3; break; }
-        if (w.length >= 2 && t.startsWith(w)) best = Math.max(best, 2);
-        else if (w.length >= 4 && lev(w, t.slice(0, w.length + 1), w.length > 6 ? 2 : 1) <= (w.length > 6 ? 2 : 1)) best = Math.max(best, 1);
+      for (const w of ALTERNATIVES[word] || [word]) {
+        const exactOnly = /^(dos\d|bonnet[a-o]$|taille)/.test(w); // une taille se cherche exactement
+        for (const t of toks) {
+          if (t === w) { best = 3; break; }
+          if (exactOnly) continue;
+          if (w.length >= 2 && t.startsWith(w)) best = Math.max(best, 2);
+          else if (w.length >= 4 && lev(w, t.slice(0, w.length + 1), w.length > 6 ? 2 : 1) <= (w.length > 6 ? 2 : 1)) best = Math.max(best, 1);
+        }
+        if (best === 3) break;
       }
       if (!best) { all = false; break; }
       score += best;
