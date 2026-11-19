@@ -1,8 +1,8 @@
 # Mettre le site Chambre 69 en ligne et le protéger
 
-Le site est **entièrement statique** : aucune base de données, aucun serveur à louer, hébergement gratuit.
-Toute modification poussée sur la branche `main` (y compris depuis l'administration `/admin`)
-est remise en ligne automatiquement en une à deux minutes.
+Le site est **entièrement statique** : aucune base de données, aucun serveur à gérer.
+Il est hébergé sur **OVH (hébergement web Perso)** ; toute modification de la branche `main`
+(y compris depuis l'administration `/admin`) est remise en ligne automatiquement en 3 à 5 minutes.
 
 ---
 
@@ -27,7 +27,72 @@ Ensuite, personne ne voit ni ne modifie les fichiers sans que vous l'ayez invit�
 
 ---
 
-## 2. Première mise en ligne sur Vercel (gratuit, ~5 minutes)
+## 2. Mise en ligne sur l'hébergement web OVH (offre Perso) — solution retenue
+
+Un robot GitHub (« GitHub Actions », gratuit) construit le site et l'envoie sur OVH
+**à chaque modification** de la branche `main`, y compris celles faites depuis `/admin`.
+Délai : 3 à 5 minutes. Fichiers concernés : `.github/workflows/deploy-ovh.yml` et `project_room69/ovh/`.
+
+### a) Dans l'espace client OVH (https://www.ovh.com/manager/)
+1. **Web Cloud** → **Hébergements** → votre hébergement → onglet **FTP - SSH** :
+   - notez le **serveur FTP** (ex. `ftp.cluster0XX.hosting.ovh.net`) et l'**identifiant** ;
+   - **Changer le mot de passe** si vous ne le connaissez pas, et notez-le.
+2. Onglet **Multisite** : vérifiez que `chambre69.sn` (et `www.chambre69.sn`) pointent vers le dossier **`www`**.
+   Sinon **Ajouter un domaine ou sous-domaine** → domaine externe → dossier `www`.
+3. Toujours dans **Multisite** : activez le **SSL** (certificat gratuit Let's Encrypt) pour les deux lignes,
+   puis **Regénérer le certificat SSL** dans l'onglet **Informations générales**.
+4. Onglet **Informations générales** : notez l'**adresse IPv4** de l'hébergement (pour les DNS, étape c).
+
+### b) Dans GitHub (une seule fois)
+Dépôt → **Settings** → **Secrets and variables** → **Actions** :
+- onglet **Secrets** → **New repository secret**, créez :
+  | Nom | Valeur |
+  |---|---|
+  | `OVH_HOST` | le serveur FTP (ex. `ftp.cluster0XX.hosting.ovh.net`) |
+  | `OVH_USER` | l'identifiant FTP |
+  | `OVH_PASSWORD` | le mot de passe FTP |
+  | `GITHUB_OAUTH_ID` | *(facultatif)* Client ID de l'OAuth App, pour le bouton « Se connecter avec GitHub » |
+  | `GITHUB_OAUTH_SECRET` | *(facultatif)* son secret |
+- onglet **Variables** → **New repository variable** *(facultatif)* :
+  | Nom | Valeur |
+  |---|---|
+  | `SITE_URL` | `https://chambre69.sn` (valeur par défaut) |
+  | `OVH_PROTOCOL` | `sftp` (par défaut) ; mettez `ftp` si l'envoi SFTP est refusé |
+  | `OVH_DIR` | `www` (par défaut) |
+
+Puis onglet **Actions** du dépôt → **Mise en ligne OVH** → **Run workflow**.
+Une coche verte = site en ligne. Une croix rouge = cliquez dessus, l'étape en erreur explique le problème
+(le plus souvent : identifiant ou mot de passe FTP).
+
+> ⚠️ Le robot **remplace tout le contenu du dossier `www`** par le site. Ne déposez rien d'autre dedans.
+
+### c) Le nom de domaine `chambre69.sn`
+Chez le registraire du domaine (zone DNS) :
+- enregistrement **A** de `chambre69.sn` → l'**IPv4 de l'hébergement OVH** (étape a.4) ;
+- enregistrement **A** (ou **CNAME** vers `chambre69.sn.`) pour `www.chambre69.sn` ;
+- **ne touchez pas** aux enregistrements **MX** (e-mails).
+La propagation prend de quelques minutes à quelques heures. Ensuite, retournez à l'étape a.3 pour le SSL.
+
+### d) Le bouton « Se connecter avec GitHub » de l'administration
+Dans l'OAuth App GitHub (voir `ADMINISTRATION.md`), mettez :
+- **Homepage URL** : `https://chambre69.sn`
+- **Authorization callback URL** : `https://chambre69.sn/api/callback`
+et renseignez les secrets `GITHUB_OAUTH_ID` / `GITHUB_OAUTH_SECRET` (étape b). Sur OVH, la connexion passe par
+`api/auth.php` et `api/callback.php` ; les identifiants sont écrits par le robot dans un fichier protégé,
+jamais dans le dépôt. La connexion par **jeton d'accès** fonctionne dans tous les cas.
+
+### e) Vérifications après la première mise en ligne
+`https://chambre69.sn` (accueil), une fiche produit, `/mariee`, le panier jusqu'au message WhatsApp,
+`/admin` (écran de connexion), `/sitemap.xml`, et une adresse inexistante (page « Cette page n'existe pas »).
+
+### f) Et Vercel ?
+Une fois OVH en place, supprimez le projet Vercel (**Settings → General → Delete Project**)
+pour éviter deux sites en parallèle. Le fichier `vercel.json` peut rester : il ne gêne pas OVH.
+
+---
+
+## 2 bis. Autre possibilité : Vercel
+ (gratuit, ~5 minutes)
 
 1. Créez un compte sur https://vercel.com avec **« Continue with GitHub »** (offre **Hobby**, gratuite).
 2. **Add New… → Project** → à côté de `chambre69`, **Import**.

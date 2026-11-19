@@ -6,7 +6,7 @@ commande finalisée sur WhatsApp, espace d'administration sans serveur.
 | Document | Pour qui | Contenu |
 |---|---|---|
 | [`ADMINISTRATION.md`](ADMINISTRATION.md) | la gérante | ajouter / retirer des pièces et des photos, boutiques, témoignages |
-| [`DEPLOYMENT.md`](DEPLOYMENT.md) | le responsable du site | mise en ligne gratuite sur Vercel, domaine, accès |
+| [`DEPLOYMENT.md`](DEPLOYMENT.md) | le responsable du site | mise en ligne sur OVH (robot GitHub), domaine, accès |
 | [`LIVRAISON_V2.md`](LIVRAISON_V2.md) | historique | ce qui a été livré en V2 |
 
 ## Architecture
@@ -18,6 +18,9 @@ public/admin/             interface d'administration (Sveltia CMS, connexion par
 public/media/             photos (WebP 480/960 px ; ajouts /admin convertis au build)
 scripts/prepare-content.mjs  content/ → src/data/catalog.json (généré, non versionné)
 scripts/prerender.mjs     pré-rendu HTML de toutes les pages + sitemap + robots
+ovh/                      réglages Apache (.htaccess) et connexion GitHub en PHP pour OVH
+api/                      la même connexion GitHub, version Vercel (si hébergé sur Vercel)
+../.github/workflows/deploy-ovh.yml   robot : build + envoi SFTP sur OVH à chaque modification de main
 src/                      application React (pages, composants, données fixes)
 ```
 

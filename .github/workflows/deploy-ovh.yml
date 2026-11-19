@@ -1,0 +1,91 @@
+# Mise en ligne automatique du site Chambre 69 sur l'hébergement web OVH.
+# Se lance à chaque modification de la branche main (y compris depuis /admin),
+# ou à la main : onglet Actions → « Mise en ligne OVH » → Run workflow.
+#
+# Secrets à créer une fois (dépôt → Settings → Secrets and variables → Actions) :
+#   OVH_HOST         ex. ftp.cluster0XX.hosting.ovh.net
+#   OVH_USER         identifiant FTP
+#   OVH_PASSWORD     mot de passe FTP
+#   GITHUB_OAUTH_ID / GITHUB_OAUTH_SECRET   (facultatif : bouton « Se connecter avec GitHub »)
+# Variables facultatives (onglet « Variables ») :
+#   SITE_URL         ex. https://chambre69.sn   (sinon https://chambre69.sn)
+#   OVH_PROTOCOL     sftp (par défaut) ou ftp
+#   OVH_DIR          dossier du site sur l'hébergement (par défaut : www)
+
+name: Mise en ligne OVH
+
+on:
+  push:
+    branches: [main]
+    paths: ['project_room69/**', '.github/workflows/deploy-ovh.yml']
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ovh
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: project_room69
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: project_room69/package-lock.json
+
+      - name: Installation
+        run: npm ci
+
+      - name: Construction du site
+        env:
+          VITE_SITE_URL: ${{ vars.SITE_URL || 'https://chambre69.sn' }}
+        run: npm run build
+
+      - name: Réglages OVH (.htaccess et connexion GitHub)
+        env:
+          OAUTH_ID: ${{ secrets.GITHUB_OAUTH_ID }}
+          OAUTH_SECRET: ${{ secrets.GITHUB_OAUTH_SECRET }}
+        run: |
+          cp ovh/.htaccess dist/.htaccess
+          mkdir -p dist/api
+          cp ovh/api/*.php dist/api/
+          if [ -n "$OAUTH_ID" ] && [ -n "$OAUTH_SECRET" ]; then
+            php -r 'echo "<?php return " . var_export(["client_id" => getenv("OAUTH_ID"), "client_secret" => getenv("OAUTH_SECRET")], true) . ";\n";' > dist/api/oauth-config.php
+            echo "Connexion GitHub configurée."
+          else
+            echo "Secrets GITHUB_OAUTH_ID / GITHUB_OAUTH_SECRET absents : connexion par jeton uniquement."
+          fi
+
+      - name: Envoi sur OVH
+        env:
+          OVH_HOST: ${{ secrets.OVH_HOST }}
+          OVH_USER: ${{ secrets.OVH_USER }}
+          OVH_PASSWORD: ${{ secrets.OVH_PASSWORD }}
+          OVH_PROTOCOL: ${{ vars.OVH_PROTOCOL || 'sftp' }}
+          OVH_DIR: ${{ vars.OVH_DIR || 'www' }}
+        run: |
+          if [ -z "$OVH_HOST" ] || [ -z "$OVH_USER" ] || [ -z "$OVH_PASSWORD" ]; then
+            echo "::error::Secrets OVH_HOST, OVH_USER et OVH_PASSWORD manquants (voir DEPLOYMENT.md)."; exit 1
+          fi
+          sudo apt-get install -y -qq lftp > /dev/null
+          if [ "$OVH_PROTOCOL" = "ftp" ]; then
+            URL="ftp://$OVH_HOST"; TLS="set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no;"
+          else
+            URL="sftp://$OVH_HOST"; TLS="set sftp:auto-confirm yes;"
+          fi
+          lftp -u "$OVH_USER","$OVH_PASSWORD" "$URL" -e "
+            $TLS
+            set net:max-retries 3; set net:timeout 30;
+            mkdir -p -f $OVH_DIR;
+            mirror --reverse --delete --verbose=1 --parallel=4 \
+                   --exclude-glob .ovhconfig --exclude-glob .well-known/ \
+                   dist/ $OVH_DIR/;
+            bye"
+          echo "Site mis en ligne."
