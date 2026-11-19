@@ -1,443 +1,317 @@
-import { useState, useEffect, useRef } from 'react';
-import { MessageCircle } from 'lucide-react';
-import { FadeInOnLoad, RevealOnScroll } from '../components/Animations';
-import { useCart } from '../context/CartContext';
-import { API_URL } from '../config';
+import { Link } from 'react-router-dom';
+import { Package, MessageCircle, Plane, Ruler, ArrowRight, MapPin, Phone, Navigation, Quote } from 'lucide-react';
+import { BY_SLUG, PRODUCTS, BRANDS_DISTRIBUTED, type Product } from '../data/catalog';
+import { BRAND, COMMUNITY, STORES, directionsUrl } from '../data/site';
+import { ProductCard } from '../components/ProductCard';
+import { Img } from '../components/ui/Img';
+import { WaButton } from '../components/ui/WaButton';
+import { Section, SectionHead } from '../components/ui/Section';
+import { useUi } from '../context/UiContext';
+import { MESSAGES } from '../lib/whatsapp';
+import { track } from '../lib/analytics';
 
-interface Product {
-  id: string;
-  category_id: string;
-  name: string;
-  slug: string;
-  description: string;
-  care_instructions: string;
-  image_url: string;
-  is_featured: boolean;
-  created_at: string;
-}
+const pick = (slugs: string[]) => slugs.map((s) => BY_SLUG.get(s)).filter(Boolean) as Product[];
 
-interface ProductVariant {
-  id: string;
-  product_id: string;
-  color: string;
-  sizes: string[];
-  created_at: string;
-}
+const HERO = pick(['soutien-gorge-agathe-empreinte', 'nuisette-traditionnelle-modele-03', 'soutien-gorge-morgan-elomi']);
+const HERITAGE = pick(['nuisette-traditionnelle-modele-01', 'chaines-de-taille-modele-01', 'senteur-et-encens-modele-05', 'nuisette-traditionnelle-modele-02']);
+const BRIDE = pick(['ensemble-kimono-blanc-de-lait', 'ensemble-kimono-et-robe-de-soie', 'porte-jarretelles-zsa-dita-von-teese']);
 
-interface Brand {
-  id: string | number;
-  name: string;
-  description: string;
-  image_url: string;
-  products: (Product & { variants: ProductVariant[] })[];
-}
+const ENTRY_TILES = [
+  { label: 'Soutiens-gorge', to: '/boutique?categorie=soutiens-gorge', slug: 'soutien-gorge-zarla-elomi' },
+  { label: 'Culottes', to: '/boutique?categorie=culottes', slug: 'culotte-leia-empreinte' },
+  { label: 'Héritage', to: '/heritage', slug: 'nuisette-traditionnelle-modele-04' },
+  { label: 'Nuisettes et kimonos', to: '/boutique?categorie=nuit', slug: 'ensemble-kimono-modele-03' },
+];
 
-const formatBrandName = (name: string) => {
-  const mapping: Record<string, string> = {
-    'ysabel mora': 'Ysabel Mora',
-    'curvy kate': 'Curvy Kate',
-    'dita von teese': 'Dita Von Teese',
-    'linga dore': 'LingaDore',
-    'louisa bracq': 'Louisa Bracq',
-    'lingerie traditionnelle africaine': 'Maternité et Grossesse',
-    'miraclesuit': 'Miraclesuit',
-    'krizalid': 'Krizalid'
-  };
+const fmt = (n: number) => n.toLocaleString('fr-FR').replace(/ |\s/g, ' ');
 
-  const normalized = name.trim().toLowerCase();
-  return mapping[normalized] || name;
-};
-
-interface HomePageProps {
-  onNavigate: (page: string, data?: any) => void;
-}
-
-export const HomePage = ({ onNavigate }: HomePageProps) => {
-  const [featuredProducts, setFeaturedProducts] = useState<(Product & { variant: ProductVariant })[]>([]);
-  const [brands, setBrands] = useState<Brand[]>([]);
-  const [heroImageUrl, setHeroImageUrl] = useState('https://i0.wp.com/www.youreleganceshop.com/wp-content/uploads/2025/01/ensemble-lingerie-5-pieces-sexy.png?fit=1136%2C1512&ssl=1');
-  const { addToCart } = useCart();
-
-  useEffect(() => {
-    const fetchFeatured = async () => {
-      try {
-        const response = await fetch(`${API_URL}/products?featured=true`);
-        const data = await response.json();
-        setFeaturedProducts(data.map((p: any) => ({
-          ...p,
-          variant: p.variants[0]
-        })));
-      } catch (error) {
-        console.error('Error fetching featured products:', error);
-      }
-    };
-
-    const fetchBrands = async () => {
-      try {
-        const response = await fetch(`${API_URL}/shop-data`);
-        const data = await response.json();
-        const cleanBrands = (data.brands || [])
-          .filter((brand: Brand) => !['backend', 'project_room69', 'node_modules', 'project', '.git', '.vscode'].includes(brand.name.toLowerCase()))
-          .map((brand: Brand) => ({
-            ...brand,
-            name: formatBrandName(brand.name),
-            description: brand.description || 'Maison de lingerie',
-            image_url: brand.image_url || brand.products?.[0]?.image_url || ''
-          }));
-
-        setBrands(cleanBrands);
-
-        const firstImage = cleanBrands.find((brand: Brand) => brand.image_url)?.image_url || '';
-        if (firstImage) {
-          setHeroImageUrl(firstImage);
-        }
-      } catch (error) {
-        console.error('Error fetching brands:', error);
-      }
-    };
-
-    fetchFeatured();
-    fetchBrands();
-  }, []);
-
-  // Refs pour les carrousels
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const brandScrollRef = useRef<HTMLDivElement>(null);
-  const [activeBrandIndex, setActiveBrandIndex] = useState(0);
-  const [selectedBrand, setSelectedBrand] = useState<Brand | null>(null);
-
-  const handleAddToCart = (product: Product, variant: ProductVariant) => {
-    addToCart(product, variant, variant.sizes[0]);
-  };
-
-  const updateActiveIndex = () => {
-    if (!scrollContainerRef.current) return;
-    const container = scrollContainerRef.current;
-    const scrollLeft = container.scrollLeft;
-    const containerCenter = scrollLeft + container.clientWidth / 2;
-    const items = container.children;
-    let closestIndex = 0;
-    let minDistance = Infinity;
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i] as HTMLElement;
-      const itemCenter = item.offsetLeft + item.clientWidth / 2;
-      const distance = Math.abs(containerCenter - itemCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = i;
-      }
-    }
-    setActiveIndex(closestIndex);
-  };
-
-  const updateBrandActiveIndex = () => {
-    if (!brandScrollRef.current) return;
-    const container = brandScrollRef.current;
-    const scrollLeft = container.scrollLeft;
-    const containerCenter = scrollLeft + container.clientWidth / 2;
-    const items = container.children;
-    let closestIndex = 0;
-    let minDistance = Infinity;
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i] as HTMLElement;
-      const itemCenter = item.offsetLeft + item.clientWidth / 2;
-      const distance = Math.abs(containerCenter - itemCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = i;
-      }
-    }
-    setActiveBrandIndex(closestIndex);
-  };
-
-  useEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener('scroll', updateActiveIndex);
-      updateActiveIndex();
-      return () => container.removeEventListener('scroll', updateActiveIndex);
-    }
-  }, [featuredProducts]);
-
-  useEffect(() => {
-    const container = brandScrollRef.current;
-    if (container) {
-      container.addEventListener('scroll', updateBrandActiveIndex);
-      updateBrandActiveIndex();
-      return () => container.removeEventListener('scroll', updateBrandActiveIndex);
-    }
-  }, [brands]);
+export function HomePage() {
+  const { openSizeGuide } = useUi();
+  const newIn = PRODUCTS.filter((p) => p.isNew && p.brandKind === 'maison').slice(0, 8);
+  const total = COMMUNITY.networks.reduce((n, x) => n + x.count, 0);
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <FadeInOnLoad>
-        <section className="relative min-h-screen flex items-stretch overflow-hidden gap-6 md:gap-8 p-6 md:p-8">
-          <div className="w-1/2 rounded-2xl shadow-2xl overflow-hidden">
-            <img
-              src={heroImageUrl}
-              alt="Lingerie élégante"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="w-1/2 bg-black border-2 border-[#C9A96E] rounded-2xl shadow-2xl flex items-start justify-center p-8">
-            <div className="text-center max-w-lg mx-auto pt-12 md:pt-16 breathe">
-              <h1 className="font-bold text-5xl md:text-7xl tracking-tight text-[#C9A96E] mb-6 leading-tight">
-                Révélez votre<br />pouvoir de séduction
-              </h1>
-              <p className="text-lg md:text-xl text-[#C9A96E]/80 mb-8 font-light">
-                Découvrez notre collection de lingerie haut de gamme, conçue pour sublimer votre beauté naturelle
-              </p>
-              <button
-                onClick={() => onNavigate('shop')}
-                className="bg-[#C9A96E] text-black px-10 py-4 text-sm tracking-wide rounded-full shadow-lg hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 font-medium"
-              >
-                Découvrir la collection
-              </button>
+    <>
+      {/* 2.1 — Bloc 1 : premier écran */}
+      <section className="relative overflow-hidden border-b border-gold/10">
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(201,169,110,0.16),transparent_55%)]" />
+        <div className="container-x relative grid items-center gap-10 py-10 sm:py-14 lg:grid-cols-[1.05fr_1fr] lg:gap-14 lg:py-20">
+          <div>
+            <p className="eyebrow mb-5">Chambre 69 — Au-delà de la lingerie</p>
+            <h1 className="h-display text-balance">
+              Toutes les tailles. <span className="text-gold">Toutes les morphologies.</span> Chaque étape de votre vie.
+            </h1>
+            <p className="lead mt-6 max-w-xl">
+              Du bonnet A au bonnet O. Empreinte, Elomi, Louisa Bracq et les plus belles maisons européennes, choisies, mesurées et conseillées à Dakar.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link to="/boutique" className="btn-gold px-8">Découvrir la collection</Link>
+              <button className="btn-line px-8" onClick={() => openSizeGuide('accueil-hero')}><Ruler className="h-5 w-5" />Trouver ma taille</button>
             </div>
+            <p className="mt-6 flex items-start gap-2 text-sm text-mute">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
+              <span>Boutiques Point E et Corniche Ouest, Dakar. Livraison au Sénégal, en Afrique de l’Ouest et à l’international.</span>
+            </p>
           </div>
-        </section>
-      </FadeInOnLoad>
 
-      {/* Produits Vedettes */}
-      <RevealOnScroll delay={0.1}>
-        <section className="py-20 px-4 bg-[#F9F5F6]">
-          <div className="max-w-7xl mx-auto -mt-14">
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <div className="flex-1 h-px bg-gray-300"></div>
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900">Produits Vedettes</h2>
-              <div className="flex-1 h-px bg-gray-300"></div>
+          <div className="grid grid-cols-[1.25fr_1fr] gap-3 sm:gap-4">
+            {HERO[0] && (
+              <Link to={`/boutique/${HERO[0].slug}`} className="row-span-2 overflow-hidden rounded-2xl bg-ink-3">
+                <Img image={HERO[0].images[0]} alt={`${HERO[0].name}, ${HERO[0].brand}`} priority sizes="(min-width:1024px) 28vw, 55vw" className="h-full w-full" />
+              </Link>
+            )}
+            {HERO.slice(1).map((p) => (
+              <Link key={p.slug} to={`/boutique/${p.slug}`} className="aspect-[4/5] overflow-hidden rounded-2xl bg-ink-3">
+                <Img image={p.images[0]} alt={`${p.name}, ${p.brand}`} sizes="(min-width:1024px) 20vw, 40vw" className="h-full w-full" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 2.1 — Bloc 2 : bande de réassurance */}
+      <section aria-label="Nos engagements" className="border-b border-gold/10 bg-ink-2">
+        <ul className="container-x grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { icon: <span className="font-serif text-xl leading-none text-gold">A–O</span>, t: 'Du bonnet A au bonnet O', d: 'Toutes les morphologies, réellement en stock.' },
+            { icon: <Package className="h-6 w-6 text-gold" />, t: 'Emballage neutre', d: 'Personne ne sait ce qu’il y a dans le colis. Personne.' },
+            { icon: <MessageCircle className="h-6 w-6 text-gold" />, t: 'Conseil sans jugement', d: 'Une conseillère répond sur WhatsApp, y compris depuis l’étranger.' },
+            { icon: <Plane className="h-6 w-6 text-gold" />, t: 'Importé directement d’Europe', d: 'France, Espagne, Angleterre. Des pièces authentiques, pas des copies.' },
+          ].map((x) => (
+            <li key={x.t} className="flex items-start gap-4 py-6 sm:px-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold/30">{x.icon}</span>
+              <span><strong className="block font-medium text-ivory">{x.t}</strong><span className="text-[15px] text-ivory-2">{x.d}</span></span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 2.1 — Bloc 3 : appel au guide des tailles + École du bon maintien */}
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="eyebrow mb-4">L’École du bon maintien</p>
+            <h2 className="h-section text-balance">Vous ne connaissez pas votre taille ? Vous n’êtes pas la seule.</h2>
+            <div className="body-copy mt-6">
+              <p>La plupart des femmes portent un soutien-gorge qui ne leur va pas. Bande qui remonte, bretelles qui marquent, armature qui blesse : ce n’est pas votre corps qui a un problème.</p>
+              <p className="text-ivory">Deux mesures, deux minutes, et vous saurez.</p>
             </div>
-            <div
-              ref={scrollContainerRef}
-              className="flex overflow-x-auto gap-6 pb-8 px-4"
-              style={{ scrollbarWidth: 'thin', msOverflowStyle: 'auto' }}
-            >
-              {featuredProducts.map((item, idx) => {
-                const isActive = idx === activeIndex;
-                return (
-                  <div
-                    key={item.id}
-                    className={`flex-shrink-0 transition-all duration-500 ${isActive ? 'scale-105 z-10' : 'scale-95 opacity-70'}`}
-                    style={{ width: '260px' }}
-                  >
-                    <div
-                      className="relative bg-gray-100 overflow-hidden rounded-lg group cursor-pointer"
-                      style={{ height: '300px' }}
-                      onClick={() => onNavigate('product', { slug: item.slug })}
-                    >
-                      <img src={item.image_url} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className={`text-base font-medium mb-2 transition-colors ${isActive ? 'text-[#C9A96E]' : 'text-gray-900 group-hover:text-[#C9A96E]'}`}>
-                        {item.name}
-                      </h3>
-                      <p className="text-xs text-gray-600 mb-2">Couleur: {item.variant?.color}</p>
-                      <p className="text-xs text-gray-600 mb-3">Tailles: {item.variant?.sizes.join(', ')}</p>
-                      <div className="flex gap-2 justify-center">
-                        <button onClick={() => onNavigate('product', { slug: item.slug })} className="bg-black text-white px-3 py-1.5 text-xs hover:bg-[#C9A96E] transition-colors rounded">
-                          Voir produit
-                        </button>
-                        <button onClick={() => handleAddToCart(item, item.variant)} className="border border-black text-black px-3 py-1.5 text-xs hover:bg-black hover:text-white transition-colors rounded">
-                          Ajouter
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button className="btn-gold px-8" onClick={() => openSizeGuide('accueil-guide')}><Ruler className="h-5 w-5" />Trouver ma taille</button>
+              <Link to="/conseils" className="btn-line">Tous nos conseils</Link>
             </div>
           </div>
-        </section>
-      </RevealOnScroll>
-
-      {/* Section Sensuelle */}
-      <RevealOnScroll delay={0.15}>
-        <section className="py-16 px-4 bg-black border-2 border-[#C9A96E] rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 mx-4 md:mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="w-full md:w-1/2 p-6 md:p-8">
-              <div className="flex flex-row gap-4 justify-center items-stretch">
-                <div className="flex-1 overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  <img src="https://image.made-in-china.com/202f0j00ApFkgamEEcob/Ensemble-De-Lingerie-Deux-Pieces-Sexy-Pour-Femme.webp" alt="Pièce sensuelle 1" className="w-full h-64 object-cover" />
-                </div>
-                <div className="flex-1 overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  <img src="https://cdn.shopify.com/s/files/1/0870/4150/7665/files/BLOG_1.png?v=1763115011" alt="Pièce sensuelle 2" className="w-full h-64 object-cover" />
-                </div>
-                <div className="flex-1 overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
-                  <img src="https://dorina.fr/cdn/shop/files/3_ORIGINS_FXBR0046LA176-BK0001_FXBF0080LA176-BK0001_FXBS0021LA176-BK0001_CP-31A.jpg?v=1754697757&width=1000" alt="Pièce sensuelle 3" className="w-full h-64 object-cover" />
-                </div>
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 p-8 md:p-12 text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl font-light mb-4 text-[#C9A96E]">
-                Osez révéler votre côté<br />
-                <span className="text-[#C9A96E] font-semibold">le plus irrésistible</span>
-              </h2>
-              <p className="text-[#C9A96E]/80 mb-6 text-base md:text-lg">
-                Découvrez notre collection de pièces sensuelles et sophistiquées
-              </p>
-              <button
-                onClick={() => onNavigate('shop', { categorySlug: 'pieces-sensuelles' })}
-                className="bg-[#C9A96E] text-black px-8 py-3 rounded-full text-sm tracking-wide hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 shadow-md"
-              >
-                Découvrir
-              </button>
-            </div>
+          <div className="card p-6 sm:p-8">
+            <p className="eyebrow mb-5">Nos bonnets</p>
+            <ul className="grid grid-cols-5 gap-2 sm:gap-3" aria-label="Bonnets disponibles du A au O">
+              {BRAND.cups.map((c) => (
+                <li key={c}>
+                  <Link to={`/boutique?bonnet=${c}`} onClick={() => track('cup_filter', { cup: c, source: 'accueil' })} className="flex aspect-square items-center justify-center rounded-xl border border-gold/25 font-serif text-2xl text-ivory transition-colors hover:border-gold hover:bg-gold hover:text-ink sm:text-3xl" aria-label={`Voir les pièces en bonnet ${c}`}>{c}</Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-sm text-mute">Un grand bonnet n’est pas un problème d’ingénierie à résoudre. C’est une taille, comme les autres. <Link to="/toutes-les-tailles" className="text-gold hover:underline">Notre amplitude réelle</Link></p>
           </div>
-        </section>
-      </RevealOnScroll>
+        </div>
+      </Section>
 
-      {/* Marques d'exception */}
-      <RevealOnScroll delay={0.2}>
-        <section className="py-20 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <div className="flex-1 h-px bg-gray-300"></div>
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900">Nos marques d'exception</h2>
-              <div className="flex-1 h-px bg-gray-300"></div>
+      {/* 2.1 — Bloc 4 : transition vers le catalogue */}
+      <Section tone="ink2">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHead title="Nos pièces">
+            Soutiens-gorge, ensembles, nuisettes, culottes, bétio (pagne intime traditionnel), linge de maison. Chaque pièce est disponible dans une amplitude réelle de tailles, pas seulement sur le papier. À partir de 33&nbsp;000&nbsp;FCFA.
+          </SectionHead>
+        </div>
+        <ul className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+          {ENTRY_TILES.map((t) => {
+            const p = BY_SLUG.get(t.slug);
+            return (
+              <li key={t.label}>
+                <Link to={t.to} className="group relative block aspect-[3/4] overflow-hidden rounded-2xl bg-ink-3">
+                  {p && <Img image={p.images[0]} alt="" sizes="(min-width:1024px) 22vw, 45vw" className="h-full w-full transition-transform duration-500 group-hover:scale-[1.03]" />}
+                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/70 to-transparent p-4 pt-16">
+                    <span className="flex items-center justify-between font-serif text-xl text-ivory sm:text-2xl">{t.label}<ArrowRight className="h-5 w-5 text-gold" aria-hidden /></span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        {newIn.length > 0 && (
+          <div className="mt-16">
+            <div className="mb-6 flex items-end justify-between gap-4">
+              <h3 className="font-serif text-3xl">Nouveautés</h3>
+              <Link to="/boutique?tri=nouveautes" className="btn-ghost">Tout voir<ArrowRight className="h-4 w-4" /></Link>
             </div>
-            <div
-              ref={brandScrollRef}
-              className="flex overflow-x-auto gap-6 pb-8 px-4"
-              style={{ scrollbarWidth: 'thin', msOverflowStyle: 'auto' }}
-            >
-              {brands.map((brand, idx) => {
-                const isActive = idx === activeBrandIndex;
-                return (
-                  <div
-                    key={brand.id}
-                    className={`flex-shrink-0 transition-all duration-500 ${isActive ? 'scale-105 z-10' : 'scale-95 opacity-70'}`}
-                    style={{ width: '260px' }}
-                  >
-                    <div className="relative bg-gray-100 overflow-hidden rounded-lg group cursor-pointer">
-                      <img src={brand.image_url || 'https://via.placeholder.com/600x800?text=Chambre+69'} alt={brand.name} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" onClick={() => setSelectedBrand(brand)} />
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className={`text-base font-medium mb-2 transition-colors ${isActive ? 'text-[#C9A96E]' : 'text-gray-900 group-hover:text-[#C9A96E]'}`}>
-                        {brand.name}
-                      </h3>
-                      <p className="text-xs text-gray-600 mb-3">{brand.description}</p>
-                      <button onClick={() => setSelectedBrand(brand)} className="bg-black text-white px-4 py-1.5 text-xs rounded-full hover:bg-[#C9A96E] transition-colors">
-                        Découvrir la marque
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <ul className="-mx-4 flex snap-x gap-4 overflow-x-auto px-4 pb-2 hide-scrollbar sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+              {newIn.map((p) => <li key={p.slug} className="w-[62%] shrink-0 snap-start sm:w-auto"><ProductCard p={p} /></li>)}
+            </ul>
           </div>
-        </section>
-      </RevealOnScroll>
+        )}
+        <div className="mt-12 text-center"><Link to="/boutique" className="btn-gold px-8">Découvrir la collection</Link></div>
+      </Section>
 
-      {/* Avis clientes */}
-      <RevealOnScroll delay={0.1}>
-        <section className="py-20 px-4 mt-10 bg-black border-2 border-[#C9A96E] rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 mx-4 md:mx-auto max-w-6xl">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#C9A96E]">Avis de nos clientes</h2>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-              <div className="w-full md:w-1/3 space-y-6">
-                <div className="bg-black/50 border border-[#C9A96E]/30 p-6 rounded-lg backdrop-blur-sm">
-                  <div className="mb-3"><span className="text-[#C9A96E] text-xl">★★★★★</span></div>
-                  <p className="text-gray-200 mb-3 text-sm italic">"Qualité exceptionnelle et confort inégalé. Je recommande vivement!"</p>
-                  <p className="text-xs text-[#C9A96E]/70 font-medium">- Sophie M.</p>
-                </div>
-                <div className="bg-black/50 border border-[#C9A96E]/30 p-6 rounded-lg backdrop-blur-sm">
-                  <div className="mb-3"><span className="text-[#C9A96E] text-xl">★★★★★</span></div>
-                  <p className="text-gray-200 mb-3 text-sm italic">"Des pièces élégantes qui subliment vraiment. Service client au top!"</p>
-                  <p className="text-xs text-[#C9A96E]/70 font-medium">- Marie L.</p>
-                </div>
-                <div className="bg-black/50 border border-[#C9A96E]/30 p-6 rounded-lg backdrop-blur-sm">
-                  <div className="mb-3"><span className="text-[#C9A96E] text-xl">★★★★★</span></div>
-                  <p className="text-gray-200 mb-3 text-sm italic">"Je me sens tellement confiante et féminine. Merci Chambre 69!"</p>
-                  <p className="text-xs text-[#C9A96E]/70 font-medium">- Léa B.</p>
-                </div>
-              </div>
-              <div className="w-full md:w-1/3 flex justify-center">
-                <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl border-4 border-[#C9A96E]">
-                  <img src="https://img.ltwebstatic.com/v4/j/pi/2026/01/19/5e/1768800169e65566b1055f08e2b5c65fcd64694e4a_thumbnail_405x552.webp" alt="Cliente satisfaite" className="w-full h-full object-cover" />
-                </div>
-              </div>
-              <div className="w-full md:w-1/3 space-y-6">
-                <div className="bg-black/50 border border-[#C9A96E]/30 p-6 rounded-lg backdrop-blur-sm">
-                  <div className="mb-3"><span className="text-[#C9A96E] text-xl">★★★★★</span></div>
-                  <p className="text-gray-200 mb-3 text-sm italic">"La lingerie est magnifique, les coupes sont parfaites. Je suis conquise!"</p>
-                  <p className="text-xs text-[#C9A96E]/70 font-medium">- Camille D.</p>
-                </div>
-                <div className="bg-black/50 border border-[#C9A96E]/30 p-6 rounded-lg backdrop-blur-sm">
-                  <div className="mb-3"><span className="text-[#C9A96E] text-xl">★★★★★</span></div>
-                  <p className="text-gray-200 mb-3 text-sm italic">"Service rapide et produit de qualité. Je recommande les yeux fermés."</p>
-                  <p className="text-xs text-[#C9A96E]/70 font-medium">- Élodie R.</p>
-                </div>
-                <div className="bg-black/50 border border-[#C9A96E]/30 p-6 rounded-lg backdrop-blur-sm">
-                  <div className="mb-3"><span className="text-[#C9A96E] text-xl">★★★★★</span></div>
-                  <p className="text-gray-200 mb-3 text-sm italic">"Je me sens sublime dans mes nouvelles pièces. Merci pour cette belle expérience!"</p>
-                  <p className="text-xs text-[#C9A96E]/70 font-medium">- Julie T.</p>
-                </div>
-              </div>
-            </div>
+      {/* Accueil, section 5 — Héritage */}
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+          <div className="order-2 grid grid-cols-2 gap-3 lg:order-1">
+            {HERITAGE.map((p, i) => (
+              <Link key={p.slug} to={`/boutique/${p.slug}`} className={`overflow-hidden rounded-2xl bg-ink-3 ${i % 3 === 0 ? 'aspect-[3/4]' : 'aspect-square'}`}>
+                <Img image={p.images[0]} alt={p.name} sizes="(min-width:1024px) 22vw, 45vw" className="h-full w-full" />
+              </Link>
+            ))}
           </div>
-        </section>
-      </RevealOnScroll>
-
-      {/* WhatsApp */}
-      <RevealOnScroll delay={0.15}>
-        <section className="mt-16 md:mt-20 py-12 px-4 bg-black border-2 border-[#C9A96E] rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 mx-4 md:mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="w-full md:w-1/2">
-              <img src="https://asset.promod.com/product/208021-gz-1755513146.jpg?auto=webp&quality=80&crop=10:15" alt="Service client WhatsApp" className="w-full h-auto rounded-xl object-cover shadow-lg" />
-            </div>
-            <div className="w-full md:w-1/2 text-center md:text-left">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#C9A96E]/10 border border-[#C9A96E] mb-4">
-                <MessageCircle className="h-8 w-8 text-[#C9A96E]" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-[#C9A96E]">Commandez facilement via WhatsApp</h2>
-              <p className="text-[#C9A96E]/80 mb-6 text-base md:text-lg">Un service personnalisé et rapide pour toutes vos commandes</p>
-              <button
-                onClick={() => window.open('https://wa.me/33123456789?text=Bonjour, je souhaite passer une commande', '_blank')}
-                className="group relative bg-[#25D366] text-white px-8 py-3 text-sm tracking-wide rounded-full shadow-lg hover:bg-[#20BD5A] transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-3 overflow-hidden"
-              >
-                <MessageCircle className="h-5 w-5 transition-transform group-hover:scale-110" />
-                <span className="font-medium">Commander maintenant</span>
-                <span className="absolute inset-0 rounded-full border-2 border-[#C9A96E] opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              </button>
-            </div>
-          </div>
-        </section>
-      </RevealOnScroll>
-
-      {/* Modale Marque */}
-      {selectedBrand && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4" onClick={() => setSelectedBrand(null)}>
-          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="relative">
-              <button onClick={() => setSelectedBrand(null)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl z-10 bg-white/80 rounded-full w-8 h-8 flex items-center justify-center">×</button>
-              <div className="grid md:grid-cols-2 gap-8 p-6 md:p-8">
-                <div className="rounded-lg overflow-hidden"><img src={selectedBrand.image_url || 'https://via.placeholder.com/600x800?text=Chambre+69'} alt={selectedBrand.name} className="w-full h-auto object-cover" /></div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-4 text-gray-900">{selectedBrand.name}</h3>
-                  <p className="text-gray-700 mb-6 leading-relaxed">{selectedBrand.description}</p>
-                </div>
-              </div>
-              {selectedBrand.products && selectedBrand.products.length > 0 && (
-                <div className="border-t border-gray-200 p-6 md:p-8">
-                  <h4 className="font-semibold text-lg mb-4 text-gray-900">Quelques pièces emblématiques</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {selectedBrand.products.slice(0, 3).map((product) => (
-                      <div key={product.id} className="bg-gray-100 rounded-lg overflow-hidden"><img src={product.image_url} alt={product.name} className="w-full h-48 object-cover" /></div>
-                    ))}
-                  </div>
-                </div>
-              )}
-              <div className="p-6 md:p-8 pt-0 text-center">
-                <button onClick={() => onNavigate('shop', { brand: selectedBrand.name.toLowerCase() })} className="bg-[#C9A96E] text-white px-6 py-2 rounded-full hover:bg-black transition-colors">
-                  Voir toute la collection {selectedBrand.name}
-                </button>
-              </div>
+          <div className="order-1 lg:order-2">
+            <p className="eyebrow mb-4">Héritage</p>
+            <h2 className="h-section text-balance">Notre héritage, enfin au niveau qu’il mérite</h2>
+            <p className="body-copy mt-6">Longtemps, le bétio (pagne intime traditionnel) est resté une affaire de chambre et de transmission orale. Nous avons décidé de lui donner ce qu’on ne lui avait jamais donné : de la soie, des finitions de maison, et une vitrine.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link to="/heritage" className="btn-gold">Découvrir la collection</Link>
+              <Link to="/mariee" className="btn-line">Composer mon trousseau</Link>
             </div>
           </div>
         </div>
-      )}
-    </div>
+      </Section>
+
+      {/* Accueil, section 6 — Amplitude (2.4) */}
+      <section className="relative overflow-hidden border-y border-gold/10 bg-ink-2 py-20 sm:py-24">
+        <div aria-hidden className="pointer-events-none absolute -right-10 top-1/2 hidden -translate-y-1/2 select-none font-serif text-[22rem] leading-none text-gold/[0.05] lg:block">A–O</div>
+        <div className="container-x relative">
+          <p className="eyebrow mb-4">Toutes les tailles</p>
+          <h2 className="h-section max-w-3xl text-balance">Du bonnet A au bonnet O. Vraiment.</h2>
+          <p className="lead mt-5 max-w-prose">Beaucoup de marques disent qu’elles habillent toutes les femmes. Peu s’engagent sur des chiffres. Voici les nôtres.</p>
+          <dl className="mt-10 grid max-w-4xl gap-4 sm:grid-cols-3">
+            <div className="card p-5"><dt className="text-sm text-mute">Bonnets</dt><dd className="mt-1 font-serif text-3xl text-ivory">du A au O</dd></div>
+            <div className="card p-5"><dt className="text-sm text-mute">Culottes et pièces souples</dt><dd className="mt-1 font-serif text-3xl text-ivory">du S au 3XL</dd></div>
+            <div className="card p-5"><dt className="text-sm text-mute">À notre connaissance</dt><dd className="mt-1 text-[15px] leading-snug text-ivory">l’amplitude la plus large disponible en Afrique de l’Ouest</dd></div>
+          </dl>
+          <ul className="mt-10 flex flex-wrap gap-2">
+            {[
+              ['Forte poitrine', '/toutes-les-tailles#forte-poitrine'], ['Petite poitrine', '/toutes-les-tailles#petite-poitrine'], ['Grossesse et allaitement', '/toutes-les-tailles#grossesse'],
+              ['Après l’accouchement', '/toutes-les-tailles#apres-accouchement'], ['Après une mastectomie', '/apres-mastectomie'], ['Ménopause et après', '/toutes-les-tailles#menopause'], ['Sport', '/toutes-les-tailles#sport'],
+            ].map(([l, to]) => <li key={l}><Link to={to} className="chip border-gold/30 text-ivory-2 hover:border-gold hover:text-ivory">{l}</Link></li>)}
+          </ul>
+        </div>
+      </section>
+
+      {/* Accueil, section 7 — Mariée */}
+      <Section>
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="eyebrow mb-4">Mariée</p>
+            <h2 className="h-section text-balance">Le trousseau de la mariée</h2>
+            <div className="body-copy mt-6">
+              <p>Chez nous, le trousseau ne se prépare pas seule. Une mère, des tantes, des amies, un mbotaay (groupe de femmes qui se soutiennent) : tout le monde y participe.</p>
+              <p>Nous avons conçu cette section pour cela. Les plus belles maisons européennes d’un côté, notre héritage de l’autre, et de quoi organiser l’ensemble sans y passer ses nuits.</p>
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link to="/mariee" className="btn-gold">Composer mon trousseau</Link>
+              <Link to="/mariee/liste" className="btn-line">Créer ma liste</Link>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {BRIDE.map((p) => (
+              <Link key={p.slug} to={`/boutique/${p.slug}`} className="aspect-[3/5] overflow-hidden rounded-2xl bg-ink-3">
+                <Img image={p.images[0]} alt={p.name} sizes="(min-width:1024px) 15vw, 30vw" className="h-full w-full" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* Maisons distribuées : caution immédiate (2.6) */}
+      <section aria-label="Nos maisons" className="border-y border-gold/10 bg-ink-2 py-10">
+        <div className="container-x">
+          <p className="mb-5 text-center text-sm text-mute">Les maisons que nous avons choisies, importées directement de France, d’Espagne et d’Angleterre</p>
+          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            {BRANDS_DISTRIBUTED.map((b) => (
+              <li key={b}><Link to={`/boutique?maison=${encodeURIComponent(b)}`} className="font-serif text-2xl text-ivory-2 transition-colors hover:text-gold sm:text-[1.7rem]">{b}</Link></li>
+            ))}
+          </ul>
+          <p className="mt-6 text-center"><Link to="/maisons" className="btn-ghost">Pourquoi ces maisons<ArrowRight className="h-4 w-4" /></Link></p>
+        </div>
+      </section>
+
+      {/* Accueil, section 8 — Témoignages (2.9) : aucun témoignage inventé */}
+      <Section>
+        <SectionHead eyebrow="Témoignages" title="Elles sont passées avant vous" center>
+          Toutes les femmes citées ici sont des clientes réelles, qui ont accepté que nous publiions leurs mots. Nous n’en avons modifié aucun.
+        </SectionHead>
+        <ul className="grid gap-4 md:grid-cols-3">
+          {['Jeune femme, 25-30 ans', 'Forte poitrine, bonnet G et plus', 'Cliente de la diaspora'].map((profile) => (
+            <li key={profile} className="flex flex-col rounded-2xl border border-dashed border-gold/30 p-6">
+              <Quote className="h-6 w-6 text-gold/60" aria-hidden />
+              <p className="mt-4 flex-1 text-[15px] italic text-mute">Témoignage en cours de recueil, publié avec l’accord écrit de la cliente.</p>
+              <p className="mt-4 text-sm text-ivory-2">{profile}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 text-center text-sm text-ivory-2">Vous êtes cliente ? <a className="text-gold hover:underline" href="https://wa.me/221787040505?text=Bonjour%20Chambre%2069%2C%20je%20souhaite%20laisser%20un%20t%C3%A9moignage." target="_blank" rel="noopener noreferrer">Deux phrases de vous, pour celles qui hésitent encore.</a></p>
+      </Section>
+
+      {/* Accueil, section 9 — Preuve d'existence physique */}
+      <Section tone="ink2">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+          <figure className="overflow-hidden rounded-2xl bg-ink-3">
+            <img src="/brand/boutique-facade-480.webp" srcSet="/brand/boutique-facade-480.webp 480w, /brand/boutique-facade-960.webp 960w" sizes="(min-width:1024px) 40vw, 100vw" width={960} height={1280} loading="lazy" alt="Façade d’une boutique Chambre 69 à Dakar, vitrine de lingerie et enseigne dorée" className="aspect-[4/5] w-full object-cover" />
+          </figure>
+          <div>
+            <p className="eyebrow mb-4">Nos boutiques</p>
+            <h2 className="h-section text-balance">Deux ans, deux boutiques. Nous existons pour de vrai.</h2>
+            <p className="body-copy mt-6">Vous pouvez venir sans rendez-vous, essayer, poser vos questions, et repartir sans rien acheter.</p>
+            <ul className="mt-8 space-y-4">
+              {STORES.map((s) => (
+                <li key={s.id} className="card p-5">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <Link to={`/nos-boutiques/${s.id}`} className="font-serif text-2xl text-ivory hover:text-gold">{s.district}</Link>
+                    <span className="text-sm text-mute">Dakar, Sénégal</span>
+                  </div>
+                  <p className="mt-1 text-sm text-mute">{s.address || 'Adresse détaillée et horaires : à compléter'}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <a href={directionsUrl(s.mapsQuery)} target="_blank" rel="noopener noreferrer" onClick={() => track('directions_click', { store: s.id })} className="btn-line min-h-[44px] px-4 text-sm"><Navigation className="h-4 w-4" />Itinéraire</a>
+                    <a href={BRAND.phoneHref} className="btn-line min-h-[44px] px-4 text-sm"><Phone className="h-4 w-4" />Appeler</a>
+                    <WaButton message={`Bonjour Chambre 69, je souhaite passer à la boutique ${s.district}.`} source={`accueil-boutique-${s.id}`} className="min-h-[44px] px-4 text-sm">Écrire sur WhatsApp</WaButton>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      {/* Accueil, section 10 — Communauté */}
+      <Section>
+        <div className="text-center">
+          <p className="eyebrow mb-4">{COMMUNITY.handle}</p>
+          <h2 className="h-section">Notre mbotaay (groupe de femmes qui se soutiennent)</h2>
+          <ul className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+            {COMMUNITY.networks.map((n) => (
+              <li key={n.id} className="card p-5">
+                <a href={n.url} target="_blank" rel="noopener noreferrer" className="block">
+                  <span className="block font-serif text-4xl text-gold">{fmt(n.count)}</span>
+                  <span className="text-sm text-ivory-2">sur {n.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="lead mx-auto mt-8 max-w-2xl">Plus de {total >= 70000 ? 'soixante-dix mille' : fmt(total)} femmes qui parlent enfin de tout cela sans baisser la voix.</p>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <a className="btn-gold" href={COMMUNITY.networks[0].url} target="_blank" rel="noopener noreferrer">Nous suivre sur TikTok</a>
+            <a className="btn-line" href={COMMUNITY.networks[1].url} target="_blank" rel="noopener noreferrer">Nous suivre sur Instagram</a>
+          </div>
+          <p className="mt-6 text-xs text-mute">Chiffres arrêtés en {COMMUNITY.updatedAt}.</p>
+        </div>
+      </Section>
+
+      {/* Dernier appel : conseil */}
+      <section className="border-t border-gold/10 bg-ink-2 py-14">
+        <div className="container-x flex flex-col items-center gap-5 text-center">
+          <h2 className="font-serif text-3xl sm:text-4xl">Une question sur une taille, une pièce, une livraison ?</h2>
+          <p className="max-w-xl text-ivory-2">Une conseillère vous répond sur WhatsApp, y compris depuis l’étranger. Le numéro fonctionne comme un numéro ordinaire.</p>
+          <WaButton message={MESSAGES.general} source="accueil-bas">Parler à une conseillère</WaButton>
+        </div>
+      </section>
+    </>
   );
-};
+}

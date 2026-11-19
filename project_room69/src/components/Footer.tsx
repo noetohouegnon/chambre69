@@ -1,126 +1,97 @@
-import { Instagram, Mail, MessageCircle } from 'lucide-react';
-import { RevealOnScroll } from './Animations';
+import { Link } from 'react-router-dom';
+import { Instagram, Facebook, Phone, Mail } from 'lucide-react';
+import { BRAND, COMMUNITY, ZONES } from '../data/site';
+import { Newsletter } from './Newsletter';
+import { TikTokIcon, SnapchatIcon, WhatsAppIcon } from './ui/icons';
+import { waLink, MESSAGES } from '../lib/whatsapp';
+import { useUi } from '../context/UiContext';
 
-const TikTokIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-    <path d="M15 9a5 5 0 0 0 5 5" />
-  </svg>
+const ICONS: Record<string, JSX.Element> = {
+  tiktok: <TikTokIcon />, instagram: <Instagram className="h-5 w-5" />, facebook: <Facebook className="h-5 w-5" />, snapchat: <SnapchatIcon />,
+};
+
+function Col({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h2 className="mb-4 font-sans text-[13px] font-medium uppercase tracking-label text-gold">{title}</h2>
+      <ul className="space-y-1 text-[15px] text-ivory-2">{children}</ul>
+    </div>
+  );
+}
+const L = ({ to, children }: { to: string; children: React.ReactNode }) => (
+  <li><Link to={to} className="inline-flex min-h-[36px] items-center hover:text-gold">{children}</Link></li>
 );
 
-interface FooterProps {
-  onNavigate: (page: string) => void;
-}
-
-export const Footer = ({ onNavigate }: FooterProps) => {
+export function Footer() {
+  const { openSizeGuide } = useUi();
   return (
-    <RevealOnScroll delay={0.2}>
-      <footer className="bg-black text-white mt-16 md:mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {/* Partie gauche : Logo + réseaux sociaux sous le logo */}
-            <div className="text-center md:text-left">
-              <div className="inline-block breathe">
-                <img
-                  src="src/assets/LOGO-removebg-preview.png"
-                  alt="Chambre 69"
-                  className="h-30 w-auto mx-auto md:mx-0"
-                />
-              </div>
-              {/* Icônes décalées vers la droite */}
-              <div className="flex justify-center md:justify-start space-x-5 mt-4 md:ml-20">
-                <a
-                  href="https://www.instagram.com/chambre_69?igsh=MXdwbzdiM2QwYWhocA=="
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#E4405F] hover:scale-110 transition-transform duration-200"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="h-6 w-6" />
-                </a>
-                <a
-                  href="https://www.tiktok.com/@chambre__69?_r=1&_t=ZS-95CKwKhAijQ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white hover:scale-110 transition-transform duration-200"
-                  aria-label="TikTok"
-                >
-                  <TikTokIcon />
-                </a>
-              </div>
-            </div>
-
-            {/* Partie centrale : Navigation - boutons arrondis */}
-            <div className="text-center md:text-left flex flex-col justify-center">
-              <h4 className="text-sm font-bold tracking-wide mb-4 text-[#C9A96E]">Navigation</h4>
-              <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                <button
-                  onClick={() => onNavigate('home')}
-                  className="px-4 py-2 text-sm rounded-full border border-[#C9A96E] bg-transparent text-gray-300 hover:bg-[#C9A96E] hover:text-black transition-all duration-300 shadow-md hover:shadow-lg breathe"
-                >
-                  Accueil
-                </button>
-                <button
-                  onClick={() => onNavigate('shop')}
-                  className="px-4 py-2 text-sm rounded-full border border-[#C9A96E] bg-transparent text-gray-300 hover:bg-[#C9A96E] hover:text-black transition-all duration-300 shadow-md hover:shadow-lg breathe"
-                >
-                  Boutique
-                </button>
-                <button
-                  onClick={() => onNavigate('about')}
-                  className="px-4 py-2 text-sm rounded-full border border-[#C9A96E] bg-transparent text-gray-300 hover:bg-[#C9A96E] hover:text-black transition-all duration-300 shadow-md hover:shadow-lg breathe"
-                >
-                  À propos
-                </button>
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="px-4 py-2 text-sm rounded-full border border-[#C9A96E] bg-transparent text-gray-300 hover:bg-[#C9A96E] hover:text-black transition-all duration-300 shadow-md hover:shadow-lg breathe"
-                >
-                  Contact
-                </button>
-              </div>
-            </div>
-
-            {/* Partie droite : Contact - boutons arrondis */}
-            <div className="text-center md:text-left flex flex-col justify-center">
-              <h4 className="text-sm font-bold tracking-wide mb-4 text-[#C9A96E]">Contact</h4>
-              <div className="flex flex-col gap-3 items-center md:items-start">
-                <a
-                  href="https://wa.me/221787040505"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full border border-[#C9A96E] bg-transparent text-gray-300 hover:bg-[#C9A96E] hover:text-black transition-all duration-300 shadow-md hover:shadow-lg breathe"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  <span>+221 78 704 05 05</span>
-                </a>
-                <a
-                  href="mailto:contact@chambre69.com"
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full border border-[#C9A96E] bg-transparent text-gray-300 hover:bg-[#C9A96E] hover:text-black transition-all duration-300 shadow-md hover:shadow-lg breathe"
-                >
-                  <Mail className="h-4 w-4" />
-                  <span>contact@chambre69.com</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-10 pt-8 border-t border-[#C9A96E]/30 text-center">
-            <p className="text-gray-400 text-xs">
-              &copy; {new Date().getFullYear()} Chambre 69. Tous droits réservés.
-            </p>
-          </div>
+    <footer className="border-t border-gold/15 bg-ink-2 pb-28 lg:pb-10">
+      <div className="container-x grid gap-10 border-b border-gold/10 py-14 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+        <div>
+          <p className="eyebrow mb-3">L’École du bon maintien</p>
+          <h2 className="font-serif text-3xl sm:text-4xl">Recevez notre guide des tailles et nos nouveautés</h2>
+          <p className="mt-4 max-w-prose text-ivory-2">Deux messages par mois, pas davantage. Vous pouvez vous désinscrire en un clic, et nous ne partageons jamais vos coordonnées.</p>
         </div>
-      </footer>
-    </RevealOnScroll>
+        <Newsletter id="nl-footer" />
+      </div>
+
+      <div className="container-x grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-5">
+        <Col title="La boutique">
+          <L to="/boutique">La boutique en ligne</L>
+          <L to="/boutique?tri=nouveautes">Nouveautés</L>
+          <L to="/toutes-les-tailles">Du bonnet A au bonnet O</L>
+          <L to="/maisons">Nos maisons</L>
+          <L to="/heritage">Héritage et bétio</L>
+          <L to="/mariee">Mariée et trousseau</L>
+          <L to="/carte-cadeau">Carte cadeau</L>
+        </Col>
+        <Col title="Informations pratiques">
+          <li><button onClick={() => openSizeGuide('pied-de-page')} className="inline-flex min-h-[36px] items-center hover:text-gold">Guide des tailles</button></li>
+          <L to="/conseils">Conseils</L>
+          <L to="/rendez-vous">Prendre rendez-vous</L>
+          <L to="/faq">Questions fréquentes</L>
+          <L to="/nos-boutiques">Nos boutiques, Dakar</L>
+          <L to="/presse">Espace presse</L>
+        </Col>
+        <Col title="Livraison et pays desservis">
+          <L to="/livraison-retours">Livraison, échanges et retours</L>
+          <L to="/commander-depuis-l-etranger">Commander depuis l’étranger</L>
+          <L to="/livraison-afrique-de-l-ouest">Afrique de l’Ouest</L>
+          <li className="pt-2 text-sm leading-relaxed text-mute">{ZONES.map((z) => z.label).join(' · ')}</li>
+          <li className="pt-1 text-sm text-mute">Colis neutre, sans mention du contenu.</li>
+        </Col>
+        <Col title="Contact">
+          <li><a href={waLink(MESSAGES.general)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[36px] items-center gap-2 hover:text-wa"><WhatsAppIcon className="h-4 w-4" />{BRAND.whatsappDisplay}</a></li>
+          <li className="text-sm text-mute">Joignable depuis l’étranger, comme un numéro ordinaire.</li>
+          <li><a href={BRAND.phoneHref} className="inline-flex min-h-[36px] items-center gap-2 hover:text-gold"><Phone className="h-4 w-4" />Appeler</a></li>
+          <li><a href={`mailto:${BRAND.email}`} className="inline-flex min-h-[36px] items-center gap-2 hover:text-gold"><Mail className="h-4 w-4" />{BRAND.email}</a></li>
+          <L to="/contact">Formulaire de contact</L>
+        </Col>
+        <Col title="Mentions légales">
+          <L to="/mentions-legales">Mentions légales</L>
+          <L to="/cgv">Conditions générales de vente</L>
+          <L to="/confidentialite">Confidentialité</L>
+          <L to="/cookies">Cookies</L>
+        </Col>
+      </div>
+
+      <div className="container-x flex flex-col items-center gap-6 border-t border-gold/10 pt-10 text-center lg:flex-row lg:justify-between lg:text-left">
+        <div>
+          <img src="/brand/logo-mark.png" alt="Chambre 69" width={199} height={186} loading="lazy" className="mx-auto h-16 w-auto lg:mx-0" />
+          <p className="mt-3 font-serif text-xl text-ivory">{BRAND.baseline}</p>
+        </div>
+        <div>
+          <p className="mb-3 text-sm text-mute">{COMMUNITY.handle} sur</p>
+          <ul className="flex justify-center gap-2">
+            {COMMUNITY.networks.map((n) => (
+              <li key={n.id}>
+                <a href={n.url} target="_blank" rel="noopener noreferrer" aria-label={`${n.label} ${COMMUNITY.handle}`} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gold/30 text-ivory hover:border-gold hover:text-gold">{ICONS[n.id]}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="text-sm text-mute">© {new Date().getFullYear()} Chambre 69 — Dakar, Sénégal</p>
+      </div>
+    </footer>
   );
-};
+}

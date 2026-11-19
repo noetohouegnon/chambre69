@@ -1,155 +1,78 @@
-import { MessageCircle, Instagram, Mail, Clock, MapPin } from 'lucide-react';
-import { FadeInOnLoad, RevealOnScroll } from '../components/Animations';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { PageHero, Section } from '../components/ui/Section';
+import { WaButton } from '../components/ui/WaButton';
+import { BRAND, DIAL_CODES } from '../data/site';
+import { MESSAGES } from '../lib/whatsapp';
+import { isEmail, isPhone, sendForm } from '../lib/forms';
 
-export const ContactPage = () => {
+export function ContactPage() {
+  const [f, setF] = useState({ prenom: '', email: '', dial: '+221', tel: '', sujet: 'Une question sur une taille', message: '' });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [done, setDone] = useState(false);
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const er: Record<string, string> = {};
+    if (!f.prenom.trim()) er.prenom = 'Indiquez votre prénom.';
+    if (!isEmail(f.email) && !isPhone(f.tel)) er.email = 'Indiquez au moins une adresse e-mail ou un numéro de téléphone pour que nous puissions vous répondre.';
+    if (f.message.trim().length < 5) er.message = 'Écrivez votre message.';
+    setErrors(er);
+    if (Object.keys(er).length) return;
+    await sendForm('contact', f, `Bonjour Chambre 69,\nSujet : ${f.sujet}\n\n${f.message}\n\n${f.prenom}${f.email ? ` · ${f.email}` : ''}${f.tel ? ` · ${f.dial} ${f.tel}` : ''}`);
+    setDone(true);
+  };
+  const err = (k: string) => errors[k] && <p id={`ct-${k}-e`} className="mt-1.5 text-sm text-[#F2A999]">{errors[k]}</p>;
   return (
-    <FadeInOnLoad>
-      <div className="min-h-screen bg-[#F9F5F6] pt-36 pb-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          {/* Titre principal */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 breathe">
-              Nous Contacter
-            </h1>
-            <div className="flex items-center justify-center gap-4 mt-4">
-              <div className="h-px bg-[#C9A96E] w-16"></div>
-              <span className="text-[#C9A96E]">✦</span>
-              <div className="h-px bg-[#C9A96E] w-16"></div>
-            </div>
+    <>
+      <PageHero eyebrow="Contact" title="Nous contacter" crumbs={[{ label: 'Contact' }]}>
+        <p>Le plus simple, c’est WhatsApp : une conseillère vous répond, y compris depuis l’étranger. Vous pouvez aussi nous écrire ci-dessous.</p>
+      </PageHero>
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
+          <div className="space-y-6">
+            <WaButton message={MESSAGES.general} source="contact" className="w-full sm:w-auto">Parler à une conseillère</WaButton>
+            <ul className="space-y-4 text-ivory-2">
+              <li className="flex gap-3"><Phone className="h-5 w-5 shrink-0 text-gold" /><span><a href={BRAND.phoneHref} className="text-ivory hover:text-gold">{BRAND.whatsappDisplay}</a><br /><span className="text-sm text-mute">WhatsApp et appels. Le numéro fonctionne depuis l’étranger comme un numéro ordinaire.</span></span></li>
+              <li className="flex gap-3"><Mail className="h-5 w-5 shrink-0 text-gold" /><a href={`mailto:${BRAND.email}`} className="text-ivory hover:text-gold">{BRAND.email}</a></li>
+              <li className="flex gap-3"><Clock className="h-5 w-5 shrink-0 text-gold" /><span>Nous répondons sous 24 heures.</span></li>
+              <li className="flex gap-3"><MapPin className="h-5 w-5 shrink-0 text-gold" /><span>Boutiques Point E et Corniche Ouest, Dakar. <Link to="/nos-boutiques" className="text-gold hover:underline">Adresses et itinéraires</Link></span></li>
+            </ul>
           </div>
-
-          {/* Section des contacts (3 blocs) */}
-          <RevealOnScroll delay={0.1}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              {/* WhatsApp */}
-              <div className="group bg-black border-2 border-[#C9A96E] rounded-2xl p-8 text-center hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div className="w-20 h-20 mx-auto bg-[#25D366] rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <MessageCircle className="h-10 w-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-semibold text-[#C9A96E] mb-3">WhatsApp</h3>
-                <p className="text-gray-300 mb-4 text-sm">
-                  Service rapide et personnalisé pour vos commandes
-                </p>
-                <a
-                  href="https://wa.me/221787040505"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-6 py-2 border border-[#C9A96E] rounded-full text-[#C9A96E] text-sm hover:bg-[#C9A96E] hover:text-black transition-all duration-300"
-                >
-                  +221 78 704 05 05
-                </a>
+          {done ? (
+            <div className="card p-8" role="status"><h2 className="font-serif text-3xl">Merci {f.prenom}</h2><p className="mt-3 text-ivory-2">Votre message est prêt sur WhatsApp. Nous vous répondons sous 24 heures.</p></div>
+          ) : (
+            <form onSubmit={submit} noValidate className="card grid gap-4 p-6 sm:grid-cols-2 sm:p-8">
+              <div>
+                <label htmlFor="ct-prenom" className="label">Prénom</label>
+                <input id="ct-prenom" className="field" autoComplete="given-name" value={f.prenom} onChange={(e) => setF({ ...f, prenom: e.target.value })} aria-invalid={!!errors.prenom} aria-describedby={errors.prenom ? 'ct-prenom-e' : undefined} />{err('prenom')}
               </div>
-
-              {/* Instagram */}
-              <div className="group bg-black border-2 border-[#C9A96E] rounded-2xl p-8 text-center hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-purple-600 to-pink-500 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Instagram className="h-10 w-10 text-white" />
-                </div>
-                <h3 className="text-2xl font-semibold text-[#C9A96E] mb-3">Instagram</h3>
-                <p className="text-gray-300 mb-4 text-sm">
-                  Suivez-nous pour découvrir nos nouveautés
-                </p>
-                <a
-                  href="https://www.instagram.com/chambre_69"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-6 py-2 border border-[#C9A96E] rounded-full text-[#C9A96E] text-sm hover:bg-[#C9A96E] hover:text-black transition-all duration-300"
-                >
-                  @chambre_69
-                </a>
+              <div>
+                <label htmlFor="ct-email" className="label">Adresse e-mail</label>
+                <input id="ct-email" type="email" inputMode="email" autoComplete="email" className="field" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} aria-invalid={!!errors.email} aria-describedby={errors.email ? 'ct-email-e' : undefined} />{err('email')}
               </div>
-
-              {/* Email */}
-              <div className="group bg-black border-2 border-[#C9A96E] rounded-2xl p-8 text-center hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div className="w-20 h-20 mx-auto bg-[#C9A96E] rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
-                  <Mail className="h-10 w-10 text-black" />
+              <div className="sm:col-span-2">
+                <label htmlFor="ct-tel" className="label">Téléphone (facultatif)</label>
+                <div className="flex gap-2">
+                  <select aria-label="Indicatif" className="field w-[8.5rem] shrink-0" value={f.dial} onChange={(e) => setF({ ...f, dial: e.target.value })}>{DIAL_CODES.map((d) => <option key={d.label} value={d.code}>{d.label}</option>)}</select>
+                  <input id="ct-tel" type="tel" inputMode="tel" className="field" value={f.tel} onChange={(e) => setF({ ...f, tel: e.target.value })} />
                 </div>
-                <h3 className="text-2xl font-semibold text-[#C9A96E] mb-3">Email</h3>
-                <p className="text-gray-300 mb-4 text-sm">
-                  Pour toute demande d'information
-                </p>
-                <a
-                  href="mailto:contact@chambre69.com"
-                  className="inline-block px-6 py-2 border border-[#C9A96E] rounded-full text-[#C9A96E] text-sm hover:bg-[#C9A96E] hover:text-black transition-all duration-300"
-                >
-                  contact@chambre69.com
-                </a>
               </div>
-            </div>
-          </RevealOnScroll>
-
-          {/* Section horaires et localisation */}
-          <RevealOnScroll delay={0.15}>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Horaires */}
-              <div className="bg-black border-2 border-[#C9A96E] rounded-2xl p-8 shadow-xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <Clock className="h-8 w-8 text-[#C9A96E]" />
-                  <h2 className="text-2xl font-semibold text-[#C9A96E]">Horaires d'ouverture</h2>
-                </div>
-                <div className="space-y-3 text-gray-300">
-                  <div className="flex justify-between border-b border-[#C9A96E]/30 pb-2">
-                    <span>Lundi - Vendredi</span>
-                    <span className="font-medium">9h00 - 19h00</span>
-                  </div>
-                  <div className="flex justify-between border-b border-[#C9A96E]/30 pb-2">
-                    <span>Samedi</span>
-                    <span className="font-medium">10h00 - 18h00</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Dimanche</span>
-                    <span className="text-gray-500">Fermé</span>
-                  </div>
-                </div>
-                <p className="text-gray-400 text-sm mt-6 italic">
-                  Nous répondons généralement dans les 24 heures
-                </p>
+              <div className="sm:col-span-2">
+                <label htmlFor="ct-sujet" className="label">Sujet</label>
+                <select id="ct-sujet" className="field" value={f.sujet} onChange={(e) => setF({ ...f, sujet: e.target.value })}>
+                  {['Une question sur une taille', 'Une commande', 'Une livraison hors Sénégal', 'Un rendez-vous', 'Après une mastectomie', 'Presse et partenariats', 'Autre'].map((s) => <option key={s}>{s}</option>)}
+                </select>
               </div>
-
-              {/* Localisation */}
-              <div className="bg-black border-2 border-[#C9A96E] rounded-2xl p-8 shadow-xl">
-                <div className="flex items-center gap-3 mb-6">
-                  <MapPin className="h-8 w-8 text-[#C9A96E]" />
-                  <h2 className="text-2xl font-semibold text-[#C9A96E]">Notre boutique</h2>
-                </div>
-                <p className="text-gray-300 mb-4">
-                  Dakar, Sénégal
-                </p>
-                <div className="rounded-lg overflow-hidden border border-[#C9A96E]/30 h-48 mb-4">
-                  <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123456!2d-17.444!3d14.6937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQxJzM3LjMiTiAxN8KwMjYnMjYuNCJX!5e0!3m2!1sfr!2ssn!4v1234567890"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Localisation Chambre 69"
-                    className="grayscale hover:grayscale-0 transition-all duration-500"
-                  ></iframe>
-                </div>
-                <a
-                  href="https://maps.google.com/?q=Dakar+Sénégal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-[#C9A96E] hover:underline"
-                >
-                  Ouvrir dans Google Maps →
-                </a>
+              <div className="sm:col-span-2">
+                <label htmlFor="ct-message" className="label">Message</label>
+                <textarea id="ct-message" className="field min-h-[140px]" value={f.message} onChange={(e) => setF({ ...f, message: e.target.value })} aria-invalid={!!errors.message} aria-describedby={errors.message ? 'ct-message-e' : undefined} />{err('message')}
               </div>
-            </div>
-          </RevealOnScroll>
-
-          {/* Message supplémentaire */}
-          <RevealOnScroll delay={0.2}>
-            <div className="mt-16 text-center">
-              <p className="text-gray-500 text-sm">
-                Une question ? Une demande particulière ? N'hésitez pas à nous contacter directement par WhatsApp ou par email.
-              </p>
-            </div>
-          </RevealOnScroll>
+              <div className="sm:col-span-2"><button type="submit" className="btn-gold">Envoyer</button></div>
+            </form>
+          )}
         </div>
-      </div>
-    </FadeInOnLoad>
+      </Section>
+    </>
   );
-};
+}

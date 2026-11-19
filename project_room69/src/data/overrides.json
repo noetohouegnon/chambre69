@@ -1,0 +1,21 @@
+{
+  "_lisez-moi": "Ce fichier prime sur catalog.json (généré automatiquement). Une entrée par fiche, repérée par son identifiant (slug). Champs possibles : name, price (en FCFA, nombre entier), description, sizes { cups, bands, alpha }, unavailable (liste de tailles en rupture, ex. [\"95G\", \"L\"]), lastPieces (true/false), stores ([\"point-e\", \"corniche-ouest\"]), fit (3 lignes « Cette pièce vous ira si »), isNew, hidden. Dès que les tailles réelles sont renseignées, ajouter \"sizesProvisional\": false.",
+  "slip-nerina-echancree-elomi": { "name": "Slip Nerina échancré" },
+  "soutien-gorge-smooth-moule-elomi": { "name": "Soutien-gorge Smooth moulé" },
+  "soutien-gorge-smoothing-moule-sans-bretelles-elomi": { "name": "Soutien-gorge Smoothing moulé sans bretelles" },
+  "soutien-gorge-cate-a-armatures-elomi": { "name": "Soutien-gorge Cate à armatures" },
+  "soutien-gorge-everymove-sport-a-armatures-multipositions-curvy-kate": { "name": "Brassière de sport Everymove à armatures, bretelles multipositions" },
+  "culotte-zsa-dita-von-teese": { "name": "Culotte Zsa Zsa" },
+  "porte-jarretelles-zsa-dita-von-teese": { "name": "Porte-jarretelles Zsa Zsa" },
+  "culotte-dita-von-teese": { "name": "String Victresse" },
+  "culotte-de-grossesse-ysabel-mora": { "name": "Culotte de grossesse" },
+  "culotte-noire-anti-frottement-ysabel-mora": { "name": "Panty anti-frottement noir" },
+  "boxer-homme-fastening-boxer-ysabel-mora": { "name": "Boxer homme à braguette" },
+  "slip-homme-fastening-ysabel-mora": { "name": "Slip homme à braguette — modèle 1" },
+  "slip-homme-fastening-ysabel-mora-2": { "name": "Slip homme à braguette — modèle 2" },
+  "soutien-gorge-naked-a-armatures-non-rembourre-ysabel-mora": { "name": "Soutien-gorge Naked à armatures, non rembourré" },
+  "soutien-gorge-naked-a-armatures-rembourre-ysabel-mora": { "name": "Soutien-gorge Naked à armatures, rembourré — modèle 1" },
+  "soutien-gorge-naked-a-armatures-rembourre-ysabel-mora-2": { "name": "Soutien-gorge Naked à armatures, rembourré — modèle 2" },
+  "soutien-gorge-sans-armatures-non-rembourre-ysabel-mora": { "name": "Soutien-gorge sans armatures, non rembourré" },
+  "t-shirt-sous-vetement-thermique-blanc-col-v-ysabel-mora": { "name": "T-shirt thermique blanc col V" }
+}
