@@ -1,10 +1,10 @@
 /**
  * Données de la maison, à un seul endroit.
- * Les valeurs entre crochets [ … ] sont en attente de transmission par Chambre 69
- * (cf. « Ce qu'il reste à nous transmettre » dans le livrable rédactionnel).
+ * Les valeurs à null (adresses, horaires, délais, mentions légales…) sont en attente de Chambre 69 :
+ * le site affiche alors une formulation neutre, et l'information réelle dès qu'elle est renseignée.
  */
 
-export const SITE_URL = (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || 'https://chambre69-74u7-one.vercel.app';
+export const SITE_URL = (import.meta.env.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || 'http://localhost:4173';
 
 export const BRAND = {
   name: 'Chambre 69',
@@ -78,32 +78,32 @@ export const ZONES: Zone[] = [
     id: 'dakar',
     label: 'Dakar et périphérie',
     countries: ['Sénégal — Dakar et périphérie'],
-    delay: '[délai à confirmer] — livraison express sur créneau',
-    fees: '[frais à confirmer]',
+    delay: 'Livraison express, sur un créneau convenu avec vous',
+    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Retrait possible dans nos deux boutiques', 'Règlement possible à la livraison, après confirmation par une conseillère'],
   },
   {
     id: 'senegal',
     label: 'Régions du Sénégal',
     countries: ['Sénégal — régions (Thiès, Saint-Louis, Mbour, Touba, Ziguinchor…)'],
-    delay: '[délai à confirmer]',
-    fees: '[frais à confirmer]',
+    delay: 'Précisé par votre conseillère selon votre ville',
+    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Suivi de commande sur WhatsApp'],
   },
   {
     id: 'sous-region',
     label: "Afrique de l'Ouest",
     countries: ["Côte d'Ivoire", 'Mali', 'Burkina Faso', 'Guinée', 'Mauritanie', 'Gambie', 'Bénin', 'Togo'],
-    delay: '[délai par pays à confirmer]',
-    fees: '[frais par pays à confirmer]',
+    delay: 'Précisé par votre conseillère selon votre pays',
+    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Droits et taxes éventuels annoncés avant la commande, jamais après'],
   },
   {
     id: 'international',
     label: 'International',
     countries: ['France', 'Italie', 'Espagne', 'Belgique', 'Royaume-Uni', 'Allemagne', 'États-Unis', 'Canada'],
-    delay: '[délai par zone à confirmer]',
-    fees: '[frais par zone à confirmer]',
+    delay: 'Précisé par votre conseillère selon votre pays',
+    fees: 'Annoncés par votre conseillère avant validation',
     notes: ['Mention douanière et droits éventuels annoncés avant la commande', 'Suivi de colis'],
   },
 ];
@@ -130,12 +130,38 @@ export const DIAL_CODES = [
   { code: '+1', label: 'États-Unis / Canada (+1)' },
 ];
 
-/** Données encore attendues — affichées sous forme de bloc d'attente neutre (3.3). */
+/**
+ * Données encore attendues de Chambre 69.
+ * Tant qu'une valeur vaut null, le site affiche une formulation neutre (jamais de « [X] » visible).
+ * Dès que l'information est connue, il suffit de la renseigner ici.
+ */
 export const PENDING = {
-  exchangeDays: '[X]',
-  shipDays: '[X]',
-  sportMaxCup: '[X]',
-  bandRange: '[XX] au [XX]',
+  /** Délai d'échange en boutique, en jours (ex. 14). */
+  exchangeDays: null as number | null,
+  /** Délai d'expédition hors Sénégal, en jours ouvrés (ex. 3). */
+  shipDays: null as number | null,
+  /** Bonnet maximum des brassières de sport en stock (ex. 'K'). */
+  sportMaxCup: null as string | null,
+  /** Amplitude des tours de dos en stock (ex. '75 au 120'). */
+  bandRange: null as string | null,
   alphaRange: 'S au 3XL',
-  legal: { company: '[raison sociale]', form: '[forme juridique]', rccm: '[RCCM]', ninea: '[NINEA]', hq: '[adresse du siège]', host: 'Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis' },
+  legal: {
+    company: null as string | null,
+    form: null as string | null,
+    rccm: null as string | null,
+    ninea: null as string | null,
+    hq: null as string | null,
+    host: 'Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis',
+  },
 };
+
+/** « sous 14 jours » si le délai est connu, sinon une formulation neutre. */
+export const exchangeDelayText = () =>
+  PENDING.exchangeDays ? `sous ${PENDING.exchangeDays} jours` : 'dans le délai indiqué par votre conseillère lors de la commande';
+
+/**
+ * Témoignages de clientes réelles, publiés avec leur accord écrit (2.9).
+ * Tant que la liste est vide, l'accueil affiche une simple invitation à témoigner.
+ * Exemple d'entrée : { quote: 'Texte exact de la cliente', author: 'Aïssatou, Dakar — bonnet G' }
+ */
+export const TESTIMONIALS: { quote: string; author: string }[] = [];

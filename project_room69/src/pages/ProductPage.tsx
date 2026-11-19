@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Heart, Ruler, CalendarCheck, ShoppingBag, Share2, Package, Plane, RefreshCw, MessageCircle, X, MapPin, Check, BellRing } from 'lucide-react';
-import { BY_SLUG, CATEGORIES, coordinated, related, formatPrice, type Product } from '../data/catalog';
+import { BY_SLUG, CATEGORIES, coordinated, related, formatPrice, isWearable, type Product } from '../data/catalog';
 import { STORES, PENDING, SITE_URL } from '../data/site';
 import { Breadcrumbs } from '../components/ui/Section';
 import { Img } from '../components/ui/Img';
@@ -59,7 +59,6 @@ function Gallery({ p }: { p: Product }) {
           ))}
         </ul>
       )}
-      {p.images.length < 5 && <p className="mt-3 text-xs text-mute">Photos portées et détails de matière : à venir après la séance photo.</p>}
       {zoom && (
         <div className="fixed inset-0 z-50 overflow-auto bg-black" role="dialog" aria-modal="true" aria-label="Photo agrandie">
           <button onClick={() => setZoom(false)} className="fixed right-3 top-3 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-ink-3 text-ivory" aria-label="Fermer"><X className="h-6 w-6" /></button>
@@ -99,6 +98,7 @@ export function ProductPage() {
   useEffect(() => { if (p && size && size !== 'Taille unique') setWaMessage(MESSAGES.product(p.name, p.reference, size)); }, [size, p, setWaMessage]);
 
   if (!p) return <NotFoundPage />;
+  const wearable = isWearable(p);
 
   const cat = CATEGORIES.find((c) => c.id === p.category)!;
   const fits = fitLines(p);
@@ -195,8 +195,8 @@ export function ProductPage() {
             {/* Les quatre actions (4.4) */}
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               <button className="btn-gold sm:col-span-2" onClick={() => requireSize() && add(p.slug, size)}><ShoppingBag className="h-5 w-5" />Ajouter au panier</button>
-              <button className="btn-line" onClick={() => { track('appointment_intent', { type: 'essayage', item: p.slug }); navigate(`/rendez-vous?type=essayage&piece=${p.slug}${size ? `&taille=${encodeURIComponent(size)}` : ''}`); }}><CalendarCheck className="h-5 w-5" />Réserver pour essayage</button>
-              <WaButton message={MESSAGES.product(p.name, p.reference, size && size !== 'Taille unique' ? size : undefined)} source="fiche-produit" variant="line">Demander conseil sur cette pièce</WaButton>
+              {wearable && <button className="btn-line" onClick={() => { track('appointment_intent', { type: 'essayage', item: p.slug }); navigate(`/rendez-vous?type=essayage&piece=${p.slug}${size ? `&taille=${encodeURIComponent(size)}` : ''}`); }}><CalendarCheck className="h-5 w-5" />Réserver pour essayage</button>}
+              <WaButton message={MESSAGES.product(p.name, p.reference, size && size !== 'Taille unique' ? size : undefined)} source="fiche-produit" variant="line" className={wearable ? '' : 'sm:col-span-2'}>Demander conseil sur cette pièce</WaButton>
               <button className="btn-ghost sm:col-span-2 sm:justify-center" onClick={() => { toggle({ slug: p.slug, size: size || '' }); track('trousseau_toggle', { item: p.slug }); }} aria-pressed={has(p.slug)}>
                 {has(p.slug) ? <><Check className="h-4 w-4" />Dans ma liste de trousseau — <Link to="/mariee/liste" className="underline">voir ma liste</Link></> : <><Heart className="h-4 w-4" />Ajouter à ma liste de trousseau</>}
               </button>
@@ -204,9 +204,9 @@ export function ProductPage() {
 
             {/* Bandeau de réassurance de la fiche produit */}
             <ul className="mt-8 grid gap-3 rounded-2xl border border-gold/15 bg-ink-2 p-5 text-sm text-ivory-2 sm:grid-cols-2">
-              <li className="flex gap-2.5"><Plane className="h-4 w-4 shrink-0 text-gold" />Importé directement d’Europe</li>
+              <li className="flex gap-2.5"><Plane className="h-4 w-4 shrink-0 text-gold" />{p.brandKind === 'maison' ? 'Importé directement d’Europe' : 'Sélectionné par Chambre 69'}</li>
               <li className="flex gap-2.5"><Package className="h-4 w-4 shrink-0 text-gold" />Emballage neutre</li>
-              <li className="flex gap-2.5"><RefreshCw className="h-4 w-4 shrink-0 text-gold" />Échange en boutique sous {PENDING.exchangeDays} jours</li>
+              <li className="flex gap-2.5"><RefreshCw className="h-4 w-4 shrink-0 text-gold" />{wearable ? `Échange en boutique${PENDING.exchangeDays ? ` sous ${PENDING.exchangeDays} jours` : ''}` : 'Neuf, dans son emballage d’origine'}</li>
               <li className="flex gap-2.5"><MessageCircle className="h-4 w-4 shrink-0 text-gold" />Conseil gratuit sur WhatsApp</li>
               <li className="flex gap-2.5 sm:col-span-2"><MapPin className="h-4 w-4 shrink-0 text-gold" />Livraison Sénégal, Afrique de l’Ouest et international — <Link to="/livraison-retours" className="text-gold hover:underline">livraison et retours</Link></li>
             </ul>
@@ -232,7 +232,7 @@ export function ProductPage() {
                 <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between font-medium">Composition, entretien et provenance<span className="text-gold group-open:rotate-45 transition-transform">+</span></summary>
                 <div className="body-copy mt-3 space-y-3">
                   <p><strong className="font-medium text-ivory">Composition : </strong>{p.composition.length ? p.composition.join(' · ') : 'communiquée sur demande par votre conseillère.'}</p>
-                  <p><strong className="font-medium text-ivory">Entretien : </strong>{p.care.length ? p.care.join(' · ') : 'lavage à la main à l’eau froide, séchage à plat et à l’ombre.'} <Link to="/conseils/prendre-soin-de-sa-lingerie" className="text-gold hover:underline">Nos conseils d’entretien</Link></p>
+                  {(p.care.length > 0 || wearable) && <p><strong className="font-medium text-ivory">Entretien : </strong>{p.care.length ? p.care.join(' · ') : 'lavage à la main à l’eau froide, séchage à plat et à l’ombre.'} <Link to="/conseils/prendre-soin-de-sa-lingerie" className="text-gold hover:underline">Nos conseils d’entretien</Link></p>}
                   <p><strong className="font-medium text-ivory">Provenance : </strong>{p.brandKind === 'maison' ? `maison ${p.brand}, importée directement par Chambre 69 (${p.origin}).` : `${p.origin}.`}</p>
                 </div>
               </details>

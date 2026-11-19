@@ -1,21 +1,705 @@
 {
   "_lisez-moi": "Ce fichier prime sur catalog.json (généré automatiquement). Une entrée par fiche, repérée par son identifiant (slug). Champs possibles : name, price (en FCFA, nombre entier), description, sizes { cups, bands, alpha }, unavailable (liste de tailles en rupture, ex. [\"95G\", \"L\"]), lastPieces (true/false), stores ([\"point-e\", \"corniche-ouest\"]), fit (3 lignes « Cette pièce vous ira si »), isNew, hidden. Dès que les tailles réelles sont renseignées, ajouter \"sizesProvisional\": false.",
-  "slip-nerina-echancree-elomi": { "name": "Slip Nerina échancré" },
-  "soutien-gorge-smooth-moule-elomi": { "name": "Soutien-gorge Smooth moulé" },
-  "soutien-gorge-smoothing-moule-sans-bretelles-elomi": { "name": "Soutien-gorge Smoothing moulé sans bretelles" },
-  "soutien-gorge-cate-a-armatures-elomi": { "name": "Soutien-gorge Cate à armatures" },
-  "soutien-gorge-everymove-sport-a-armatures-multipositions-curvy-kate": { "name": "Brassière de sport Everymove à armatures, bretelles multipositions" },
-  "culotte-zsa-dita-von-teese": { "name": "Culotte Zsa Zsa" },
-  "porte-jarretelles-zsa-dita-von-teese": { "name": "Porte-jarretelles Zsa Zsa" },
-  "culotte-dita-von-teese": { "name": "String Victresse" },
-  "culotte-de-grossesse-ysabel-mora": { "name": "Culotte de grossesse" },
-  "culotte-noire-anti-frottement-ysabel-mora": { "name": "Panty anti-frottement noir" },
-  "boxer-homme-fastening-boxer-ysabel-mora": { "name": "Boxer homme à braguette" },
-  "slip-homme-fastening-ysabel-mora": { "name": "Slip homme à braguette — modèle 1" },
-  "slip-homme-fastening-ysabel-mora-2": { "name": "Slip homme à braguette — modèle 2" },
-  "soutien-gorge-naked-a-armatures-non-rembourre-ysabel-mora": { "name": "Soutien-gorge Naked à armatures, non rembourré" },
-  "soutien-gorge-naked-a-armatures-rembourre-ysabel-mora": { "name": "Soutien-gorge Naked à armatures, rembourré — modèle 1" },
-  "soutien-gorge-naked-a-armatures-rembourre-ysabel-mora-2": { "name": "Soutien-gorge Naked à armatures, rembourré — modèle 2" },
-  "soutien-gorge-sans-armatures-non-rembourre-ysabel-mora": { "name": "Soutien-gorge sans armatures, non rembourré" },
-  "t-shirt-sous-vetement-thermique-blanc-col-v-ysabel-mora": { "name": "T-shirt thermique blanc col V" }
+  "slip-nerina-echancree-elomi": {
+    "name": "Slip Nerina échancré"
+  },
+  "soutien-gorge-smooth-moule-elomi": {
+    "name": "Soutien-gorge Smooth moulé"
+  },
+  "soutien-gorge-smoothing-moule-sans-bretelles-elomi": {
+    "name": "Soutien-gorge Smoothing moulé sans bretelles"
+  },
+  "soutien-gorge-cate-a-armatures-elomi": {
+    "name": "Soutien-gorge Cate à armatures"
+  },
+  "soutien-gorge-everymove-sport-a-armatures-multipositions-curvy-kate": {
+    "name": "Brassière de sport Everymove à armatures, bretelles multipositions"
+  },
+  "culotte-zsa-dita-von-teese": {
+    "name": "Culotte Zsa Zsa"
+  },
+  "porte-jarretelles-zsa-dita-von-teese": {
+    "name": "Porte-jarretelles Zsa Zsa"
+  },
+  "culotte-dita-von-teese": {
+    "name": "String Victresse"
+  },
+  "culotte-de-grossesse-ysabel-mora": {
+    "name": "Culotte de grossesse"
+  },
+  "culotte-noire-anti-frottement-ysabel-mora": {
+    "name": "Panty anti-frottement noir"
+  },
+  "boxer-homme-fastening-boxer-ysabel-mora": {
+    "name": "Boxer homme à braguette"
+  },
+  "slip-homme-fastening-ysabel-mora": {
+    "name": "Slip homme bleu marine à braguette",
+    "images": [
+      {
+        "src": "/media/slip-homme-fastening-ysabel-mora/0-960.webp",
+        "srcSmall": "/media/slip-homme-fastening-ysabel-mora/0-480.webp",
+        "ratio": 0.667,
+        "width": 600
+      },
+      {
+        "src": "/media/slip-homme-fastening-ysabel-mora/1-960.webp",
+        "srcSmall": "/media/slip-homme-fastening-ysabel-mora/1-480.webp",
+        "ratio": 0.667,
+        "width": 600
+      },
+      {
+        "src": "/media/slip-homme-fastening-ysabel-mora-2/0-960.webp",
+        "srcSmall": "/media/slip-homme-fastening-ysabel-mora-2/0-480.webp",
+        "ratio": 0.667,
+        "width": 500
+      }
+    ]
+  },
+  "slip-homme-fastening-ysabel-mora-2": {
+    "name": "Slip homme à braguette — modèle 2",
+    "hidden": true
+  },
+  "soutien-gorge-naked-a-armatures-non-rembourre-ysabel-mora": {
+    "name": "Soutien-gorge Naked à armatures, non rembourré"
+  },
+  "soutien-gorge-naked-a-armatures-rembourre-ysabel-mora": {
+    "name": "Soutien-gorge Naked à armatures, rembourré, forme plongeante"
+  },
+  "soutien-gorge-naked-a-armatures-rembourre-ysabel-mora-2": {
+    "name": "Soutien-gorge Naked à armatures, rembourré, forme corbeille"
+  },
+  "soutien-gorge-sans-armatures-non-rembourre-ysabel-mora": {
+    "name": "Soutien-gorge sans armatures, non rembourré"
+  },
+  "t-shirt-sous-vetement-thermique-blanc-col-v-ysabel-mora": {
+    "name": "T-shirt thermique blanc col V"
+  },
+  "nuisette-traditionnelle-modele-01": {
+    "name": "Nuisette traditionnelle et kimono rose"
+  },
+  "nuisette-traditionnelle-modele-02": {
+    "name": "Nuisette traditionnelle et kimono moutarde"
+  },
+  "nuisette-traditionnelle-modele-03": {
+    "name": "Nuisette traditionnelle et kimono vert imprimé"
+  },
+  "nuisette-traditionnelle-modele-04": {
+    "name": "Nuisette traditionnelle et kimono blanc à motifs"
+  },
+  "chaines-de-taille-modele-01": {
+    "name": "Chaînes de taille multirangs dorées"
+  },
+  "chaines-de-taille-modele-02": {
+    "name": "Chaînes de taille en perles multicolores"
+  },
+  "chaines-de-taille-modele-03": {
+    "name": "Chaînes de taille à pampilles perlées"
+  },
+  "senteur-et-encens-modele-01": {
+    "name": "Huile parfumée Al Haramain Sadaf",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-01/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-01/0-480.webp",
+        "ratio": 0.989,
+        "width": 1032
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-03/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-03/0-480.webp",
+        "ratio": 1.126,
+        "width": 856
+      }
+    ]
+  },
+  "senteur-et-encens-modele-02": {
+    "name": "Huile parfumée Al Haramain Oyuny",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-02/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-02/0-480.webp",
+        "ratio": 1.315,
+        "width": 884
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-04/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-04/0-480.webp",
+        "ratio": 1.042,
+        "width": 888
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-08/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-08/0-480.webp",
+        "ratio": 1.194,
+        "width": 888
+      }
+    ]
+  },
+  "senteur-et-encens-modele-03": {
+    "name": "Huile parfumée Al Haramain Sadaf (en coffret)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-04": {
+    "name": "Huile parfumée Al Haramain Oyuny (en coffret)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-05": {
+    "name": "Parfum d’ambiance Naseem Velvet Delight"
+  },
+  "senteur-et-encens-modele-06": {
+    "name": "Parfum d’ambiance Naseem French"
+  },
+  "senteur-et-encens-modele-07": {
+    "name": "Parfum 75 ml en flacon doré, coffret rose"
+  },
+  "senteur-et-encens-modele-08": {
+    "name": "Huile parfumée Al Haramain Oyuny (flacon)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-09": {
+    "name": "Parfum Jamed 75 ml"
+  },
+  "senteur-et-encens-modele-10": {
+    "name": "Encens mamoul en pot, bouchon violet",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-10/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-10/0-480.webp",
+        "ratio": 1,
+        "width": 1080
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-34/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-34/0-480.webp",
+        "ratio": 1,
+        "width": 1280
+      }
+    ]
+  },
+  "senteur-et-encens-modele-11": {
+    "name": "Parfum Coco Miss 75 ml"
+  },
+  "senteur-et-encens-modele-12": {
+    "name": "Encens Mamoul Thurabi",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-12/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-12/0-480.webp",
+        "ratio": 1,
+        "width": 1280
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-13/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-13/0-480.webp",
+        "ratio": 1,
+        "width": 500
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-35/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-35/0-480.webp",
+        "ratio": 0.956,
+        "width": 612
+      }
+    ]
+  },
+  "senteur-et-encens-modele-13": {
+    "name": "Encens Mamoul Thurabi (pot)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-14": {
+    "name": "Parfum Dreiser 75 ml"
+  },
+  "senteur-et-encens-modele-15": {
+    "name": "Encens Haramain Oudh Barakah",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-15/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-15/0-480.webp",
+        "ratio": 1,
+        "width": 800
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-16/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-16/0-480.webp",
+        "ratio": 1,
+        "width": 600
+      }
+    ]
+  },
+  "senteur-et-encens-modele-16": {
+    "name": "Encens Haramain Oudh Barakah (coffret)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-17": {
+    "name": "Encens Oudh Ma’attar, boîte moyenne"
+  },
+  "senteur-et-encens-modele-18": {
+    "name": "Encens Oudh Ma’attar, boîte fleurie"
+  },
+  "senteur-et-encens-modele-19": {
+    "name": "Encens Al Haramain en pot rouge, cuillère dorée"
+  },
+  "senteur-et-encens-modele-20": {
+    "name": "Encens Al Haramain Al Areej"
+  },
+  "senteur-et-encens-modele-21": {
+    "name": "Encens Oudh Moattar Akher Mawed",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-21/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-21/0-480.webp",
+        "ratio": 1.356,
+        "width": 1280
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-22/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-22/0-480.webp",
+        "ratio": 1.356,
+        "width": 1280
+      }
+    ]
+  },
+  "senteur-et-encens-modele-22": {
+    "name": "Encens Oudh Moattar Akher Mawed (pot)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-23": {
+    "name": "Encens Haramain Agarwood Khusoosi Duggat"
+  },
+  "senteur-et-encens-modele-24": {
+    "name": "Encens Oudh Ma’al Attar, grande boîte"
+  },
+  "senteur-et-encens-modele-25": {
+    "name": "Huile parfumée Haramain Faris",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-25/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-25/0-480.webp",
+        "ratio": 1,
+        "width": 1080
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-31/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-31/0-480.webp",
+        "ratio": 0.753,
+        "width": 964
+      }
+    ]
+  },
+  "senteur-et-encens-modele-26": {
+    "name": "Huile parfumée Haramain Farasha"
+  },
+  "senteur-et-encens-modele-27": {
+    "name": "Huile parfumée en flacon doré ciselé"
+  },
+  "senteur-et-encens-modele-28": {
+    "name": "Huile parfumée Al Haramain, flacon doré"
+  },
+  "senteur-et-encens-modele-29": {
+    "name": "Parfum Al Haramain Dunes of Dubai",
+    "images": [
+      {
+        "src": "/media/senteur-et-encens-modele-29/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-29/0-480.webp",
+        "ratio": 1,
+        "width": 820
+      },
+      {
+        "src": "/media/senteur-et-encens-modele-30/0-960.webp",
+        "srcSmall": "/media/senteur-et-encens-modele-30/0-480.webp",
+        "ratio": 1,
+        "width": 1080
+      }
+    ]
+  },
+  "senteur-et-encens-modele-30": {
+    "name": "Parfum Al Haramain Dunes of Dubai (coffret)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-31": {
+    "name": "Huile parfumée Haramain Faris (flacon)",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-32": {
+    "name": "Parfum d’ambiance Naseem Oud"
+  },
+  "senteur-et-encens-modele-33": {
+    "name": "Encens Mamool Zainab"
+  },
+  "senteur-et-encens-modele-34": {
+    "name": "Encens mamoul, bouchon violet",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-35": {
+    "name": "Encens Mamoul Thurabi en copeaux",
+    "hidden": true
+  },
+  "senteur-et-encens-modele-36": {
+    "name": "Parfum d’ambiance Naseem Serenity"
+  },
+  "ensemble-kimono-modele-01": {
+    "name": "Nuisette en satin et kimono en dentelle champagne"
+  },
+  "ensemble-kimono-modele-02": {
+    "name": "Body doré et kimono en tulle bleu à plumes"
+  },
+  "ensemble-kimono-modele-03": {
+    "name": "Body doré et kimono en tulle jaune à plumes"
+  },
+  "ensemble-kimono-modele-04": {
+    "name": "Kimono long en dentelle dorée à plumes"
+  },
+  "ensemble-seduction-modele-01": {
+    "name": "Ensemble harnais rouge avec bas"
+  },
+  "ensemble-seduction-modele-02": {
+    "name": "Body harnais noir"
+  },
+  "ensemble-seduction-modele-03": {
+    "name": "Ensemble harnais nude et noir"
+  },
+  "ensemble-seduction-modele-04": {
+    "name": "Ensemble harnais bordeaux"
+  },
+  "ensemble-seduction-modele-05": {
+    "name": "Ensemble harnais rose"
+  },
+  "ensemble-seduction-modele-06": {
+    "name": "Body en dentelle rouge et kimono assorti"
+  },
+  "ensemble-seduction-modele-07": {
+    "name": "Body et robe en résille noire"
+  },
+  "ensemble-seduction-modele-08": {
+    "name": "Body en dentelle noire à manches évasées"
+  },
+  "ensemble-seduction-modele-09": {
+    "name": "Robe en résille noire à manches longues"
+  },
+  "ensemble-seduction-modele-10": {
+    "name": "Ensemble trois pièces en dentelle noire"
+  },
+  "ensemble-seduction-modele-11": {
+    "name": "Body en dentelle rouge à col lacé"
+  },
+  "ensemble-seduction-modele-12": {
+    "name": "Ensemble en dentelle rose"
+  },
+  "ensemble-seduction-modele-13": {
+    "name": "Ensemble rouge avec bas et menottes"
+  },
+  "ensemble-seduction-modele-14": {
+    "name": "Bas autofixants en dentelle"
+  },
+  "ensemble-seduction-modele-15": {
+    "name": "Ensemble harnais rouge à nœuds"
+  },
+  "ensemble-seduction-modele-16": {
+    "name": "Ensemble rouge à volants avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-17": {
+    "name": "Costumes de jeu de rôle"
+  },
+  "ensemble-seduction-modele-18": {
+    "name": "Ensemble en dentelle blanche avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-19": {
+    "name": "Ensemble noir avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-20": {
+    "name": "Ensemble rouge à plumes avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-21": {
+    "name": "Ensemble noir à plumes avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-22": {
+    "name": "Ensemble à lanières avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-23": {
+    "name": "Guêpière en dentelle bordeaux"
+  },
+  "ensemble-seduction-modele-24": {
+    "name": "Nuisette rouge à nœud, col américain"
+  },
+  "ensemble-seduction-modele-25": {
+    "name": "Ensemble ouvert en dentelle noire"
+  },
+  "ensemble-seduction-modele-26": {
+    "name": "Guêpière en dentelle rouge"
+  },
+  "ensemble-seduction-modele-27": {
+    "name": "Corset rouge et noir lacé"
+  },
+  "ensemble-seduction-modele-28": {
+    "name": "Body en dentelle noire avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-29": {
+    "name": "Body à lanières en dentelle noire"
+  },
+  "ensemble-seduction-modele-30": {
+    "name": "Ensemble noir à lanières avec bas"
+  },
+  "ensemble-seduction-modele-31": {
+    "name": "Body en tulle plumetis à lanières"
+  },
+  "ensemble-seduction-modele-32": {
+    "name": "Ensemble en dentelle rouge avec porte-jarretelles"
+  },
+  "ensemble-seduction-modele-33": {
+    "name": "Body en tulle plumetis à col montant"
+  },
+  "ensemble-seduction-modele-34": {
+    "name": "Harnais rouge et cache-tétons"
+  },
+  "ensemble-seduction-modele-35": {
+    "name": "Costume de dompteuse"
+  },
+  "ensemble-seduction-modele-36": {
+    "name": "Costume d’agente d’intervention"
+  },
+  "ensemble-seduction-modele-37": {
+    "name": "Costume d’infirmière en vinyle noir"
+  },
+  "ensemble-seduction-modele-38": {
+    "name": "Costume de policière en vinyle"
+  },
+  "ensemble-seduction-modele-39": {
+    "name": "Costume d’infirmière blanc et rouge"
+  },
+  "ensemble-seduction-modele-40": {
+    "name": "Costume de pirate"
+  },
+  "ensemble-seduction-modele-41": {
+    "name": "Costume de femme chat"
+  },
+  "ensemble-seduction-modele-42": {
+    "name": "Costume de mariée en tulle blanc"
+  },
+  "nuisette-modele-01": {
+    "name": "Body et kimono en dentelle dorée"
+  },
+  "nuisette-modele-02": {
+    "name": "Body en dentelle noire à manches longues"
+  },
+  "nuisette-modele-03": {
+    "name": "Body en dentelle noire à lanières"
+  },
+  "nuisette-modele-04": {
+    "name": "Body en tulle noir brodé de fleurs"
+  },
+  "nuisette-modele-05": {
+    "name": "Ensemble brodé de fleurs et bijou de corps"
+  },
+  "nuisette-modele-06": {
+    "name": "Body en dentelle verte et noire"
+  },
+  "nuisette-modele-07": {
+    "name": "Nuisette en voile rouge"
+  },
+  "nuisette-modele-08": {
+    "name": "Ensemble violet à lanières"
+  },
+  "nuisette-modele-09": {
+    "name": "Body rayé noir et masque de lapin"
+  },
+  "accessoire-bien-etre-modele-01": {
+    "name": "Stimulateur clitoridien rose",
+    "images": [
+      {
+        "src": "/media/accessoire-bien-etre-modele-01/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-01/0-480.webp",
+        "ratio": 1,
+        "width": 800
+      },
+      {
+        "src": "/media/accessoire-bien-etre-modele-08/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-08/0-480.webp",
+        "ratio": 0.75,
+        "width": 1920
+      }
+    ]
+  },
+  "accessoire-bien-etre-modele-02": {
+    "name": "Godemiché réaliste",
+    "hidden": true
+  },
+  "accessoire-bien-etre-modele-03": {
+    "name": "Satisfyer Pro 2 Generation 2",
+    "images": [
+      {
+        "src": "/media/accessoire-bien-etre-modele-03/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-03/0-480.webp",
+        "ratio": 1,
+        "width": 1000
+      },
+      {
+        "src": "/media/accessoire-bien-etre-modele-13/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-13/0-480.webp",
+        "ratio": 0.901,
+        "width": 1133
+      }
+    ]
+  },
+  "accessoire-bien-etre-modele-04": {
+    "name": "Vibromasseur rabbit rotatif 2 en 1"
+  },
+  "accessoire-bien-etre-modele-05": {
+    "name": "Boules de geisha Satisfyer Yoni Power 2"
+  },
+  "accessoire-bien-etre-modele-06": {
+    "name": "Œuf vibrant télécommandé Cora"
+  },
+  "accessoire-bien-etre-modele-07": {
+    "name": "Vibromasseur rabbit rose"
+  },
+  "accessoire-bien-etre-modele-08": {
+    "name": "Stimulateur clitoridien « Shell »",
+    "hidden": true
+  },
+  "accessoire-bien-etre-modele-09": {
+    "name": "Godemiché réaliste Adiba Parker"
+  },
+  "accessoire-bien-etre-modele-10": {
+    "name": "Satisfyer Pro + G-Spot",
+    "images": [
+      {
+        "src": "/media/accessoire-bien-etre-modele-10/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-10/0-480.webp",
+        "ratio": 0.955,
+        "width": 1253
+      },
+      {
+        "src": "/media/accessoire-bien-etre-modele-11/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-11/0-480.webp",
+        "ratio": 1.068,
+        "width": 1290
+      },
+      {
+        "src": "/media/accessoire-bien-etre-modele-19/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-19/0-480.webp",
+        "ratio": 0.699,
+        "width": 503
+      }
+    ]
+  },
+  "accessoire-bien-etre-modele-11": {
+    "name": "Satisfyer Pro + G-Spot (blanc)",
+    "hidden": true
+  },
+  "accessoire-bien-etre-modele-12": {
+    "name": "Vibromasseur à aspiration violet"
+  },
+  "accessoire-bien-etre-modele-13": {
+    "name": "Satisfyer Pro 2 Generation 2 (coffret)",
+    "hidden": true
+  },
+  "accessoire-bien-etre-modele-14": {
+    "name": "Pompe d’aspiration pour la poitrine"
+  },
+  "accessoire-bien-etre-modele-15": {
+    "name": "Pompe d’aspiration pour la poitrine (notice)"
+  },
+  "accessoire-bien-etre-modele-16": {
+    "name": "Pompe d’aspiration pour la poitrine, à poire"
+  },
+  "accessoire-bien-etre-modele-17": {
+    "name": "Godemiché réaliste Lovetoy Nature XXL"
+  },
+  "accessoire-bien-etre-modele-18": {
+    "name": "Harnais gode-ceinture Pretty Love"
+  },
+  "accessoire-bien-etre-modele-19": {
+    "name": "Satisfyer Pro + G-Spot (coffret)",
+    "hidden": true
+  },
+  "accessoire-bien-etre-modele-20": {
+    "name": "Vibromasseur rabbit Pretty Love Zach"
+  },
+  "accessoire-bien-etre-modele-21": {
+    "name": "Godemiché vibrant réaliste Lovetoy 10,5 pouces",
+    "images": [
+      {
+        "src": "/media/accessoire-bien-etre-modele-21/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-21/0-480.webp",
+        "ratio": 0.522,
+        "width": 522
+      },
+      {
+        "src": "/media/accessoire-bien-etre-modele-23/0-960.webp",
+        "srcSmall": "/media/accessoire-bien-etre-modele-23/0-480.webp",
+        "ratio": 1,
+        "width": 1000
+      }
+    ]
+  },
+  "accessoire-bien-etre-modele-22": {
+    "name": "Satisfyer Spinning Rabbit 1"
+  },
+  "accessoire-bien-etre-modele-23": {
+    "name": "Godemiché vibrant réaliste Lovetoy 10,5 pouces (coffret)",
+    "hidden": true
+  },
+  "accessoire-bien-etre-modele-24": {
+    "name": "Godemiché réaliste 27 cm"
+  },
+  "accessoire-bien-etre-modele-25": {
+    "name": "Godemiché Lovetoy Sliding-Skin 7 pouces"
+  },
+  "accessoire-bien-etre-modele-26": {
+    "name": "Godemiché Lovetoy Sliding-Skin 12 pouces"
+  },
+  "accessoire-bien-etre-modele-27": {
+    "name": "Godemiché réaliste, teinte caramel"
+  },
+  "culotte-enclose-taille-haute-curvy-kate": {
+    "name": "Culotte Enclose taille haute"
+  },
+  "boxer-homme-ouverture-braguette-ysabel-mora": {
+    "name": "Boxer homme à carreaux, ouverture braguette",
+    "images": [
+      {
+        "src": "/media/boxer-homme-ouverture-braguette-ysabel-mora/0-960.webp",
+        "srcSmall": "/media/boxer-homme-ouverture-braguette-ysabel-mora/0-480.webp",
+        "ratio": 0.667,
+        "width": 600
+      },
+      {
+        "src": "/media/boxer-homme-ouverture-braguette-ysabel-mora/1-960.webp",
+        "srcSmall": "/media/boxer-homme-ouverture-braguette-ysabel-mora/1-480.webp",
+        "ratio": 0.667,
+        "width": 600
+      },
+      {
+        "src": "/media/boxer-homme-ouverture-braguette-ysabel-mora-2/0-960.webp",
+        "srcSmall": "/media/boxer-homme-ouverture-braguette-ysabel-mora-2/0-480.webp",
+        "ratio": 0.667,
+        "width": 500
+      },
+      {
+        "src": "/media/boxer-homme-ouverture-braguette-ysabel-mora-2/1-960.webp",
+        "srcSmall": "/media/boxer-homme-ouverture-braguette-ysabel-mora-2/1-480.webp",
+        "ratio": 0.667,
+        "width": 500
+      }
+    ]
+  },
+  "culotte-taille-haute-ysabel-mora": {
+    "name": "Culotte taille haute en dentelle ivoire"
+  },
+  "lingerie-jeune-fille-ysabel-mora": {
+    "name": "Brassière jeune fille en coton rose"
+  },
+  "lingerie-jeune-fille-ysabel-mora-2": {
+    "name": "Culotte jeune fille en coton rose"
+  },
+  "pyjamas-femme-ysabel-mora": {
+    "name": "Pyjama court rose, col V en dentelle"
+  },
+  "pyjamas-femme-ysabel-mora-2": {
+    "name": "Pyjama court rose poudré à fines bretelles"
+  },
+  "boxer-homme-ouverture-braguette-ysabel-mora-2": {
+    "hidden": true
+  }
 }

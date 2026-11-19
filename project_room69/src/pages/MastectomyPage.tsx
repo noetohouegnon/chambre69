@@ -56,23 +56,18 @@ export function MastectomyPage() {
         </div>
       </Section>
 
+      {FILM.url && (
       <Section>
         <h2 className="h-section">Avec ou sans. Femme entièrement.</h2>
         <p className="mt-3 text-ivory-2">Le film que nous avons réalisé en octobre, pour que cela se sache.</p>
         <div className="mt-8 overflow-hidden rounded-2xl border border-gold/20">
-          {FILM.url ? (
             <a href={FILM.url} target="_blank" rel="noopener noreferrer" className="group relative block aspect-video bg-ink-3">
               {FILM.poster && <img src={FILM.poster} alt="Vignette du film Avec ou sans — Femme entièrement" loading="lazy" className="h-full w-full object-cover" />}
               <span className="absolute inset-0 flex items-center justify-center"><span className="flex h-20 w-20 items-center justify-center rounded-full bg-gold text-ink"><Play className="h-8 w-8" /></span></span>
             </a>
-          ) : (
-            <div className="flex aspect-video flex-col items-center justify-center gap-4 border-dashed bg-ink-2 text-center">
-              <span className="flex h-20 w-20 items-center justify-center rounded-full border border-gold/50 text-gold"><Play className="h-8 w-8" /></span>
-              <p className="max-w-sm px-6 text-sm text-mute">Emplacement du film « Avec ou sans — Femme entièrement » : vignette cliquable, jamais en lecture automatique. En attente du fichier définitif.</p>
-            </div>
-          )}
         </div>
       </Section>
+      )}
 
       <section className="border-t border-gold/10 bg-ink-2 py-16 text-center">
         <div className="container-x">

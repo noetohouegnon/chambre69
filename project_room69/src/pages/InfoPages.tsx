@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Gift, Download } from 'lucide-react';
-import { PageHero, Section, Pending } from '../components/ui/Section';
+import { PageHero, Section } from '../components/ui/Section';
 import { WaButton } from '../components/ui/WaButton';
 import { Newsletter } from '../components/Newsletter';
 import { MESSAGES } from '../lib/whatsapp';
-import { BRAND, ZONES, PENDING, SITE_URL } from '../data/site';
+import { BRAND, ZONES, PENDING, SITE_URL, exchangeDelayText } from '../data/site';
 import { setConsent, getConsent } from '../lib/analytics';
 
 /* ---------- Carte cadeau (5.5) ---------- */
@@ -13,7 +13,7 @@ export function GiftCardPage() {
   const [amount, setAmount] = useState('50000');
   const [custom, setCustom] = useState('');
   const value = amount === 'libre' ? custom : amount;
-  const fmt = (v: string) => Number(v).toLocaleString('fr-FR').replace(/ |\s/g, ' ');
+  const fmt = (v: string) => Number(v).toLocaleString('fr-FR').replace(/\u202f|\s/g, '\u00a0');
   return (
     <>
       <PageHero eyebrow="Carte cadeau" title="Offrir une carte cadeau" crumbs={[{ label: 'Carte cadeau' }]}>
@@ -57,11 +57,11 @@ export function GiftCardPage() {
 const FAQ: { cat: string; q: string; a: React.ReactNode; text: string }[] = [
   { cat: 'Tailles', q: 'Jusqu’à quelle taille montez-vous ?', text: 'Du bonnet A au bonnet O, et du S au 3XL pour les culottes et pièces souples.', a: <>Du bonnet A au bonnet O, et du S au 3XL pour les culottes et les pièces souples. <Link to="/toutes-les-tailles" className="text-gold hover:underline">Notre amplitude réelle</Link></> },
   { cat: 'Tailles', q: 'Je ne connais pas ma taille. Comment faire ?', text: 'Notre guide des tailles vous donne un point de départ en deux minutes, puis une conseillère vérifie avec vous sur WhatsApp. Vous pouvez aussi venir vous faire mesurer gratuitement en boutique.', a: <>Notre <Link to="/guide-des-tailles" className="text-gold hover:underline">guide des tailles</Link> vous donne un point de départ en deux minutes, puis une conseillère vérifie avec vous sur WhatsApp. Vous pouvez aussi venir vous faire mesurer gratuitement en boutique : vingt minutes, en salon fermé.</> },
-  { cat: 'Livraison', q: 'Livrez-vous hors de Dakar ?', text: 'Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et délais s’affichent dès que vous indiquez votre pays.', a: <>Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et délais s’affichent dès que vous indiquez votre pays. <Link to="/livraison-retours" className="text-gold hover:underline">Livraison et retours</Link></> },
+  { cat: 'Livraison', q: 'Livrez-vous hors de Dakar ?', text: 'Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et le délai vous sont annoncés dès que vous indiquez votre pays.', a: <>Oui : dans les régions du Sénégal, en Afrique de l’Ouest et à l’international. Les frais et le délai vous sont annoncés dès que vous indiquez votre pays, avant toute validation. <Link to="/livraison-retours" className="text-gold hover:underline">Livraison et retours</Link></> },
   { cat: 'Livraison', q: 'Puis-je commander depuis la France et faire livrer ma mère à Dakar ?', text: 'Oui. Cochez « Commande à offrir » dans votre panier : l’adresse de livraison est différente de la vôtre, le prix n’apparaît pas sur le colis, et nous vous prévenons quand elle l’a reçu.', a: <>Oui. Cochez « Commande à offrir » dans votre panier : l’adresse de livraison est différente de la vôtre, le prix n’apparaît pas sur le colis, et nous vous prévenons quand elle l’a reçu. <Link to="/commander-depuis-l-etranger" className="text-gold hover:underline">Commander depuis l’étranger</Link></> },
   { cat: 'Discrétion', q: 'Le colis est-il discret ?', text: 'Oui. Il est expédié dans un emballage neutre, sans mention du contenu ni du nom de la boutique à l’extérieur.', a: 'Oui. Il est expédié dans un emballage neutre, sans mention du contenu ni du nom de la boutique à l’extérieur. Vous pouvez aussi demander à n’être contactée que par WhatsApp.' },
   { cat: 'Paiement', q: 'Comment se passe le règlement ?', text: 'Votre commande est envoyée à une conseillère sur WhatsApp. Elle confirme la disponibilité, les frais et le délai, puis convient avec vous du règlement. Rien n’est expédié avant votre accord.', a: 'Votre commande est envoyée à une conseillère sur WhatsApp. Elle confirme la disponibilité de chaque taille, les frais et le délai, puis convient avec vous du règlement. Rien n’est expédié avant votre accord, et le libellé reste discret.' },
-  { cat: 'Retours', q: 'Puis-je échanger une pièce ?', text: 'Oui, en boutique, dans le délai indiqué dans notre politique. Pour des raisons d’hygiène, certaines pièces portées à même la peau ne peuvent être ni reprises ni échangées.', a: <>Oui, dans l’une de nos deux boutiques, sous {PENDING.exchangeDays} jours. Pour des raisons d’hygiène, les culottes, strings et pièces portées à même la peau ne peuvent être reprises que non portées, avec leur protection d’origine. C’est une règle de respect pour chaque cliente. <Link to="/livraison-retours" className="text-gold hover:underline">Notre politique</Link></> },
+  { cat: 'Retours', q: 'Puis-je échanger une pièce ?', text: 'Oui, en boutique, dans le délai indiqué dans notre politique. Pour des raisons d’hygiène, certaines pièces portées à même la peau ne peuvent être ni reprises ni échangées.', a: <>Oui, dans l’une de nos deux boutiques, {exchangeDelayText()}. Pour des raisons d’hygiène, les culottes, strings et pièces portées à même la peau ne peuvent être reprises que non portées, avec leur protection d’origine. C’est une règle de respect pour chaque cliente. <Link to="/livraison-retours" className="text-gold hover:underline">Notre politique</Link></> },
   { cat: 'Disponibilité', q: 'Les tailles affichées sont-elles en stock ?', text: 'Une conseillère confirme la disponibilité exacte de votre taille avant toute expédition. Une taille indisponible reste visible, avec une alerte de retour en stock.', a: 'Une conseillère confirme la disponibilité exacte de votre taille avant toute expédition. Une taille indisponible reste visible, et vous pouvez demander à être prévenue de son retour.' },
   { cat: 'Rendez-vous', q: 'Faut-il prendre rendez-vous ?', text: 'Non, nos boutiques vous accueillent sans rendez-vous. Pour une prise de mesures, un trousseau ou un accompagnement après mastectomie, un rendez-vous vous garantit un salon fermé et le temps qu’il faut.', a: <>Non, nos boutiques vous accueillent sans rendez-vous. Pour une prise de mesures, un trousseau ou un accompagnement après mastectomie, un rendez-vous vous garantit un salon fermé et le temps qu’il faut. <Link to="/rendez-vous" className="text-gold hover:underline">Prendre rendez-vous</Link></> },
   { cat: 'Authenticité', q: 'Vos pièces sont-elles authentiques ?', text: 'Oui. Nous importons directement de France, d’Espagne et d’Angleterre. Ce sont des pièces authentiques, pas des copies.', a: 'Oui. Nous importons directement de France, d’Espagne et d’Angleterre. Ce sont des pièces authentiques, pas des copies.' },
@@ -120,7 +120,7 @@ export function DeliveryPage() {
                 </li>
               ))}
             </ul>
-            <div className="mt-6"><Pending>grille définitive des délais et des frais par zone et par pays, délai d’échange et règles d’hygiène (formulation proposée ci-dessous, à valider).</Pending></div>
+            <p className="mt-6 text-sm text-mute">Les frais et le délai exacts dépendent de votre adresse et du poids du colis. Votre conseillère vous les annonce sur WhatsApp avant toute validation : rien n’est expédié sans votre accord.</p>
           </section>
           <section className="body-copy">
             <h2 className="h-section">Discrétion</h2>
@@ -133,7 +133,7 @@ export function DeliveryPage() {
           </section>
           <section className="body-copy">
             <h2 className="h-section">Échanges et retours</h2>
-            <p className="mt-4">Une pièce commandée en ligne peut être essayée et échangée dans l’une de nos deux boutiques, sous {PENDING.exchangeDays} jours.</p>
+            <p className="mt-4">Une pièce commandée en ligne peut être essayée et échangée dans l’une de nos deux boutiques, {exchangeDelayText()}.</p>
             <p>Pour des raisons d’hygiène, les culottes, strings et pièces portées à même la peau ne peuvent être échangés que non portés, avec leur protection d’origine. Nous l’appliquons pour chacune de nos clientes : c’est ce qui vous garantit de recevoir une pièce que personne n’a portée.</p>
             <p>Hors du Sénégal, écrivez-nous : nous trouvons une solution au cas par cas, et nous vous disons honnêtement ce qui est possible avant que vous ne commandiez.</p>
           </section>
@@ -169,8 +169,8 @@ export function PressPage() {
       </PageHero>
       <Section>
         <div className="grid gap-6 sm:grid-cols-2">
-          <a href="/brand/logo-wide.png" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Logo Chambre 69</span><span className="text-sm text-mute">PNG, fond transparent — version vectorielle à venir</span></span><Download className="h-5 w-5 text-gold" /></a>
-          <a href="/brand/boutique-facade-960.webp" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Vitrine de la boutique</span><span className="text-sm text-mute">WebP — visuels haute définition à venir</span></span><Download className="h-5 w-5 text-gold" /></a>
+          <a href="/brand/logo-wide.png" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Logo Chambre 69</span><span className="text-sm text-mute">PNG, fond transparent — autres formats sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
+          <a href="/brand/boutique-facade-960.webp" download className="card flex items-center justify-between gap-4 p-6 hover:border-gold/40"><span><span className="block text-ivory">Vitrine de la boutique</span><span className="text-sm text-mute">WebP — visuels haute définition sur demande</span></span><Download className="h-5 w-5 text-gold" /></a>
         </div>
         <div className="mt-8 card p-6"><p className="text-ivory">Contact presse</p><p className="mt-2 text-ivory-2"><a href={`mailto:${BRAND.email}?subject=Presse`} className="text-gold hover:underline">{BRAND.email}</a> · {BRAND.whatsappDisplay}</p></div>
       </Section>
@@ -192,9 +192,11 @@ const L = PENDING.legal;
 export function LegalNoticePage() {
   return (
     <Legal title="Mentions légales">
-      <Pending>informations légales à transmettre par Chambre 69 : raison sociale, forme juridique, RCCM, NINEA, adresse du siège.</Pending>
       <h2>Éditeur</h2>
-      <p>{L.company}, {L.form}, immatriculée au RCCM sous le numéro {L.rccm}, NINEA {L.ninea}. Siège : {L.hq}, Dakar, Sénégal.</p>
+      <p>
+        {L.company || 'Chambre 69'}{L.form ? `, ${L.form}` : ''}{L.rccm ? `, immatriculée au RCCM sous le numéro ${L.rccm}` : ''}{L.ninea ? `, NINEA ${L.ninea}` : ''}.
+        {' '}Siège : {L.hq ? `${L.hq}, ` : ''}Dakar, Sénégal.
+      </p>
       <p>Directrice de la publication : {BRAND.founder}, fondatrice et directrice générale.</p>
       <p>Contact : {BRAND.email} — {BRAND.whatsappDisplay}.</p>
       <h2>Hébergement</h2>
@@ -208,13 +210,12 @@ export function LegalNoticePage() {
 export function TermsPage() {
   return (
     <Legal title="Conditions générales de vente">
-      <Pending>texte définitif à valider juridiquement, conformément au droit sénégalais, couvrant la vente à distance vers l’Afrique de l’Ouest et l’international.</Pending>
-      <h2>1. Objet</h2><p>Les présentes conditions régissent les ventes conclues entre {L.company} (« Chambre 69 ») et toute cliente passant commande sur le site {SITE_URL}, en boutique ou par WhatsApp.</p>
+      <h2>1. Objet</h2><p>Les présentes conditions régissent les ventes conclues entre {L.company ? <>{L.company} (« Chambre 69 »)</> : 'Chambre 69'} et toute cliente passant commande sur le site {SITE_URL}, en boutique ou par WhatsApp.</p>
       <h2>2. Commande</h2><p>La commande est transmise à une conseillère, qui confirme la disponibilité de chaque taille, les frais de livraison et le délai. La vente est conclue à l’acceptation de cette confirmation par la cliente.</p>
       <h2>3. Prix</h2><p>Les prix sont exprimés en francs CFA (FCFA). Une conversion en euros ou en dollars peut être indiquée à titre purement indicatif. Les frais de livraison sont communiqués avant la confirmation de la commande.</p>
       <h2>4. Règlement</h2><p>Les modalités de règlement sont convenues avec la conseillère lors de la confirmation de la commande. Aucune donnée bancaire n’est conservée par Chambre 69.</p>
       <h2>5. Livraison</h2><p>Chambre 69 livre au Sénégal, dans les pays d’Afrique de l’Ouest desservis et à l’international. Pour les livraisons hors Sénégal, d’éventuels droits et taxes peuvent être dus par la destinataire ; ils sont annoncés avant la commande.</p>
-      <h2>6. Échanges et retours</h2><p>Les échanges s’effectuent en boutique sous {PENDING.exchangeDays} jours. Pour des raisons d’hygiène, les pièces portées à même la peau ne sont échangées que non portées, dans leur protection d’origine.</p>
+      <h2>6. Échanges et retours</h2><p>Les échanges s’effectuent en boutique, {exchangeDelayText()}. Pour des raisons d’hygiène, les pièces portées à même la peau ne sont échangées que non portées, dans leur protection d’origine.</p>
       <h2>7. Données personnelles</h2><p>Voir notre <Link to="/confidentialite" className="text-gold hover:underline">politique de confidentialité</Link>.</p>
       <h2>8. Droit applicable</h2><p>Les présentes conditions sont soumises au droit sénégalais.</p>
     </Legal>
@@ -224,7 +225,6 @@ export function TermsPage() {
 export function PrivacyPage() {
   return (
     <Legal title="Politique de confidentialité">
-      <Pending>texte définitif à valider, et déclaration du traitement auprès de la Commission de protection des données personnelles (CDP).</Pending>
       <h2>Ce que nous collectons</h2><p>Les informations que vous nous transmettez volontairement : prénom, coordonnées, pays, adresse de livraison, taille, et le contenu de vos messages.</p>
       <h2>Pourquoi</h2><p>Pour traiter vos commandes et rendez-vous, vous conseiller, et — seulement si vous l’avez accepté — vous envoyer nos actualités, segmentées par pays.</p>
       <h2>Combien de temps</h2><p>Trois ans après notre dernier échange pour les données de contact, et la durée légale pour les données de facturation.</p>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { PageHero, Section, Pending } from '../components/ui/Section';
+import { PageHero, Section } from '../components/ui/Section';
 import { PENDING } from '../data/site';
 
 const SITUATIONS = [
@@ -10,7 +10,7 @@ const SITUATIONS = [
   { id: 'apres-accouchement', label: 'Après l’accouchement', title: 'Après, ce n’est pas la même chose. Et c’est normal.', text: ['La poitrine change, le dos aussi, et le soutien-gorge d’avant ne va plus. Beaucoup de femmes continuent à le porter des mois, en attendant de « redevenir comme avant ».', 'Nous ne vous demanderons jamais de redevenir comme avant. Nous vous mesurons telle que vous êtes aujourd’hui.'], link: { label: 'Prendre rendez-vous pour une prise de mesures', to: '/rendez-vous?type=mesures' } },
   { id: 'mastectomie', label: 'Après une mastectomie', title: 'Vous avez traversé quelque chose', text: ['Trouver de la lingerie adaptée après une mastectomie relève souvent du parcours du combattant, et ce qu’on trouve ressemble rarement à de la lingerie. À Dakar comme dans toute la sous-région, l’offre est presque inexistante.', 'Nous proposons des brassières post-opératoires et des prothèses mammaires, et nos conseillères sont formées à cet accompagnement.'], link: { label: 'Avec ou sans. Femme entièrement.', to: '/apres-mastectomie' } },
   { id: 'menopause', label: 'À la ménopause et après', title: 'Il n’y a pas d’âge où l’on arrête', text: ['Passé un certain âge, on cesse de proposer de la belle lingerie aux femmes, comme si le désir d’être belle s’éteignait avec quelque chose d’autre.', 'La peau devient plus sensible, la poitrine évolue, le confort compte davantage. Ce sont des paramètres techniques, pas une raison de porter du beige.'], link: { label: 'Voir la ligne Drianké (femme assumée)', to: '/boutique?ligne=drianke' } },
-  { id: 'sport', label: 'Le sport et le mouvement', title: 'Courir avec un grand bonnet', text: ['La plupart des brassières de sport s’arrêtent au bonnet D. Au-delà, on vous conseille d’en superposer deux, ce qui n’est ni confortable, ni efficace, ni digne.'], pending: `Nous proposons un maintien réel jusqu’au bonnet ${PENDING.sportMaxCup}.`, link: { label: 'Voir les pièces de maintien', to: '/boutique?occasion=sport' } },
+  { id: 'sport', label: 'Le sport et le mouvement', title: 'Courir avec un grand bonnet', text: ['La plupart des brassières de sport s’arrêtent au bonnet D. Au-delà, on vous conseille d’en superposer deux, ce qui n’est ni confortable, ni efficace, ni digne.', PENDING.sportMaxCup ? `Nous proposons un maintien réel jusqu’au bonnet ${PENDING.sportMaxCup}.` : 'Nous proposons des brassières de sport à armatures, conçues pour les grands bonnets : un vrai maintien, sans superposition.'], link: { label: 'Voir les pièces de maintien', to: '/boutique?occasion=sport' } },
 ];
 
 export function InclusivityPage() {
@@ -24,8 +24,8 @@ export function InclusivityPage() {
         <h2 className="h-section">Notre amplitude réelle</h2>
         <dl className="mt-8 grid gap-4 sm:grid-cols-3">
           <div className="card p-6"><dt className="text-sm text-mute">Bonnets</dt><dd className="mt-1 font-serif text-4xl">du A au O</dd></div>
-          <div className="card p-6"><dt className="text-sm text-mute">Tours de dos</dt><dd className="mt-2"><Pending>du {PENDING.bandRange}, après vérification en stock.</Pending></dd></div>
-          <div className="card p-6"><dt className="text-sm text-mute">Culottes et pièces non structurées</dt><dd className="mt-1 font-serif text-4xl">du S au 3XL</dd><dd className="mt-1 text-xs text-mute">Amplitude à confirmer par le stock réel.</dd></div>
+          <div className="card p-6"><dt className="text-sm text-mute">Tours de dos</dt>{PENDING.bandRange ? <dd className="mt-1 font-serif text-4xl">du {PENDING.bandRange}</dd> : <dd className="mt-2 text-ivory-2">Selon les maisons et les modèles. Votre conseillère vérifie avec vous le stock exact dans votre tour de dos.</dd>}</div>
+          <div className="card p-6"><dt className="text-sm text-mute">Culottes et pièces non structurées</dt><dd className="mt-1 font-serif text-4xl">du S au 3XL</dd><dd className="mt-1 text-xs text-mute">Selon les modèles.</dd></div>
         </dl>
         <div className="body-copy mt-8">
           <p>Ces tailles ne sont pas commandables sur demande : elles sont en stock dans nos boutiques.</p>
@@ -44,7 +44,6 @@ export function InclusivityPage() {
               <div>
                 <h2 className="h-section">{s.title}</h2>
                 <div className="body-copy mt-5">{s.text.map((t) => <p key={t}>{t}</p>)}</div>
-                {s.pending && <div className="mt-4 max-w-prose"><Pending>{s.pending}</Pending></div>}
                 <Link to={s.link.to} className="btn-ghost mt-6">{s.link.label}<ArrowRight className="h-4 w-4" /></Link>
               </div>
             </div>

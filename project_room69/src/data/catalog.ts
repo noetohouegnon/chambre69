@@ -104,9 +104,37 @@ const CATEGORY_RANK: Record<CategoryId, number> = {
   'soutiens-gorge': 0, culottes: 1, heritage: 2, nuit: 3, 'porte-jarretelles': 4, basiques: 5, seduction: 6, homme: 7, 'bien-etre': 8,
 };
 
+/** Lignes parasites issues de la conversion des fiches .docx (titres de rubrique, tailles, marque). */
+const JUNK_FEATURE = /^(descriptif|informations? produits?|détail(s)? produit|caractéristiques|slip|culotte|string|tanga|shorty|soutien-gorge|marque\s*:.*|((XXS|XS|S|M|L|XL|XXL|\d?XL)\s*)+)$/i;
+
+/** Texte de présentation par défaut, quand la fiche d'origine n'en contient pas (aucune promesse invérifiable). */
+function fallbackDescription(p: Product): string {
+  const n = p.name.toLowerCase();
+  if (p.brandKind === 'maison') {
+    return `Une pièce de la maison ${p.brand} (${p.origin}), importée directement par Chambre 69. Votre conseillère vous détaille sur WhatsApp la matière, la coupe et les tailles disponibles, et vous aide à choisir la vôtre.`;
+  }
+  if (/encens|mamoul|mamool|oudh|agarwood/.test(n)) return 'Un encens choisi pour parfumer la chambre et le linge, dans la tradition du thiouraye. Se brûle sur un charbon ardent ou dans un brûle-parfum. Votre conseillère vous dit comment le doser et l’associer.';
+  if (/huile parfumée/.test(n)) return 'Une huile parfumée qui se pose en quelques gouttes sur la peau ou le linge. Votre conseillère vous décrit ses notes et vous aide à l’associer à un encens.';
+  if (/parfum/.test(n)) return 'Un parfum choisi pour la chambre, le linge ou la peau. Votre conseillère vous décrit ses notes sur WhatsApp et vous aide à composer votre ensemble de senteurs.';
+  if (/chaînes de taille/.test(n)) return 'Des chaînes de taille à porter à même la peau, seules ou sous un pagne, dans l’esprit du bin-bin (perles de taille). Elles s’offrent volontiers dans un trousseau.';
+  if (/nuisette traditionnelle/.test(n)) return 'Une nuisette longue et son kimono assorti, dans l’esprit de nos tenues d’intérieur traditionnelles. Taille ample, tombé fluide : une pièce de trousseau qui se porte longtemps.';
+  if (/costume/.test(n)) return 'Un costume de jeu de rôle, pour une soirée à deux qui sort de l’ordinaire. Votre conseillère vous confirme les pièces incluses et les tailles disponibles.';
+  if (/pompe d’aspiration/.test(n)) return 'Un appareil d’aspiration pour la poitrine, vendu dans un emballage neutre. Votre conseillère vous explique son utilisation en toute discrétion sur WhatsApp.';
+  if (p.category === 'bien-etre') return 'Un accessoire de bien-être intime, vendu neuf dans son emballage d’origine et expédié dans un colis neutre. Votre conseillère répond à vos questions en toute discrétion sur WhatsApp.';
+  if (/kimono/.test(n)) return 'Une pièce d’intérieur à superposer, pour le soir ou pour un moment à deux. Votre conseillère vous confirme la matière et les tailles disponibles.';
+  if (/bas autofixants/.test(n)) return 'Des bas autofixants à bande de dentelle, qui tiennent seuls ou s’accrochent à un porte-jarretelles. Votre conseillère vous confirme les coloris disponibles.';
+  return 'Une pièce de notre sélection séduction, choisie pour un moment à deux. Votre conseillère vous confirme sur WhatsApp la matière, le coloris et les tailles disponibles.';
+}
+
+/** Pièces à porter (sert à n'afficher l'essayage et les conseils d'entretien textile que lorsqu'ils ont un sens). */
+export const isWearable = (p: Pick<Product, 'name' | 'category'>) =>
+  p.category !== 'bien-etre' && !/encens|parfum|huile|chaînes de taille|mamoul|mamool|oudh|agarwood/i.test(p.name);
+
 export const PRODUCTS: Product[] = (raw as unknown as Product[])
   .map((p, i) => {
     const merged = { ...p, ...(ov[p.slug] || {}) } as Product;
+    merged.features = (merged.features || []).filter((f) => !JUNK_FEATURE.test(f.trim()));
+    if (!merged.description?.trim()) merged.description = fallbackDescription(merged);
     merged.lines = deriveLines(merged);
     merged.occasions = deriveOccasions(merged);
     merged.rank = i;
@@ -120,7 +148,7 @@ export const BRANDS_DISTRIBUTED = [...new Set(PRODUCTS.filter((p) => p.brandKind
 
 export const productUrl = (p: Pick<Product, 'slug'>) => `/boutique/${p.slug}`;
 
-export const formatPrice = (n: number) => `${n.toLocaleString('fr-FR').replace(/ |\s/g, ' ')} FCFA`;
+export const formatPrice = (n: number) => `${n.toLocaleString('fr-FR').replace(/\u202f|\s/g, '\u00a0')}\u00a0FCFA`;
 
 export function related(p: Product, n = 4): Product[] {
   const sameCollection = PRODUCTS.filter((q) => q.slug !== p.slug && q.brand === p.brand && sharedWord(q.name, p.name));
@@ -129,8 +157,11 @@ export function related(p: Product, n = 4): Product[] {
   return [...new Set([...sameCollection, ...sameCat, ...others])].slice(0, n);
 }
 
+const GENERIC_WORDS = ['Soutien-gorge', 'Culotte', 'Slip', 'String', 'Tanga', 'Ensemble', 'Body', 'Nuisette', 'Encens', 'Parfum', 'Huile', 'Costume', 'Godemiché', 'Vibromasseur', 'Satisfyer', 'Lovetoy', 'Haramain', 'Pompe', 'Chaînes', 'Guêpière', 'Corset', 'Harnais', 'Bas', 'Robe', 'Kimono', 'Pyjama', 'Boxer', 'Brassière', 'Naked'];
+
 function sharedWord(a: string, b: string) {
-  const model = (s: string) => s.split(/\s+/).filter((w) => /^[A-ZÀ-Ý][a-zà-ÿ]{2,}$/.test(w) && !['Soutien-gorge', 'Culotte', 'Slip', 'String', 'Tanga'].includes(w));
+  // Seuls les noms de modèle des maisons (Agathe, Cassiopée…) servent à rapprocher deux pièces.
+  const model = (s: string) => s.split(/\s+/).filter((w) => /^[A-ZÀ-Ý][a-zà-ÿ]{2,}$/.test(w) && !GENERIC_WORDS.includes(w));
   const ma = model(a);
   return model(b).some((w) => ma.includes(w));
 }

@@ -5,8 +5,19 @@ import { PRODUCTS, BRANDS_DISTRIBUTED } from '../data/catalog';
 import { Img } from '../components/ui/Img';
 import { sizeSummary } from '../components/ProductCard';
 
-/** Textes de présentation par maison : à soumettre à Chambre 69 avant publication (gabarit du livrable). */
-const BRAND_TEXT: Record<string, string | null> = {};
+/** Textes de présentation par maison (proposition rédigée à partir du positionnement public de chaque maison, à relire par Chambre 69). */
+const BRAND_TEXT: Record<string, string | null> = {
+  Empreinte: 'Maison française réputée pour ses broderies et ses dentelles, et pour un maintien pensé dès l’origine pour les bonnets généreux. Le luxe, sans renoncer au confort.',
+  Elomi: 'Maison anglaise entièrement consacrée aux femmes rondes et aux fortes poitrines : des coupes qui maintiennent vraiment, sans jamais renoncer à la dentelle ni à la couleur.',
+  'Louisa Bracq': 'Maison française de lingerie raffinée, connue pour ses broderies délicates et ses lignes très féminines. Des pièces qui se portent comme un bijou.',
+  Freya: 'Maison anglaise jeune et colorée, pensée pour les poitrines généreuses : imprimés, couleurs franches et maintien sérieux, jusque dans le sport et le bain.',
+  Fantasie: 'Maison anglaise spécialiste des bonnets généreux, qui mise sur une élégance discrète et un confort qui tient toute la journée.',
+  'Curvy Kate': 'Maison anglaise née pour les poitrines généreuses, au style affirmé et joueur. Des coupes modernes, du quotidien jusqu’à la brassière de sport.',
+  'Dita Von Teese': 'La ligne de lingerie imaginée par l’artiste Dita Von Teese : satin, dentelle, porte-jarretelles et glamour d’inspiration rétro, assumé jusqu’au bout.',
+  Wacoal: 'Maison d’origine japonaise, reconnue dans le monde entier pour la précision de ses coupes et la finesse de ses dentelles.',
+  'Ysabel Mora': 'Maison espagnole du quotidien : basiques, pyjamas, pièces de grossesse et sous-vêtements homme, confortables et faciles à vivre, pour toute la famille.',
+  LingaDore: 'Maison européenne de lingerie et de nuit, aux dentelles et aux coloris soignés, pour se faire plaisir à prix doux.',
+};
 
 export function BrandsPage() {
   const brands = BRANDS_DISTRIBUTED.map((b) => {
@@ -33,7 +44,7 @@ export function BrandsPage() {
               </Link>
               <div className="p-6">
                 <h2 className="font-serif text-3xl">{b.name} <span className="text-lg text-mute">— {b.origin}</span></h2>
-                {BRAND_TEXT[b.name] ? <p className="mt-3 text-ivory-2">{BRAND_TEXT[b.name]}</p> : <p className="pending mt-3">Présentation de la maison en cours de validation par Chambre 69.</p>}
+                {BRAND_TEXT[b.name] ? <p className="mt-3 text-ivory-2">{BRAND_TEXT[b.name]}</p> : null}
                 <p className="mt-3 text-sm text-mute">{b.range} · {b.count} pièce{b.count > 1 ? 's' : ''} en ligne</p>
                 <Link to={`/boutique?maison=${encodeURIComponent(b.name)}`} className="btn-ghost mt-3">Voir les pièces {b.name}<ArrowRight className="h-4 w-4" /></Link>
               </div>

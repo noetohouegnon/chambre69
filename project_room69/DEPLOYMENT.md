@@ -1,185 +1,59 @@
-# Déploiement du projet Chambre 69
+# Mettre le site Chambre 69 en ligne (gratuitement, avec Vercel)
 
-Ce guide décrit la procédure complète pour déployer le projet avec :
-- **Neon** pour la base de données PostgreSQL
-- **Render** pour le backend Node.js + Prisma
-- **Vercel** pour le frontend React + Vite
+Le site est **entièrement statique** : aucune base de données ni serveur à louer.
+Le catalogue est généré depuis les dossiers photos et les fiches `.docx` du dépôt.
+Le dossier `backend/` est un reste de l'ancien prototype : il n'est **pas** utilisé.
 
----
+## 1. Première mise en ligne (une seule fois, ~5 minutes)
 
-## 1. Préparation du dépôt
+1. Créez un compte gratuit sur https://vercel.com avec **« Continue with GitHub »**.
+2. Cliquez sur **Add New… → Project**, puis **Import** à côté du dépôt `chambre69`
+   (si le dépôt n'apparaît pas : « Adjust GitHub App Permissions » et autorisez-le).
+3. Dans l'écran de configuration :
+   - **Root Directory** : cliquez sur *Edit* et choisissez **`project_room69`** (important).
+   - **Framework Preset** : Vite (détecté automatiquement).
+   - Ne touchez à rien d'autre : `vercel.json` fournit déjà les commandes.
+4. Cliquez sur **Deploy**. Après 1 à 2 minutes, le site est en ligne à une adresse du type
+   `https://chambre69-xxxx.vercel.app`.
 
-1. Assurez-vous que le dépôt **project_room69** est à jour.
-2. Les dossiers à la racine contiennent les images et les fichiers Word pour chaque collection.
-3. Le backend utilise Prisma et lit les images relatives à l’arborescence racine.
+Chaque modification poussée ensuite sur la branche `main` est remise en ligne automatiquement.
 
----
+## 2. Brancher le nom de domaine (quand il sera acheté)
 
-## 2. Créer la base de données sur Neon
+1. Vercel → votre projet → **Settings → Domains** → ajoutez `chambre69.sn` (ou autre).
+2. Suivez les indications de Vercel pour les enregistrements DNS chez le registraire.
+3. **Settings → Environment Variables** : ajoutez `VITE_SITE_URL` = `https://chambre69.sn`,
+   puis **Deployments → Redeploy**. Les liens de partage WhatsApp et Google utiliseront ce domaine.
 
-1. Connectez-vous sur https://neon.tech.
-2. Créez un nouveau projet.
-3. Notez l’URL de connexion PostgreSQL fournie par Neon.
-4. Dans la zone `Connection strings`, copiez la valeur `postgresql://...`
+Sans cette variable, le site utilise automatiquement l'adresse `*.vercel.app` de production.
 
-### Variables d’environnement Neon
-- `DATABASE_URL`: URL de connexion PostgreSQL Neon
+## 3. Mettre à jour les informations (sans développeur)
 
-Exemple :
-```env
-DATABASE_URL="postgresql://user:password@ep-example-12345.us-east-1.aws.neon.tech:5432/neondb?sslmode=require"
+Tout se modifie directement sur GitHub (bouton crayon ✏️ sur le fichier), puis « Commit changes » :
+
+| Information | Fichier | Champ |
+|---|---|---|
+| Adresses, horaires, stationnement des boutiques | `src/data/site.ts` | `STORES` (`address`, `landmarks`, `hours`, `parking`) |
+| Délais et frais de livraison | `src/data/site.ts` | `ZONES` (`delay`, `fees`) |
+| Délai d'échange, délai d'expédition, tours de dos, bonnet max. sport | `src/data/site.ts` | `PENDING` |
+| Raison sociale, RCCM, NINEA, siège | `src/data/site.ts` | `PENDING.legal` |
+| Témoignages clientes (avec leur accord écrit) | `src/data/site.ts` | `TESTIMONIALS` |
+| Chiffres réseaux sociaux | `src/data/site.ts` | `COMMUNITY` |
+| Prix, nom, tailles réelles, rupture, masquer une pièce | `src/data/overrides.json` | voir `_lisez-moi` en tête du fichier |
+| Film « Avec ou sans » | `src/pages/MastectomyPage.tsx` | `FILM` (lien YouTube + vignette) |
+
+Tant qu'une valeur n'est pas renseignée, le site affiche une formulation neutre
+(« annoncés par votre conseillère… ») : rien d'incomplet n'apparaît aux clientes.
+
+## 4. En local (facultatif, pour un développeur)
+
 ```
-
----
-
-## 3. Préparer le backend
-
-1. Ouvrez le dossier `project_room69/backend`.
-2. Installez les dépendances :
-```bash
+cd project_room69
 npm install
-```
-3. Assurez-vous que le fichier `backend/package.json` contient :
-   - `express`, `cors`, `dotenv`, `@prisma/client`, `mammoth`
-4. Vérifiez que le fichier `backend/prisma/schema.prisma` utilise `env("DATABASE_URL")`.
-
-### Initialiser la base de données Prisma
-
-1. Créez la migration locale :
-```bash
-npx prisma migrate dev --name init
-```
-2. Générer le client Prisma :
-```bash
-npx prisma generate
-```
-3. Exécuter le seed pour importer les produits depuis le dossier racine :
-```bash
-npm run prisma:seed
+npm run catalog   # régénère le catalogue depuis les dossiers photos (si nouvelles photos)
+npm run build     # build + pré-rendu des pages + sitemap
+npx vite preview  # aperçu sur http://localhost:4173
 ```
 
-> Le seed lit les fichiers image et les fichiers `.docx` de chaque dossier de collection. Il extrait automatiquement la description si un fichier Word est trouvé dans le même dossier que l’image.
-
----
-
-## 4. Déployer le backend sur Render
-
-### Créer un service backend
-1. Connectez-vous à https://render.com.
-2. Créez un nouveau service **Web Service**.
-3. Sélectionnez le dépôt GitHub contenant `project_room69`.
-4. Branche : `main`.
-5. Build Command :
-```bash
-cd backend && npm install && npm run build
-```
-6. Start Command :
-```bash
-cd backend && npm start
-```
-7. Environnement : `Node 18` ou plus.
-
-### Variables d’environnement sur Render
-- `DATABASE_URL` : URL PostgreSQL Neon
-- `JWT_SECRET` : clé secrète pour JWT (ex : `chambre69_secret_key_luxury`)
-
-### Ajustement du seed sur Render
-- `backend/prisma/seed.ts` se base sur le dossier racine `ROOT_PATH`.
-- En production Render, l’arborescence projet doit inclure le dossier des images.
-- Vérifiez que les ressources sont disponibles dans le repo.
-
----
-
-## 5. Déployer le frontend sur Vercel
-
-1. Connectez-vous à https://vercel.com.
-2. Ajoutez un nouveau projet depuis GitHub.
-3. Sélectionnez le dépôt `project_room69`.
-4. Build Command :
-```bash
-npm install && npm run build
-```
-5. Output Directory :
-```bash
-dist
-```
-
-### Variables d’environnement Vercel
-- `VITE_API_URL` : URL du backend Render
-
-Exemple :
-```env
-VITE_API_URL="https://backend-chambre69.onrender.com/api"
-```
-
-> Si votre backend Render expose le service à `https://backend-chambre69.onrender.com`, ajoutez `/api` à la fin dans `VITE_API_URL`.
-
----
-
-## 6. Configuration finale
-
-### Backend
-- Vérifier `backend/src/index.ts` :
-  - `process.env.PORT` pour le port Render
-  - `process.env.JWT_SECRET`
-  - `process.env.DATABASE_URL`
-
-### Frontend
-- Vérifier `src/config.ts` :
-  - `VITE_API_URL` est utilisé pour les appels API.
-
-### Exemple de `.env` local
-```env
-# backend/.env
-DATABASE_URL="postgresql://user:password@neon.example:5432/dbname?sslmode=require"
-JWT_SECRET="votre_cle_jwt"
-```
-
-```env
-# frontend/.env
-VITE_API_URL="http://localhost:5000/api"
-```
-
----
-
-## 7. Test de bout en bout
-
-1. Lancer le backend local :
-```bash
-cd backend
-npm run dev
-```
-2. Lancer le frontend local :
-```bash
-npm run dev
-```
-3. Vérifier :
-   - `http://localhost:5173` en local
-   - Authentification fonctionnelle
-   - Panier bloqué si non connecté
-   - Requêtes API via `VITE_API_URL`
-   - Produits et descriptions extraites des `.docx`
-
----
-
-## 8. Notes importantes
-
-- La commande panier est désormais protégée : l’utilisateur doit se connecter pour utiliser WhatsApp via le panier.
-- Les descriptions des collections sont extraites des fichiers Word présents dans les dossiers de produits.
-- Le seul fichier YAML du projet est `.github/workflows/main.yml` et le `docker-compose.yml` local pour PostgreSQL.
-
----
-
-## 9. Commandes utiles
-
-```bash
-# Rebuild backend et frontend
-npm install
-npm run build
-cd backend
-npm run build
-
-# Regénérer Prisma
-npx prisma generate
-npm run prisma:seed
-```
+Alternative gratuite à Vercel : Netlify (même réglages : dossier `project_room69`,
+commande `npm run build`, dossier publié `dist`).

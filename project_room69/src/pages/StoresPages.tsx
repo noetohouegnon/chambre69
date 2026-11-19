@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Navigation, Phone, MapPin, Clock, Car, Package } from 'lucide-react';
-import { PageHero, Section, Pending } from '../components/ui/Section';
+import { PageHero, Section } from '../components/ui/Section';
 import { WaButton } from '../components/ui/WaButton';
 import { STORES, BRAND, directionsUrl, SITE_URL, type Store } from '../data/site';
 import { track } from '../lib/analytics';
@@ -47,7 +47,7 @@ export function StoresPage() {
               <p className="eyebrow">Dakar, Sénégal</p>
               <h2 className="mt-3 font-serif text-4xl"><Link to={`/nos-boutiques/${s.id}`} className="hover:text-gold">{s.district}</Link></h2>
               <p className="mt-2 text-ivory-2">{s.context}</p>
-              <div className="mt-5">{s.address ? <p>{s.address}</p> : <Pending>adresse complète, repères et horaires jour par jour.</Pending>}</div>
+              <div className="mt-5">{s.address ? <p>{s.address}</p> : <p className="text-sm text-mute">Pour l’adresse exacte et les horaires du jour, utilisez « Itinéraire » ou écrivez-nous sur WhatsApp : nous vous guidons jusqu’à la porte.</p>}</div>
               <div className="mt-6"><StoreActions s={s} /></div>
               <Link to={`/nos-boutiques/${s.id}`} className="btn-ghost mt-4">Toutes les informations</Link>
             </article>
@@ -84,16 +84,18 @@ export function StorePage() {
           <div className="space-y-8">
             <div>
               <h2 className="flex items-center gap-2 font-serif text-3xl"><MapPin className="h-6 w-6 text-gold" />Adresse et repères</h2>
-              <div className="mt-3">{s.address ? <p>{s.address}<br />{s.landmarks}</p> : <Pending>adresse complète et repères de quartier compréhensibles localement.</Pending>}</div>
+              <div className="mt-3">{s.address ? <p>{s.address}<br />{s.landmarks}</p> : <p className="text-ivory-2">{s.context}. Le bouton « Itinéraire » vous guide jusqu’à la boutique ; en cas de doute, écrivez-nous sur WhatsApp et une conseillère vous donne les repères du quartier.</p>}</div>
             </div>
             <div>
               <h2 className="flex items-center gap-2 font-serif text-3xl"><Clock className="h-6 w-6 text-gold" />Horaires</h2>
-              <div className="mt-3">{s.hours ? <ul>{s.hours.map((h) => <li key={h.day} className="flex justify-between border-b border-gold/10 py-2"><span>{h.day}</span><span>{h.time}</span></li>)}</ul> : <Pending>horaires jour par jour, horaires du Ramadan et des fêtes.</Pending>}</div>
+              <div className="mt-3">{s.hours ? <ul>{s.hours.map((h) => <li key={h.day} className="flex justify-between border-b border-gold/10 py-2"><span>{h.day}</span><span>{h.time}</span></li>)}</ul> : <p className="text-ivory-2">Les horaires peuvent varier pendant le Ramadan et les fêtes : appelez-nous ou écrivez-nous sur WhatsApp avant de passer, nous vous confirmons l’ouverture du jour.</p>}</div>
             </div>
-            <div>
-              <h2 className="flex items-center gap-2 font-serif text-3xl"><Car className="h-6 w-6 text-gold" />Stationnement et accès</h2>
-              <div className="mt-3">{s.parking ? <p>{s.parking}</p> : <Pending>stationnement et repères d’accès.</Pending>}</div>
-            </div>
+            {s.parking && (
+              <div>
+                <h2 className="flex items-center gap-2 font-serif text-3xl"><Car className="h-6 w-6 text-gold" />Stationnement et accès</h2>
+                <div className="mt-3"><p>{s.parking}</p></div>
+              </div>
+            )}
             <div className="card p-5">
               <p className="text-ivory">Retrait en boutique</p>
               <p className="mt-1 text-sm text-ivory-2">Vous commandez en ligne, depuis Dakar ou depuis l’étranger, et vous retirez ici pendant votre passage. Nous gardons vos pièces de côté.</p>
@@ -104,7 +106,6 @@ export function StorePage() {
             <MapFacade store={s} />
             <figure className="overflow-hidden rounded-2xl bg-ink-3">
               <img src="/brand/boutique-facade-960.webp" width={960} height={1280} loading="lazy" alt="Vitrine Chambre 69 à Dakar" className="aspect-[4/3] w-full object-cover" />
-              <figcaption className="p-3 text-xs text-mute">Photographies de l’intérieur de la boutique : à venir.</figcaption>
             </figure>
           </div>
         </div>

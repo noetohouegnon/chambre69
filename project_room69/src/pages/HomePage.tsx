@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Package, MessageCircle, Plane, Ruler, ArrowRight, MapPin, Phone, Navigation, Quote } from 'lucide-react';
 import { BY_SLUG, PRODUCTS, BRANDS_DISTRIBUTED, type Product } from '../data/catalog';
-import { BRAND, COMMUNITY, STORES, directionsUrl } from '../data/site';
+import { BRAND, COMMUNITY, STORES, TESTIMONIALS, directionsUrl } from '../data/site';
 import { ProductCard } from '../components/ProductCard';
 import { Img } from '../components/ui/Img';
 import { WaButton } from '../components/ui/WaButton';
 import { Section, SectionHead } from '../components/ui/Section';
 import { useUi } from '../context/UiContext';
-import { MESSAGES } from '../lib/whatsapp';
+import { MESSAGES, waLink } from '../lib/whatsapp';
 import { track } from '../lib/analytics';
 
 const pick = (slugs: string[]) => slugs.map((s) => BY_SLUG.get(s)).filter(Boolean) as Product[];
@@ -23,7 +23,7 @@ const ENTRY_TILES = [
   { label: 'Nuisettes et kimonos', to: '/boutique?categorie=nuit', slug: 'ensemble-kimono-modele-03' },
 ];
 
-const fmt = (n: number) => n.toLocaleString('fr-FR').replace(/ |\s/g, ' ');
+const fmt = (n: number) => n.toLocaleString('fr-FR').replace(/\u202f|\s/g, '\u00a0');
 
 export function HomePage() {
   const { openSizeGuide } = useUi();
@@ -233,22 +233,33 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Accueil, section 8 — Témoignages (2.9) : aucun témoignage inventé */}
-      <Section>
-        <SectionHead eyebrow="Témoignages" title="Elles sont passées avant vous" center>
-          Toutes les femmes citées ici sont des clientes réelles, qui ont accepté que nous publiions leurs mots. Nous n’en avons modifié aucun.
-        </SectionHead>
-        <ul className="grid gap-4 md:grid-cols-3">
-          {['Jeune femme, 25-30 ans', 'Forte poitrine, bonnet G et plus', 'Cliente de la diaspora'].map((profile) => (
-            <li key={profile} className="flex flex-col rounded-2xl border border-dashed border-gold/30 p-6">
-              <Quote className="h-6 w-6 text-gold/60" aria-hidden />
-              <p className="mt-4 flex-1 text-[15px] italic text-mute">Témoignage en cours de recueil, publié avec l’accord écrit de la cliente.</p>
-              <p className="mt-4 text-sm text-ivory-2">{profile}</p>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-8 text-center text-sm text-ivory-2">Vous êtes cliente ? <a className="text-gold hover:underline" href="https://wa.me/221787040505?text=Bonjour%20Chambre%2069%2C%20je%20souhaite%20laisser%20un%20t%C3%A9moignage." target="_blank" rel="noopener noreferrer">Deux phrases de vous, pour celles qui hésitent encore.</a></p>
-      </Section>
+      {/* Accueil, section 8 — Témoignages (2.9) : aucun témoignage inventé. Section affichée dès qu'un témoignage réel est saisi dans site.ts. */}
+      {TESTIMONIALS.length > 0 ? (
+        <Section>
+          <SectionHead eyebrow="Témoignages" title="Elles sont passées avant vous" center>
+            Toutes les femmes citées ici sont des clientes réelles, qui ont accepté que nous publiions leurs mots. Nous n’en avons modifié aucun.
+          </SectionHead>
+          <ul className="grid gap-4 md:grid-cols-3">
+            {TESTIMONIALS.map((t) => (
+              <li key={t.quote} className="flex flex-col rounded-2xl border border-gold/20 p-6">
+                <Quote className="h-6 w-6 text-gold/60" aria-hidden />
+                <p className="mt-4 flex-1 text-[15px] italic text-ivory-2">« {t.quote} »</p>
+                <p className="mt-4 text-sm text-mute">{t.author}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 text-center text-sm text-ivory-2">Vous êtes cliente ? <a className="text-gold hover:underline" href={waLink('Bonjour Chambre 69, je souhaite laisser un témoignage.')} target="_blank" rel="noopener noreferrer">Deux phrases de vous, pour celles qui hésitent encore.</a></p>
+        </Section>
+      ) : (
+        <Section>
+          <div className="mx-auto max-w-2xl text-center">
+            <Quote className="mx-auto h-7 w-7 text-gold/60" aria-hidden />
+            <h2 className="h-section mt-4">Vous êtes déjà passée chez nous ?</h2>
+            <p className="body-copy mt-4">Deux phrases de vous peuvent aider celles qui hésitent encore. Nous ne publions un témoignage qu’avec votre accord écrit, et sans en changer un mot.</p>
+            <a className="btn-line mt-6" href={waLink('Bonjour Chambre 69, je souhaite laisser un témoignage.')} target="_blank" rel="noopener noreferrer">Laisser un témoignage</a>
+          </div>
+        </Section>
+      )}
 
       {/* Accueil, section 9 — Preuve d'existence physique */}
       <Section tone="ink2">
@@ -267,7 +278,7 @@ export function HomePage() {
                     <Link to={`/nos-boutiques/${s.id}`} className="font-serif text-2xl text-ivory hover:text-gold">{s.district}</Link>
                     <span className="text-sm text-mute">Dakar, Sénégal</span>
                   </div>
-                  <p className="mt-1 text-sm text-mute">{s.address || 'Adresse détaillée et horaires : à compléter'}</p>
+                  <p className="mt-1 text-sm text-mute">{s.address || s.context}</p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     <a href={directionsUrl(s.mapsQuery)} target="_blank" rel="noopener noreferrer" onClick={() => track('directions_click', { store: s.id })} className="btn-line min-h-[44px] px-4 text-sm"><Navigation className="h-4 w-4" />Itinéraire</a>
                     <a href={BRAND.phoneHref} className="btn-line min-h-[44px] px-4 text-sm"><Phone className="h-4 w-4" />Appeler</a>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PageHero, Section, Pending } from '../components/ui/Section';
+import { PageHero, Section } from '../components/ui/Section';
 import { WaButton } from '../components/ui/WaButton';
 import { MESSAGES } from '../lib/whatsapp';
 import { ZONES, PENDING } from '../data/site';
@@ -58,7 +58,7 @@ export function AbroadPage() {
           <article className="card p-8">
             <h2 className="font-serif text-3xl">Ce qu’il faut savoir</h2>
             <div className="body-copy mt-4">
-              <p>Les délais et les frais s’affichent dès que vous indiquez votre pays, avant de valider.</p>
+              <p>Les délais et les frais vous sont annoncés dès que vous indiquez votre pays, avant de valider quoi que ce soit.</p>
               <p>Le règlement est convenu avec votre conseillère, et le libellé qui apparaît sur votre relevé est discret.</p>
               <p>Selon votre pays, des droits de douane peuvent s’appliquer à la réception. Nous vous l’indiquons avant la commande, jamais après.</p>
               <p>Notre numéro WhatsApp fonctionne depuis l’étranger, comme un numéro ordinaire.</p>
@@ -70,7 +70,7 @@ export function AbroadPage() {
       <Section tone="ink2">
         <h2 className="h-section mb-8">Délais et frais à l’international</h2>
         <DelaysTable ids={['international', 'dakar', 'senegal']} />
-        <div className="mt-6 max-w-prose"><Pending>délais et frais par pays, et liste définitive des pays desservis.</Pending></div>
+        <p className="mt-6 max-w-prose text-sm text-mute">Les frais et le délai exacts dépendent de votre ville et du poids du colis : votre conseillère vous les annonce sur WhatsApp, avant toute validation. Rien n’est expédié sans votre accord.</p>
         <WaButton message={MESSAGES.abroad()} source="diaspora-bas" className="mt-8">Parler à une conseillère</WaButton>
       </Section>
     </>
@@ -98,7 +98,7 @@ export function WestAfricaPage() {
           <article>
             <h2 className="h-section">Comment ça se passe</h2>
             <ol className="mt-6 space-y-4 text-[17px] text-ivory-2">
-              {['Vous indiquez votre pays : les frais et les délais s’affichent immédiatement.', 'Vous réglez selon les modalités convenues avec votre conseillère.', `Nous expédions sous ${PENDING.shipDays} jours ouvrés, dans un colis neutre, et vous suivez votre commande.`, 'Si la taille ne va pas, écrivez-nous : nous trouverons une solution.'].map((t, i) => (
+              {['Vous indiquez votre pays : votre conseillère vous annonce les frais et le délai.', 'Vous réglez selon les modalités convenues avec votre conseillère.', PENDING.shipDays ? `Nous expédions sous ${PENDING.shipDays} jours ouvrés, dans un colis neutre, et vous suivez votre commande.` : 'Nous expédions dès votre accord, dans un colis neutre, et vous suivez votre commande sur WhatsApp.', 'Si la taille ne va pas, écrivez-nous : nous trouverons une solution.'].map((t, i) => (
                 <li key={t} className="flex gap-4"><span className="font-serif text-3xl leading-none text-gold">{i + 1}</span><span>{t}</span></li>
               ))}
             </ol>
@@ -132,7 +132,7 @@ export function WestAfricaPage() {
       <Section>
         <h2 className="h-section mb-8">Délais et frais en Afrique de l’Ouest</h2>
         <DelaysTable ids={['sous-region']} />
-        <div className="mt-6 max-w-prose"><Pending>liste des pays réellement desservis, délais et frais par pays. Aucun pays ne sera affiché s’il n’est pas réellement livré.</Pending></div>
+        <p className="mt-6 max-w-prose text-sm text-mute">Les frais et le délai exacts dépendent de votre ville et du poids du colis : votre conseillère vous les annonce sur WhatsApp, avant toute validation. Rien n’est expédié sans votre accord.</p>
       </Section>
     </>
   );
