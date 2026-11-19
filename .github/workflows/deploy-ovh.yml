@@ -9,7 +9,8 @@
 #   GITHUB_OAUTH_ID / GITHUB_OAUTH_SECRET   (facultatif : bouton « Se connecter avec GitHub »)
 # Variables facultatives (onglet « Variables ») :
 #   SITE_URL         ex. https://chambre69.sn   (sinon https://chambre69.sn)
-#   OVH_PROTOCOL     sftp (par défaut) ou ftp
+#   OVH_PROTOCOL     ftp (par défaut, FTPS) ou sftp
+#   OVH_FORCE_HTTPS  false tant que le certificat HTTPS n'est pas actif (site de test en http)
 #   OVH_DIR          dossier du site sur l'hébergement (par défaut : www)
 
 name: Mise en ligne OVH
@@ -52,8 +53,31 @@ jobs:
         env:
           OAUTH_ID: ${{ secrets.GITHUB_OAUTH_ID }}
           OAUTH_SECRET: ${{ secrets.GITHUB_OAUTH_SECRET }}
+          FORCE_HTTPS: ${{ vars.OVH_FORCE_HTTPS || 'true' }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://chambre69.sn' }}
         run: |
           cp ovh/.htaccess dist/.htaccess
+          # Tant que le certificat HTTPS n'est pas prêt : pas de redirection forcée vers https
+          # (sinon le site de test affiche une erreur).
+          if [ "$FORCE_HTTPS" = "false" ]; then
+            python3 - <<'PY'
+          import re
+          p = 'dist/.htaccess'
+          s = open(p).read()
+          s = re.sub(r"  # 1\. Toujours en HTTPS.*?\n\n", "", s, flags=re.S)
+          s = s.replace("; upgrade-insecure-requests", "")
+          s = re.sub(r'  Header always set Strict-Transport-Security[^\n]*\n', "", s)
+          open(p, 'w').write(s)
+          PY
+            echo "HTTPS forcé désactivé (test en http)."
+          fi
+          # Site de test (adresse en « test. ») : invisible pour Google.
+          case "$SITE_URL" in
+            *//test.*)
+              sed -i 's|<IfModule mod_headers.c>|<IfModule mod_headers.c>\n  Header always set X-Robots-Tag "noindex, nofollow"|' dist/.htaccess
+              printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+              echo "Site de test : non indexable." ;;
+          esac
           mkdir -p dist/api
           cp ovh/api/*.php dist/api/
           if [ -n "$OAUTH_ID" ] && [ -n "$OAUTH_SECRET" ]; then
@@ -78,7 +102,7 @@ jobs:
           OVH_HOST: ${{ secrets.OVH_HOST }}
           OVH_USER: ${{ secrets.OVH_USER }}
           OVH_PASSWORD: ${{ secrets.OVH_PASSWORD }}
-          OVH_PROTOCOL: ${{ vars.OVH_PROTOCOL || 'sftp' }}
+          OVH_PROTOCOL: ${{ vars.OVH_PROTOCOL || 'ftp' }}
           OVH_DIR: ${{ vars.OVH_DIR || 'www' }}
         run: |
           if [ -z "$OVH_HOST" ] || [ -z "$OVH_USER" ] || [ -z "$OVH_PASSWORD" ]; then

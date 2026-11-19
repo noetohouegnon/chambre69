@@ -56,8 +56,9 @@ Dépôt → **Settings** → **Secrets and variables** → **Actions** :
 - onglet **Variables** → **New repository variable** *(facultatif)* :
   | Nom | Valeur |
   |---|---|
-  | `SITE_URL` | `https://chambre69.sn` (valeur par défaut) |
-  | `OVH_PROTOCOL` | `sftp` (par défaut) ; mettez `ftp` si l'envoi SFTP est refusé |
+  | `SITE_URL` | `https://chambre69.sn` (par défaut). Pour le site de test : `http://test.chambre69.sn` (non indexé par Google) |
+  | `OVH_PROTOCOL` | `ftp` (par défaut, connexion chiffrée FTPS) ; `sftp` si votre offre l'autorise |
+  | `OVH_FORCE_HTTPS` | `false` tant que le certificat HTTPS n'est pas actif (site de test en http), puis supprimez la variable |
   | `OVH_DIR` | `www` (par défaut) |
 
 Puis onglet **Actions** du dépôt → **Mise en ligne OVH** → **Run workflow**.
