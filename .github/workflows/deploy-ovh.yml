@@ -63,6 +63,16 @@ jobs:
             echo "Secrets GITHUB_OAUTH_ID / GITHUB_OAUTH_SECRET absents : connexion par jeton uniquement."
           fi
 
+      - name: Site prêt à envoyer (à télécharger depuis l'onglet Actions)
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-chambre69-ovh
+          path: |
+            project_room69/dist/
+            !project_room69/dist/api/oauth-config.php
+          include-hidden-files: true
+          retention-days: 30
+
       - name: Envoi sur OVH
         env:
           OVH_HOST: ${{ secrets.OVH_HOST }}
@@ -72,7 +82,8 @@ jobs:
           OVH_DIR: ${{ vars.OVH_DIR || 'www' }}
         run: |
           if [ -z "$OVH_HOST" ] || [ -z "$OVH_USER" ] || [ -z "$OVH_PASSWORD" ]; then
-            echo "::error::Secrets OVH_HOST, OVH_USER et OVH_PASSWORD manquants (voir DEPLOYMENT.md)."; exit 1
+            echo "::warning::Accès FTP OVH pas encore renseignés : site construit mais non envoyé. Téléchargez « site-chambre69-ovh » (Artifacts) et déposez-le à la main dans le dossier www."
+            exit 0
           fi
           sudo apt-get install -y -qq lftp > /dev/null
           if [ "$OVH_PROTOCOL" = "ftp" ]; then

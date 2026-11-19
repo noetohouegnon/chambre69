@@ -66,6 +66,13 @@ Une coche verte = site en ligne. Une croix rouge = cliquez dessus, l'étape en e
 
 > ⚠️ Le robot **remplace tout le contenu du dossier `www`** par le site. Ne déposez rien d'autre dedans.
 
+### b bis) En attendant les accès FTP : envoi à la main
+Tant que les secrets ne sont pas renseignés, le robot construit quand même le site (coche verte, avec un avertissement).
+Dépôt → **Actions** → dernière exécution **Mise en ligne OVH** → en bas, **Artifacts** → téléchargez
+**site-chambre69-ovh** (fichier ZIP). Décompressez-le, puis avec **FileZilla** (gratuit) connectez-vous au FTP OVH
+et déposez **tout le contenu** dans le dossier `www`, y compris le fichier caché `.htaccess`
+(FileZilla : menu *Serveur* → *Forcer l'affichage des fichiers cachés*).
+
 ### c) Le nom de domaine `chambre69.sn`
 Chez le registraire du domaine (zone DNS) :
 - enregistrement **A** de `chambre69.sn` → l'**IPv4 de l'hébergement OVH** (étape a.4) ;
