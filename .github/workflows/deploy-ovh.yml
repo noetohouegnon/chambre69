@@ -69,9 +69,9 @@ jobs:
           PY
             echo "HTTPS forcé désactivé (test en http)."
           fi
-          # Site de test (adresse en « test. ») : invisible pour Google.
+          # Site de test (adresse en « test. » ou adresse technique OVH) : invisible pour Google.
           case "$SITE_URL" in
-            *//test.*)
+            *//test.*|*hosting.ovh.net*)
               sed -i 's|<IfModule mod_headers.c>|<IfModule mod_headers.c>\n  Header always set X-Robots-Tag "noindex, nofollow"|' dist/.htaccess
               printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
               echo "Site de test : non indexable." ;;
