@@ -207,7 +207,7 @@ export function PrivacyPage() {
   return (
     <Legal title="Politique de confidentialité">
       <h2>Ce que nous collectons</h2><p>Les informations que vous nous transmettez volontairement : prénom, coordonnées, pays, adresse de livraison, taille, et le contenu de vos messages.</p>
-      <h2>Pourquoi</h2><p>Pour traiter vos commandes et rendez-vous, vous conseiller, et — seulement si vous l’avez accepté — vous envoyer nos actualités, segmentées par pays.</p>
+      <h2>Le guide des tailles</h2><p>Le guide des tailles fonctionne sans que vous donniez la moindre information : vos mesures ne quittent pas votre appareil. Si vous demandez à être recontactée, votre prénom, votre numéro WhatsApp, votre taille, vos mesures et votre budget approximatif (facultatif) sont transmis à la boutique par WhatsApp, uniquement pour vous répondre au sujet de votre taille.</p><h2>Pourquoi</h2><p>Pour traiter vos commandes et rendez-vous, vous conseiller, et — seulement si vous l’avez accepté — vous envoyer nos actualités, segmentées par pays.</p>
       <h2>Combien de temps</h2><p>Trois ans après notre dernier échange pour les données de contact, et la durée légale pour les données de facturation.</p>
       <h2>Vos droits</h2><p>Vous pouvez accéder à vos données, les rectifier, les supprimer ou vous opposer à leur utilisation en écrivant à {BRAND.email}. Ces droits s’appliquent conformément à la loi sénégalaise sur la protection des données personnelles et, pour les clientes résidant en Europe, au règlement européen (RGPD).</p>
       <h2>Partage</h2><p>Vos données ne sont jamais vendues ni partagées à des fins commerciales. Elles ne sont transmises qu’aux prestataires nécessaires (livraison, messagerie) dans la limite de leur mission.</p>

@@ -109,6 +109,15 @@ export const ZONES: Zone[] = [
 
 export const COUNTRY_OPTIONS = ZONES.flatMap((z) => z.countries.map((c) => ({ zone: z.id, country: c })));
 
+/** Tranches de budget proposées à la fin du guide des tailles (à ajuster avec Chambre 69). */
+export const BUDGETS = [
+  'Moins de 30 000 FCFA',
+  '30 000 à 60 000 FCFA',
+  '60 000 à 100 000 FCFA',
+  'Plus de 100 000 FCFA',
+  'Je ne sais pas encore',
+];
+
 /** Indicatifs proposés dans les formulaires (4.8). */
 export const DIAL_CODES = [
   { code: '+221', label: 'Sénégal (+221)' },

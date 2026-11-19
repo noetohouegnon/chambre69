@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Ruler } from 'lucide-react';
+import { ArrowLeft, Ruler, Check } from 'lucide-react';
 import { computeSize, type SizeResult } from '../lib/sizing';
 import { WaButton } from './ui/WaButton';
 import { MESSAGES } from '../lib/whatsapp';
 import { storage } from '../lib/storage';
+import { BUDGETS, DIAL_CODES } from '../data/site';
+import { isPhone, sendForm, fullPhone } from '../lib/forms';
+import { track } from '../lib/analytics';
 
 /** Schéma neutre (aucune photographie de corps, 2.5). */
 function Diagram({ level }: { level: 'under' | 'bust' }) {
@@ -16,6 +19,77 @@ function Diagram({ level }: { level: 'under' | 'bust' }) {
       <ellipse cx="100" cy={y} rx="62" ry="9" fill="none" stroke="#5A1725" strokeWidth="3" strokeDasharray="5 4" />
       <text x="100" y={y - 16} textAnchor="middle" fill="#5A1725" fontSize="11" fontFamily="Jost, sans-serif">{level === 'under' ? 'tour de dos' : 'tour de poitrine'}</text>
     </svg>
+  );
+}
+
+/** Mention affichée sous chaque résultat. */
+const FITTING_NOTE = 'Ceci est une indication. Merci de vous rapprocher de la boutique : rien ne vaut un fitting. Selon les formes et les marques, les tailles peuvent être différentes.';
+
+/** Bloc facultatif : la cliente demande à être recontactée. Les informations partent sur WhatsApp, déjà rédigées. */
+function SizeLead({ label, under, bust }: { label: string; under: string; bust: string }) {
+  const [f, setF] = useState({ prenom: '', dial: '+221', tel: '', budget: '', ok: false });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [done, setDone] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const er: Record<string, string> = {};
+    if (!f.prenom.trim()) er.prenom = 'Indiquez votre prénom.';
+    if (!isPhone(f.tel)) er.tel = 'Indiquez un numéro WhatsApp valide.';
+    if (!f.ok) er.ok = 'Cochez la case pour que nous puissions vous recontacter.';
+    setErrors(er);
+    if (Object.keys(er).length) return;
+    const phone = fullPhone(f.dial, f.tel);
+    track('size_lead', { size: label });
+    await sendForm('guide-des-tailles', { prenom: f.prenom, tel: phone, budget: f.budget, taille: label, dos: under, poitrine: bust },
+      `Bonjour Chambre 69, j'ai utilisé le guide des tailles et je souhaite que l'on confirme ma taille.\nPrénom : ${f.prenom}\nWhatsApp : ${phone}\nTaille indiquée par le guide : ${label} (dos ${under} cm, poitrine ${bust} cm)${f.budget ? `\nBudget approximatif : ${f.budget}` : ''}\nJ'accepte d'être recontactée par Chambre 69.`);
+    setDone(true);
+  };
+
+  if (done) {
+    return (
+      <div className="mt-8 rounded-2xl border border-gold/25 bg-gold/[0.05] p-5" role="status">
+        <p className="flex items-center gap-2 font-serif text-2xl text-ivory"><Check className="h-5 w-5 text-gold" aria-hidden />Merci {f.prenom}.</p>
+        <p className="mt-2 text-sm text-ivory-2">Votre demande est préparée sur WhatsApp : il ne reste qu’à l’envoyer. Une conseillère vous répondra pour confirmer votre taille.</p>
+      </div>
+    );
+  }
+  const err = (k: string) => errors[k] && <p className="mt-1.5 text-sm text-[#B3261E]">{errors[k]}</p>;
+  return (
+    <form onSubmit={submit} noValidate className="mt-8 rounded-2xl border border-gold/20 bg-white/60 p-5 sm:p-6">
+      <h3 className="font-serif text-2xl text-ivory">Voulez-vous qu’une conseillère confirme votre taille ?</h3>
+      <p className="mt-2 text-sm text-ivory-2">C’est facultatif et gratuit. Laissez vos coordonnées : une conseillère vous répond sur WhatsApp et vous oriente vers les pièces qui vous vont.</p>
+      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="sl-prenom" className="label">Prénom</label>
+          <input id="sl-prenom" className="field" autoComplete="given-name" value={f.prenom} onChange={(e) => setF({ ...f, prenom: e.target.value })} aria-invalid={!!errors.prenom} />
+          {err('prenom')}
+        </div>
+        <div>
+          <label htmlFor="sl-tel" className="label">Numéro WhatsApp</label>
+          <div className="flex gap-2">
+            <select aria-label="Indicatif" className="field w-[8.5rem] shrink-0" value={f.dial} onChange={(e) => setF({ ...f, dial: e.target.value })}>{DIAL_CODES.map((d) => <option key={d.code + d.label} value={d.code}>{d.label}</option>)}</select>
+            <input id="sl-tel" type="tel" inputMode="tel" autoComplete="tel-national" className="field" value={f.tel} onChange={(e) => setF({ ...f, tel: e.target.value })} aria-invalid={!!errors.tel} />
+          </div>
+          {err('tel')}
+        </div>
+        <div className="sm:col-span-2">
+          <label htmlFor="sl-budget" className="label">Votre budget approximatif <span className="text-mute">(facultatif)</span></label>
+          <select id="sl-budget" className="field" value={f.budget} onChange={(e) => setF({ ...f, budget: e.target.value })}>
+            <option value="">Je préfère ne pas le dire</option>
+            {BUDGETS.map((b) => <option key={b} value={b}>{b}</option>)}
+          </select>
+        </div>
+        <div className="sm:col-span-2">
+          <label className="flex items-start gap-3 text-sm text-ivory-2">
+            <input type="checkbox" className="mt-1 h-5 w-5 accent-[#5A1725]" checked={f.ok} onChange={(e) => setF({ ...f, ok: e.target.checked })} aria-invalid={!!errors.ok} />
+            <span>J’accepte que Chambre 69 me recontacte sur WhatsApp au sujet de ma taille. <Link to="/confidentialite" className="text-gold underline-offset-2 hover:underline">Confidentialité</Link></span>
+          </label>
+          {err('ok')}
+        </div>
+      </div>
+      <button type="submit" className="btn-gold mt-5 w-full sm:w-auto">Être recontactée</button>
+    </form>
   );
 }
 
@@ -104,12 +178,13 @@ export function SizeGuideTool({ onNavigate, compact }: { onNavigate?: () => void
             <>
               <p className="eyebrow mb-3">Résultat</p>
               <H className="font-serif text-4xl sm:text-5xl">Votre taille est <span className="text-gold">{result.label}</span></H>
-              <p className="body-copy mt-5">C’est votre point de départ. Une taille varie légèrement d’une maison à l’autre, comme pour les chaussures. Si une pièce ne vous convient pas, échangez-la en boutique ou écrivez-nous.</p>
+              <p className="body-copy mt-5">{FITTING_NOTE}</p>
               <p className="mt-5 rounded-xl border border-gold/25 bg-gold/[0.06] p-4 text-[15px] leading-relaxed text-ivory-2">{result.message}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link to={`/boutique?bonnet=${result.cup}&dos=${result.band}`} onClick={onNavigate} className="btn-gold">Voir les pièces disponibles en {result.label}</Link>
                 <WaButton message={MESSAGES.sizeCheck(result.label)} source="guide_resultat" variant="line">Faire vérifier par une conseillère</WaButton>
               </div>
+              <SizeLead label={result.label} under={under} bust={bust} />
             </>
           ) : (
             <>
