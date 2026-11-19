@@ -30,8 +30,10 @@ Ensuite, personne ne voit ni ne modifie les fichiers sans que vous l'ayez invit�
 ## 2. Mise en ligne sur l'hébergement web OVH (offre Perso) — solution retenue
 
 Un robot GitHub (« GitHub Actions », gratuit) construit le site et l'envoie sur OVH
-**à chaque modification** de la branche `main`, y compris celles faites depuis `/admin`.
-Délai : 3 à 5 minutes. Fichiers concernés : `.github/workflows/deploy-ovh.yml` et `project_room69/ovh/`.
+**quand vous lancez la mise en ligne** : Actions → *Mise en ligne OVH* → *Run workflow* (2 à 3 minutes).
+Pour qu'il se lance **tout seul à chaque modification** de `main` (y compris depuis `/admin`),
+une fois le site validé : dans `.github/workflows/deploy-ovh.yml`, sous `on:`, ajoutez
+`push:` / `branches: [main]` / `paths: ['project_room69/**']`. Fichiers concernés : `.github/workflows/deploy-ovh.yml` et `project_room69/ovh/`.
 
 ### a) Dans l'espace client OVH (https://www.ovh.com/manager/)
 1. **Web Cloud** → **Hébergements** → votre hébergement → onglet **FTP - SSH** :
@@ -65,7 +67,8 @@ Puis onglet **Actions** du dépôt → **Mise en ligne OVH** → **Run workflow*
 Une coche verte = site en ligne. Une croix rouge = cliquez dessus, l'étape en erreur explique le problème
 (le plus souvent : identifiant ou mot de passe FTP).
 
-> ⚠️ Le robot **remplace tout le contenu du dossier `www`** par le site. Ne déposez rien d'autre dedans.
+> ℹ️ Par défaut, le robot **n'efface rien** sur OVH : il ajoute ou remplace seulement les fichiers du site
+> (l'ancien `index.html` est remplacé). Pour tout nettoyer, créez la variable `OVH_CLEAN` = `true`.
 
 ### b bis) En attendant les accès FTP : envoi à la main
 Tant que les secrets ne sont pas renseignés, le robot construit quand même le site (coche verte, avec un avertissement).

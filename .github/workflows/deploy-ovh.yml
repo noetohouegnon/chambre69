@@ -1,6 +1,5 @@
 # Mise en ligne automatique du site Chambre 69 sur l'hébergement web OVH.
-# Se lance à chaque modification de la branche main (y compris depuis /admin),
-# ou à la main : onglet Actions → « Mise en ligne OVH » → Run workflow.
+# Se lance à la main : onglet Actions → « Mise en ligne OVH » → Run workflow.
 #
 # Secrets à créer une fois (dépôt → Settings → Secrets and variables → Actions) :
 #   OVH_HOST         ex. ftp.cluster0XX.hosting.ovh.net
@@ -16,9 +15,8 @@
 name: Mise en ligne OVH
 
 on:
-  push:
-    branches: [main]
-    paths: ['project_room69/**', '.github/workflows/deploy-ovh.yml']
+  # Mise en ligne volontaire uniquement : Actions → « Mise en ligne OVH » → Run workflow.
+  # (Pour la remettre en automatique à chaque modification, voir DEPLOYMENT.md.)
   workflow_dispatch:
 
 concurrency:
@@ -104,7 +102,10 @@ jobs:
           OVH_PASSWORD: ${{ secrets.OVH_PASSWORD }}
           OVH_PROTOCOL: ${{ vars.OVH_PROTOCOL || 'auto' }}
           OVH_DIR: ${{ vars.OVH_DIR || 'www' }}
+          OVH_CLEAN: ${{ vars.OVH_CLEAN || 'false' }}
         run: |
+          # Par défaut, aucun fichier existant n'est supprimé sur OVH ; OVH_CLEAN=true pour tout remplacer.
+          DELETE=''; [ "$OVH_CLEAN" = "true" ] && DELETE='--delete'
           if [ -z "$OVH_HOST" ] || [ -z "$OVH_USER" ] || [ -z "$OVH_PASSWORD" ]; then
             echo "::warning::Accès FTP OVH pas encore renseignés : site construit mais non envoyé. Téléchargez « site-chambre69-ovh » (Artifacts) et déposez-le à la main dans le dossier www."
             exit 0
@@ -117,7 +118,7 @@ jobs:
                 $3
                 set net:max-retries 1; set net:timeout 20; set net:reconnect-interval-base 2;
                 mkdir -p -f $OVH_DIR;
-                mirror --reverse --delete --verbose=1 --parallel=4 \
+                mirror --reverse $DELETE --verbose=1 --parallel=4 \
                        --exclude-glob .ovhconfig --exclude-glob .well-known/ \
                        dist/ $OVH_DIR/;
                 bye"; then
