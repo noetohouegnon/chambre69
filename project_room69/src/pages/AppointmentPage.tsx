@@ -4,6 +4,7 @@ import { Check } from 'lucide-react';
 import { PageHero, Section } from '../components/ui/Section';
 import { STORES, DIAL_CODES } from '../data/site';
 import { BY_SLUG } from '../data/catalog';
+import { pieceLink } from '../lib/whatsapp';
 import { isPhone, sendForm, fullPhone } from '../lib/forms';
 import { track } from '../lib/analytics';
 
@@ -44,7 +45,7 @@ export function AppointmentPage() {
         `Bonjour Chambre 69, je souhaite prendre rendez-vous : ${type.label} (${type.duration}).`,
         `Boutique : ${store.district}`,
         `Date souhaitée : ${new Date(f.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}, ${f.slot.toLowerCase()}`,
-        piece ? `Pièce à essayer : ${piece.name} — réf. ${piece.reference}${sp.get('taille') ? `, taille ${sp.get('taille')}` : ''}` : '',
+        piece ? `Pièce à essayer : ${piece.name} — réf. ${piece.reference}${sp.get('taille') ? `, taille ${sp.get('taille')}` : ''}\n${pieceLink(piece.slug)}` : '',
         `Prénom : ${f.prenom} · Téléphone : ${fullPhone(f.dial, f.tel)}`,
         f.accompagnee ? 'Je viendrai accompagnée.' : '',
         f.whatsappOnly ? 'Merci de me répondre sur WhatsApp plutôt que par appel.' : '',

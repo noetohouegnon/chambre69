@@ -92,10 +92,10 @@ export function ProductPage() {
   useEffect(() => {
     if (!p) return;
     track('view_item', { item: p.slug, brand: p.brand });
-    setWaMessage(MESSAGES.product(p.name, p.reference));
+    setWaMessage(MESSAGES.product(p.name, p.reference, undefined, p.slug));
     return () => setWaMessage(null);
   }, [p, setWaMessage]);
-  useEffect(() => { if (p && size && size !== 'Taille unique') setWaMessage(MESSAGES.product(p.name, p.reference, size)); }, [size, p, setWaMessage]);
+  useEffect(() => { if (p && size && size !== 'Taille unique') setWaMessage(MESSAGES.product(p.name, p.reference, size, p.slug)); }, [size, p, setWaMessage]);
 
   if (!p) return <NotFoundPage />;
   const wearable = isWearable(p);
@@ -183,7 +183,7 @@ export function ProductPage() {
                 {sizeUnavailable && (
                   <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-gold/25 p-3 text-sm">
                     <span>{size} — indisponible pour le moment.</span>
-                    <a className="btn-ghost text-sm" href={waLink(MESSAGES.backInStock(p.name, p.reference, size))} target="_blank" rel="noopener noreferrer" onClick={() => setNotify(size)}><BellRing className="h-4 w-4" />Prévenez-moi du retour</a>
+                    <a className="btn-ghost text-sm" href={waLink(MESSAGES.backInStock(p.name, p.reference, size, p.slug))} target="_blank" rel="noopener noreferrer" onClick={() => setNotify(size)}><BellRing className="h-4 w-4" />Prévenez-moi du retour</a>
                   </div>
                 )}
                 {notify && <p className="mt-2 text-sm text-gold" role="status">Demande d’alerte préparée sur WhatsApp pour la taille {notify}.</p>}
@@ -196,7 +196,7 @@ export function ProductPage() {
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               <button className="btn-gold sm:col-span-2" onClick={() => requireSize() && add(p.slug, size)}><ShoppingBag className="h-5 w-5" />Ajouter au panier</button>
               {wearable && <button className="btn-line" onClick={() => { track('appointment_intent', { type: 'essayage', item: p.slug }); navigate(`/rendez-vous?type=essayage&piece=${p.slug}${size ? `&taille=${encodeURIComponent(size)}` : ''}`); }}><CalendarCheck className="h-5 w-5" />Réserver pour essayage</button>}
-              <WaButton message={MESSAGES.product(p.name, p.reference, size && size !== 'Taille unique' ? size : undefined)} source="fiche-produit" variant="line" className={wearable ? '' : 'sm:col-span-2'}>Demander conseil sur cette pièce</WaButton>
+              <WaButton message={MESSAGES.product(p.name, p.reference, size && size !== 'Taille unique' ? size : undefined, p.slug)} source="fiche-produit" variant="line" className={wearable ? '' : 'sm:col-span-2'}>Demander conseil sur cette pièce</WaButton>
               <button className="btn-ghost sm:col-span-2 sm:justify-center" onClick={() => { toggle({ slug: p.slug, size: size || '' }); track('trousseau_toggle', { item: p.slug }); }} aria-pressed={has(p.slug)}>
                 {has(p.slug) ? <><Check className="h-4 w-4" />Dans ma liste de trousseau — <Link to="/mariee/liste" className="underline">voir ma liste</Link></> : <><Heart className="h-4 w-4" />Ajouter à ma liste de trousseau</>}
               </button>

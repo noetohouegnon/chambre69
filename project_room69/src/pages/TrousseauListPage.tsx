@@ -7,7 +7,7 @@ import { SITE_URL } from '../data/site';
 import { Breadcrumbs } from '../components/ui/Section';
 import { Img } from '../components/ui/Img';
 import { WhatsAppIcon } from '../components/ui/icons';
-import { waLink, waShare } from '../lib/whatsapp';
+import { waLink, waShare, pieceLink } from '../lib/whatsapp';
 import { track } from '../lib/analytics';
 
 function ContributorView({ list, code }: { list: TrousseauList; code: string }) {
@@ -21,7 +21,7 @@ function ContributorView({ list, code }: { list: TrousseauList; code: string }) 
   const reserve = (slug: string) => {
     const p = BY_SLUG.get(slug)!;
     const item = list.items.find((i) => i.slug === slug)!;
-    const msg = `Bonjour Chambre 69, je souhaite ${mode === 'plusieurs' ? 'participer, à plusieurs,' : 'offrir'} une pièce de la liste de trousseau de ${name} (liste ${code.slice(0, 10)}) :\n${p.name} — ${p.brand}, réf. ${p.reference}${item.size ? `, taille ${item.size}` : ''}.\nDe la part de : ${giver || '—'}${note ? `\nMon message pour elle : « ${note} »` : ''}\nMerci de la mettre de côté.`;
+    const msg = `Bonjour Chambre 69, je souhaite ${mode === 'plusieurs' ? 'participer, à plusieurs,' : 'offrir'} une pièce de la liste de trousseau de ${name} (liste ${code.slice(0, 10)}) :\n${p.name} — ${p.brand}, réf. ${p.reference}${item.size ? `, taille ${item.size}` : ''}.\n${pieceLink(p.slug)}\nDe la part de : ${giver || '—'}${note ? `\nMon message pour elle : « ${note} »` : ''}\nMerci de la mettre de côté.`;
     track('trousseau_reserve', { item: slug, mode });
     window.open(waLink(msg), '_blank', 'noopener');
     setDone((d) => [...d, slug]);

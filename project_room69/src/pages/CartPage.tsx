@@ -7,7 +7,7 @@ import { formatPrice } from '../data/catalog';
 import { Img } from '../components/ui/Img';
 import { WaButton } from '../components/ui/WaButton';
 import { WhatsAppIcon } from '../components/ui/icons';
-import { waLink, MESSAGES } from '../lib/whatsapp';
+import { waLink, MESSAGES, pieceLink } from '../lib/whatsapp';
 import { storage } from '../lib/storage';
 import { track } from '../lib/analytics';
 import { isEmail, isPhone, fullPhone } from '../lib/forms';
@@ -88,7 +88,7 @@ export function CartPage() {
   const send = () => {
     const d = new Date();
     const id = `C69-${String(d.getFullYear()).slice(2)}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
-    const lines = items.map((i, k) => `${k + 1}. ${i.product.name} — ${i.product.brand}\n   Réf. ${i.product.reference} · Taille ${i.size || 'unique'} · Quantité ${i.qty}${i.product.price ? ` · ${formatPrice(i.product.price * i.qty)}` : ''}`).join('\n');
+    const lines = items.map((i, k) => `${k + 1}. ${i.product.name} — ${i.product.brand}\n   Réf. ${i.product.reference} · Taille ${i.size || 'unique'} · Quantité ${i.qty}${i.product.price ? ` · ${formatPrice(i.product.price * i.qty)}` : ''}\n   ${pieceLink(i.product.slug)}`).join('\n');
     const msg = [
       `Bonjour Chambre 69, voici ma commande n° ${id}.`, '', lines, '',
       `Pays de livraison : ${country}`,
