@@ -93,8 +93,9 @@ export function Header() {
         </p>
       </div>
 
+      <div className="bg-bordeaux text-creme">
       <div className="container-x flex h-16 items-center gap-3 lg:h-20">
-        <button className="-ml-2 inline-flex h-11 w-11 items-center justify-center text-ivory lg:hidden" onClick={() => setMenu(true)} aria-label="Ouvrir le menu" aria-expanded={menu} aria-controls="menu-mobile">
+        <button className="-ml-2 inline-flex h-11 w-11 items-center justify-center text-creme lg:hidden" onClick={() => setMenu(true)} aria-label="Ouvrir le menu" aria-expanded={menu} aria-controls="menu-mobile">
           <Menu className="h-6 w-6" />
         </button>
         <Link to="/" className="mr-auto flex shrink-0 items-center lg:mr-0" aria-label="Chambre 69, retour à l’accueil">
@@ -104,23 +105,23 @@ export function Header() {
         <div className="ml-auto hidden max-w-xs flex-1 lg:block xl:max-w-sm"><SearchBox /></div>
 
         <div className="flex items-center gap-1 sm:gap-2 lg:ml-4">
-          <button className="inline-flex h-11 w-11 items-center justify-center text-ivory hover:text-gold lg:hidden" onClick={() => setSearchOpen((v) => !v)} aria-label="Rechercher" aria-expanded={searchOpen}>
+          <button className="inline-flex h-11 w-11 items-center justify-center text-creme hover:text-or lg:hidden" onClick={() => setSearchOpen((v) => !v)} aria-label="Rechercher" aria-expanded={searchOpen}>
             <Search className="h-5 w-5" />
           </button>
-          <button className="hidden h-11 items-center gap-2 rounded-full px-3 text-sm text-ivory hover:text-gold md:inline-flex" onClick={() => openSizeGuide('en-tete')}>
+          <button className="hidden h-11 items-center gap-2 rounded-full px-3 text-sm text-creme hover:text-or md:inline-flex" onClick={() => openSizeGuide('en-tete')}>
             <Ruler className="h-5 w-5" aria-hidden />Trouver ma taille
           </button>
-          <a href={waLink(MESSAGES.general)} target="_blank" rel="noopener noreferrer" onClick={() => track('whatsapp_click', { source: 'en-tete' })} className="hidden h-11 w-11 items-center justify-center text-ivory hover:text-wa sm:inline-flex" aria-label="Écrire sur WhatsApp">
+          <a href={waLink(MESSAGES.general)} target="_blank" rel="noopener noreferrer" onClick={() => track('whatsapp_click', { source: 'en-tete' })} className="hidden h-11 w-11 items-center justify-center text-creme hover:text-or sm:inline-flex" aria-label="Écrire sur WhatsApp">
             <WhatsAppIcon />
           </a>
-          <Link to="/panier" className="relative inline-flex h-11 w-11 items-center justify-center text-ivory hover:text-gold" aria-label={`Panier, ${count} article${count > 1 ? 's' : ''}`}>
+          <Link to="/panier" className="relative inline-flex h-11 w-11 items-center justify-center text-creme hover:text-or" aria-label={`Panier, ${count} article${count > 1 ? 's' : ''}`}>
             <ShoppingBag className="h-5 w-5" />
-            <span className={`absolute right-0.5 top-0.5 flex h-5 min-w-[20px] items-center justify-center rounded-full px-1 text-[11px] font-medium ${count ? 'bg-gold text-ink' : 'bg-ink-4 text-mute'}`}>{count}</span>
+            <span className={`absolute right-0.5 top-0.5 flex h-5 min-w-[20px] items-center justify-center rounded-full px-1 text-[11px] font-medium ${count ? 'bg-or text-bordeaux' : 'bg-creme/20 text-creme'}`}>{count}</span>
           </Link>
         </div>
       </div>
-
       {searchOpen && <div className="container-x pb-3 lg:hidden"><SearchBox autoFocus onDone={() => setSearchOpen(false)} /></div>}
+      </div>
 
       <nav aria-label="Navigation principale" className="hidden border-t border-gold/10 lg:block">
         <ul className="container-x flex items-center justify-center gap-1 xl:gap-3">
@@ -138,7 +139,7 @@ export function Header() {
         <div id="menu-mobile" ref={menuRef} className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
           <div className="absolute inset-0 bg-black/70" onClick={() => setMenu(false)} />
           <div className="absolute inset-y-0 left-0 flex w-[86%] max-w-sm flex-col overflow-y-auto bg-ink-2 shadow-2xl">
-            <div className="flex h-16 items-center justify-between border-b border-gold/10 px-4">
+            <div className="flex h-16 items-center justify-between bg-bordeaux px-4 text-creme">
               <img src="/brand/logo-wide.png" alt="Chambre 69" width={482} height={105} className="h-8 w-auto" />
               <button className="inline-flex h-11 w-11 items-center justify-center" onClick={() => setMenu(false)} aria-label="Fermer le menu"><X className="h-6 w-6" /></button>
             </div>
