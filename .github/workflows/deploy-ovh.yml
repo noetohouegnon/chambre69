@@ -8,6 +8,7 @@
 # Variables facultatives (onglet « Variables ») :
 #   SITE_URL         ex. https://chambre69.sn   (sinon https://chambre69.sn)
 #   OVH_PROTOCOL     auto (par défaut : essaie FTPS, puis SFTP, puis FTP), ou ftps / sftp / ftp
+#   OVH_NOINDEX      true = site caché de Google (jusqu'à la validation de la cliente), puis supprimer la variable
 #   OVH_FORCE_HTTPS  false tant que le certificat HTTPS n'est pas actif (site de test en http)
 #   OVH_DIR          dossier du site sur l'hébergement (par défaut : www)
 
@@ -50,6 +51,7 @@ jobs:
         env:
           FORCE_HTTPS: ${{ vars.OVH_FORCE_HTTPS || 'true' }}
           SITE_URL: ${{ vars.SITE_URL || 'https://chambre69.sn' }}
+          NOINDEX: ${{ vars.OVH_NOINDEX || 'false' }}
         run: |
           cp ovh/.htaccess dist/.htaccess
           # Tant que le certificat HTTPS n'est pas prêt : pas de redirection forcée vers https
@@ -67,6 +69,7 @@ jobs:
             echo "HTTPS forcé désactivé (test en http)."
           fi
           # Site de test (adresse en « test. » ou adresse technique OVH) : invisible pour Google.
+          [ "$NOINDEX" = "true" ] && SITE_URL="$SITE_URL//test."   # site pas encore validé : caché de Google
           case "$SITE_URL" in
             *//test.*|*hosting.ovh.net*)
               sed -i 's|<IfModule mod_headers.c>|<IfModule mod_headers.c>\n  Header always set X-Robots-Tag "noindex, nofollow"|' dist/.htaccess
@@ -88,6 +91,7 @@ jobs:
             echo "HTTPS forcé désactivé (test en http)."
           fi
           # Site de test (adresse en « test. » ou adresse technique OVH) : invisible pour Google.
+          [ "$NOINDEX" = "true" ] && SITE_URL="$SITE_URL//test."   # site pas encore validé : caché de Google
           case "$SITE_URL" in
             *//test.*|*hosting.ovh.net*)
               sed -i 's|<IfModule mod_headers.c>|<IfModule mod_headers.c>\n  Header always set X-Robots-Tag "noindex, nofollow"|' dist/.htaccess

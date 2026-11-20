@@ -82,6 +82,14 @@ Chez le registraire du domaine (zone DNS) :
 - **ne touchez pas** aux enregistrements **MX** (e-mails).
 La propagation prend de quelques minutes à quelques heures. Ensuite, retournez à l'étape a.3 pour le SSL.
 
+### c bis) Mise en production sur `chambre69.sn`
+Variables GitHub (Settings → Secrets and variables → Actions → Variables) :
+- `SITE_URL` = `https://chambre69.sn`
+- supprimer `OVH_FORCE_HTTPS` (le HTTPS est actif)
+- tant que la cliente n'a pas validé : `OVH_NOINDEX` = `true` (le site reste caché de Google)
+- le jour de la validation : supprimer `OVH_NOINDEX`, puis relancer le robot → le site devient visible sur Google.
+Après chaque changement de variable : Actions → Mise en ligne OVH → Run workflow.
+
 ### d) Vérifications après la première mise en ligne
 `https://chambre69.sn` (accueil), une fiche produit, `/mariee`, le panier jusqu'au message WhatsApp,
 `/admin` (écran de connexion), `/sitemap.xml`, et une adresse inexistante (page « Cette page n'existe pas »).
