@@ -55,4 +55,4 @@ node scripts/build-brand-assets.mjs   # régénère les images de partage (polic
 ## Charte graphique
 
 Base crème `#F4F2EE`, bordeaux `#5A1725`, or `#E49D27` et noir en accents ; titres en Italiana,
-texte en Jost ; logo C69 doré d'origine. Jetons dans `tailwind.config.js`.
+texte en Jost ; logo principal de la charte (bordeaux sur crème, crème sur bordeaux). Jetons dans `tailwind.config.js`.

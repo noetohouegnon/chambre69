@@ -16,7 +16,7 @@ backend:
     deleteMedia: "Photo supprimée : {{path}}"
 
 logo:
-  src: /brand/logo-mark.png
+  src: /brand/symbole-bordeaux.png
 
 # Photos ajoutées depuis l'administration (converties automatiquement en WebP allégé,
 # y compris les photos HEIC des iPhone).

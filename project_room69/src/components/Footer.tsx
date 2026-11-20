@@ -77,7 +77,7 @@ export function Footer() {
 
       <div className="container-x flex flex-col items-center gap-6 border-t border-creme/15 pt-10 text-center lg:flex-row lg:justify-between lg:text-left">
         <div>
-          <img src="/brand/logo-mark.png" alt="Chambre 69" width={199} height={186} loading="lazy" className="mx-auto h-24 w-auto lg:mx-0" />
+          <img src="/brand/logo-creme.png" alt="Chambre 69" width={882} height={924} loading="lazy" className="mx-auto h-24 w-auto lg:mx-0" />
           <p className="mt-3 font-serif text-xl text-creme">{BRAND.baseline}</p>
         </div>
         <div>
