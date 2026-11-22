@@ -1,0 +1,13 @@
+import sys; sys.path.insert(0,'src')
+from engine import *
+s=skia.Surface(W,H); c=s.getCanvas(); c.clear(col("#141820"))
+vgrad(c,0,0,W,H,col("#161b24"),col("#0b0d11"))
+sit=mk(lean=8,head=18,hipL=90,kneeL=-90,hipR=90,kneeR=-90,shR=30,elR=85,shL=25,elL=80,fear=0.0)
+draw_figure(c,250,420,sit,1)
+fear=mk(lean=-10,head=-6,shR=-40,elR=-30,shL=-30,elL=-40,fear=1,mouth=1,hipL=8,hipR=-6,kneeL=-20,kneeR=-10)
+draw_figure(c,700,480,fear,1)
+draw_figure(c,250,1000,mk(**walk(0.8)),1)
+dbl=mk(lean=16,head=14,**{**walk(1.2,limp=1,tired=1,amp=.6),"shL":14,"shR":9}, fear=0.2)
+draw_figure(c,700,1000,dbl,-1,double=True)
+draw_figure(c,540,1500,mk(smile=1,lean=-3),1,scale=2.0)
+s.makeImageSnapshot().save("build/t_fig.png")
