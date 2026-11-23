@@ -1,95 +1,103 @@
 1
-00:00:00,300 --> 00:00:03,506
+00:00:00,357 --> 00:00:02,914
 À vingt-trois heures dix-sept, un garçon a
 
 2
-00:00:03,256 --> 00:00:06,285
-reçu un message… qui allait détruire sa
+00:00:02,894 --> 00:00:04,315
+reçu un message…
 
 3
-00:00:06,035 --> 00:00:06,599
-vie.
+00:00:04,392 --> 00:00:06,238
+qui allait détruire sa vie.
 
 4
-00:00:07,000 --> 00:00:10,563
-Le plus terrifiant? Il venait de son
+00:00:07,056 --> 00:00:08,651
+Le plus terrifiant?
 
 5
-00:00:10,313 --> 00:00:11,824
-propre numéro.
+00:00:08,802 --> 00:00:11,397
+Il venait de son propre numéro.
 
 6
-00:00:12,400 --> 00:00:16,382
-Il vérifie l'expéditeur. C'est exactement son
+00:00:12,457 --> 00:00:14,340
+Il vérifie l'expéditeur.
 
 7
-00:00:16,132 --> 00:00:17,012
-numéro.
+00:00:14,527 --> 00:00:16,625
+C'est exactement son numéro.
 
 8
-00:00:20,000 --> 00:00:23,261
+00:00:20,057 --> 00:00:22,844
 Une blague. Forcément une blague.
 
 9
-00:00:25,000 --> 00:00:28,021
-Alors il reste chez lui. Et quelques
+00:00:25,057 --> 00:00:26,979
+Alors il reste chez lui.
 
 10
-00:00:27,771 --> 00:00:29,394
-minutes plus tard…
+00:00:27,099 --> 00:00:29,070
+Et quelques minutes plus tard…
 
 11
-00:00:30,200 --> 00:00:32,799
+00:00:30,265 --> 00:00:32,838
 Flash spécial. Un grave accident vient
 
 12
-00:00:32,549 --> 00:00:35,252
+00:00:32,818 --> 00:00:34,788
 d'impliquer le bus de vingt-trois heures
 
 13
-00:00:35,002 --> 00:00:35,795
+00:00:34,768 --> 00:00:35,521
 dix-sept.
 
 14
-00:00:36,200 --> 00:00:38,772
+00:00:36,256 --> 00:00:38,229
 Le message disait vrai.
 
 15
-00:00:40,000 --> 00:00:42,922
+00:00:40,057 --> 00:00:42,603
 Dix secondes. Dix secondes avant que
 
 16
-00:00:42,672 --> 00:00:45,013
+00:00:42,583 --> 00:00:44,497
 quelqu'un frappe à sa porte.
 
 17
-00:00:48,400 --> 00:00:49,947
+00:00:48,457 --> 00:00:49,787
 Ouvre-moi… c'est toi.
 
 18
-00:00:51,400 --> 00:00:55,418
+00:00:51,457 --> 00:00:54,949
 Il s'approche. Il regarde par le judas.
 
 19
-00:00:57,000 --> 00:00:58,814
-Je t'en supplie… ne fais pas la
+00:00:57,057 --> 00:00:57,784
+Je t'en supplie…
 
 20
-00:00:58,564 --> 00:00:59,817
-même erreur que moi.
+00:00:57,764 --> 00:00:59,139
+ne fais pas la même erreur que
 
 21
-00:01:06,200 --> 00:01:10,066
-Il hésite. Il recule. Puis…
+00:00:59,119 --> 00:00:59,631
+moi.
 
 22
-00:01:19,400 --> 00:01:23,022
-Et c'est ainsi qu'il comprit… Il n'essayait
+00:01:06,257 --> 00:01:08,712
+Il hésite. Il recule.
 
 23
-00:01:22,772 --> 00:01:25,931
-pas d'échapper au futur. Il était en
+00:01:09,060 --> 00:01:09,681
+Puis…
 
 24
-00:01:25,681 --> 00:01:27,385
-train de le créer.
+00:01:19,456 --> 00:01:21,520
+Et c'est ainsi qu'il comprit…
+
+25
+00:01:21,617 --> 00:01:24,327
+Il n'essayait pas d'échapper au futur.
+
+26
+00:01:24,577 --> 00:01:26,946
+Il était en train de le créer.

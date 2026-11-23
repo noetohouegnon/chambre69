@@ -5,8 +5,8 @@ from engine import *
 INFO = json.load(open("build/voice/info.json"))
 CUE_START = dict(n1=0.3, n2=7.0, n3=12.4, n4=20.0, n5=25.0, tv=30.2, n6=36.2, n7=40.0,
                  d1=48.4, n8=51.4, d2=57.0, n9=66.2, n10=79.4)
-CUES = [(CUE_START[k], INFO[k]["dur"], INFO[k]["text"]) for k in CUE_START]
-CHUNKS = build_chunks(CUES)
+ALIGN = json.load(open("build/voice/align.json"))
+CHUNKS = build_chunks([[(w, CUE_START[k]+a, CUE_START[k]+b) for w, a, b in ALIGN[k]] for k in CUE_START])
 TOTAL = 88.6
 END_PICTURE = 87.5     # coupure franche, puis silence
 
@@ -119,9 +119,9 @@ def thumb(c, T, taps, target=(700, 1255)):
     tx, ty = target[0] + wob, target[1] + 6*math.cos(T*14)
     bx, by = 1180, 1800
     hx, hy = lerp(bx, tx+90, k), lerp(by, ty+170, k)
-    c.drawLine(bx+200, by+300, hx, hy, paint(HOOD, 120))
+    c.drawLine(bx+200, by+300, hx, hy, paint(HOOD, 84))
     c.drawLine(bx+200, by+300, hx, hy, paint(col("#6f86a8", 90), 128*0+4))
-    c.drawCircle(hx, hy, 62, paint(SKIN))
+    c.drawCircle(hx, hy, 50, paint(SKIN))
     c.drawLine(hx-6, hy-14, tx, ty, paint(SKIN, 48))
     for a, b in taps:
         if a <= T < b:
@@ -138,7 +138,7 @@ def blur_bg(c, T, warm=True, dark=0.0):
 def front_head(c, cx, cy, s, T, double=False, fear=0.0, mouth=0.0, tilt=0.0, look=(0, 0), breath=0.0, tears=True):
     c.save(); c.translate(cx, cy + breath*6*s); c.rotate(tilt); c.scale(s, s)
     # épaules / sweat
-    sh = skia.Path(); sh.moveTo(-330, 520); sh.quadTo(-300, 190, -120, 170); sh.lineTo(120, 170); sh.quadTo(300, 190, 330, 520); sh.close()
+    sh = skia.Path(); sh.moveTo(-340, 1400); sh.lineTo(-330, 520); sh.quadTo(-300, 190, -120, 170); sh.lineTo(120, 170); sh.quadTo(300, 190, 330, 520); sh.lineTo(340, 1400); sh.close()
     c.drawPath(sh, paint(col("#6f86a8", 120), 8)); c.drawPath(sh, paint(HOOD))
     c.drawCircle(0, 100, 150, paint(HOOD))       # capuche
     # cordons
@@ -175,7 +175,7 @@ def front_head(c, cx, cy, s, T, double=False, fear=0.0, mouth=0.0, tilt=0.0, loo
     c.restore()
 
 # ---------------------------------------------------------------- Chambre
-CLOCK_POS = (740, 330, 960, 440)
+CLOCK_POS = (540, 330, 760, 440)
 TV_RECT = (730, 560, 1040, 790)
 
 def draw_tv_screen(c, T, on, news_t):
@@ -211,7 +211,7 @@ def draw_tv_screen(c, T, on, news_t):
     for yy in range(int(y0), int(y1), 6): c.drawLine(x0, yy, x1, yy, paint(col("#000000", 40), 1))
     glow(c, 885, 675, 520, col("#3f86ff"), 0.22*on)
 
-def draw_room(c, T, lamp=1.0, ambient=0.15, tv=0.0, clock="21:41", clock_col=None, win_cold=1.0, red=0.0, hide_clock_glow=False):
+def draw_room(c, T, lamp=1.0, ambient=0.15, tv=0.0, clock="21:41", clock_col=None, win_cold=1.0, red=0.0, hide_clock_glow=False, show_clock=True):
     # murs
     vgrad(c, 0, 0, W, FLOOR, col("#181d27"), col("#11151c"))
     # plafond
@@ -241,9 +241,10 @@ def draw_room(c, T, lamp=1.0, ambient=0.15, tv=0.0, clock="21:41", clock_col=Non
     glow(c, 270, 600, 420, col("#4b78d8"), 0.10*win_cold)
     # horloge murale numérique
     x0, y0, x1, y1 = CLOCK_POS
-    rect(c, x0, y0, x1, y1, col("#07090d"), 1, 14)
-    text(c, clock, (x0+x1)/2, y1-26, 80, clock_col or col("#ff3b3b"), "Bold", "c")
-    glow(c, (x0+x1)/2, (y0+y1)/2, 230, clock_col or col("#ff3b3b"), 0.12 + 0.2*red)
+    if show_clock:
+        rect(c, x0, y0, x1, y1, col("#07090d"), 1, 14)
+        text(c, clock, (x0+x1)/2, y1-26, 80, clock_col or col("#ff3b3b"), "Bold", "c")
+        glow(c, (x0+x1)/2, (y0+y1)/2, 230, clock_col or col("#ff3b3b"), 0.12 + 0.2*red)
     # TV
     draw_tv_screen(c, T, tv, T)
     # bureau + chaise + ordinateur
@@ -299,15 +300,17 @@ def draw_street(c, T, t0):
         glow(c, lx+90, 556, 380, WARM, 0.55); c.drawCircle(lx+90, 548, 14, paint(col("#fff1d0")))
         glow(c, lx+90, 1130, 300, WARM, 0.25, sy=0.3)
     # abribus
+    c.save(); c.translate(-230, 0)
     rect(c, 360, 700, 740, 1120, col("#bcd3ff", 20)); c.drawRoundRect(skia.Rect(350, 690, 750, 1125), 6, 6, paint(col("#6b7f9f"), 6))
     rect(c, 340, 670, 760, 700, col("#10141c")); c.drawLine(380, 1060, 720, 1060, paint(col("#2b3342"), 14))
     rect(c, 640, 740, 726, 880, col("#10141c")); text(c, "17", 683, 810, 56, col("#ffffff"), "ExtraBold", "c"); text(c, "23:17", 683, 860, 30, col("#ff7b4d"), "Bold", "c")
     # passagers (stick figures silhouettes)
     for i, px in enumerate((430, 520)):
         draw_figure(c, px, 940, mk(lean=3, hipL=2, hipR=-2, shL=6, shR=3, elR=40, looky=0), 1, scale=0.85, rimcol=col("#7d8ca8", 120), floor_y=1118)
+    c.restore()
     # bus
-    bx = lerp(1700, 640, ease_out(prog(lt, 0.2, 1.8)))
-    if lt > 1.85: bx += (lt-1.85)*60   # glisse
+    bx = lerp(1700, 790, ease_out(prog(lt, 0.2, 1.8)))
+    if lt > 1.85: bx -= (lt-1.85)*40   # glisse
     by = 1170
     rect(c, bx-290, by-210, bx+290, by, col("#d7dde8"), 1, 26)
     for k in range(6):
@@ -459,7 +462,7 @@ def render(c, T):
         camera_end(c)
     elif T < 12.0:
         k = (T-2.4)/9.6
-        camera_begin(c, lerp(560, 480, k), lerp(980, 960, k), lerp(1.3, 1.7, smooth(k)), 0, 0.0, T)
+        camera_begin(c, lerp(520, 450, k), lerp(900, 930, k), lerp(1.3, 1.65, smooth(k)), 0, 0.0, T)
         draw_room(c, T, lamp=1.0, ambient=0.18)
         x, y, p, f, d = fig_pose_room(T); draw_figure(c, x, y, p, f, d, T=T)
         # lueur du téléphone sur son visage
@@ -476,8 +479,8 @@ def render(c, T):
             a = ease_out(prog(T, 13.0, 13.4)) * (1 - smooth(prog(T, 16.6, 17.0)))
             if a > 0:
                 cv.save(); cv.saveLayerAlpha(None, int(255*a))
-                rect(cv, x0+20, y0+300, x1-20, y0+860, col("#0b0e14"), 0.96, 40)
-                cv.drawRoundRect(skia.Rect(x0+20, y0+300, x1-20, y0+860), 40, 40, paint(col("#e03030"), 4))
+                rect(cv, x0+20, y0+262, x1-20, y0+860, col("#0b0e14"), 1.0, 40)
+                cv.drawRoundRect(skia.Rect(x0+20, y0+262, x1-20, y0+860), 40, 40, paint(col("#e03030"), 4))
                 text(cv, "EXPÉDITEUR", 540, y0+390, 40, col("#8f9bb0"), "SemiBold", "c")
                 text(cv, NUM, 540, y0+455, 54, col("#ffffff"), "ExtraBold", "c")
                 text(cv, "=", 540, y0+600, 140, col("#ff3b3b"), "ExtraBold", "c")
@@ -491,7 +494,7 @@ def render(c, T):
         camera_end(c)
     elif T < 23.5:
         k = (T-20.5)/3.0
-        camera_begin(c, lerp(470, 520, k), lerp(930, 940, k), lerp(1.75, 1.45, smooth(k)), 0, 0.0, T)
+        camera_begin(c, lerp(470, 500, k), 960, lerp(1.7, 1.4, smooth(k)), 0, 0.0, T)
         draw_room(c, T, lamp=1.0, ambient=0.18)
         x, y, p, f, d = fig_pose_room(T); draw_figure(c, x, y, p, f, d, T=T)
         glow(c, x+95, y-70, 130, col("#9bb8ff"), 0.35)
@@ -503,7 +506,7 @@ def render(c, T):
         draw_phone(c, T, vib_t=23.8)
         camera_end(c)
     elif T < 28.8:
-        camera_begin(c, 540, 960, 1.3 + 0.1*prog(T, 25, 28.8), 0, 0.0, T)
+        camera_begin(c, 480, 960, 1.4 + 0.1*prog(T, 25, 28.8), 0, 0.0, T)
         draw_room(c, T, lamp=1.0, ambient=0.2, clock="22:09")
         x, y, p, f, d = fig_pose_room(T); draw_figure(c, x, y, p, f, d, T=T)
         camera_end(c)
@@ -527,11 +530,11 @@ def render(c, T):
         tvk = prog(T, 31.2, 31.5)
         if T < 33.5:   # gros plan sur la TV
             k = prog(T, 31.2, 33.5)
-            camera_begin(c, 885, 675, lerp(3.05, 2.8, k), 0, 0.01, T)
+            camera_begin(c, 885, 675, lerp(2.6, 2.4, k), 0, 0.01, T)
         else:          # recul : on voit sa réaction
             k = smooth(prog(T, 33.5, 34.6))
-            camera_begin(c, lerp(885, 640, k), lerp(675, 900, k), lerp(2.8, 1.12, k), 0, 0.0 + 0.35*prog(T, 34.6, 36), T)
-        draw_room(c, T, lamp=0.0, ambient=0.45, tv=1.0, clock="22:31")
+            camera_begin(c, lerp(885, 600, k), lerp(675, 930, k), lerp(2.4, 1.25, k), 0, 0.0 + 0.35*prog(T, 34.6, 36), T)
+        draw_room(c, T, lamp=0.0, ambient=0.45, tv=1.0, clock="22:31", show_clock=(T >= 34.5))
         if T >= 33.0:
             x, y, p, f, d = fig_pose_room(T); draw_figure(c, x, y, p, f, d, T=T, rimcol=col("#7fb0ff", 190))
         camera_end(c)
@@ -555,14 +558,14 @@ def render(c, T):
         tint = 0.3
     elif T < 48.2:
         k = prog(T, 40.6, 48.2)
-        z = lerp(1.0, 1.55, smooth(k))
+        z = lerp(1.25, 1.85, smooth(k))
         zk = 0.0
         for kt in (45.2, 45.9, 46.6):
             zk += 0.05*max(0, 1-(T-kt)/0.25) if T >= kt else 0.0
         shake = 0.0
         for kt in (45.2, 45.9, 46.6):
             if kt <= T < kt+0.4: shake = max(shake, 1.0*(1-(T-kt)/0.4))
-        camera_begin(c, lerp(450, 360, smooth(k)), lerp(900, 960, smooth(k)), z+zk, 0, shake, T)
+        camera_begin(c, lerp(430, 340, smooth(k)), lerp(900, 985, smooth(k)), z+zk, 0, shake, T)
         draw_room(c, T, lamp=0.0, ambient=0.78, clock="23:16", clock_col=col("#ff2a2a"), red=0.5 + 0.3*prog(T, 42, 45))
         x, y, p, f, d = fig_pose_dark(T)
         draw_figure(c, x, y, p, f, d, T=T, rimcol=col("#9bb8ff", 170))
@@ -575,7 +578,7 @@ def render(c, T):
         tint = 0.35 + 0.25*hb
     elif T < 51.0:
         u = T - 48.2
-        camera_begin(c, lerp(1900, 1960, u/2.8), 900, lerp(1.35, 1.7, smooth(u/2.8)), 0, 0.02 + (0.2 if T > 50.2 else 0), T)
+        camera_begin(c, lerp(1960, 1985, u/2.8), 960, lerp(1.45, 1.75, smooth(u/2.8)), 0, 0.02 + (0.2 if T > 50.2 else 0), T)
         draw_hall(c, T, flick=1, red=0.7)
         camera_end(c)
         tint = 0.45
@@ -583,7 +586,7 @@ def render(c, T):
     elif T < 55.4:
         k = prog(T, 51.0, 55.4)
         fx = lerp(420, 1640, smooth(k*0.97+0.015))
-        camera_begin(c, fx+160, 930, lerp(1.28, 1.12, k), 0, 0.0, T)
+        camera_begin(c, fx+130, 1000, lerp(1.7, 1.9, k), 0, 0.0, T)
         draw_hall(c, T, flick=1, red=0.5+0.4*k)
         ph = (T-51.0)*5.6
         wp = walk(ph, amp=0.8, tired=0.3)
@@ -635,7 +638,7 @@ def render(c, T):
         tint = 0.6
     elif T < 66.0:
         u = T - 62.6
-        camera_begin(c, 1700, 930, lerp(1.35, 1.7, smooth(u/3.4)), 0, 0.2 + 0.3*u/3.4, T)
+        camera_begin(c, 1820, 960, lerp(1.45, 1.8, smooth(u/3.4)), 0, 0.2 + 0.3*u/3.4, T)
         reach = smooth(prog(T, 63.3, 65.4))
         draw_hall(c, T, flick=1, red=0.9, handle=0)
         pose = anim(T, [(62.6, dict(lean=8, head=6, fear=0.9, lookx=1, shR=40, elR=70, shL=30, elL=60, hipL=6, hipR=-4, kneeL=-8, kneeR=-6)),
@@ -654,7 +657,7 @@ def render(c, T):
                         (69.6, dict(lean=4, head=6, fear=0.7, lookx=1, shR=40, elR=60, shL=24, elL=50, hipL=10, hipR=-8, kneeL=-14, kneeR=-8)),
                         (70.3, dict(lean=14, head=8, fear=0.7, lookx=1, shR=80, elR=10, shL=24, elL=50, hipL=10, hipR=-6, kneeL=-10, kneeR=-6))])
         bx = -70*smooth(prog(T, 66.4, 67.1)) + 70*smooth(prog(T, 68.6, 69.8))
-        camera_begin(c, 1700, 930, lerp(1.7, 1.55, smooth(prog(T, 66, 68))) + 0.25*o, 0, 0.12*(1-o), T)
+        camera_begin(c, 1810, 960, lerp(1.6, 1.5, smooth(prog(T, 66, 68))) + 0.25*o, 0, 0.12*(1-o), T)
         draw_hall(c, T, flick=1, red=0.8, door_open=o, handle=prog(T, 70.0, 70.4))
         draw_figure(c, 1640 + bx*1.0, FLOOR-172, step, 1, False, T=T, rimcol=col("#e07a7a", 170))
         glow(c, DOOR_X, 880, 650, col("#7aa6ff"), 0.9*o)
@@ -668,7 +671,7 @@ def render(c, T):
         titlecard(c, T)
     elif T < 76.0:
         k = prog(T, 74.3, 76.0)
-        camera_begin(c, 560, 930, 1.18 - 0.02*k, 0, 0.0, T)
+        camera_begin(c, 470, 940, 1.5 - 0.04*k, 0, 0.0, T)
         draw_room(c, T, lamp=0.0, ambient=0.55, clock="23:17", clock_col=col("#ff3b3b"), win_cold=1.6)
         draw_future_fig(c, T)
         camera_end(c)
@@ -698,7 +701,7 @@ def render(c, T):
         tint = 0.35
     elif T < END_PICTURE:
         k = prog(T, 81.8, END_PICTURE)
-        camera_begin(c, lerp(520,540,k), lerp(930, 900, k), lerp(1.35, 1.0, smooth(k)), 0, 0.0, T)
+        camera_begin(c, lerp(470,540,k), lerp(940, 930, k), lerp(1.5, 1.05, smooth(k)), 0, 0.0, T)
         draw_room(c, T, lamp=0.0, ambient=0.6, clock="23:17", clock_col=col("#ff3b3b"), win_cold=1.7)
         draw_future_fig(c, T, final=True)
         camera_end(c)

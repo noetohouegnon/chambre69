@@ -25,7 +25,7 @@ info={}
 for i,t,v,s,p,st in LINES:
     raw=f"{B}/{i}_raw.wav"; out=f"{B}/{i}.wav"
     subprocess.run(["espeak-ng","-v",v,"-s",str(s),"-p",str(p),"-g","4",t,"-w",raw],check=True)
-    subprocess.run(["ffmpeg","-y","-loglevel","error","-i",raw,"-ar","44100","-ac","1","-af",FX[st]+",apad=pad_dur=0.4",out],check=True)
+    subprocess.run(["ffmpeg","-y","-loglevel","error","-i",raw,"-ar","44100","-ac","1","-af",FX[st]+",silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse,adelay=60,apad=pad_dur=0.4",out],check=True)
     w=wave.open(out); d=w.getnframes()/w.getframerate()
     info[i]={"text":t,"dur":round(d-0.4,3),"style":st}
     print(i,round(d-0.4,2),t)

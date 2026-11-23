@@ -279,31 +279,25 @@ def vignette(c, strength=0.75, tint=None, a_tint=0.0):
 RED_WORDS = {"mourir", "message", "propre", "numéro", "porte", "futur", "créer", "vérité", "accident",
              "moi", "toi", "frappe", "supplie", "erreur", "vrai", "détruire", "vie", "judas", "terrifiant",
              "blague", "dix", "bus", "n'ouvre", "pas"}
-def build_chunks(cues):
-    """cues: [(start, dur, text)] -> liste de chunks [(t0,t1,[(word,tw0,tw1)...lines])]"""
+def build_chunks(timed):
+    """timed: liste de (mot, t0, t1) en temps absolu, groupés par réplique -> chunks (g0,g1,[(mot,t0,t1)])"""
+    import re
     chunks = []
-    for st, dur, txt in cues:
-        words = txt.replace(" ?","?").replace(" !","!").replace(" …","…").split()
-        # groupes de ~ 6 mots max / 2 lignes de ≤ 22 caractères
+    for words in timed:
         groups = []; cur = []
-        for w in words:
-            trial = cur + [w]
-            lines = split_lines(trial)
-            if len(trial) > 7 or lines is None or len(lines) > 2:
-                groups.append(cur); cur = [w]
+        for wd in words:
+            trial = cur + [wd]
+            lines = split_lines([w for w, _, _ in trial])
+            if cur and (len(trial) > 7 or lines is None or len(lines) > 2):
+                groups.append(cur); cur = [wd]
             else: cur = trial
+            if re.search(r"[.?!…]$", wd[0]) and len(cur) >= 3: groups.append(cur); cur = []
         if cur: groups.append(cur)
-        total = sum(len(w)+2 for w in words)
-        acc = 0.0; t_end = st + dur*0.985
-        for g in groups:
-            gw = sum(len(w)+2 for w in g)
-            g0 = st + dur*(acc/total); acc += gw; g1 = st + dur*(acc/total)
-            ws = []; a2 = 0.0
-            for w in g:
-                ww = len(w)+2
-                ws.append((w, g0 + (g1-g0)*(a2/gw), g0 + (g1-g0)*((a2+ww)/gw))); a2 += ww
-            chunks.append((g0, min(g1+0.25, t_end+0.3), ws))
-    return chunks
+        for g in groups: chunks.append([g[0][1], g[-1][2] + 0.35, g])
+    chunks.sort(key=lambda c: c[0])
+    for i in range(len(chunks)-1):
+        chunks[i][1] = min(chunks[i][1], chunks[i+1][0] + 0.02)
+    return [tuple(c) for c in chunks]
 
 def split_lines(ws, maxc=21):
     s = " ".join(ws)
