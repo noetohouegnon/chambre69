@@ -41,7 +41,7 @@ export const COMMUNITY = {
     { id: 'instagram', label: 'Instagram', count: REG.reseaux?.instagram ?? 14000, url: text(REG.reseaux?.instagram_url) },
     { id: 'facebook', label: 'Facebook', count: REG.reseaux?.facebook ?? 12000, url: text(REG.reseaux?.facebook_url) },
     { id: 'snapchat', label: 'Snapchat', count: REG.reseaux?.snapchat ?? 3000, url: text(REG.reseaux?.snapchat_url) },
-  ] as { id: string; label: string; count: number; url: string | null }[],
+  ].filter((n) => n.count > 0) as { id: string; label: string; count: number; url: string | null }[], // un réseau à 0 abonné est masqué
 
 };
 

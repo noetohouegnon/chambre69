@@ -296,7 +296,7 @@ export function HomePage() {
         <div className="text-center">
           <p className="eyebrow mb-4">{COMMUNITY.handle}</p>
           <h2 className="h-section">Notre mbotaay (groupe de femmes qui se soutiennent)</h2>
-          <ul className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 sm:grid-cols-4">
+          <ul className={`mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-4 ${COMMUNITY.networks.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-4'}`}>
             {COMMUNITY.networks.map((n) => (
               <li key={n.id} className="card p-5">
                 {n.url ? (
