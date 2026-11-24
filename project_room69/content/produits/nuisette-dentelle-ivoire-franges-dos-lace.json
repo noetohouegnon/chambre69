@@ -1,0 +1,30 @@
+{
+  "name": "Nuisette en dentelle ivoire à franges, dos lacé",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Ivoire",
+  "description": "Une nuisette en dentelle ivoire, ornée de fines franges qui retombent avec légèreté. Le décolleté est en V, les bretelles sont fines, et le dos se lace. Une pièce délicate, pensée pour la nuit de noces ou pour les nuits qui se souviennent.",
+  "features": [
+    "Dentelle ivoire à franges",
+    "Décolleté en V, fines bretelles",
+    "Dos lacé"
+  ],
+  "images": [
+    "/media/nuisette-dentelle-ivoire-franges-dos-lace/0-960.webp",
+    "/media/nuisette-dentelle-ivoire-franges-dos-lace/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 10
+}

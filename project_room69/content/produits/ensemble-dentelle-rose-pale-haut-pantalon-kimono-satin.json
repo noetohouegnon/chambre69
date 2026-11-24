@@ -1,0 +1,30 @@
+{
+  "name": "Ensemble en dentelle rose pâle, haut et pantalon, avec kimono en satin",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Rose pâle",
+  "description": "Un ensemble en dentelle rose pâle : un haut court sans manches et un pantalon fluide à jambes larges. Il est présenté avec un kimono en satin rose, à porter ouvert par-dessus. Une tenue d'intérieur élégante, légère et très féminine.",
+  "features": [
+    "Haut court sans manches en dentelle",
+    "Pantalon fluide à jambes larges en dentelle",
+    "Présenté avec un kimono en satin rose"
+  ],
+  "images": [
+    "/media/ensemble-dentelle-rose-pale-haut-pantalon-kimono-satin/0-960.webp",
+    "/media/ensemble-dentelle-rose-pale-haut-pantalon-kimono-satin/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 9
+}

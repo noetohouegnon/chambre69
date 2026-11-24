@@ -1,0 +1,31 @@
+{
+  "name": "Ensemble nuisette satin champagne et kimono long en dentelle prune",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Champagne et prune",
+  "description": "Un ensemble en deux temps. La nuisette en satin champagne se lace sur les côtés et se termine par une bordure de dentelle prune. Le kimono long, en dentelle prune ajourée, se noue à la taille et laisse deviner le satin dessous. Une silhouette tout en transparence et en douceur.",
+  "features": [
+    "Nuisette en satin champagne, lacée sur les côtés",
+    "Bordure de dentelle prune",
+    "Kimono long en dentelle ajourée, à nouer"
+  ],
+  "images": [
+    "/media/ensemble-nuisette-satin-champagne-kimono-long-dentelle-prune/1-960.webp",
+    "/media/ensemble-nuisette-satin-champagne-kimono-long-dentelle-prune/2-960.webp",
+    "/media/ensemble-nuisette-satin-champagne-kimono-long-dentelle-prune/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 7
+}

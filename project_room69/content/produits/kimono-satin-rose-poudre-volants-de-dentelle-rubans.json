@@ -1,0 +1,29 @@
+{
+  "name": "Kimono en satin rose poudré, volants de dentelle rubans",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Rose poudré",
+  "description": "Un kimono rose poudré, tout en légèreté. Des volants étagés de dentelle de rubans, crème et rose, ourlent le bas et les manches. Une pièce romantique, à garder pour les grands jours.",
+  "features": [
+    "Satin rose poudré",
+    "Volants étagés en dentelle de rubans crème et rose",
+    "Ceinture à nouer"
+  ],
+  "images": [
+    "/media/kimono-satin-rose-poudre-volants-de-dentelle-rubans/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 4
+}

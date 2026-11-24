@@ -2,14 +2,14 @@ import { Link } from 'react-router-dom';
 import { PageHero, Section } from '../components/ui/Section';
 import { ProductCard } from '../components/ProductCard';
 import { WaButton } from '../components/ui/WaButton';
-import { PRODUCTS, BY_SLUG } from '../data/catalog';
+import { PRODUCTS, BY_SLUG, isScent } from '../data/catalog';
 import { Img } from '../components/ui/Img';
 import { MESSAGES } from '../lib/whatsapp';
 
 export function HeritagePage() {
   const pieces = PRODUCTS.filter((p) => p.category === 'heritage');
-  const traditional = pieces.filter((p) => /traditionnelle|cha[iî]nes/i.test(p.name));
-  const scents = pieces.filter((p) => /senteur/i.test(p.name));
+  const traditional = pieces.filter((p) => !isScent(p));
+  const scents = pieces.filter(isScent);
   const lead = BY_SLUG.get('nuisette-traditionnelle-modele-02');
   return (
     <>
@@ -47,7 +47,7 @@ export function HeritagePage() {
 
       <Section tone="ink2">
         <h2 className="h-section">La collection traditionnelle</h2>
-        <p className="body-copy mt-4">Nuisettes traditionnelles, chaînes de taille, et le bin-bin (perles de taille) qui les accompagne. Chaque pièce est présentée avec la même exigence que nos maisons européennes.</p>
+        <p className="body-copy mt-4">Nuisettes, kimonos et ensembles de dentelle et de satin, chaînes de taille, et le bin-bin (perles de taille) qui les accompagne. Chaque pièce est présentée avec la même exigence que nos maisons européennes.</p>
         <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4">
           {traditional.map((p) => <li key={p.slug}><ProductCard p={p} /></li>)}
         </ul>

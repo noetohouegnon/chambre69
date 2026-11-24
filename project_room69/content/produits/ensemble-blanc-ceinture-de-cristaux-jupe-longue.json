@@ -1,0 +1,29 @@
+{
+  "name": "Ensemble blanc, ceinture de cristaux et jupe longue",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Blanc",
+  "description": "Un ensemble blanc pour les grandes occasions. Le haut se noue dans le cou et dans le dos. La ceinture à franges de cristaux accroche la lumière à chaque pas, et la jupe longue en satin, ouverte dans le dos, tombe avec douceur.",
+  "features": [
+    "Haut à nouer, dans le cou et dans le dos",
+    "Ceinture à franges de cristaux",
+    "Jupe longue en satin, ouverte dans le dos"
+  ],
+  "images": [
+    "/media/ensemble-blanc-ceinture-de-cristaux-jupe-longue/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 1
+}

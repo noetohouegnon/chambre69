@@ -1,0 +1,30 @@
+{
+  "name": "Nuisette bordeaux à sequins et franges",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Bordeaux",
+  "description": "Une nuisette en tulle bordeaux, brodée de chaînettes de sequins qui retombent en franges. De fines bretelles, un volant frangé dans le bas, et un dos qui se noue. Elle bouge à chaque pas et attire la lumière.",
+  "features": [
+    "Tulle brodé de chaînettes de sequins",
+    "Fines bretelles, volant frangé dans le bas",
+    "Dos à nouer"
+  ],
+  "images": [
+    "/media/nuisette-bordeaux-sequins-et-franges/0-960.webp",
+    "/media/nuisette-bordeaux-sequins-et-franges/1-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 6
+}

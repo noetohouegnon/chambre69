@@ -1,0 +1,29 @@
+{
+  "name": "Kimono mi-long en satin bleu nuit, manches en dentelle",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Bleu nuit",
+  "description": "Un kimono mi-long en satin bleu nuit, aux manches en tulle brodé de fleurs en relief et bordées de petits volants. La ceinture se noue à la taille. Une pièce élégante et discrète, pour les soirées.",
+  "features": [
+    "Satin bleu nuit",
+    "Manches en tulle brodé, bordées de volants",
+    "Ceinture à nouer"
+  ],
+  "images": [
+    "/media/kimono-mi-long-satin-bleu-nuit-manches-dentelle/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 8
+}

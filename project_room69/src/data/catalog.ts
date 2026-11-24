@@ -77,6 +77,8 @@ const CUPS = 'ABCDEFGHIJKLMNO';
 const ROLEPLAY = /costume|harnais|menottes|masque|cache-tétons|jeu de rôle/i;
 /** Encens, parfums et huiles (le thiouraye et les senteurs). */
 const SCENT = /encens|parfum|huile|mamoul|mamool|oudh|agarwood/i;
+/** Vrai pour l'encens, les parfums et les huiles (le thiouraye et les senteurs). */
+export const isScent = (p: Pick<Product, 'name'>) => SCENT.test(p.name);
 
 function deriveLines(p: Product): LineId[] {
   const l = new Set<LineId>();

@@ -1,0 +1,29 @@
+{
+  "name": "Kimono court en satin bordeaux, manches à volants",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Bordeaux",
+  "description": "Un kimono court en satin bordeaux, aux manches larges qui s'ouvrent comme des ailes. De petits volants soulignent l'extrémité des manches. La ceinture se noue à la taille pour marquer la silhouette.",
+  "features": [
+    "Satin bordeaux",
+    "Manches larges bordées de volants",
+    "Ceinture à nouer"
+  ],
+  "images": [
+    "/media/kimono-court-satin-bordeaux-manches-a-volants/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 5
+}

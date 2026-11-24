@@ -1,0 +1,29 @@
+{
+  "name": "Kimono en satin rose, manches à fleurs en relief",
+  "brand": "Chambre 69",
+  "origin": "Sélection Chambre 69",
+  "category": "heritage",
+  "color": "Rose",
+  "description": "Un kimono en satin rose, simple et fluide, dont les manches s'évasent en volants de tulle couverts de petites fleurs en relief. La ceinture se noue à la taille. Une pièce douce, pour les matins tranquilles comme pour les belles soirées.",
+  "features": [
+    "Satin rose fluide",
+    "Manches évasées à volants de fleurs en relief",
+    "Ceinture à nouer"
+  ],
+  "images": [
+    "/media/kimono-satin-rose-manches-fleurs-en-relief/0-960.webp"
+  ],
+  "sizes": {
+    "alpha": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "2XL"
+    ]
+  },
+  "sizesProvisional": true,
+  "isNew": true,
+  "hidden": false,
+  "rank": 3
+}
