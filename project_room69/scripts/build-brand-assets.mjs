@@ -21,7 +21,7 @@ const BORDEAUX = '#5A1725', CREME = '#F4F2EE', OR = '#E49D27', TEXTE = '#4B3438'
 const xml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 const OG = [
-  { name: 'accueil', title: ['Toutes les tailles.', 'Toutes les morphologies.'], sub: 'Du bonnet A au bonnet O — Dakar', photo: 'soutien-gorge-agathe-empreinte' },
+  { name: 'accueil', title: ['Toutes les tailles.', 'Toutes les morphologies.'], sub: 'Du bonnet A au bonnet O — Dakar', photo: 'soutien-gorge-naked-ysabel-mora' },
   { name: 'boutique', title: ['La boutique en ligne'], sub: 'Empreinte, Elomi, Louisa Bracq — du A au O', photo: 'soutien-gorge-morgan-elomi' },
   { name: 'heritage', title: ['Notre héritage,', 'au niveau qu’il mérite'], sub: 'Bétio et lingerie traditionnelle', photo: 'nuisette-traditionnelle-modele-03' },
   { name: 'mariee', title: ['Le trousseau', 'de la mariée'], sub: 'Liste de trousseau à partager', photo: 'ensemble-kimono-blanc-de-lait' },

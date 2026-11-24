@@ -12,13 +12,13 @@ import { track } from '../lib/analytics';
 
 const pick = (slugs: string[]) => slugs.map((s) => BY_SLUG.get(s)).filter(Boolean) as Product[];
 
-const HERO = pick(['soutien-gorge-agathe-empreinte', 'nuisette-traditionnelle-modele-03', 'soutien-gorge-morgan-elomi']);
+const HERO = pick(['soutien-gorge-naked-ysabel-mora', 'nuisette-traditionnelle-modele-03', 'soutien-gorge-morgan-elomi']);
 const HERITAGE = pick(['nuisette-traditionnelle-modele-01', 'chaines-de-taille-modele-01', 'senteur-et-encens-modele-05', 'nuisette-traditionnelle-modele-02']);
 const BRIDE = pick(['ensemble-kimono-blanc-de-lait', 'ensemble-kimono-et-robe-de-soie', 'porte-jarretelles-zsa-dita-von-teese']);
 
 const ENTRY_TILES = [
   { label: 'Soutiens-gorge', to: '/boutique?categorie=soutiens-gorge', slug: 'soutien-gorge-zarla-elomi' },
-  { label: 'Culottes', to: '/boutique?categorie=culottes', slug: 'culotte-leia-empreinte' },
+  { label: 'Culottes', to: '/boutique?categorie=culottes', slug: 'culotte-enclose-taille-haute-curvy-kate-2' },
   { label: 'Héritage', to: '/heritage', slug: 'nuisette-traditionnelle-modele-04' },
   { label: 'Nuisettes et kimonos', to: '/boutique?categorie=nuit', slug: 'ensemble-kimono-modele-03' },
 ];

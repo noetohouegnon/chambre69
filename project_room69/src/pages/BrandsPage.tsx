@@ -19,12 +19,19 @@ const BRAND_TEXT: Record<string, string | null> = {
   LingaDore: 'Maison européenne de lingerie et de nuit, aux dentelles et aux coloris soignés, pour se faire plaisir à prix doux.',
 };
 
+/** Photo de couverture choisie à la main pour certaines maisons (mannequins à la peau foncée, comme le veut la charte). */
+const COVER: Record<string, string> = {
+  'Ysabel Mora': 'soutien-gorge-naked-ysabel-mora',
+  Freya: 'soutien-gorge-sydnie-freya',
+  'Curvy Kate': 'culotte-enclose-taille-haute-curvy-kate-2',
+};
+
 export function BrandsPage() {
   const brands = BRANDS_DISTRIBUTED.map((b) => {
     const items = PRODUCTS.filter((p) => p.brand === b);
     const bras = items.filter((p) => p.sizes.cups?.length);
     const cups = [...new Set(bras.flatMap((p) => p.sizes.cups || []))].sort();
-    return { name: b, origin: items[0].origin, count: items.length, cover: items.find((p) => p.category === 'soutiens-gorge') || items[0], range: cups.length ? `Bonnets ${cups[0]} à ${cups[cups.length - 1]}` : sizeSummary(items[0]) };
+    return { name: b, origin: items[0].origin, count: items.length, cover: items.find((p) => p.slug === COVER[b]) || items.find((p) => p.category === 'soutiens-gorge') || items[0], range: cups.length ? `Bonnets ${cups[0]} à ${cups[cups.length - 1]}` : sizeSummary(items[0]) };
   });
   brands.sort((a, b) => { const o = ['Empreinte', 'Elomi', 'Louisa Bracq']; const ia = o.indexOf(a.name), ib = o.indexOf(b.name); return (ia < 0 ? 9 : ia) - (ib < 0 ? 9 : ib); });
 
