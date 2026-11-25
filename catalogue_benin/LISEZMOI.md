@@ -6,6 +6,7 @@ Date de référence des informations : **25 novembre 2026**.
 
 | Livrable | Fichier |
 |---|---|
+| 0 — Catalogue Welcome to Bénin (plateforme et fonctionnalités) | `livrables/0_catalogue_welcome_to_benin_2026-2027.pdf` et `_numerique.pdf` |
 | 1 — Catalogue principal (A4, impression) | `livrables/1_catalogue_benin_2026-2027.pdf` |
 | 2 — Version numérique (WhatsApp, e-mail, téléphone) | `livrables/2_catalogue_benin_2026-2027_numerique.pdf` |
 | 3 — Annuaire des prestataires | `livrables/3_annuaire_prestataires.xlsx` et `.csv` |
