@@ -1,0 +1,2 @@
+Aucune illustration générée par IA dans cette édition : Magnific n'a pas pu être utilisé (accès réseau non autorisé, compte et validation humaine requis).
+Les prompts prêts à l'emploi sont dans ../prompts_magnific.md. Toute image générée devra porter la mention « Illustration générée par IA » dans le catalogue.
