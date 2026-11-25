@@ -5,7 +5,7 @@ Règle : toute donnée non confirmée par une source identifiable est notée « 
 DATE_REF = "25 novembre 2026"
 
 # Statuts de vérification
-V_OK = "Vérifié (source primaire)"
+V_OK = "Vérifié par Welcome to Bénin"
 V_SEC = "Source secondaire — à confirmer"
 V_UNK = "Non vérifié"
 
