@@ -1,4 +1,4 @@
-# Audit de la référence « Welcome to Bénin » — cartographie des rubriques
+# Audit de la référence « Welcome to Benin » — cartographie des rubriques
 
 Site examiné : https://welcometobenin.com/fr — plan de site lu le 25 novembre 2026 (82 pages en français, 82 en anglais). Le site sert de **référence fonctionnelle et documentaire** ; ni son identité graphique, ni ses textes, ni ses photographies ne sont reproduits.
 

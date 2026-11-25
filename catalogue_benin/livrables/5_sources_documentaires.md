@@ -4,7 +4,7 @@ Date de référence : 25 novembre 2026
 
 | Source | Adresse | Utilisation |
 |---|---|---|
-| Welcome to Bénin (référence fonctionnelle) | https://welcometobenin.com/fr | Structure, rubriques, attractions, événements, annuaire. Non reproduit : textes, identité visuelle, photographies. |
+| Welcome to Benin (référence fonctionnelle) | https://welcometobenin.com/fr | Structure, rubriques, attractions, événements, annuaire. Non reproduit : textes, identité visuelle, photographies. |
 | Wikimedia Commons (photographies) | https://commons.wikimedia.org/ | Licences individuelles : voir crédits photographiques. |
 | Ministère de l'Europe et des Affaires étrangères (France) — Conseils aux voyageurs, Bénin : sécurité | https://www.diplomatie.gouv.fr/fr/information-par-pays/benin/conseils-aux-voyageurs-securite | Zones déconseillées (fiche actualisée le 21/04/2026 selon la page). |
 | Ministère de l'Europe et des Affaires étrangères (France) — Santé | https://www.diplomatie.gouv.fr/fr/information-par-pays/benin/conseils-aux-voyageurs-sante | Recommandations sanitaires. |

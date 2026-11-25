@@ -115,7 +115,7 @@ svg{display:block;width:100%;height:auto}
 pages = []
 def page(inner, cls="", foot=True, section=""):
     n = len(pages) + 1
-    f = f'<div class="foot"><span>Welcome to Bénin · welcometobenin.com · Catalogue 2026-2027{(" · <b>"+esc(section)+"</b>") if section else ""}</span><span><b>{n}</b></span></div>' if foot else ""
+    f = f'<div class="foot"><span>Welcome to Benin · welcometobenin.com · Catalogue 2026-2027{(" · <b>"+esc(section)+"</b>") if section else ""}</span><span><b>{n}</b></span></div>' if foot else ""
     pages.append(f'<section class="page {cls}" data-n="{n}">{inner}{f}</section>')
     return n
 
@@ -137,7 +137,7 @@ def tag_status(s):
 # ───────────────────────── COUVERTURE ─────────────────────────
 cov = photo("ganvie", 0)
 page(f'<div class="full">{img_tag(cov, "full", "center 55%")}</div><div class="overlay-top"></div>'
-     f'<div class="txt-over" style="top:20mm"><div class="eyebrow" style="color:#E9CD95;letter-spacing:5px">Welcome to Bénin présente · Catalogue touristique & commercial</div></div>'
+     f'<div class="txt-over" style="top:20mm"><div class="eyebrow" style="color:#E9CD95;letter-spacing:5px">Welcome to Benin présente · Catalogue touristique & commercial</div></div>'
      f'<div class="txt-over" style="bottom:28mm"><h1 style="font-size:64pt;letter-spacing:6px">BÉNIN</h1><div class="rule"></div>'
      f'<p class="serif" style="font-size:17pt;font-weight:400;font-style:italic;max-width:140mm;line-height:1.3">Voyager, découvrir, séjourner, entreprendre — le guide de référence de la destination.</p>'
      f'<p style="margin-top:8mm;font-size:8pt;letter-spacing:2px;text-transform:uppercase;color:#E9CD95">Édition 2026-2027 · mise à jour {M.DATE_REF}</p></div>', "dark", foot=False)
@@ -146,22 +146,22 @@ page(f'<div class="full">{img_tag(cov, "full", "center 55%")}</div><div class="o
 page(f"""<div class="m">
 <div class="eyebrow">Avant-propos</div><h2 style="margin-top:2mm">Bienvenue : un pays à parcourir, une destination à préparer</h2><div class="rule"></div>
 <p class="lead">Le Bénin est un pays de mémoire et de mouvement : des royaumes dont les palais se visitent encore, une côte où l'océan rencontre la lagune, des villes qui inventent leur avenir, des cultures vivantes qui ne se laissent pas réduire à des cartes postales.</p>
-<p>Édité dans l’esprit de Welcome to Bénin, ce catalogue a été conçu comme un outil de travail autant que comme un livre à feuilleter : il aide un voyageur, une famille, un membre de la diaspora, une agence ou un investisseur à comprendre la destination et à préparer concrètement un séjour.</p>
+<p>Édité dans l’esprit de Welcome to Benin, ce catalogue a été conçu comme un outil de travail autant que comme un livre à feuilleter : il aide un voyageur, une famille, un membre de la diaspora, une agence ou un investisseur à comprendre la destination et à préparer concrètement un séjour.</p>
 <h3 style="margin-top:6mm">Notre méthode — et ce qu'elle implique</h3>
 <p>Chaque information a été rattachée à une source identifiable. Lorsqu'une donnée n'a pas pu être confirmée (téléphone, tarif, horaires, agrément), elle porte la mention <b>« À confirmer »</b> ou <b>« Non renseigné »</b> : nous préférons une fiche honnête à une fiche remplie.</p>
 <div class="box"><b class="t">Statuts de vérification utilisés</b>
-<p style="margin:0 0 1.5mm"><span class="tag ok">Vérifié par Welcome to Bénin</span> Fiche contrôlée par la rédaction de Welcome to Bénin (téléphone ou terrain).</p>
+<p style="margin:0 0 1.5mm"><span class="tag ok">Vérifié par Welcome to Benin</span> Fiche contrôlée par la rédaction de Welcome to Benin (téléphone ou terrain).</p>
 <p style="margin:0 0 1.5mm"><span class="tag sec">Source secondaire — à confirmer</span> Information relevée sur un site officiel de groupe, une plateforme de réservation ou un guide : à recouper avant tout paiement.</p>
 <p style="margin:0"><span class="tag unk">Non vérifié</span> Pratique courante ou information générale sans source nominative.</p></div>
 <div class="box alert"><b class="t">À lire avant de partir</b>
 <p style="margin:0">Une partie du Nord du pays — notamment les parcs de la Pendjari et du W, et le centre de l'Atacora — fait l'objet d'avis de sécurité officiels (« formellement déconseillé » ou « déconseillé sauf raison impérative » selon la fiche du ministère français des Affaires étrangères consultée le 25 novembre 2026). Nous les présentons à titre culturel, <b>sans proposer de circuit</b> dans ces zones. Voir page dédiée.</p></div>
 <h3 style="margin-top:5mm">Une édition de lancement</h3>
-<p>Le catalogue s'appuie sur l’annuaire Welcome to Bénin, en phase de lancement et d’enrichissement, et sur des sources publiques. Il ne remplace ni les sites officiels, ni les conseils de votre ambassade, ni un contact direct avec les prestataires. Les photographies proviennent de Wikimedia Commons sous licences libres ; aucune image ne représente un établissement qu'elle ne montre pas réellement.</p>
+<p>Le catalogue s'appuie sur l’annuaire Welcome to Benin, en phase de lancement et d’enrichissement, et sur des sources publiques. Il ne remplace ni les sites officiels, ni les conseils de votre ambassade, ni un contact direct avec les prestataires. Les photographies proviennent de Wikimedia Commons sous licences libres ; aucune image ne représente un établissement qu'elle ne montre pas réellement.</p>
 </div>""", section="Avant-propos")
 
 
-page(f"""<div class="m"><div class="eyebrow">Welcome to Bénin</div><h2>Le magazine-pays et l’annuaire qui met le Bénin à portée de main</h2><div class="rule"></div>
-<p class="lead">Welcome to Bénin (<a href="https://welcometobenin.com/fr" style="color:var(--green)">welcometobenin.com</a>) est, selon sa présentation, un magazine-pays indépendant et un annuaire marchand : il relie les voyageurs du monde entier, la diaspora et l’hospitalité béninoise. Ce catalogue en est le prolongement en PDF.</p>
+page(f"""<div class="m"><div class="eyebrow">Welcome to Benin</div><h2>Le magazine-pays et l’annuaire qui met le Bénin à portée de main</h2><div class="rule"></div>
+<p class="lead">Welcome to Benin (<a href="https://welcometobenin.com/fr" style="color:var(--green)">welcometobenin.com</a>) est, selon sa présentation, un magazine-pays indépendant et un annuaire marchand : il relie les voyageurs du monde entier, la diaspora et l’hospitalité béninoise. Ce catalogue en est le prolongement en PDF.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;margin:4mm 0">
 <div class="card" style="margin:0"><div class="num" style="font-size:30pt">1</div><h3>Le magazine-pays</h3><p style="font-size:8.6pt">Récits, guides et dossiers sur l’histoire, le vodun, les royaumes, l’architecture et les festivals, en français et en anglais.</p></div>
 <div class="card" style="margin:0"><div class="num" style="font-size:30pt">2</div><h3>L’annuaire et guide</h3><p style="font-size:8.6pt">Hôtels, restaurants, transport, agences, guides, sport et bien-être, sorties, services aux entreprises. Chaque fiche donne un contact direct par WhatsApp ou téléphone.</p></div>
@@ -173,18 +173,18 @@ page(f"""<div class="m"><div class="eyebrow">Welcome to Bénin</div><h2>Le magaz
 <tr><td><b>Construire un itinéraire</b></td><td>Un outil interactif : durée (1 à 14 jours), ville de départ, centres d’intérêt.</td></tr>
 <tr><td><b>Suivre les événements</b></td><td>Calendrier de 13 rendez-vous, du plus proche au plus lointain, avec hébergements et agences à proximité.</td></tr>
 <tr><td><b>Investir, s’installer</b></td><td>Dossiers thématiques et annuaire de services aux entreprises.</td></tr></table>
-<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Les engagements affichés par Welcome to Bénin</b><p style="margin:0">Initiative privée, indépendante du gouvernement · accès gratuit pour les voyageurs · <b>0 % de commission</b> : le client contacte directement le prestataire · le badge « Vérifié » ne s’achète pas : il est attribué après un contrôle par la rédaction (téléphone ou terrain).</p></div></div>""", section="Welcome to Bénin")
+<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Les engagements affichés par Welcome to Benin</b><p style="margin:0">Initiative privée, indépendante du gouvernement · accès gratuit pour les voyageurs · <b>0 % de commission</b> : le client contacte directement le prestataire · le badge « Vérifié » ne s’achète pas : il est attribué après un contrôle par la rédaction (téléphone ou terrain).</p></div></div>""", section="Welcome to Benin")
 
-page(f"""<div class="m"><div class="eyebrow">Welcome to Bénin · Voyageurs</div><h2>Préparer son séjour en quatre gestes</h2><div class="rule"></div>
+page(f"""<div class="m"><div class="eyebrow">Welcome to Benin · Voyageurs</div><h2>Préparer son séjour en quatre gestes</h2><div class="rule"></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm">
 <div class="card"><div class="num" style="font-size:30pt">1</div><h3>Choisir sa destination</h3><p>Parcourez les fiches de ce catalogue ou celles du site : Cotonou, Ouidah, Ganvié, Porto-Novo, Grand-Popo, Abomey, Dassa-Zoumè… avec histoire, conseils de visite et coordonnées GPS.</p></div>
 <div class="card"><div class="num" style="font-size:30pt">2</div><h3>Construire son itinéraire</h3><p>Utilisez l’outil d’itinéraire du site ou les six circuits de la Partie 10, de 24 heures à 14 jours.</p></div>
 <div class="card"><div class="num" style="font-size:30pt">3</div><h3>Contacter directement</h3><p>Chaque fiche « Vérifié » propose un WhatsApp et un appel direct vers l’hôte, le loueur ou l’agence : pas d’intermédiaire, pas de commission prélevée par le site.</p></div>
 <div class="card"><div class="num" style="font-size:30pt">4</div><h3>Rester informé</h3><p>Calendrier des festivals, avis pratiques (visa, santé, sécurité) et blog du site, pour partir avec les bonnes informations.</p></div></div>
 <h3 style="margin-top:3mm">Pourquoi le contact direct compte</h3>
-<p>Selon Welcome to Bénin, les plateformes internationales prélèvent jusqu’à 20 % sur une réservation ; ici, le règlement revient en totalité au professionnel local. Le site précise qu’il ne vend ni billets d’avion ni séjours : il met en relation, par téléphone ou WhatsApp, avec les prestataires.</p>
+<p>Selon Welcome to Benin, les plateformes internationales prélèvent jusqu’à 20 % sur une réservation ; ici, le règlement revient en totalité au professionnel local. Le site précise qu’il ne vend ni billets d’avion ni séjours : il met en relation, par téléphone ou WhatsApp, avec les prestataires.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm;height:58mm;margin-top:4mm">{img_tag(photo("ganvie",1))}{img_tag(photo("grandpopo",1))}{img_tag(photo("cuisine",1,"cuisine2"))}</div>
-<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Où retrouver tout cela</b><p style="margin:0">welcometobenin.com/fr · rubrique « Préparer mon séjour » · WhatsApp rédaction : +229 01 95 36 95 72.</p></div></div>""", section="Welcome to Bénin")
+<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Où retrouver tout cela</b><p style="margin:0">welcometobenin.com/fr · rubrique « Préparer mon séjour » · WhatsApp rédaction : +229 01 95 36 95 72.</p></div></div>""", section="Welcome to Benin")
 
 TOC_PLACEHOLDER = len(pages) + 1
 page("%%TOC%%", section="Sommaire")
@@ -343,7 +343,7 @@ page(f"""<div class="m"><div class="eyebrow">Partie 5 · Gastronomie</div><h2>Le
 <div class="box"><b class="t">Conseil</b><p style="margin:0">Goûtez le poisson braisé dans un maquis de plage de la Route des Pêches, la pâte accompagnée d'une sauce du jour dans un restaurant populaire, et les brochettes de rue en soirée. Demandez le niveau de piment : il peut être élevé.</p></div></div>""", section="Gastronomie")
 rr = "".join(f"<tr><td><b>{esc(r['nom'])}</b><br><span class='small'>{esc(r['ville'])} · {esc(r['loc'])}</span></td><td>{esc(r['type'])}</td><td>{esc(r['spec'])}</td><td>{esc(r['horaires'])}</td><td>{esc(r['prix'])}</td><td>{esc(r['contact'])}</td><td>{tag_status(r['statut'])}<br><span class='small'>{esc(r['src'])}</span></td></tr>" for r in M.RESTAURANTS)
 page(f"""<div class="m"><div class="eyebrow">Partie 5 · Tables à découvrir</div><h2>Restaurants (Cotonou)</h2><div class="rule"></div>
-<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Restaurants : rejoignez l’annuaire</b><p style="margin:0">Maquis, tables gastronomiques, restaurants de plage, traiteurs : la rubrique Restaurants de Welcome to Bénin s’ouvre aux partenaires (gratuit en phase de lancement, 0 % de commission).</p></div>
+<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Restaurants : rejoignez l’annuaire</b><p style="margin:0">Maquis, tables gastronomiques, restaurants de plage, traiteurs : la rubrique Restaurants de Welcome to Benin s’ouvre aux partenaires (gratuit en phase de lancement, 0 % de commission).</p></div>
 <div class="box alert"><b class="t">Fiches partielles</b><p style="margin:0">Ces adresses sont issues de listes publiques (Petit Futé, Tripadvisor) et n'ont pas été confirmées en direct : horaires, prix et contacts sont donc « Non renseigné ». Vérifiez avant de vous déplacer. Aucun restaurant n'a été ajouté sans source.</p></div>
 <table><tr><th>Établissement</th><th>Cuisine</th><th>Spécialités</th><th>Horaires</th><th>Prix</th><th>Contact</th><th>Statut</th></tr>{rr}</table>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm;height:36mm;margin-top:4mm">{img_tag(photo("cotonou_plage",0,"cotonou_ville"))}{img_tag(photo("cotonou_ville",1,"cotonou_plage"))}</div>
@@ -363,7 +363,7 @@ ag = "".join(f"""<div class="card"><div style="display:flex;justify-content:spac
 <p>{esc(a['pres'])}</p><dl class="kv"><dt>Services</dt><dd>{esc(a['services'])}</dd><dt>Circuits</dt><dd>{esc(a['circuits'])}</dd><dt>Tarifs</dt><dd>{esc(a['tarifs'])}</dd>
 <dt>Téléphone</dt><dd>{esc(a['contact'])}</dd><dt>Site</dt><dd>{esc(a['site'])}</dd><dt>Réservation</dt><dd>{esc(a['resa'])}</dd><dt>Agrément</dt><dd>{esc(a['agrement'])}</dd><dt>Source</dt><dd>{esc(a['src'])}</dd></dl></div>""" for a in M.AGENCES)
 page(f"""<div class="m"><div class="eyebrow">Partie 7 · Professionnels</div><h2>Agences et tour-opérateurs</h2><div class="rule"></div>{ag}
-<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Guides : une rubrique à construire avec vous</b><p style="margin:0">Welcome to Bénin prépare une rubrique « Guides touristiques agréés » (guide national certifié, de site, safari, thématique ; langues dont français, anglais, fon, yoruba, dendi, bariba). Guides, créez votre fiche gratuitement.</p></div>
+<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Guides : une rubrique à construire avec vous</b><p style="margin:0">Welcome to Benin prépare une rubrique « Guides touristiques agréés » (guide national certifié, de site, safari, thématique ; langues dont français, anglais, fon, yoruba, dendi, bariba). Guides, créez votre fiche gratuitement.</p></div>
 <div class="box alert"><b class="t">Guides touristiques agréés</b><p style="margin:0">{esc(M.GUIDES_NOTE)}</p></div>
 <div class="box"><b class="t">Vérifier un agrément</b><p style="margin:0">Aucune de ces agences ne publie de numéro d'agrément. Avant tout paiement, demandez la licence délivrée par les autorités du tourisme et une facture normalisée.</p></div></div>""", section="Agences & guides")
 
@@ -420,8 +420,8 @@ page(f"""<div class="m"><div class="eyebrow">Infos pratiques</div><h2>Conseils a
 <h3 style="margin-top:7mm">Rejoindre le catalogue</h3><p>Vous êtes un professionnel du tourisme au Bénin (hôtel, restaurant, agence, guide, transport, événement) ? Les fiches de ce catalogue sont gratuites à compléter et à corriger. Envoyez vos informations vérifiables (adresse, téléphone, tarifs, photographies dont vous détenez les droits) pour une prochaine édition.</p></div>""", section="Infos pratiques")
 
 
-page(f"""<div class="m"><div class="eyebrow">Welcome to Bénin · Professionnels</div><h2>Hôtels, restaurants, agences, guides : soyez trouvés</h2><div class="rule"></div>
-<p class="lead">« Vos clients vous cherchent déjà. Il est temps qu’ils vous trouvent. » En phase de lancement, le référencement sur Welcome to Bénin est <b>gratuit, sans carte bancaire, sans engagement et sans commission</b>.</p>
+page(f"""<div class="m"><div class="eyebrow">Welcome to Benin · Professionnels</div><h2>Hôtels, restaurants, agences, guides : soyez trouvés</h2><div class="rule"></div>
+<p class="lead">« Vos clients vous cherchent déjà. Il est temps qu’ils vous trouvent. » En phase de lancement, le référencement sur Welcome to Benin est <b>gratuit, sans carte bancaire, sans engagement et sans commission</b>.</p>
 <div class="card" style="margin-top:4mm"><h3>Ce que comprend votre fiche</h3>
 <dl class="kv" style="grid-template-columns:44mm 1fr"><dt>Une fiche complète</dt><dd>Photos, description, horaires et prix indicatifs.</dd>
 <dt>Un contact direct</dt><dd>Vos clients vous écrivent sur WhatsApp ou vous appellent, sans intermédiaire.</dd>
@@ -430,11 +430,11 @@ page(f"""<div class="m"><div class="eyebrow">Welcome to Bénin · Professionnels
 <dt>Un guide Google Maps</dt><dd>Pas à pas pour être aussi bien trouvé sur Google Maps.</dd></dl></div>
 <h3>Comment être référencé</h3>
 <div class="timeline"><div><b>1.</b> Remplissez le formulaire de l’Espace professionnel (quelques minutes).</div><div><b>2.</b> La rédaction valide la fiche avant publication.</div><div><b>3.</b> Votre fiche est contrôlée ; le badge « Vérifié » est attribué si les prestations et coordonnées sont confirmées.</div><div><b>4.</b> Vous recevez les demandes directement, au téléphone ou sur WhatsApp.</div></div>
-<div class="box"><b class="t">Partenaires fondateurs</b><p style="margin:0">Selon Welcome to Bénin, les établissements inscrits pendant la phase de lancement bénéficieront de conditions préférentielles sur les futures offres payantes optionnelles. Les fiches restent gratuites. Paiement futur privilégié par Mobile Money (MTN MoMo, Moov Money, Celtiis Cash).</p></div>
-<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Ce catalogue a besoin de vous</b><p style="margin:0">Ce catalogue manque de restaurants, de lodges, de guides agréés, de loueurs et de services : si vous exercez l’un de ces métiers, référencez-vous sur <b>welcometobenin.com/fr/espace-professionnel</b>.</p></div></div>""", section="Welcome to Bénin")
+<div class="box"><b class="t">Partenaires fondateurs</b><p style="margin:0">Selon Welcome to Benin, les établissements inscrits pendant la phase de lancement bénéficieront de conditions préférentielles sur les futures offres payantes optionnelles. Les fiches restent gratuites. Paiement futur privilégié par Mobile Money (MTN MoMo, Moov Money, Celtiis Cash).</p></div>
+<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Ce catalogue a besoin de vous</b><p style="margin:0">Ce catalogue manque de restaurants, de lodges, de guides agréés, de loueurs et de services : si vous exercez l’un de ces métiers, référencez-vous sur <b>welcometobenin.com/fr/espace-professionnel</b>.</p></div></div>""", section="Welcome to Benin")
 
-page(f"""<div class="m"><div class="eyebrow">Welcome to Bénin · Diaspora et investisseurs</div><h2>Au-delà du voyage : s’installer, investir, se reconnecter</h2><div class="rule"></div>
-<p class="lead">Le troisième pilier de Welcome to Bénin s’adresse à la diaspora, aux afro-descendants et aux investisseurs, avec des dossiers thématiques et un annuaire de services d’appui.</p>
+page(f"""<div class="m"><div class="eyebrow">Welcome to Benin · Diaspora et investisseurs</div><h2>Au-delà du voyage : s’installer, investir, se reconnecter</h2><div class="rule"></div>
+<p class="lead">Le troisième pilier de Welcome to Benin s’adresse à la diaspora, aux afro-descendants et aux investisseurs, avec des dossiers thématiques et un annuaire de services d’appui.</p>
 <table><tr><th style="width:46mm">Dossier</th><th>Ce que le site présente</th></tr>
 <tr><td><b>Zone industrielle de Glo-Djigbé</b></td><td>Plateforme industrielle de transformation du coton, de l’anacarde et du soja.</td></tr>
 <tr><td><b>Sèmè City</b></td><td>Cité de l’innovation et du savoir : universités, recherche, start-up.</td></tr>
@@ -444,16 +444,16 @@ page(f"""<div class="m"><div class="eyebrow">Welcome to Bénin · Diaspora et in
 <tr><td><b>My Afro Origins</b></td><td>Cadre légal de reconnaissance de la nationalité béninoise pour les afro-descendants (loi de 2024, selon le site).</td></tr></table>
 <p class="small" style="margin-top:2mm">Les chiffres économiques avancés par le site (croissance, création d’entreprise en moins de 2 h, etc.) n’ont pas été vérifiés dans le cadre de ce catalogue ; consultez les sources institutionnelles avant toute décision.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm;height:60mm;margin:4mm 0">{img_tag(photo("cotonou_ville",0))}{img_tag(photo("cotonou_street",0,"cotonou_ville"))}</div>
-<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Services d’appui répertoriés</b><p style="margin:0">Coworking et espaces de travail, hôtels d’affaires et séminaires, transport d’affaires avec chauffeur : voir Partie 8 et l’annuaire du site.</p></div></div>""", section="Welcome to Bénin")
+<div class="box" style="border-left-color:var(--green)"><b class="t" style="color:var(--green)">Services d’appui répertoriés</b><p style="margin:0">Coworking et espaces de travail, hôtels d’affaires et séminaires, transport d’affaires avec chauffeur : voir Partie 8 et l’annuaire du site.</p></div></div>""", section="Welcome to Benin")
 
-page(f"""<div class="dark" style="position:absolute;inset:0;background:var(--green)"></div><div class="m" style="color:var(--ivory)"><div class="eyebrow" style="color:#E9CD95">Contact</div><h1 style="margin-top:3mm;font-size:34pt">Welcome to Bénin</h1><div class="rule"></div>
+page(f"""<div class="dark" style="position:absolute;inset:0;background:var(--green)"></div><div class="m" style="color:var(--ivory)"><div class="eyebrow" style="color:#E9CD95">Contact</div><h1 style="margin-top:3mm;font-size:34pt">Welcome to Benin</h1><div class="rule"></div>
 <p class="lead" style="color:#f1ecdf">Raconter le Bénin, révéler ses trésors, connecter ses acteurs.</p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm;margin-top:8mm">
 <div style="background:rgba(247,241,227,.08);padding:5mm;border-radius:2mm"><h3 style="color:#E9CD95">Voyageurs</h3><p>Parcourez le guide, construisez votre itinéraire et contactez directement les prestataires.</p><p><b>welcometobenin.com/fr</b></p></div>
 <div style="background:rgba(247,241,227,.08);padding:5mm;border-radius:2mm"><h3 style="color:#E9CD95">Professionnels</h3><p>Référencez votre établissement gratuitement pendant la phase de lancement.</p><p><b>welcometobenin.com/fr/espace-professionnel</b></p></div>
 <div style="background:rgba(247,241,227,.08);padding:5mm;border-radius:2mm"><h3 style="color:#E9CD95">WhatsApp rédaction et pro</h3><p style="font-size:14pt"><b>+229 01 95 36 95 72</b></p><p class="small" style="color:#d8d2c0">Canal le plus direct avec l’équipe ; réponse annoncée sous 24 h ouvrées.</p></div>
 <div style="background:rgba(247,241,227,.08);padding:5mm;border-radius:2mm"><h3 style="color:#E9CD95">Presse et partenariats</h3><p>Demandes d’interviews, de tournages, d’iconographie, partenariats hôteliers et institutionnels : formulaire de contact du site.</p></div></div>
-<p style="margin-top:10mm;font-size:8.6pt;color:#d8d2c0">Welcome to Bénin, initiative privée basée à Cotonou, se présente comme indépendante du gouvernement. Les informations de contact ci-dessus sont celles publiées sur son site à la date de consultation (25 novembre 2026).</p></div>""", "dark", section="Contact")
+<p style="margin-top:10mm;font-size:8.6pt;color:#d8d2c0">Welcome to Benin, initiative privée basée à Cotonou, se présente comme indépendante du gouvernement. Les informations de contact ci-dessus sont celles publiées sur son site à la date de consultation (25 novembre 2026).</p></div>""", "dark", section="Contact")
 
 # ───────────────────────── SOURCES & CRÉDITS ─────────────────────────
 src = "".join(f"<tr><td>{esc(a)}</td><td class='small'><a href=\"{esc(u)}\" style='color:var(--green)'>{esc(u)}</a></td><td class='small'>{esc(n)}</td></tr>" for a, u, n in M.SOURCES)
@@ -492,7 +492,7 @@ credits_pages()
 
 # fin : sommaire
 toc_html = '<div class="m"><div class="eyebrow">Sommaire</div><h2>Dans ce catalogue</h2><div class="rule"></div>' + "".join(f'<div class="toc-row"><span class="n">{n}</span><span class="t">{esc(t)}</span><span class="p">p. {p}</span></div>' for n, t, p in TOC)
-toc_html += f'<div class="toc-row"><span class="n"></span><span class="t">Welcome to Bénin : le guide, le réseau, le contact</span><span class="p">p. {TOC_PLACEHOLDER+1} et {next(i+1 for i,x in enumerate(pages) if "Hôtels, restaurants, agences, guides" in x)}-{next(i+1 for i,x in enumerate(pages) if "Raconter le Bénin" in x)}</span></div>'
+toc_html += f'<div class="toc-row"><span class="n"></span><span class="t">Welcome to Benin : le guide, le réseau, le contact</span><span class="p">p. {TOC_PLACEHOLDER+1} et {next(i+1 for i,x in enumerate(pages) if "Hôtels, restaurants, agences, guides" in x)}-{next(i+1 for i,x in enumerate(pages) if "Raconter le Bénin" in x)}</span></div>'
 toc_html += f'<div class="toc-row"><span class="n"></span><span class="t">Infos pratiques · Conseils</span><span class="p">p. {next(i+1 for i,s in enumerate(pages) if "Préparer son voyage" in s)}</span></div>'
 toc_html += f'<div class="toc-row"><span class="n"></span><span class="t">Bibliographie, sources et crédits photographiques</span><span class="p">p. {CREDITS_PAGES_AT-1}</span></div></div>'
 pages[TOC_PLACEHOLDER - 1] = pages[TOC_PLACEHOLDER - 1].replace("%%TOC%%", toc_html)

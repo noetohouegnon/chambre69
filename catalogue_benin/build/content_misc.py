@@ -5,7 +5,7 @@ Règle : toute donnée non confirmée par une source identifiable est notée « 
 DATE_REF = "25 novembre 2026"
 
 # Statuts de vérification
-V_OK = "Vérifié par Welcome to Bénin"
+V_OK = "Vérifié par Welcome to Benin"
 V_SEC = "Source secondaire — à confirmer"
 V_UNK = "Non vérifié"
 
@@ -92,7 +92,7 @@ HEBERGEMENTS = [
   desc="Villa de trois chambres près de la plage, avec salon, cuisine et quatre salles d'eau (dont une pour les visiteurs).",
   chambres="3 chambres · salon · cuisine", equip="Cuisine · 4 salles d'eau · près de la plage", tarif="Sur demande ; réserver au moins 48 h à l'avance",
   tel="+229 01 97 26 65 79", wa="Oui (via la fiche de l'annuaire)", web="Fiche sur welcometobenin.com", resa="Contact direct (arrivée dès 14 h, départ 11 h)",
-  src="Welcome to Bénin (fiche « vérifié »)", statut=V_OK, photo="grandpopo"),
+  src="Welcome to Benin (fiche « vérifié »)", statut=V_OK, photo="grandpopo"),
  dict(nom="Village Vacances Awalé Plage", ville="Grand-Popo", adresse="Ewe Condji, Grand-Popo", cat="Hôtel balnéaire",
   desc="Hôtel de bord de mer à Grand-Popo, listé parmi les hébergements familiaux de la ville par les plateformes de réservation.",
   chambres="Non renseigné", equip="Non renseigné", tarif="À confirmer",
@@ -128,15 +128,15 @@ RESTAURANTS = [
 # ───────────── Partie 6 : transport ─────────────
 TRANSPORT = [
  dict(nom="Avis — agence de l'aéroport", ville="Cotonou", type="Location de véhicules (sans chauffeur)", vehicules="Selon disponibilité", capacite="Non renseigné", tarifs="À confirmer ; selon un agrégateur, environ 86 €/jour en moyenne à Cotonou (ordre de grandeur)", conditions="Protection vol obligatoire selon Avis", contact="Via avis.com", zones="Cotonou et alentours (à confirmer)", src="avis.com ; Kayak (ordre de prix)", statut=V_SEC),
- dict(nom="Bio Bangana Marouf", ville="Cotonou (Akpakpa)", type="Location sans chauffeur — journalière ou horaire", vehicules="Non renseigné", capacite="Non renseigné", tarifs="À partir de 25 000 F CFA (indicatif)", conditions="Cotonou et environs ; déplacements dans toutes les régions possibles", contact="+229 01 97 26 53 92 (WhatsApp)", zones="Cotonou, toutes régions du Bénin", src="Welcome to Bénin (fiche « vérifié »)", statut=V_OK),
- dict(nom="Adventure and Safari in Benin", ville="Porto-Novo (Avakpa)", type="Navette aéroport, excursions et circuits", vehicules="Non renseigné", capacite="Non renseigné", tarifs="Fixé selon la prestation", conditions="Paiement mobile money (MTN MoMo, Moov, Celtiis) ; facture normalisée", contact="+229 01 94 69 92 72", zones="Sud du Bénin (à confirmer)", src="Welcome to Bénin (fiche « vérifié »)", statut=V_OK),
+ dict(nom="Bio Bangana Marouf", ville="Cotonou (Akpakpa)", type="Location sans chauffeur — journalière ou horaire", vehicules="Non renseigné", capacite="Non renseigné", tarifs="À partir de 25 000 F CFA (indicatif)", conditions="Cotonou et environs ; déplacements dans toutes les régions possibles", contact="+229 01 97 26 53 92 (WhatsApp)", zones="Cotonou, toutes régions du Bénin", src="Welcome to Benin (fiche « vérifié »)", statut=V_OK),
+ dict(nom="Adventure and Safari in Benin", ville="Porto-Novo (Avakpa)", type="Navette aéroport, excursions et circuits", vehicules="Non renseigné", capacite="Non renseigné", tarifs="Fixé selon la prestation", conditions="Paiement mobile money (MTN MoMo, Moov, Celtiis) ; facture normalisée", contact="+229 01 94 69 92 72", zones="Sud du Bénin (à confirmer)", src="Welcome to Benin (fiche « vérifié »)", statut=V_OK),
  dict(nom="Taxis-motos (zémidjans)", ville="Partout", type="Transport urbain individuel", vehicules="Moto", capacite="1 passager", tarifs="Négociés ou à la course (à confirmer)", conditions="Casque non systématique ; prudence", contact="—", zones="Villes", src="Pratique courante", statut=V_UNK),
 ]
 
 # ───────────── Partie 7 : agences et guides ─────────────
 AGENCES = [
- dict(nom="Wonder Tours And Services", ville="Ouidah (Docomey)", pres="Agence de voyage généraliste basée à Ouidah ; personnel bilingue français/anglais ; adaptée aux familles.", services="Organisation d'excursions et de circuits ; facture normalisée ; mobile money", circuits="Non renseigné", tarifs="À partir de 47 500 F CFA (indicatif)", contact="+229 01 40 89 54 22", site="Fiche sur welcometobenin.com", resa="WhatsApp (selon fiche)", agrement="À confirmer — pas de numéro d'agrément publié", src="Welcome to Bénin", statut=V_OK),
- dict(nom="Adventure and Safari in Benin", ville="Porto-Novo (Avakpa)", pres="Agence réceptive basée à Porto-Novo ; navette aéroport (Cotonou-Cadjehoun) ; adaptée aux familles.", services="Excursions et circuits ; personnel bilingue ; mobile money ; facture normalisée", circuits="Non renseigné", tarifs="Fixé selon la prestation", contact="+229 01 94 69 92 72", site="Fiche sur welcometobenin.com", resa="WhatsApp (selon fiche)", agrement="À confirmer — pas de numéro d'agrément publié", src="Welcome to Bénin", statut=V_OK),
+ dict(nom="Wonder Tours And Services", ville="Ouidah (Docomey)", pres="Agence de voyage généraliste basée à Ouidah ; personnel bilingue français/anglais ; adaptée aux familles.", services="Organisation d'excursions et de circuits ; facture normalisée ; mobile money", circuits="Non renseigné", tarifs="À partir de 47 500 F CFA (indicatif)", contact="+229 01 40 89 54 22", site="Fiche sur welcometobenin.com", resa="WhatsApp (selon fiche)", agrement="À confirmer — pas de numéro d'agrément publié", src="Welcome to Benin", statut=V_OK),
+ dict(nom="Adventure and Safari in Benin", ville="Porto-Novo (Avakpa)", pres="Agence réceptive basée à Porto-Novo ; navette aéroport (Cotonou-Cadjehoun) ; adaptée aux familles.", services="Excursions et circuits ; personnel bilingue ; mobile money ; facture normalisée", circuits="Non renseigné", tarifs="Fixé selon la prestation", contact="+229 01 94 69 92 72", site="Fiche sur welcometobenin.com", resa="WhatsApp (selon fiche)", agrement="À confirmer — pas de numéro d'agrément publié", src="Welcome to Benin", statut=V_OK),
 ]
 GUIDES_NOTE = ("Aucun guide agréé n'a pu être nommé de façon vérifiable à la date du 25 novembre 2026 : l'annuaire de référence est en cours d'enrichissement, "
                "et la liste officielle des guides agréés n'est pas publiée en ligne à notre connaissance. Contacter Bénin Tourisme (benintourisme.bj) ou le ministère du Tourisme pour obtenir un guide agréé.")
@@ -185,23 +185,23 @@ EVENEMENTS = [
   acces="Accès libre à la plupart des cérémonies publiques (à confirmer) ; stands sur candidature", orga="Gouvernement du Bénin", contact="gouv.bj / benin.bj", src="beninwebtv.bj (communication gouvernementale)", photo="ouidah_vodun", futur=True),
  dict(nom="Quintessence — Festival international du film de Ouidah", lieu="Ouidah", periode="Début janvier (dates 2027 à confirmer)", statut_date="Dates 2027 non confirmées",
   desc="Doyen des festivals de cinéma du Bénin, fondé en 2003 par le cinéaste Jean Odoutan ; projections en plein air.",
-  acces="Projections publiques gratuites (selon organisateur)", orga="Jean Odoutan", contact="Non renseigné", src="Welcome to Bénin (à recouper)", photo="ouidah_vodun", futur=True),
+  acces="Projections publiques gratuites (selon organisateur)", orga="Jean Odoutan", contact="Non renseigné", src="Welcome to Benin (à recouper)", photo="ouidah_vodun", futur=True),
  dict(nom="FInAB — Festival international des arts du Bénin", lieu="Cotonou", periode="Autour du 20 février (dates 2027 à confirmer)", statut_date="Dates 2027 non confirmées",
   desc="Plateforme pluridisciplinaire (arts plastiques, musique, danse, mode, théâtre, cinéma, littérature) avec le village Tokp'Art.",
-  acces="Non renseigné", orga="Groupe Empire", contact="Non renseigné", src="Welcome to Bénin (à recouper)", photo="cotonou_street", futur=True),
+  acces="Non renseigné", orga="Groupe Empire", contact="Non renseigné", src="Welcome to Benin (à recouper)", photo="cotonou_street", futur=True),
  dict(nom="Festival des Masques de Porto-Novo", lieu="Porto-Novo", periode="Fin juillet ou début août (2027 à confirmer)", statut_date="Dates non confirmées",
   desc="Parade de masques (Guèlèdè, inscrit au patrimoine culturel immatériel de l'UNESCO ; Egungun, Zangbeto).",
-  acces="Non renseigné", orga="À confirmer", contact="Non renseigné", src="Welcome to Bénin (à recouper)", photo="festival", futur=True),
+  acces="Non renseigné", orga="À confirmer", contact="Non renseigné", src="Welcome to Benin (à recouper)", photo="festival", futur=True),
  dict(nom="Ouidah Jazz Festival", lieu="Ouidah (Maison de la Culture)", periode="Fin août (dates 2027 à confirmer)", statut_date="Dates non confirmées",
-  desc="Trois soirées de jazz et de rythmes afro-diasporiques.", acces="Non renseigné", orga="À confirmer", contact="Non renseigné", src="Welcome to Bénin (à recouper)", photo="festival", futur=True),
+  desc="Trois soirées de jazz et de rythmes afro-diasporiques.", acces="Non renseigné", orga="À confirmer", contact="Non renseigné", src="Welcome to Benin (à recouper)", photo="festival", futur=True),
  dict(nom="JISTNA — Journée internationale du souvenir de la traite négrière et de son abolition", lieu="Ouidah (Porte du Non-Retour)", periode="23 août (chaque année)", statut_date="Date fixe annuelle (UNESCO)",
-  desc="Cérémonie de recueillement sur la plage ; instituée par l'UNESCO.", acces="Ouvert au public", orga="À confirmer", contact="Non renseigné", src="UNESCO ; Welcome to Bénin", photo="ouidah_porte", futur=True),
+  desc="Cérémonie de recueillement sur la plage ; instituée par l'UNESCO.", acces="Ouvert au public", orga="À confirmer", contact="Non renseigné", src="UNESCO ; Welcome to Benin", photo="ouidah_porte", futur=True),
  dict(nom="La Gaani", lieu="Nikki", periode="Date mobile (calendrier lunaire, lendemain du Maouloud)", statut_date="Date 2027 à confirmer ; zone Nord soumise à avis de sécurité",
-  desc="Fête équestre et royale du peuple baatonu, avec parade de cavaliers wasangari. Voir avertissement sécurité avant tout déplacement.", acces="Non renseigné", orga="Cour impériale de Nikki", contact="Non renseigné", src="Welcome to Bénin (à recouper)", photo="nikki_gaani", futur=True),
+  desc="Fête équestre et royale du peuple baatonu, avec parade de cavaliers wasangari. Voir avertissement sécurité avant tout déplacement.", acces="Non renseigné", orga="Cour impériale de Nikki", contact="Non renseigné", src="Welcome to Benin (à recouper)", photo="nikki_gaani", futur=True),
  dict(nom="Black Travel Summit 2027", lieu="Cotonou (annoncé)", periode="Dates non annoncées", statut_date="Dates non annoncées",
   desc="Première édition africaine du sommet des professionnels afro-descendants du tourisme : annoncée en octobre 2026 ; partenaire local : Bénin Tourisme.", acces="Non renseigné", orga="Black Travel Summit · Bénin Tourisme", contact="blacktravelsummit.com ; benintourisme.bj", src="gouv.bj ; presse béninoise", photo="cotonou_ville", futur=True),
  dict(nom="Kaléta", lieu="Sud du Bénin (Ouidah, Porto-Novo, Cotonou)", periode="Fin d'année (tradition de Noël)", statut_date="Tradition annuelle, sans date fixe",
-  desc="Tradition carnavalesque héritée des Afro-descendants du Brésil : danseurs masqués et percussions dans les rues.", acces="Libre (rue)", orga="Quartiers", contact="—", src="Welcome to Bénin", photo="festival", futur=True),
+  desc="Tradition carnavalesque héritée des Afro-descendants du Brésil : danseurs masqués et percussions dans les rues.", acces="Libre (rue)", orga="Quartiers", contact="—", src="Welcome to Benin", photo="festival", futur=True),
 ]
 
 # ───────────── Partie 10 : circuits ─────────────
@@ -239,7 +239,7 @@ CIRCUITS_THEMES = [
 
 # ───────────── Sources documentaires ─────────────
 SOURCES = [
- ("Welcome to Bénin (référence fonctionnelle)", "https://welcometobenin.com/fr", "Structure, rubriques, attractions, événements, annuaire. Non reproduit : textes, identité visuelle, photographies."),
+ ("Welcome to Benin (référence fonctionnelle)", "https://welcometobenin.com/fr", "Structure, rubriques, attractions, événements, annuaire. Non reproduit : textes, identité visuelle, photographies."),
  ("Wikimedia Commons (photographies)", "https://commons.wikimedia.org/", "Licences individuelles : voir crédits photographiques."),
  ("Ministère de l'Europe et des Affaires étrangères (France) — Conseils aux voyageurs, Bénin : sécurité", "https://www.diplomatie.gouv.fr/fr/information-par-pays/benin/conseils-aux-voyageurs-securite", "Zones déconseillées (fiche actualisée le 21/04/2026 selon la page)."),
  ("Ministère de l'Europe et des Affaires étrangères (France) — Santé", "https://www.diplomatie.gouv.fr/fr/information-par-pays/benin/conseils-aux-voyageurs-sante", "Recommandations sanitaires."),

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Catalogue de la plateforme Welcome to Bénin et de ses fonctionnalités. Usage: python3 build_wtb.py print|web"""
+"""Catalogue de la plateforme Welcome to Benin et de ses fonctionnalités. Usage: python3 build_wtb.py print|web"""
 import json, sys, os, html, base64
 sys.path.insert(0, os.path.dirname(__file__))
 import content_misc as M
@@ -82,7 +82,7 @@ svg{display:block;width:100%;height:auto}
 pages = []
 def page(inner, bg="", foot=True, w=False, section=""):
     n = len(pages) + 1
-    f = f'<div class="foot {"w" if w else ""}"><span>Welcome to Bénin · welcometobenin.com{(" · "+esc(section)) if section else ""}</span><i>{n}</i></div>' if foot else ""
+    f = f'<div class="foot {"w" if w else ""}"><span>Welcome to Benin · welcometobenin.com{(" · "+esc(section)) if section else ""}</span><i>{n}</i></div>' if foot else ""
     pages.append(f'<section class="page" style="{bg}"><div class="ribbon"></div>{inner}{f}</section>')
 
 # 1 COUVERTURE
@@ -93,7 +93,7 @@ page(f'''<div class="full">{img(photo("ganvie",0),"full","center 45%",False)}</d
 <div class="m" style="top:20mm"><span class="chip d">Catalogue 2026-2027</span></div>
 <div class="m" style="top:auto;bottom:26mm;color:#fff">
 <div class="k" style="color:var(--y);font-size:9pt">Le magazine-pays et l’annuaire du Bénin</div>
-<h1 style="margin:3mm 0 4mm">Welcome<br>to Bénin</h1>
+<h1 style="margin:3mm 0 4mm">Welcome<br>to Benin</h1>
 <p class="it" style="font-size:19pt;line-height:1.25;max-width:150mm">Raconter le Bénin, révéler ses trésors, connecter ses acteurs.</p>
 <p style="margin-top:6mm"><span class="chip">Guide d’attraits</span><span class="chip">Annuaire vérifié</span><span class="chip">Itinéraires</span><span class="chip">Événements</span><span class="chip">WhatsApp direct · 0 % de commission</span></p></div>''', foot=False, w=True)
 
@@ -103,7 +103,7 @@ page(f'''<div class="blob" style="width:110mm;height:110mm;background:var(--sun)
 <p class="lead" style="max-width:158mm">Réhabilitation des sites de Ouidah, d’Abomey et de Ganvié, essor de la Route des Pêches, reconnaissance du patrimoine vodun, scène créative en effervescence : le pays se transforme. Il manquait un outil unique pour <b>préparer son séjour avec des repères fiables</b> et <b>joindre directement les bonnes adresses</b>.</p>
 <div class="grid2" style="margin:6mm 0;height:95mm"><div style="display:grid;grid-template-rows:1fr 1fr;gap:5mm"><div class="tile t-g"><div class="big">100 %</div><h3>indépendant</h3><p class="small" style="color:#fff">Initiative privée, sans influence gouvernementale ni corporative.</p></div><div class="tile t-y"><div class="big">0 %</div><h3>de commission</h3><p class="small">Réservations et prises de contact : tout revient aux professionnels locaux.</p></div></div>
 <div style="display:grid;grid-template-rows:1fr 1fr;gap:5mm"><div class="tile t-r"><div class="big">12</div><h3>départements</h3><p class="small" style="color:#fff">Du littoral atlantique aux falaises et aux parcs du Grand Nord.</p></div><div class="tile t-b"><div class="big">Gratuit</div><h3>pour les voyageurs</h3><p class="small" style="color:#fff">Articles, guides pratiques et répertoires en libre accès.</p></div></div></div>
-<div class="tile t-n"><p class="it" style="font-size:14.5pt;line-height:1.35;margin:0">« Nous croyons en un tourisme qui ne dénature pas, qui respecte l’histoire et qui enrichit directement les femmes et les hommes qui font vivre le pays chaque jour. »</p><p class="small" style="color:var(--y);margin:2mm 0 0">Manifeste de Welcome to Bénin · initiative privée basée à Cotonou</p></div>
+<div class="tile t-n"><p class="it" style="font-size:14.5pt;line-height:1.35;margin:0">« Nous croyons en un tourisme qui ne dénature pas, qui respecte l’histoire et qui enrichit directement les femmes et les hommes qui font vivre le pays chaque jour. »</p><p class="small" style="color:var(--y);margin:2mm 0 0">Manifeste de Welcome to Benin · initiative privée basée à Cotonou</p></div>
 </div>''', section="Manifeste")
 
 # 3 TROIS PILIERS
@@ -119,7 +119,7 @@ feat = [("Guide des attraits","Plus de 40 fiches de sites, par ville","t-g"),("D
         ("Le badge Vérifié","Un contrôle, pas une pub","t-g"),("L’outil d’itinéraire","1 à 14 jours, selon vos envies","t-y"),("Le calendrier","13 événements et festivals","t-r"),("Magazine et infos pratiques","Blog, visa, santé, argent","t-b")]
 tiles = "".join(f'<div class="tile {c}" style="min-height:42mm"><div class="n" style="background:#fff;color:var(--n)">{i+1}</div><h3 style="margin-top:3mm">{esc(a)}</h3><p class="small" style="color:inherit;opacity:.92;margin-top:1mm">{esc(b)}</p></div>' for i, (a, b, c) in enumerate(feat))
 page(f'''<div class="blob" style="width:70mm;height:70mm;background:var(--y);left:-24mm;bottom:20mm;opacity:.35"></div>
-<div class="m"><div class="k">Sommaire</div><h2 style="margin:2mm 0 2mm">Huit fonctionnalités<br>pour préparer son séjour</h2><p class="lead">Voici ce que fait Welcome to Bénin, outil par outil. Les pages suivantes les détaillent avec des exemples concrets.</p>
+<div class="m"><div class="k">Sommaire</div><h2 style="margin:2mm 0 2mm">Huit fonctionnalités<br>pour préparer son séjour</h2><p class="lead">Voici ce que fait Welcome to Benin, outil par outil. Les pages suivantes les détaillent avec des exemples concrets.</p>
 <div class="grid2" style="margin-top:5mm">{tiles}</div>
 <div class="tile t-n" style="margin-top:5mm;display:flex;gap:6mm;align-items:center"><div class="big" style="color:var(--y)">+</div><div><h3>Et aussi</h3><p class="small" style="color:#fff;margin:0">Affaires et investissement · Espace professionnel · Interface bilingue français / anglais · Accès gratuit pour les voyageurs.</p></div></div></div>''', section="Sommaire")
 
@@ -222,14 +222,14 @@ page(f'''<div class="full" style="background:linear-gradient(150deg,#FFC62B,#FF9
 rows = [("Frais pour le client","Jusqu’à 20 % prélevés sur une réservation, selon le site","0 % : contact direct avec le prestataire"),("Contact","Via la plateforme","WhatsApp ou appel directs"),("Avis et labels","Parfois opaques ou sponsorisés","Badge Vérifié non payant, contrôlé"),("Contenu","Fiches génériques","Récits locaux, bilingues, ancrés dans le réel"),("Où va l’argent","Vers de grands groupes","Vers les professionnels béninois")]
 rh = "".join(f'<tr><td style="padding:3mm;font-weight:700">{a}</td><td style="padding:3mm;background:#fbeaea">{b}</td><td style="padding:3mm;background:var(--mint);font-weight:600">{c}</td></tr>' for a, b, c in rows)
 page(f'''<div class="m"><div class="k">L’idée</div><h2 style="margin:2mm 0 4mm">Ce qui change par rapport aux plateformes classiques</h2>
-<table style="width:100%;border-collapse:separate;border-spacing:0 2mm;font-size:9pt"><tr><th></th><th class="pop" style="text-align:left;padding:2mm 3mm;color:var(--r)">Plateformes internationales</th><th class="pop" style="text-align:left;padding:2mm 3mm;color:var(--g)">Welcome to Bénin</th></tr>{rh}</table>
-<p class="small">Comparatif tel que présenté par Welcome to Bénin ; non audité de façon indépendante.</p>
+<table style="width:100%;border-collapse:separate;border-spacing:0 2mm;font-size:9pt"><tr><th></th><th class="pop" style="text-align:left;padding:2mm 3mm;color:var(--r)">Plateformes internationales</th><th class="pop" style="text-align:left;padding:2mm 3mm;color:var(--g)">Welcome to Benin</th></tr>{rh}</table>
+<p class="small">Comparatif tel que présenté par Welcome to Benin ; non audité de façon indépendante.</p>
 <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:5mm;height:62mm;margin-top:4mm">{img(photo("ganvie",0),"round")}<div style="display:grid;grid-template-rows:1fr 1fr;gap:5mm">{img(photo("artisanat_poterie",0),"round")}{img(photo("cuisine",2),"round")}</div></div></div>''', section="Différences")
 
 # 18 CONTACT
 page(f'''<div class="full">{img(photo("grandpopo",0),"full","center",False)}</div><div class="full" style="background:linear-gradient(180deg,rgba(6,107,58,.88),rgba(20,33,61,.92))"></div>
 <div class="blob" style="width:80mm;height:80mm;background:var(--y);left:-30mm;bottom:-30mm"></div><div class="blob" style="width:44mm;height:44mm;background:var(--r);right:-10mm;top:70mm"></div>
-<div class="m" style="color:#fff"><span class="chip">Rejoignez le mouvement</span><h1 style="margin:3mm 0 3mm;font-size:40pt">Welcome<br>to Bénin</h1><p class="it" style="font-size:16pt">Raconter le Bénin, révéler ses trésors, connecter ses acteurs.</p>
+<div class="m" style="color:#fff"><span class="chip">Rejoignez le mouvement</span><h1 style="margin:3mm 0 3mm;font-size:40pt">Welcome<br>to Benin</h1><p class="it" style="font-size:16pt">Raconter le Bénin, révéler ses trésors, connecter ses acteurs.</p>
 <div class="grid2" style="margin-top:9mm"><div class="tile" style="background:rgba(255,255,255,.14)"><h3 style="color:var(--y)">Voyageurs</h3><p>Parcourez le guide, construisez votre itinéraire, contactez directement les prestataires.</p><p class="pop"><b>welcometobenin.com/fr</b></p></div>
 <div class="tile" style="background:rgba(255,255,255,.14)"><h3 style="color:var(--y)">Professionnels</h3><p>Référencez gratuitement votre établissement pendant la phase de lancement.</p><p class="pop"><b>welcometobenin.com/fr/espace-professionnel</b></p></div>
 <div class="tile" style="background:var(--y);color:var(--n)"><h3>WhatsApp rédaction et pro</h3><p class="pop" style="font-size:16pt;margin:1mm 0">+229 01 95 36 95 72</p><p class="small">Réponse annoncée sous 24 h ouvrées.</p></div>
@@ -245,7 +245,7 @@ def credits():
     r2 = "".join(f"<tr><td>{esc(MAN['images'][i]['title'][:52])}</td><td>{esc(MAN['images'][i]['author_short'][:28])}</td><td>{esc(MAN['images'][i]['lic_short'])}</td></tr>" for i in ids[half:])
     t = lambda r: f'<table style="width:100%;font-size:6.2pt;border-collapse:collapse"><tr style="background:var(--g);color:#fff"><th style="text-align:left;padding:1mm">Fichier</th><th style="text-align:left">Auteur</th><th style="text-align:left">Licence</th></tr>{r}</table>'
     page(f'''<div class="m"><div class="k">Références</div><h2 style="margin:2mm 0">Sources, crédits et mentions</h2>
-<div class="grid2" style="margin:3mm 0"><div class="tile t-w"><h4>Sources</h4><p class="small" style="opacity:1;margin:1mm 0 0">Welcome to Bénin (welcometobenin.com, consulté le 25/11/2026) pour les fonctionnalités, rubriques et fiches ; gouv.bj et Benin Web TV pour les dates d’événements ; diplomatie.gouv.fr pour la sécurité ; evisa.bj pour le visa ; ARCEP Bénin pour les urgences ; Wikimedia Commons pour les photographies.</p></div>
+<div class="grid2" style="margin:3mm 0"><div class="tile t-w"><h4>Sources</h4><p class="small" style="opacity:1;margin:1mm 0 0">Welcome to Benin (welcometobenin.com, consulté le 25/11/2026) pour les fonctionnalités, rubriques et fiches ; gouv.bj et Benin Web TV pour les dates d’événements ; diplomatie.gouv.fr pour la sécurité ; evisa.bj pour le visa ; ARCEP Bénin pour les urgences ; Wikimedia Commons pour les photographies.</p></div>
 <div class="tile t-w"><h4>Mentions</h4><p class="small" style="opacity:1;margin:1mm 0 0">Catalogue indépendant, rédigé à partir d’informations publiques. Les affirmations sur la plateforme reprennent ses propres déclarations. Aucune image générée par IA. Les licences Creative Commons ne couvrent pas le droit à l’image des personnes : revue conseillée avant une diffusion publicitaire. Carte des départements : œuvre dérivée, CC BY-SA 4.0.</p></div></div>
 <h4 style="margin-bottom:2mm">Crédits photographiques (Wikimedia Commons)</h4><div class="grid2" style="gap:4mm">{t(r1)}{t(r2)}</div></div>''', section="Crédits")
 credits()
@@ -257,7 +257,7 @@ def _scale(m):
 _body = "".join(pages)
 _body = _re.sub(r"font-size:(\d+(?:\.\d+)?)pt", _scale, _body)
 _css = _re.sub(r"font-size:(\d+(?:\.\d+)?)pt", _scale, CSS)
-doc = f'<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Welcome to Bénin — le catalogue</title><style>{font_face()}{_css}</style></head><body>{_body}</body></html>'
+doc = f'<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Welcome to Benin — le catalogue</title><style>{font_face()}{_css}</style></head><body>{_body}</body></html>'
 out = os.path.join(ROOT, "build", f"wtb_{MODE}.html")
 open(out, "w", encoding="utf-8").write(doc)
 print("pages", len(pages), "images", len(USED), out)
